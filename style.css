@@ -1820,6 +1820,9 @@ textarea {
     z-index: 10;
     text-align: left;
 }
+.douglas-hero .hero-text-col {
+    text-align: left;
+}
 .douglas-hero .hero-title {
     font-size: 4rem;
     line-height: 1.1;
@@ -1829,6 +1832,19 @@ textarea {
 .douglas-hero .hero-subtitle {
     text-align: left;
     max-width: 500px;
+    margin-inline: 0;
+}
+.douglas-hero .badge-container {
+    text-align: left;
+}
+.douglas-hero .btn-hero-main {
+    text-align: center;
+}
+.douglas-hero .hero-stats-row {
+    justify-content: flex-start;
+}
+.douglas-hero .accreditation-pills {
+    justify-content: flex-start;
 }
 .hero-stats-row {
     display: flex;
@@ -1891,7 +1907,7 @@ textarea {
 
 .hero-art-col {
     position: relative;
-    height: 480px;
+    height: 560px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1899,8 +1915,8 @@ textarea {
 
 .hero-carousel {
     position: relative;
-    width: 80%;
-    height: 70%;
+    width: 100%;
+    height: 85%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1908,16 +1924,16 @@ textarea {
 
 .carousel-card {
     position: absolute;
-    width: 180px;
-    height: 280px;
-    border-radius: 16px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-    border: 1px solid rgba(255,255,255,0.1);
+    width: 260px;
+    height: 400px;
+    border-radius: 20px;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.35);
+    border: 1px solid rgba(255,255,255,0.12);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1.25rem;
+    gap: 1.5rem;
     transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: transform, opacity;
     cursor: default;
@@ -1925,17 +1941,17 @@ textarea {
 }
 
 .carousel-card .card-icon-large {
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     color: var(--accent-gold);
-    filter: drop-shadow(0 0 12px var(--accent-gold-glow));
+    filter: drop-shadow(0 0 16px var(--accent-gold-glow));
 }
 
 .carousel-card .card-title {
     color: white;
-    font-size: 0.8rem;
-    font-weight: 600;
+    font-size: 1rem;
+    font-weight: 700;
     text-align: center;
-    padding: 0 0.75rem;
+    padding: 0 1rem;
     text-shadow: 0 1px 4px rgba(0,0,0,0.3);
 }
 
@@ -1948,14 +1964,14 @@ textarea {
 
 /* Stacked card positions — fanned out with rotation & depth */
 .card-pos-1 {
-    transform: translateX(-100px) rotate(-6deg) scale(0.85);
+    transform: translateX(-140px) rotate(-6deg) scale(0.82);
     z-index: 1;
-    opacity: 0.5;
+    opacity: 0.45;
 }
 .card-pos-2 {
-    transform: translateX(-50px) rotate(-3deg) scale(0.92);
+    transform: translateX(-70px) rotate(-3deg) scale(0.91);
     z-index: 2;
-    opacity: 0.75;
+    opacity: 0.7;
 }
 .card-pos-3 {
     transform: translateX(0) rotate(0deg) scale(1);
@@ -1963,31 +1979,31 @@ textarea {
     opacity: 1;
 }
 .card-pos-4 {
-    transform: translateX(50px) rotate(3deg) scale(0.92);
+    transform: translateX(70px) rotate(3deg) scale(0.91);
     z-index: 2;
-    opacity: 0.75;
+    opacity: 0.7;
 }
 .card-pos-5 {
-    transform: translateX(100px) rotate(6deg) scale(0.85);
+    transform: translateX(140px) rotate(6deg) scale(0.82);
     z-index: 1;
-    opacity: 0.5;
+    opacity: 0.45;
 }
 
 /* Hover: fan out wider */
 .hero-carousel:hover .card-pos-1 {
-    transform: translateX(-150px) rotate(-10deg) scale(0.85);
+    transform: translateX(-200px) rotate(-10deg) scale(0.82);
 }
 .hero-carousel:hover .card-pos-2 {
-    transform: translateX(-75px) rotate(-5deg) scale(0.92);
+    transform: translateX(-100px) rotate(-5deg) scale(0.91);
 }
 .hero-carousel:hover .card-pos-3 {
-    transform: translateX(0) rotate(0deg) scale(1.02);
+    transform: translateX(0) rotate(0deg) scale(1.03);
 }
 .hero-carousel:hover .card-pos-4 {
-    transform: translateX(75px) rotate(5deg) scale(0.92);
+    transform: translateX(100px) rotate(5deg) scale(0.91);
 }
 .hero-carousel:hover .card-pos-5 {
-    transform: translateX(150px) rotate(10deg) scale(0.85);
+    transform: translateX(200px) rotate(10deg) scale(0.82);
 }
 
 /* Hide old geo-art elements if any remain */
@@ -2372,7 +2388,12 @@ textarea {
 
 @media (max-width: 900px) {
     .hero-content-grid, .announcement-inner, .news-grid { grid-template-columns: 1fr; }
+    .douglas-hero .hero-text-col { text-align: center; }
     .douglas-hero .hero-title, .douglas-hero .hero-subtitle { text-align: center; margin-left: auto; margin-right: auto; }
+    .douglas-hero .hero-subtitle { margin-inline: auto; }
+    .douglas-hero .badge-container { text-align: center; }
+    .douglas-hero .hero-stats-row { justify-content: center; }
+    .douglas-hero .accreditation-pills { justify-content: center; }
     .hero-stats-row { justify-content: center; flex-wrap: wrap; gap: 1.5rem !important; }
     .hero-stats-row .stat-item {
         margin-right: 0;
