@@ -51,7 +51,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // Typewriter Effect
 const words = ["Learning", "Growth", "Excellence", "Innovation", "Success"];
-let wordIndex = 0; // We start with the first word "Learning" already in HTML
+let wordIndex = 0;
 let charIndex = words[0].length;
 let isDeleting = true;
 const typewriterElement = document.querySelector('.typewriter');
@@ -72,19 +72,70 @@ function type() {
     let typeSpeed = isDeleting ? 40 : 100;
     
     if (!isDeleting && charIndex === currentWord.length) {
-        typeSpeed = 2000; // Pause at end of word
+        typeSpeed = 2000;
         isDeleting = true;
     } else if (isDeleting && charIndex === 0) {
         isDeleting = false;
         wordIndex = (wordIndex + 1) % words.length;
-        typeSpeed = 400; // Pause before typing new word
+        typeSpeed = 400;
     }
     
     setTimeout(type, typeSpeed);
 }
 
-// Start the backspace after a 2-second delay since "Learning" is already in the HTML
 setTimeout(type, 2000);
+
+// ==========================================
+// Hero Card Carousel Auto-Animation
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+    const carousel = document.getElementById('heroCarousel');
+    if (!carousel) return;
+
+    const cards = carousel.querySelectorAll('.carousel-card');
+    if (cards.length === 0) return;
+
+    const positionClasses = ['card-pos-1', 'card-pos-2', 'card-pos-3', 'card-pos-4', 'card-pos-5'];
+    
+    // Track current order: index i holds which card element is at position i
+    // Initial: card 0 at pos 0, card 1 at pos 1, etc.
+    let order = Array.from({ length: cards.length }, (_, i) => i);
+
+    let isHovering = false;
+    let animationInterval;
+
+    function updatePositions() {
+        order.forEach((cardIdx, posIdx) => {
+            const card = cards[cardIdx];
+            // Remove all position classes
+            positionClasses.forEach(cls => card.classList.remove(cls));
+            // Assign new position
+            card.classList.add(positionClasses[posIdx]);
+        });
+    }
+
+    function rotateCards() {
+        if (isHovering) return;
+        // Front card (pos 3, index 2) goes to back (pos 1, index 0)
+        // Shift all positions: each card moves one position toward the front
+        // The card at pos-5 wraps to pos-1
+        const last = order.pop();
+        order.unshift(last);
+        updatePositions();
+    }
+
+    // Auto-rotate every 3 seconds
+    animationInterval = setInterval(rotateCards, 3000);
+
+    // Pause animation on hover
+    carousel.addEventListener('mouseenter', () => {
+        isHovering = true;
+    });
+
+    carousel.addEventListener('mouseleave', () => {
+        isHovering = false;
+    });
+});
 
 // Hamburger Menu Toggle
 document.addEventListener('DOMContentLoaded', () => {
@@ -104,7 +155,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (dropdownToggle && dropdownContent) {
         dropdownToggle.addEventListener('click', (e) => {
-            // Only toggle on mobile screens
             if (window.innerWidth <= 900) {
                 e.preventDefault();
                 dropdownContent.classList.toggle('show');
@@ -122,7 +172,6 @@ document.addEventListener('DOMContentLoaded', () => {
             question.addEventListener('click', () => {
                 const isActive = item.classList.contains('active');
                 
-                // Close all other items
                 faqItems.forEach(child => {
                     child.classList.remove('active');
                     child.querySelector('.faq-answer').style.maxHeight = null;
@@ -146,7 +195,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (yearBtns.length > 0) {
         yearBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Remove active class from all
                 yearBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 
@@ -175,7 +223,6 @@ document.addEventListener('DOMContentLoaded', () => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 
-                // Get data from the clicked card
                 const card = link.closest('.news-card');
                 const title = card.querySelector('.news-card-title').textContent;
                 const date = card.querySelector('.news-card-date').textContent;
@@ -183,7 +230,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const modalHtml = card.querySelector('.full-content-data').innerHTML;
                 const accentClass = card.querySelector('.news-card-accent').className.split(' ')[1];
                 
-                // Populate modal
                 modalOverlay.querySelector('.modal-title').textContent = title;
                 modalOverlay.querySelector('.modal-date').textContent = date;
                 modalOverlay.querySelector('.modal-issue').textContent = issue;
@@ -192,7 +238,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const modalAccent = modalOverlay.querySelector('.modal-accent-top');
                 modalAccent.className = `modal-accent-top ${accentClass}`;
 
-                // Show modal
                 modalOverlay.classList.add('active');
                 document.body.style.overflow = 'hidden';
             });
@@ -223,7 +268,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const progressFill = document.querySelector('.progress-line-fill');
 
         function updateWizardUI() {
-            // Update step visibility
             steps.forEach((step, idx) => {
                 if (idx + 1 === currentStep) {
                     step.classList.add('active');
@@ -232,7 +276,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // Update indicators
             indicators.forEach((ind, idx) => {
                 const stepNum = idx + 1;
                 ind.classList.remove('active', 'completed');
@@ -249,7 +292,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // Update progress line
             const progressPercentage = ((currentStep - 1) / (totalSteps - 1)) * 100;
             if (progressFill) progressFill.style.width = `${progressPercentage}%`;
         }
@@ -259,10 +301,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const currentStepEl = document.querySelector(`.form-step[data-step="${currentStep}"]`);
             const requiredInputs = currentStepEl.querySelectorAll('input[required], select[required], textarea[required]');
             
-            // Remove old errors
             currentStepEl.querySelectorAll('.input-error').forEach(el => el.classList.remove('input-error'));
             
-            // If it's step 4 (Radio cards), ensure one is checked
             if (currentStep === 4) {
                 const checkedRadio = currentStepEl.querySelector('input[name="program"]:checked');
                 if (!checkedRadio) {
@@ -312,7 +352,6 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('sum-term').textContent = val('term', true);
         }
 
-        // Attach click to next/back buttons
         document.querySelectorAll('.btn-next').forEach(btn => {
             btn.addEventListener('click', () => {
                 if (validateStep() && currentStep < totalSteps) {
@@ -332,7 +371,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
         
-        // Form Submission
         wizardForm.addEventListener('submit', (e) => {
             e.preventDefault();
             if (validateStep()) {
@@ -342,7 +380,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
         
-        // Attach Edit links in Summary
         document.querySelectorAll('.summary-edit').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -351,10 +388,10 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Init UI
         updateWizardUI();
     }
 });
+
 // Animated Counters Logic
 document.addEventListener('DOMContentLoaded', () => {
     const statNums = document.querySelectorAll('.stat-number');
