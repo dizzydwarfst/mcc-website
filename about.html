@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="About Metropolitan Community College. Our mission, vision, and core values.">
+    <title>About Us - Metropolitan Community College</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .mission-vision-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; max-width: 1200px; margin: 0 auto; }
+        .mv-col h2 { font-size: 2rem; color: var(--deep-green-dark); margin-bottom: 1.5rem; position: relative; padding-bottom: 0.5rem; }
+        .mv-col h2::after { content: ''; position: absolute; left: 0; bottom: 0; width: 60px; height: 3px; background: var(--accent-gold); }
+        .mv-col p { font-size: 1.1rem; line-height: 1.8; color: #555; }
+        
+        .values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; max-width: 1400px; margin: 0 auto; }
+        .value-card { background: white; padding: 2.5rem 2rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; }
+        .value-card i { font-size: 2.5rem; color: var(--accent-gold); margin-bottom: 1.5rem; }
+        .value-card h3 { font-size: 1.3rem; color: var(--deep-green-dark); margin-bottom: 1rem; }
+        .value-card p { font-size: 1rem; color: #666; }
+        
+        .stats-section { background-color: var(--deep-green-dark); padding: 5rem 5%; color: white; text-align: center; }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3rem; max-width: 1200px; margin: 3rem auto 0; }
+        .stat-box .stat-number { font-size: 4rem; font-weight: 800; color: var(--accent-gold); display: block; line-height: 1; margin-bottom: 0.5rem; }
+        .stat-box .stat-label { font-size: 1.1rem; font-weight: 400; color: white; }
+        
+        .accreditations-row { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; margin-bottom: 2rem; }
+        .acc-item { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 1.1rem; color: var(--deep-green-dark); }
+        .acc-item i { color: var(--accent-gold); font-size: 1.5rem; }
+        
+        .campus-block { max-width: 1200px; margin: 0 auto; text-align: center; }
+        .map-wrapper { border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin: 2rem auto; }
+        
+        @media(max-width: 900px) {
+            .mission-vision-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .values-grid, .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media(max-width: 600px) {
+            .values-grid, .stats-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .stat-box .stat-number { font-size: 3.5rem; }
+            .accreditations-row { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+    <header class="solid-header sticky">
+        <div class="header-top">
+            <div class="portal-logins">
+                <a href="#" class="btn-top-portal"><i class="fas fa-user-graduate"></i> Student LMS</a>
+                <a href="#" class="btn-top-portal"><i class="fas fa-id-badge"></i> Staff CRM</a>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="logo-container">
+                <a href="index.html" style="text-decoration:none; display:flex; align-items:center; gap:15px;">
+                    <span class="mcc-logo">MCC</span>
+                    <span class="logo-text">Metropolitan<br>Community College</span>
+                </a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
+            <nav class="main-nav" role="navigation">
+                <a href="programs.html">Programs</a>
+                <div class="nav-dropdown">
+                    <a class="nav-dropdown-toggle">Admissions <i class="fas fa-chevron-down" style="font-size:0.8em;margin-left:5px;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="admission-procedure.html">Admission Procedure</a>
+                        <a href="admission-requirements.html">Admission Requirements</a>
+                        <a href="tuition-fees.html">Tuition, Fees & Payments</a>
+                        <a href="apply-admissions.html">Apply for Admissions</a>
+                    </div>
+                </div>
+                <a href="about.html" style="color:var(--accent-gold) !important;">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="newsletter.html">Newsletter</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="about-page">
+        <!-- Hero Banner -->
+        <div class="hero-strip reveal" style="padding-bottom: 120px;">
+            <h1 style="font-size:2.8rem; margin-bottom:1rem;">About Metropolitan Community College</h1>
+            <p>Empowering students through innovation, care, and excellence since 2023.</p>
+        </div>
+
+        <!-- Section 1: Mission & Vision -->
+        <section class="bg-white content-section reveal" style="margin-top:-60px; position:relative; z-index:10; border-radius: 20px 20px 0 0;">
+            <div class="mission-vision-grid">
+                <div class="mv-col">
+                    <h2>Our Mission</h2>
+                    <p>Metropolitan Community College is dedicated to providing accessible, high-quality education that prepares students for meaningful careers in a rapidly evolving world. We combine practical skills training with innovative teaching methodologies to ensure every graduate is workforce-ready.</p>
+                </div>
+                <div class="mv-col">
+                    <h2>Our Vision</h2>
+                    <p>To be British Columbia's most innovative community college &mdash; a place where diverse learners from around the world come to discover their passions, build professional skills, and launch careers that make a difference.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Core Values -->
+        <section class="bg-light-gray content-section reveal">
+            <div style="text-align:center; max-width:800px; margin:0 auto 4rem;">
+                <h2 class="section-title">Our <span class="text-gold">Core Values</span></h2>
+            </div>
+            <div class="values-grid">
+                <div class="value-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Excellence</h3>
+                    <p>We set high standards in everything we do, from curriculum design to student support.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-globe-americas"></i>
+                    <h3>Diversity</h3>
+                    <p>We celebrate the richness of our multicultural community and provide an inclusive learning environment.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>Innovation</h3>
+                    <p>We embrace emerging technologies and teaching methods to stay ahead of industry needs.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-heart"></i>
+                    <h3>Care</h3>
+                    <p>We treat every student as an individual, providing personalized guidance and support throughout their journey.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: By the Numbers -->
+        <section class="stats-section reveal">
+            <h2 class="section-title" style="color:white; margin:0;">MCC at a <span class="text-gold">Glance</span></h2>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <span class="stat-number" data-target="6" data-suffix="+">0</span>
+                    <span class="stat-label">Programs Offered</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number" data-target="500" data-suffix="+">0</span>
+                    <span class="stat-label">Graduates Since 2023</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number" data-target="25" data-suffix="+">0</span>
+                    <span class="stat-label">Countries Represented</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number" data-target="95" data-suffix="%">0</span>
+                    <span class="stat-label">Student Satisfaction Rate</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Accreditations -->
+        <section class="bg-white content-section reveal text-center">
+            <h2 class="section-title center">Accreditations & Partnerships</h2>
+            <div class="accreditations-row" style="margin-top:3rem;">
+                <div class="acc-item"><i class="fas fa-award"></i> PTIB Accredited</div>
+                <div class="acc-item"><i class="fas fa-check-circle"></i> BC EQA Designated</div>
+                <div class="acc-item"><i class="fas fa-leaf"></i> EduCanada Approved</div>
+                <div class="acc-item"><i class="fas fa-handshake"></i> Partner of Alliance Française</div>
+            </div>
+            <p style="max-width:800px; margin: 0 auto; color:#666; line-height:1.6; font-size:1.05rem;">
+                Our accreditations ensure that your education at MCC meets the highest provincial and federal standards for quality. As a designated learning institution, we are authorized to host international students and continuously partner with world-renowned organizations to elevate your academic experience.
+            </p>
+        </section>
+
+        <!-- Section 5: Campus Location -->
+        <section class="bg-light-gray content-section reveal">
+            <div class="campus-block">
+                <h2 class="section-title center">Our Campus</h2>
+                <p style="font-size:1.1rem; color:#555; max-width:800px; margin:0 auto;">Located in the heart of Vancouver's historic Gastown district on Water Street, our campus offers modern facilities in one of the city's most vibrant neighborhoods.</p>
+                
+                <div class="map-wrapper">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2602.5!2d-123.1085!3d49.2843!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDnCsDE3JzAzLjUiTiAxMjPCsDA2JzMwLjYiVw!5e0!3m2!1sen!2sca!4v1" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                
+                <div style="font-size:1.1rem; color:#333; font-weight:600;">
+                    <i class="fas fa-map-marker-alt" style="color:var(--accent-teal); margin-right:8px;"></i> Water Street, Vancouver, BC, Canada <br>
+                    <span style="font-size:0.9rem; font-weight:400; color:#666; display:inline-block; margin-top:0.5rem;">Steps from Waterfront Station &mdash; accessible by SkyTrain, bus, and SeaBus</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom CTA Band -->
+        <section class="cta-band reveal" style="background: rgba(43,122,106, 0.05); text-align:center; padding:5rem 5%;">
+            <h2 style="font-size:2rem; color:var(--deep-green-dark); margin-bottom: 2rem;">Ready to start your journey?</h2>
+            <div class="cta-buttons" style="justify-content: center;">
+                <a href="apply-admissions.html" class="btn-solid-gold">Apply Now</a>
+                <a href="contact.html" class="btn-outline-gold">Contact Us</a>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact" class="site-footer">
+        <div class="footer-grid reveal">
+            <div class="footer-brand">
+                <span class="mcc-logo large">MCC</span>
+                <p>Metropolitan Community College</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="admission-procedure.html">Admissions</a></li>
+                    <li><a href="#">International Students</a></li>
+                    <li><a href="#">Career Services</a></li>
+                    <li><a href="#">Alumni</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-map-marker-alt"></i> Water Street, Vancouver, BC</p>
+                <p><i class="fas fa-phone"></i> +1 (604) 555-0100</p>
+                <p><i class="fas fa-envelope"></i> admissions@mcc.edu</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Metropolitan Community College. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

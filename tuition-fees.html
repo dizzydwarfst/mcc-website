@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tuition and fee information for Metropolitan Community College programs.">
+    <title>Tuition & Fees - Metropolitan Community College</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .coming-soon-container { max-width: 600px; margin: 4rem auto 6rem; text-align: center; background: white; padding: 4rem 2rem; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); position: relative; }
+        .coming-soon-icon { font-size: 4rem; color: var(--accent-gold); margin-bottom: 1.5rem; text-shadow: 0 0 20px var(--accent-gold-glow); }
+        .coming-soon-badge { display: inline-block; padding: 0.4rem 1.2rem; background: rgba(10, 59, 36, 0.1); color: var(--deep-green); border-radius: 20px; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 1.5rem; letter-spacing: 1px;}
+        .notify-form { display: flex; gap: 10px; margin-top: 2.5rem; justify-content: center; }
+        .notify-input { padding: 0.8rem 1.5rem; border: 1px solid #ddd; border-radius: 30px; font-family: inherit; font-size: 1rem; width: 300px; max-width: 100%; transition: 0.3s;}
+        .notify-input:focus { outline: none; border-color: var(--accent-gold); box-shadow: 0 0 10px var(--accent-gold-glow); }
+        @media(max-width: 600px) { .notify-form { flex-direction: column; } .notify-input { width: 100%; } }
+    </style>
+</head>
+<body>
+    <header class="solid-header sticky">
+        <div class="header-top">
+            <div class="portal-logins">
+                <a href="#" class="btn-top-portal"><i class="fas fa-user-graduate"></i> Student LMS</a>
+                <a href="#" class="btn-top-portal"><i class="fas fa-id-badge"></i> Staff CRM</a>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="logo-container">
+                <a href="index.html" style="text-decoration:none; display:flex; align-items:center; gap:15px;">
+                    <span class="mcc-logo">MCC</span>
+                    <span class="logo-text">Metropolitan<br>Community College</span>
+                </a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
+            <nav class="main-nav" role="navigation">
+                <a href="programs.html">Programs</a>
+                <div class="nav-dropdown">
+                    <a class="nav-dropdown-toggle">Admissions <i class="fas fa-chevron-down" style="font-size:0.8em;margin-left:5px;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="admission-procedure.html">Admission Procedure</a>
+                        <a href="admission-requirements.html">Admission Requirements</a>
+                        <a href="tuition-fees.html" style="color:var(--accent-gold) !important;">Tuition, Fees & Payments</a>
+                        <a href="apply-admissions.html">Apply for Admissions</a>
+                    </div>
+                </div>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="newsletter.html">Newsletter</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="admissions-page">
+        <!-- Hero Strip -->
+        <div class="hero-strip reveal">
+            <h1>Tuition, Fees & Payments</h1>
+            <p>Transparent pricing for your investment in higher education.</p>
+        </div>
+
+        <section class="content-section bg-light-gray" style="min-height: 50vh;">
+            <div class="coming-soon-container reveal">
+                <i class="fas fa-wallet coming-soon-icon"></i>
+                <br>
+                <div class="coming-soon-badge">Coming Soon</div>
+                <h2 style="color: var(--deep-green); font-size: 2.2rem; margin-bottom: 1rem;">Information Updating</h2>
+                <p style="color: #666; font-size: 1.1rem; line-height: 1.6;">We are currently finalizing our fee schedules for the upcoming academic year. Please leave your email below and we'll notify you the moment it's available.</p>
+                
+                <form class="notify-form">
+                    <input type="email" class="notify-input" placeholder="Enter your email address" required aria-label="Email Address">
+                    <button type="submit" class="btn-solid-gold">Notify Me</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- CTA Band -->
+        <section class="cta-band reveal">
+            <h2>Looking to start soon?</h2>
+            <p>You can still apply for your intended program without paying tuition right now.</p>
+            <div class="cta-buttons">
+                <a href="apply-admissions.html" class="btn-solid-gold">Apply Now</a>
+                <a href="contact.html" class="btn-outline-gold">Contact Us</a>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact" class="site-footer">
+        <div class="footer-grid reveal">
+            <div class="footer-brand">
+                <span class="mcc-logo large">MCC</span>
+                <p>Metropolitan Community College</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">Admissions</a></li>
+                    <li><a href="#">International Students</a></li>
+                    <li><a href="#">Career Services</a></li>
+                    <li><a href="#">Alumni</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-map-marker-alt"></i> Water Street, Vancouver, BC</p>
+                <p><i class="fas fa-phone"></i> +1 (604) 555-0100</p>
+                <p><i class="fas fa-envelope"></i> admissions@mcc.edu</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Metropolitan Community College. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
+

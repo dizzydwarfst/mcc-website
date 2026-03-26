@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Apply for admissions to Metropolitan Community College via our step-by-step form.">
+    <title>Apply for Admissions - Metropolitan Community College</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .form-section-title { font-size: 1.2rem; color: var(--accent-teal); margin-bottom: 2rem; font-weight: 800; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; }
+        .checkbox-group { display: flex; align-items: flex-start; gap: 10px; margin-top: 2rem; margin-bottom: 2rem; }
+        .checkbox-group input { margin-top: 3px; }
+        .checkbox-group label { font-size: 0.9rem; color: #555; }
+    </style>
+</head>
+<body>
+    <header class="solid-header sticky">
+        <div class="header-top">
+            <div class="portal-logins">
+                <a href="#" class="btn-top-portal"><i class="fas fa-user-graduate"></i> Student LMS</a>
+                <a href="#" class="btn-top-portal"><i class="fas fa-id-badge"></i> Staff CRM</a>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="logo-container">
+                <a href="index.html" style="text-decoration:none; display:flex; align-items:center; gap:15px;">
+                    <span class="mcc-logo">MCC</span>
+                    <span class="logo-text">Metropolitan<br>Community College</span>
+                </a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
+            <nav class="main-nav" role="navigation">
+                <a href="programs.html">Programs</a>
+                <div class="nav-dropdown">
+                    <a class="nav-dropdown-toggle">Admissions <i class="fas fa-chevron-down" style="font-size:0.8em;margin-left:5px;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="admission-procedure.html">Admission Procedure</a>
+                        <a href="admission-requirements.html">Admission Requirements</a>
+                        <a href="tuition-fees.html">Tuition, Fees & Payments</a>
+                        <a href="apply-admissions.html" style="color:var(--accent-gold) !important;">Apply for Admissions</a>
+                    </div>
+                </div>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="newsletter.html">Newsletter</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="admissions-page">
+        <!-- Hero Strip -->
+        <div class="hero-strip reveal" style="padding-bottom: 120px;">
+            <h1>Start Your Journey Today</h1>
+            <p>Join an aspiring community focused on innovation, care, and success.</p>
+        </div>
+
+        <section class="content-section bg-light-gray" style="padding-top: 0;">
+            <!-- Main Wizard Container -->
+            <div class="wizard-container reveal" id="wizard-container">
+                <!-- Progress Header -->
+                <div class="progress-bar-container">
+                    <div class="progress-line">
+                        <div class="progress-line-fill"></div>
+                    </div>
+                    <div class="step-indicator" data-indicator="1">
+                        <div class="step-circle">1</div>
+                        <div class="step-label">Personal Info</div>
+                    </div>
+                    <div class="step-indicator" data-indicator="2">
+                        <div class="step-circle">2</div>
+                        <div class="step-label">Contact</div>
+                    </div>
+                    <div class="step-indicator" data-indicator="3">
+                        <div class="step-circle">3</div>
+                        <div class="step-label">Address</div>
+                    </div>
+                    <div class="step-indicator" data-indicator="4">
+                        <div class="step-circle">4</div>
+                        <div class="step-label">Program</div>
+                    </div>
+                    <div class="step-indicator" data-indicator="5">
+                        <div class="step-circle">5</div>
+                        <div class="step-label">Review</div>
+                    </div>
+                </div>
+
+                <form id="wizard-form" novalidate>
+                    <!-- STEP 1: Personal Info -->
+                    <div class="form-step" data-step="1">
+                        <h3 class="form-section-title">Step 1: Personal Information</h3>
+                        <div class="form-grid-3">
+                            <div class="form-group">
+                                <label for="first_name">First Name <span style="color:#D4AF37">*</span></label>
+                                <input type="text" name="first_name" id="first_name" required>
+                                <span class="error-msg">First name is required</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="last_name">Last Name <span style="color:#D4AF37">*</span></label>
+                                <input type="text" name="last_name" id="last_name" required>
+                                <span class="error-msg">Last name is required</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="preferred_name">Preferred Name (English Name)</label>
+                                <input type="text" name="preferred_name" id="preferred_name">
+                            </div>
+                        </div>
+
+                        <div class="form-grid-3">
+                            <div class="form-group">
+                                <label for="dob">Date of Birth <span style="color:#D4AF37">*</span></label>
+                                <input type="date" name="dob" id="dob" required>
+                                <span class="error-msg">Date of birth is required</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="gender">Gender <span style="color:#D4AF37">*</span></label>
+                                <select name="gender" id="gender" required>
+                                    <option value="">Select Gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Other</option>
+                                    <option value="prefer_not">Prefer not to say</option>
+                                </select>
+                                <span class="error-msg">Gender is required</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="citizenship">Country of Citizenship <span style="color:#D4AF37">*</span></label>
+                                <input type="text" name="citizenship" id="citizenship" required>
+                                <span class="error-msg">Citizenship is required</span>
+                            </div>
+                        </div>
+
+                        <div class="wizard-buttons">
+                            <button type="button" class="btn-solid-gold btn-next" style="margin-left: auto;">Next Step <i class="fas fa-arrow-right" style="margin-left:5px;"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2: Contact Details -->
+                    <div class="form-step" data-step="2">
+                        <h3 class="form-section-title">Step 2: Contact Details</h3>
+                        <div class="form-grid-3">
+                            <div class="form-group">
+                                <label for="phone_code">Phone Country Code <span style="color:#D4AF37">*</span></label>
+                                <select name="phone_code" id="phone_code" required>
+                                    <option value="CA+1">CA +1</option>
+                                    <option value="US+1">US +1</option>
+                                    <option value="UK+44">UK +44</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <span class="error-msg">Country code is required</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone_number">Phone Number <span style="color:#D4AF37">*</span></label>
+                                <input type="tel" name="phone_number" id="phone_number" placeholder="### - ### - ####" required>
+                                <span class="error-msg">Phone number is required</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email <span style="color:#D4AF37">*</span></label>
+                                <input type="email" name="email" id="email" placeholder="Do not use agent's email" required>
+                                <span class="error-msg">Valid email is required</span>
+                            </div>
+                        </div>
+
+                        <div class="form-grid-3">
+                            <div class="form-group">
+                                <label for="status">Status in Canada <span style="color:#D4AF37">*</span></label>
+                                <select name="status" id="status" required>
+                                    <option value="">Select Status</option>
+                                    <option value="citizen">Citizen</option>
+                                    <option value="pr">Permanent Resident</option>
+                                    <option value="study_permit">Study Permit</option>
+                                    <option value="visitor">Visitor Visa</option>
+                                </select>
+                                <span class="error-msg">Status is required</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="status_expiry">Status Expiry Date</label>
+                                <input type="date" name="status_expiry" id="status_expiry">
+                            </div>
+                            <div class="form-group">
+                                <label for="sin_number">Social Insurance Number</label>
+                                <input type="text" name="sin_number" id="sin_number" placeholder="(optional)">
+                            </div>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" name="info_update_agreement" id="info_update" required>
+                            <label for="info_update">If any of the above contact information changes, I will update it on the Student Registration Page <span style="color:#D4AF37">*</span></label>
+                        </div>
+
+                        <div class="wizard-buttons">
+                            <button type="button" class="btn-outline-gold btn-back"><i class="fas fa-arrow-left" style="margin-right:5px;"></i> Back</button>
+                            <button type="button" class="btn-solid-gold btn-next">Next Step <i class="fas fa-arrow-right" style="margin-left:5px;"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 3: Address -->
+                    <div class="form-step" data-step="3">
+                        <h3 class="form-section-title">Step 3: Student's Home Address</h3>
+                        <div class="form-grid-2">
+                            <div class="form-group" style="grid-column: 1 / -1;">
+                                <label for="street_address">Street Address <span style="color:#D4AF37">*</span></label>
+                                <input type="text" name="street_address" id="street_address" required>
+                                <span class="error-msg">Street address is required</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="city">City <span style="color:#D4AF37">*</span></label>
+                                <input type="text" name="city" id="city" required>
+                                <span class="error-msg">City is required</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="province">Province / State <span style="color:#D4AF37">*</span></label>
+                                <input type="text" name="province" id="province" required>
+                                <span class="error-msg">Province is required</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="postal_code">Postal / Zip Code</label>
+                                <input type="text" name="postal_code" id="postal_code">
+                            </div>
+                            <div class="form-group">
+                                <label for="country">Country <span style="color:#D4AF37">*</span></label>
+                                <select name="country" id="country" required>
+                                    <option value="Canada">Canada</option>
+                                    <option value="USA">United States</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <span class="error-msg">Country is required</span>
+                            </div>
+                        </div>
+
+                        <div class="wizard-buttons">
+                            <button type="button" class="btn-outline-gold btn-back"><i class="fas fa-arrow-left" style="margin-right:5px;"></i> Back</button>
+                            <button type="button" class="btn-solid-gold btn-next">Next Step <i class="fas fa-arrow-right" style="margin-left:5px;"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 4: Program Selection -->
+                    <div class="form-step" data-step="4">
+                        <h3 class="form-section-title">Step 4: Program Selection</h3>
+                        
+                        <div class="radio-card-grid">
+                            <!-- Card 1 -->
+                            <label class="radio-card-label">
+                                <input type="radio" name="program" value="AI Microcredential">
+                                <div class="radio-card">
+                                    <div class="radio-card-icon"><i class="fas fa-robot"></i></div>
+                                    <div>
+                                        <div class="radio-card-title">AI Microcredential</div>
+                                        <p class="radio-card-desc">Master cutting-edge AI tools and models to accelerate workflows.</p>
+                                    </div>
+                                </div>
+                            </label>
+                            
+                            <!-- Card 2 -->
+                            <label class="radio-card-label">
+                                <input type="radio" name="program" value="Caregiver Senior">
+                                <div class="radio-card">
+                                    <div class="radio-card-icon"><i class="fas fa-hands-helping"></i></div>
+                                    <div>
+                                        <div class="radio-card-title">Caregiver Senior</div>
+                                        <p class="radio-card-desc">Develop specialized skills required for elder care and support.</p>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <!-- Card 3 -->
+                            <label class="radio-card-label">
+                                <input type="radio" name="program" value="Caregiver Infant">
+                                <div class="radio-card">
+                                    <div class="radio-card-icon"><i class="fas fa-baby"></i></div>
+                                    <div>
+                                        <div class="radio-card-title">Caregiver Infant</div>
+                                        <p class="radio-card-desc">Explore early childhood development and neonatal care.</p>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <!-- Card 4 -->
+                            <label class="radio-card-label">
+                                <input type="radio" name="program" value="Video & Content Creation">
+                                <div class="radio-card">
+                                    <div class="radio-card-icon"><i class="fas fa-video"></i></div>
+                                    <div>
+                                        <div class="radio-card-title">Video & Content Creation</div>
+                                        <p class="radio-card-desc">Learn end-to-end media production and viral engagement concepts.</p>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <!-- Card 5 -->
+                            <label class="radio-card-label">
+                                <input type="radio" name="program" value="Hospitality Diploma">
+                                <div class="radio-card">
+                                    <div class="radio-card-icon"><i class="fas fa-hotel"></i></div>
+                                    <div>
+                                        <div class="radio-card-title">Hospitality Diploma</div>
+                                        <p class="radio-card-desc">Global opportunities with paid co-op experience in downtown Vancouver.</p>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <!-- Card 6 -->
+                            <label class="radio-card-label">
+                                <input type="radio" name="program" value="Esports Diploma">
+                                <div class="radio-card">
+                                    <div class="radio-card-icon"><i class="fas fa-gamepad"></i></div>
+                                    <div>
+                                        <div class="radio-card-title">Esports Diploma</div>
+                                        <p class="radio-card-desc">Turn your passion for competitive gaming into a thriving career.</p>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="form-group" style="max-width: 300px;">
+                            <label for="term">Preferred Start Term <span style="color:#D4AF37">*</span></label>
+                            <select name="term" id="term" required>
+                                <option value="">Select Term</option>
+                                <option value="fall2026">Fall 2026</option>
+                                <option value="winter2027">Winter 2027</option>
+                                <option value="spring2027">Spring 2027</option>
+                            </select>
+                            <span class="error-msg">Start term is required</span>
+                        </div>
+
+                        <div class="wizard-buttons">
+                            <button type="button" class="btn-outline-gold btn-back"><i class="fas fa-arrow-left" style="margin-right:5px;"></i> Back</button>
+                            <button type="button" class="btn-solid-gold btn-next">Next Step <i class="fas fa-arrow-right" style="margin-left:5px;"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 5: Review -->
+                    <div class="form-step" data-step="5">
+                        <h3 class="form-section-title">Step 5: Review & Submit</h3>
+                        
+                        <div class="summary-block">
+                            <div class="summary-header">
+                                <h4>Personal Information</h4>
+                                <a href="#" class="summary-edit" data-target-step="1">Edit</a>
+                            </div>
+                            <div class="summary-row"><div class="summary-label">Name:</div><div class="summary-val" id="sum-name"></div></div>
+                            <div class="summary-row"><div class="summary-label">DOB & Gender:</div><div class="summary-val" id="sum-dob-gender"></div></div>
+                            <div class="summary-row"><div class="summary-label">Citizenship:</div><div class="summary-val" id="sum-citizen"></div></div>
+                        </div>
+
+                        <div class="summary-block">
+                            <div class="summary-header">
+                                <h4>Contact Details</h4>
+                                <a href="#" class="summary-edit" data-target-step="2">Edit</a>
+                            </div>
+                            <div class="summary-row"><div class="summary-label">Phone:</div><div class="summary-val" id="sum-phone"></div></div>
+                            <div class="summary-row"><div class="summary-label">Email:</div><div class="summary-val" id="sum-email"></div></div>
+                            <div class="summary-row"><div class="summary-label">Status in CA:</div><div class="summary-val" id="sum-status"></div></div>
+                        </div>
+
+                        <div class="summary-block">
+                            <div class="summary-header">
+                                <h4>Home Address</h4>
+                                <a href="#" class="summary-edit" data-target-step="3">Edit</a>
+                            </div>
+                            <div class="summary-row"><div class="summary-label">Address:</div><div class="summary-val" id="sum-address"></div></div>
+                        </div>
+
+                        <div class="summary-block">
+                            <div class="summary-header">
+                                <h4>Program Selection</h4>
+                                <a href="#" class="summary-edit" data-target-step="4">Edit</a>
+                            </div>
+                            <div class="summary-row"><div class="summary-label">Program:</div><div class="summary-val" id="sum-program"></div></div>
+                            <div class="summary-row"><div class="summary-label">Start Term:</div><div class="summary-val" id="sum-term"></div></div>
+                        </div>
+
+                        <div class="checkbox-group" style="padding: 1rem; border-top: 2px solid #eee; margin-top: 2rem;">
+                            <input type="checkbox" name="terms_agreement" id="terms_agreement" required>
+                            <label for="terms_agreement" style="font-weight: 600; color: #333;">I confirm the information above is accurate and I agree to the terms of admission. <span style="color:#D4AF37">*</span></label>
+                        </div>
+                        <span class="error-msg" style="margin-left: 25px; margin-top:-15px; margin-bottom: 2rem;">Please agree to the terms</span>
+
+                        <div class="wizard-buttons">
+                            <button type="button" class="btn-outline-gold btn-back"><i class="fas fa-arrow-left" style="margin-right:5px;"></i> Back</button>
+                            <button type="submit" class="btn-solid-gold" style="padding: 1rem 3rem; font-size: 1.1rem;">Submit Application</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Success State Container -->
+            <div class="wizard-container success-state" id="wizard-success" style="display: none;">
+                <i class="fas fa-check-circle success-icon"></i>
+                <h2 style="color: var(--deep-green); font-size: 2.2rem; margin-bottom: 1rem;">Application Received!</h2>
+                <p style="color: #666; font-size: 1.1rem; max-width: 500px; margin: 0 auto 3rem;">Thank you for applying to Metropolitan Community College. We'll review your application and contact you within 5 business days.</p>
+                <a href="index.html" class="btn-solid-gold">Return to Homepage</a>
+            </div>
+        </section>
+
+        <!-- CTA Band -->
+        <section class="cta-band reveal">
+            <h2>Need assistance with your application?</h2>
+            <p>Our admissions advisors are available to guide you through every step.</p>
+            <div class="cta-buttons">
+                <a href="admission-procedure.html" class="btn-solid-gold">View Application Guide</a>
+                <a href="contact.html" class="btn-outline-gold">Contact Advisors</a>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact" class="site-footer">
+        <div class="footer-grid reveal">
+            <div class="footer-brand">
+                <span class="mcc-logo large">MCC</span>
+                <p>Metropolitan Community College</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="admission-procedure.html">Admissions</a></li>
+                    <li><a href="#">International Students</a></li>
+                    <li><a href="#">Career Services</a></li>
+                    <li><a href="#">Alumni</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-map-marker-alt"></i> Water Street, Vancouver, BC</p>
+                <p><i class="fas fa-phone"></i> +1 (604) 555-0100</p>
+                <p><i class="fas fa-envelope"></i> admissions@mcc.edu</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Metropolitan Community College. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Metropolitan Community College. Find our campus, contact our advisors, or explore frequently asked questions.">
+    <title>Contact Us - Metropolitan Community College</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="solid-header sticky">
+        <div class="header-top">
+            <div class="portal-logins">
+                <a href="#" class="btn-top-portal"><i class="fas fa-user-graduate"></i> Student LMS</a>
+                <a href="#" class="btn-top-portal"><i class="fas fa-id-badge"></i> Staff CRM</a>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="logo-container">
+                <a href="index.html" style="text-decoration:none; display:flex; align-items:center; gap:15px;">
+                    <span class="mcc-logo">MCC</span>
+                    <span class="logo-text">Metropolitan<br>Community College</span>
+                </a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
+            <nav class="main-nav" role="navigation">
+                <a href="programs.html">Programs</a>
+                <div class="nav-dropdown">
+                    <a class="nav-dropdown-toggle">Admissions <i class="fas fa-chevron-down" style="font-size:0.8em;margin-left:5px;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="admission-procedure.html">Admission Procedure</a>
+                        <a href="admission-requirements.html">Admission Requirements</a>
+                        <a href="tuition-fees.html">Tuition, Fees & Payments</a>
+                        <a href="apply-admissions.html">Apply for Admissions</a>
+                    </div>
+                </div>
+                <a href="about.html">About</a>
+                <a href="contact.html" style="color:var(--accent-gold) !important;">Contact</a>
+                <a href="newsletter.html">Newsletter</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="contact-page">
+        <!-- Dark Hero Banner -->
+        <div class="hero-strip reveal" style="padding-bottom: 120px;">
+            <h1>Get In Touch</h1>
+            <p>We're here to help you every step of the way.</p>
+        </div>
+
+        <section class="content-section bg-light-gray" style="padding-top: 0;">
+            <!-- Main Content Grid -->
+            <div class="contact-grid reveal" style="margin-top:-60px; position:relative; z-index:10;">
+                
+                <!-- Left Column: Contact Form -->
+                <div class="contact-form-container" style="background: white; border-radius: 12px; padding: 3rem; box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
+                    <h2 class="section-title" style="margin-bottom: 2rem;">Send Us a Message</h2>
+                    <form id="contact-form" onsubmit="event.preventDefault(); this.style.display='none'; document.getElementById('contact-success').style.display='block';">
+                        <div class="form-group">
+                            <label for="fullName">Full Name <span style="color:#D4AF37">*</span></label>
+                            <input type="text" id="fullName" name="fullName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactEmail">Email <span style="color:#D4AF37">*</span></label>
+                            <input type="email" id="contactEmail" name="contactEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactPhone">Phone (optional)</label>
+                            <input type="tel" id="contactPhone" name="contactPhone">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject <span style="color:#D4AF37">*</span></label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Select a topic</option>
+                                <option value="General Inquiry">General Inquiry</option>
+                                <option value="Admissions">Admissions</option>
+                                <option value="Programs">Programs</option>
+                                <option value="Technical Support">Technical Support</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message <span style="color:#D4AF37">*</span></label>
+                            <textarea id="message" name="message" rows="5" required style="width: 100%; border: 1px solid #ccc; border-radius: 8px; padding: 10px; font-family: 'Outfit';"></textarea>
+                        </div>
+                        <button type="submit" class="btn-solid-gold" style="width: 100%; padding: 1rem; font-size: 1.1rem; margin-top: 1rem;">Send Message</button>
+                    </form>
+
+                    <div id="contact-success" style="display:none; text-align:center; padding: 3rem 0;">
+                        <i class="fas fa-paper-plane" style="font-size: 3rem; color: var(--accent-teal); margin-bottom: 1rem;"></i>
+                        <h3 style="color:var(--deep-green); margin-bottom: 1rem;">Message sent!</h3>
+                        <p style="color:#666;">We'll get back to you shortly.</p>
+                    </div>
+
+                    <!-- Direct Contact Info Block -->
+                    <div class="contact-info-block">
+                        <div class="contact-info-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+1 (604) 555-0100</span>
+                        </div>
+                        <div class="contact-info-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>admissions@mcc.edu</span>
+                        </div>
+                        <div class="contact-info-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Office Hours: Monday &ndash; Friday, 9:00 AM &ndash; 5:00 PM PST</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Google Map -->
+                <div>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2602.5!2d-123.1085!3d49.2843!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDnCsDE3JzAzLjUiTiAxMjPCsDA2JzMwLjYiVw!5e0!3m2!1sen!2sca!4v1" width="100%" height="480" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    <div style="margin-top: 1.5rem; text-align: center;">
+                        <p style="font-size: 1.1rem; color: #444; font-weight: 600; margin-bottom: 0.5rem;"><i class="fas fa-map-pin" style="color:var(--accent-teal); margin-right:8px;"></i> Water Street, Vancouver, BC, Canada</p>
+                        <a href="https://maps.google.com" target="_blank" class="btn-outline-gold" style="display:inline-block; padding: 0.5rem 1.5rem;">Get Directions <i class="fas fa-arrow-right" style="margin-left:5px;"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section reveal">
+            <h2 class="section-title center" style="margin-bottom: 4rem;">Frequently Asked Questions</h2>
+            <div class="faq-container">
+                
+                <!-- FAQ 1 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How do I apply to MCC?
+                        <i class="fas fa-plus faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            You can apply online through our Apply for Admissions page. Complete the step-by-step application form and submit the required documents. Our admissions team will review your application and respond within 5 business days.                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What are the admission requirements?
+                        <i class="fas fa-plus faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            General requirements include being over 18 years old, completion of high school education, and English language proficiency. Some programs have additional requirements. Visit our Admission Requirements page for full details.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Is MCC accredited?
+                        <i class="fas fa-plus faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            Yes, Metropolitan Community College is accredited by the Private Training Institutions Branch (PTIB) of British Columbia and is designated under the BC Education Quality Assurance (EQA) framework.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What programs does MCC offer?
+                        <i class="fas fa-plus faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            We offer six programs: AI Microcredential, Caregiver Senior, Caregiver Infant, Video & Content Creation, Hospitality Diploma, and Esports Diploma. Visit our Programs page to explore each one.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 5 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How much is tuition?
+                        <i class="fas fa-plus faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            Tuition varies by program. Our Tuition, Fees & Payments page is currently being updated for the upcoming academic year. Please contact our admissions office for current pricing.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 6 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Does MCC accept international students?
+                        <i class="fas fa-plus faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            Absolutely! We welcome international students from around the world. International applicants must obtain a study permit for programs longer than 6 months.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 7 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What English proficiency tests are accepted?
+                        <i class="fas fa-plus faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            We accept IELTS, TOEFL iBT, CAEL, and equivalent assessments. Students may also take the College's own language proficiency exam. Required scores vary by program.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 8 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How do I get a study permit?
+                        <i class="fas fa-plus faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            After receiving your official Letter of Acceptance (LOA) from MCC, you can apply for a study permit through Immigration, Refugees and Citizenship Canada (IRCC). We recommend starting this process early.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 9 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Can I transfer credits from another institution?
+                        <i class="fas fa-plus faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            Transfer credit evaluations are handled on a case-by-case basis. Please contact our admissions office with your transcripts for an assessment.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 10 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How do I contact the admissions office?
+                        <i class="fas fa-plus faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            You can reach us by phone at +1 (604) 555-0100, by email at admissions@mcc.edu, or by filling out the contact form on this page. Our office hours are Monday to Friday, 9 AM to 5 PM PST.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Bottom CTA Band -->
+        <section class="cta-band reveal" style="background: rgba(43,122,106, 0.05);">
+            <h2>Ready to start your journey?</h2>
+            <div class="cta-buttons" style="justify-content: center; margin-top:2rem;">
+                <a href="apply-admissions.html" class="btn-solid-gold">Apply Now</a>
+                <a href="programs.html" class="btn-outline-gold">Explore Programs</a>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact" class="site-footer">
+        <div class="footer-grid reveal">
+            <div class="footer-brand">
+                <span class="mcc-logo large">MCC</span>
+                <p>Metropolitan Community College</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="admission-procedure.html">Admissions</a></li>
+                    <li><a href="#">International Students</a></li>
+                    <li><a href="#">Career Services</a></li>
+                    <li><a href="#">Alumni</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-map-marker-alt"></i> Water Street, Vancouver, BC</p>
+                <p><i class="fas fa-phone"></i> +1 (604) 555-0100</p>
+                <p><i class="fas fa-envelope"></i> admissions@mcc.edu</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Metropolitan Community College. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
