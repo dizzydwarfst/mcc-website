@@ -3,20 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Tuition and fee information for Metropolitan Community College programs.">
-    <title>Tuition & Fees - Metropolitan Community College</title>
+    <meta name="description" content="Understand tuition planning, fee categories, payment timing, and funding guidance at Metropolitan Community College.">
+    <title>Tuition, Fees & Payments - Metropolitan Community College</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        .coming-soon-container { max-width: 600px; margin: 4rem auto 6rem; text-align: center; background: white; padding: 4rem 2rem; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); position: relative; }
-        .coming-soon-icon { font-size: 4rem; color: var(--accent-gold); margin-bottom: 1.5rem; text-shadow: 0 0 20px var(--accent-gold-glow); }
-        .coming-soon-badge { display: inline-block; padding: 0.4rem 1.2rem; background: rgba(10, 59, 36, 0.1); color: var(--deep-green); border-radius: 20px; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 1.5rem; letter-spacing: 1px;}
-        .notify-form { display: flex; gap: 10px; margin-top: 2.5rem; justify-content: center; }
-        .notify-input { padding: 0.8rem 1.5rem; border: 1px solid #ddd; border-radius: 30px; font-family: inherit; font-size: 1rem; width: 300px; max-width: 100%; transition: 0.3s;}
-        .notify-input:focus { outline: none; border-color: var(--accent-gold); box-shadow: 0 0 10px var(--accent-gold-glow); }
-        @media(max-width: 600px) { .notify-form { flex-direction: column; } .notify-input { width: 100%; } }
-    </style>
 </head>
 <body>
     <header class="solid-header sticky">
@@ -28,7 +19,7 @@
         </div>
         <div class="header-main">
             <div class="logo-container">
-                <a href="index.html" style="text-decoration:none; display:flex; align-items:center; gap:15px;">
+                <a href="index.html" class="logo-link">
                     <span class="mcc-logo">MCC</span>
                     <span class="logo-text">Metropolitan<br>Community College</span>
                 </a>
@@ -37,11 +28,12 @@
             <nav class="main-nav" role="navigation">
                 <a href="programs.html">Programs</a>
                 <div class="nav-dropdown">
-                    <a class="nav-dropdown-toggle">Admissions <i class="fas fa-chevron-down" style="font-size:0.8em;margin-left:5px;"></i></a>
+                    <a href="admissions.html" class="nav-dropdown-toggle active">Admissions <i class="fas fa-chevron-down" style="font-size:0.8em;margin-left:5px;"></i></a>
                     <div class="dropdown-content">
+                        <a href="admissions.html">Admissions Overview</a>
                         <a href="admission-procedure.html">Admission Procedure</a>
                         <a href="admission-requirements.html">Admission Requirements</a>
-                        <a href="tuition-fees.html" style="color:var(--accent-gold) !important;">Tuition, Fees & Payments</a>
+                        <a href="tuition-fees.html" class="nav-current">Tuition, Fees & Payments</a>
                         <a href="apply-admissions.html">Apply for Admissions</a>
                     </div>
                 </div>
@@ -52,35 +44,102 @@
         </div>
     </header>
 
-    <main class="admissions-page">
-        <!-- Hero Strip -->
-        <div class="hero-strip reveal">
-            <h1>Tuition, Fees & Payments</h1>
-            <p>Transparent pricing for your investment in higher education.</p>
-        </div>
-
-        <section class="content-section bg-light-gray" style="min-height: 50vh;">
-            <div class="coming-soon-container reveal">
-                <i class="fas fa-wallet coming-soon-icon"></i>
-                <br>
-                <div class="coming-soon-badge">Coming Soon</div>
-                <h2 style="color: var(--deep-green); font-size: 2.2rem; margin-bottom: 1rem;">Information Updating</h2>
-                <p style="color: #666; font-size: 1.1rem; line-height: 1.6;">We are currently finalizing our fee schedules for the upcoming academic year. Please leave your email below and we'll notify you the moment it's available.</p>
-                
-                <form class="notify-form">
-                    <input type="email" class="notify-input" placeholder="Enter your email address" required aria-label="Email Address">
-                    <button type="submit" class="btn-solid-gold">Notify Me</button>
-                </form>
+    <main class="page-main">
+        <section class="page-hero">
+            <div class="page-hero-grid reveal">
+                <div>
+                    <span class="page-eyebrow">Tuition Planning</span>
+                    <h1 class="page-hero-title">Understand how tuition and payments work before you enroll</h1>
+                    <p class="page-hero-subtitle">This page replaces the old coming-soon shell with real planning guidance. We are intentionally not inventing exact tuition amounts, but students should still be able to understand how the process works.</p>
+                    <div class="page-stat-list">
+                        <span class="page-stat-pill"><i class="fas fa-file-invoice-dollar"></i> Fee categories explained</span>
+                        <span class="page-stat-pill"><i class="fas fa-calendar-alt"></i> Payment timing guidance</span>
+                        <span class="page-stat-pill"><i class="fas fa-hand-holding-usd"></i> Funding and award pointers</span>
+                    </div>
+                    <div class="page-highlight-card">
+                        <strong>Personalized estimates</strong>
+                        <p>Program pricing can vary by pathway, materials, and intake. For a personalized estimate, contact MCC admissions after narrowing your preferred program.</p>
+                    </div>
+                </div>
+                <div class="page-hero-media">
+                    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80" alt="Student budget planning with a laptop and calculator">
+                </div>
             </div>
         </section>
 
-        <!-- CTA Band -->
-        <section class="cta-band reveal">
-            <h2>Looking to start soon?</h2>
-            <p>You can still apply for your intended program without paying tuition right now.</p>
-            <div class="cta-buttons">
-                <a href="apply-admissions.html" class="btn-solid-gold">Apply Now</a>
-                <a href="contact.html" class="btn-outline-gold">Contact Us</a>
+        <section class="section-shell" style="background:#ffffff;">
+            <div class="section-intro reveal">
+                <span class="section-kicker">Fee Framework</span>
+                <h2 class="section-title center">What students should plan for</h2>
+                <p class="section-copy">Rather than showing placeholder text, this page now outlines the categories students typically need to understand when planning their MCC budget.</p>
+            </div>
+            <div class="requirements-grid">
+                <article class="tuition-card reveal">
+                    <h3>Application-related fees</h3>
+                    <p>Students should be prepared for admissions-related costs connected to applying, processing, and confirming their place where applicable.</p>
+                </article>
+                <article class="tuition-card reveal" style="transition-delay:0.1s;">
+                    <h3>Program tuition</h3>
+                    <p>Tuition depends on the program, learning format, and length of study. MCC provides program-specific guidance during admissions conversations.</p>
+                </article>
+                <article class="tuition-card reveal" style="transition-delay:0.2s;">
+                    <h3>Materials and supplies</h3>
+                    <p>Some programs may involve software access, uniforms, equipment, practicum preparation, or course materials beyond core tuition.</p>
+                </article>
+                <article class="tuition-card reveal" style="transition-delay:0.3s;">
+                    <h3>International planning</h3>
+                    <p>International students should also plan for visa-related costs, travel, arrival expenses, and living costs in Vancouver.</p>
+                </article>
+                <article class="tuition-card reveal" style="transition-delay:0.4s;">
+                    <h3>Payment timing</h3>
+                    <p>Students should expect payment checkpoints tied to seat confirmation, pre-start preparation, and enrollment readiness.</p>
+                </article>
+                <article class="tuition-card reveal" style="transition-delay:0.5s;">
+                    <h3>Policy questions</h3>
+                    <p>Refund, deadline, and installment questions should be clarified directly with admissions before enrollment is finalized.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section-shell">
+            <div class="two-column-panel">
+                <article class="info-panel reveal">
+                    <h3>How to plan your payment timeline</h3>
+                    <ul class="checklist">
+                        <li>Choose your program and intended start term first</li>
+                        <li>Ask for a program-specific tuition estimate from admissions</li>
+                        <li>Confirm any seat deposit or payment deadlines before intake</li>
+                        <li>Plan additional time if you are arranging international funding</li>
+                    </ul>
+                    <p>This gives students a more practical decision path than a vague placeholder panel.</p>
+                </article>
+                <article class="info-panel accent-teal reveal" style="transition-delay:0.1s;">
+                    <h3>Funding and support ideas</h3>
+                    <ul class="checklist">
+                        <li>Ask admissions about available entrance support or intake guidance</li>
+                        <li>Review career outcomes to align education spending with your goals</li>
+                        <li>Explore external funding options appropriate to your situation</li>
+                        <li>Use early planning to reduce last-minute financial pressure</li>
+                    </ul>
+                    <a href="career-services.html" class="subtle-link">See long-term career support <i class="fas fa-arrow-right"></i></a>
+                </article>
+            </div>
+        </section>
+
+        <section class="section-shell" style="background:#ffffff;">
+            <div class="spotlight-card reveal">
+                <div class="spotlight-media">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80" alt="Advisor discussing financial planning with a student">
+                </div>
+                <div class="spotlight-content">
+                    <span class="section-kicker">Need a Specific Estimate?</span>
+                    <h2 class="section-title" style="margin-bottom:1rem;">Talk to admissions once you know your preferred program</h2>
+                    <p class="section-copy">The most useful next step is not another generic sentence. It is a real conversation about your intended program, intake, and student profile so MCC can guide you more accurately.</p>
+                    <div class="hero-action-row">
+                        <a href="contact.html" class="btn-solid-gold">Request Tuition Guidance</a>
+                        <a href="apply-admissions.html" class="btn-outline-gold">Start Your Application</a>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
@@ -89,20 +148,29 @@
         <div class="footer-grid reveal">
             <div class="footer-brand">
                 <span class="mcc-logo large">MCC</span>
-                <p>Metropolitan Community College</p>
+                <p>Metropolitan Community College helps future students move from curiosity to career-ready confidence with practical programs and student-first support in Vancouver.</p>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
             <div class="footer-links">
                 <h4>Quick Links</h4>
                 <ul>
-                    <li><a href="#">Admissions</a></li>
-                    <li><a href="#">International Students</a></li>
-                    <li><a href="#">Career Services</a></li>
-                    <li><a href="#">Alumni</a></li>
+                    <li><a href="admissions.html">Admissions</a></li>
+                    <li><a href="international-students.html">International Students</a></li>
+                    <li><a href="career-services.html">Career Services</a></li>
+                    <li><a href="alumni.html">Alumni</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Explore MCC</h4>
+                <ul>
+                    <li><a href="programs.html">Programs</a></li>
+                    <li><a href="about.html">About MCC</a></li>
+                    <li><a href="newsletter.html">News & Newsletter</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
                 </ul>
             </div>
             <div class="footer-contact">
@@ -110,13 +178,14 @@
                 <p><i class="fas fa-map-marker-alt"></i> Water Street, Vancouver, BC</p>
                 <p><i class="fas fa-phone"></i> +1 (604) 555-0100</p>
                 <p><i class="fas fa-envelope"></i> admissions@mcc.edu</p>
+                <p><i class="fas fa-clock"></i> Monday - Friday, 9:00 AM - 5:00 PM PST</p>
             </div>
         </div>
         <div class="footer-bottom">
             <p>&copy; 2026 Metropolitan Community College. All rights reserved.</p>
         </div>
     </footer>
+
     <script src="script.js"></script>
 </body>
 </html>
-

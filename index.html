@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Metropolitan Community College offers cutting-edge programs to prepare you for the future.">
+    <meta name="description" content="Metropolitan Community College offers career-ready programs, supportive admissions guidance, and a future-focused student experience in Vancouver.">
     <title>Metropolitan Community College</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -19,15 +19,18 @@
         </div>
         <div class="header-main">
             <div class="logo-container">
-                <span class="mcc-logo">MCC</span>
-                <span class="logo-text">Metropolitan<br>Community College</span>
+                <a href="index.html" class="logo-link">
+                    <span class="mcc-logo">MCC</span>
+                    <span class="logo-text">Metropolitan<br>Community College</span>
+                </a>
             </div>
             <button class="mobile-menu-btn" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
             <nav class="main-nav" role="navigation">
                 <a href="programs.html">Programs</a>
                 <div class="nav-dropdown">
-                    <a class="nav-dropdown-toggle">Admissions <i class="fas fa-chevron-down" style="font-size:0.8em;margin-left:5px;"></i></a>
+                    <a href="admissions.html" class="nav-dropdown-toggle">Admissions <i class="fas fa-chevron-down" style="font-size:0.8em;margin-left:5px;"></i></a>
                     <div class="dropdown-content">
+                        <a href="admissions.html">Admissions Overview</a>
                         <a href="admission-procedure.html">Admission Procedure</a>
                         <a href="admission-requirements.html">Admission Requirements</a>
                         <a href="tuition-fees.html">Tuition, Fees & Payments</a>
@@ -41,247 +44,284 @@
         </div>
     </header>
 
-    <main>
-        <!-- Hero Section -->
-        <section class="hero-section douglas-hero" style="overflow:-moz-hidden-unscrollable; overflow:hidden;">
-            <div class="orb orb-1"></div>
-            <div class="orb orb-2"></div>
-            
-            <div class="hero-content-grid reveal">
-                <!-- Left Column -->
-                <div class="hero-text-col">
-                    <div class="badge-container">
-                        <span class="golden-badge">Fall 2026 Admissions Open</span>
+    <main class="page-main">
+        <section class="editorial-home-hero">
+            <div class="editorial-hero-grid reveal">
+                <div>
+                    <span class="hero-eyebrow">Future Students | Vancouver, BC</span>
+                    <h1 class="home-hero-title">Study what you love. Build what comes next with <span class="text-gold typewriter">Learning</span><span class="cursor">|</span></h1>
+                    <p class="home-hero-subtitle">MCC combines practical teaching, clear admissions support, and a student-first campus experience for learners who want momentum from day one.</p>
+                    <div class="hero-action-row">
+                        <a href="programs.html" class="btn-solid-gold">Find Your Program</a>
+                        <a href="apply-admissions.html" class="btn-outline-gold">Apply Now</a>
                     </div>
-                    <h1 class="hero-title">Develop a passion for <span class="text-gold typewriter">Learning</span><span class="cursor">|</span></h1>
-                    <p class="hero-subtitle">Step into the future of education with Canada's most innovative college experience.</p>
-                    <a href="programs.html" class="btn-solid-gold btn-hero-main" style="margin-top: 2rem; display: inline-block;">Find Your Program &rarr;</a>
-                    
-                    <div class="hero-stats-row mt-4">
-                        <div class="stat-item"><span class="stat-num">6+</span> <span class="stat-label">Programs</span></div>
-                        <div class="stat-item"><span class="stat-num">500+</span> <span class="stat-label">Graduates</span></div>
-                        <div class="stat-item"><span class="stat-num">25+</span> <span class="stat-label">Countries Represented</span></div>
-                        <div class="stat-item border-none" style="border:none !important; padding-right:0;"><span class="stat-num">95%</span> <span class="stat-label">Student Satisfaction</span></div>
+                    <div class="hero-proof-inline">
+                        <span><i class="fas fa-calendar-check"></i> Fall 2026 applications open</span>
+                        <span><i class="fas fa-award"></i> PTIB accredited and BC EQA designated</span>
+                        <span><i class="fas fa-globe-americas"></i> International student support available</span>
                     </div>
-                    <div class="accreditation-pills">
-                        <span class="pill-badge">&lang; PTIB Accredited &rang;</span>
-                        <span class="pill-badge">&lang; BC EQA Designated &rang;</span>
-                        <span class="pill-badge">&lang; EduCanada Approved &rang;</span>
+                    <div class="hero-note-card">
+                        <strong>Why students choose MCC</strong>
+                        <p>Small cohorts, accessible advising, and programs connected to fast-moving industries from AI and digital media to care, hospitality, and esports.</p>
                     </div>
                 </div>
-                <!-- Right Column -->
-                <div class="hero-art-col">
-                    <div class="hero-carousel" id="heroCarousel">
-                        <div class="carousel-card card-pos-1" data-id="1">
-                            <i class="fas fa-robot card-icon-large"></i>
-                            <span class="card-title">AI Microcredential</span>
+                <div>
+                    <div class="hero-visual-frame">
+                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80" alt="Students collaborating in a campus lounge">
+                        <div class="hero-floating-card primary">
+                            <strong>6+ career-ready programs</strong>
+                            <span>Build skills for high-growth sectors with applied, practical learning.</span>
                         </div>
-                        <div class="carousel-card card-pos-2" data-id="2">
-                            <i class="fas fa-hands-helping card-icon-large"></i>
-                            <span class="card-title">Caregiver Senior</span>
-                        </div>
-                        <div class="carousel-card card-pos-3" data-id="3">
-                            <i class="fas fa-hotel card-icon-large"></i>
-                            <span class="card-title">Hospitality Diploma</span>
-                        </div>
-                        <div class="carousel-card card-pos-4" data-id="4">
-                            <i class="fas fa-gamepad card-icon-large"></i>
-                            <span class="card-title">Esports Diploma</span>
-                        </div>
-                        <div class="carousel-card card-pos-5" data-id="5">
-                            <i class="fas fa-video card-icon-large"></i>
-                            <span class="card-title">Video & Content Creation</span>
+                        <div class="hero-floating-card secondary">
+                            <strong>Admissions made clear</strong>
+                            <span>Requirements, tuition planning, application steps, and support all mapped in one place.</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Announcement Banner -->
-        <section class="announcement-banner reveal">
-            <div class="announcement-inner">
-                <div class="ann-info">
-                    <div class="ann-icon"><i class="fas fa-bullhorn"></i></div>
-                    <div class="ann-text">
-                        <h2>Fall 2026 Admissions Now Open</h2>
-                        <p>Apply early to secure your spot. Programs fill up fast &mdash; start your application today.</p>
-                    </div>
+        <section class="proof-strip">
+            <div class="proof-strip-grid reveal">
+                <div class="proof-item">
+                    <div class="proof-label">Programs</div>
+                    <div class="proof-value stat-number" data-target="6" data-suffix="+">0</div>
+                    <p>Career-ready programs built around practical outcomes.</p>
                 </div>
-                <div class="ann-cta">
-                    <a href="apply-admissions.html" class="btn-solid-gold">Apply Now &rarr;</a>
+                <div class="proof-item">
+                    <div class="proof-label">Student Satisfaction</div>
+                    <div class="proof-value stat-number" data-target="95" data-suffix="%">0</div>
+                    <p>Supportive advising and small-campus attention from inquiry to intake.</p>
+                </div>
+                <div class="proof-item">
+                    <div class="proof-label">Countries Represented</div>
+                    <div class="proof-value stat-number" data-target="25" data-suffix="+">0</div>
+                    <p>A global student community studying in downtown Vancouver.</p>
+                </div>
+                <div class="proof-item">
+                    <div class="proof-label">Upcoming Intake</div>
+                    <div class="proof-value">Fall 2026</div>
+                    <p>Applications are now open for students ready to plan their next step.</p>
                 </div>
             </div>
         </section>
 
-        <!-- News & Highlights -->
-        <section class="news-highlights bg-light-gray content-section pb-0" style="padding-top:4rem;">
-            <div class="news-grid">
-                <div class="news-dual-card reveal">
-                    <div class="news-top-accent card-color-3"></div>
-                    <div class="news-card-inner">
-                        <div class="news-icon-container bg-teal-tint">
-                            <i class="fas fa-language news-icon text-teal"></i>
+        <section class="section-shell">
+            <div class="section-surface">
+                <article class="spotlight-card reveal">
+                    <div class="spotlight-media">
+                        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=80" alt="Students and an advisor at an information session">
+                    </div>
+                    <div class="spotlight-content">
+                        <span class="section-kicker">Featured Event</span>
+                        <h2 class="section-title" style="margin-bottom:1rem;">Admissions Open House for Fall 2026</h2>
+                        <p class="section-copy">Meet advisors, compare programs, review requirements, and understand your next steps before you apply. This is the fastest way to move from interest to a confident decision.</p>
+                        <div class="tag-row">
+                            <span>Program advising</span>
+                            <span>International guidance</span>
+                            <span>Application planning</span>
                         </div>
-                        <h3>New French Programs Launching</h3>
-                        <p>Explore our new ESL French, French Hospitality, and TEF Prep programs designed for bilingual success.</p>
-                        <a href="newsletter.html" class="teal-link news-card-link">Learn More &rarr;</a>
-                    </div>
-                </div>
-                <div class="news-dual-card reveal" style="transition-delay: 0.1s;">
-                    <div class="news-top-accent card-color-2"></div>
-                    <div class="news-card-inner">
-                        <div class="news-icon-container bg-gold-tint">
-                            <i class="fas fa-briefcase news-icon text-gold"></i>
+                        <div class="hero-action-row">
+                            <a href="apply-admissions.html" class="btn-solid-gold">Start Your Application</a>
+                            <a href="admissions.html" class="btn-outline-gold">Explore Admissions</a>
                         </div>
-                        <h3>Bilingual Careers in Demand</h3>
-                        <p>Discover how dual-language proficiency opens doors to premium employment opportunities across Canada.</p>
-                        <a href="programs.html" class="teal-link news-card-link">Explore Programs &rarr;</a>
                     </div>
-                </div>
+                </article>
             </div>
         </section>
 
-        <!-- Featured Programs -->
-        <section id="programs" class="bg-white content-section" style="padding-top: 6rem; padding-bottom: 8rem;">
-            <div class="section-header reveal">
-                <h2 class="section-title">Microcredentials & <span class="text-gold">Programs</span></h2>
-                <p style="color: #555; font-size: 1.2rem; max-width: 600px; margin: 0 auto;">Discover our specialized pathways to success</p>
-                <div style="margin-top: 2rem;">
-                    <a href="programs.html" class="btn-solid-gold">Explore All Programs &rarr;</a>
-                </div>
+        <section class="section-shell" style="background:#ffffff;">
+            <div class="section-intro reveal">
+                <span class="section-kicker">Programs and Pathways</span>
+                <h2 class="section-title center">Choose a path with a clear destination</h2>
+                <p class="section-copy">We organize learning around career outcomes, applied practice, and student confidence. Explore the program group that best matches the future you want to build.</p>
             </div>
-            
-            <div class="modern-card-grid">
-                <!-- Program 1: AI -->
-                <div class="modern-card reveal program-dual-card">
-                    <div class="prog-icon-container bg-green-tint"><i class="fas fa-robot text-dark-green"></i></div>
-                    <h3>AI Microcredential</h3>
-                    <p>Master cutting-edge AI tools and models to accelerate workflows and future-proof your career.</p>
-                    <a href="programs.html" class="teal-link prog-card-link">Learn More &rarr;</a>
-                </div>
-                
-                <!-- Program 2: Caregiver Senior -->
-                <div class="modern-card accent-teal reveal program-dual-card" style="transition-delay: 0.1s;">
-                    <div class="prog-icon-container bg-green-tint"><i class="fas fa-hands-helping text-dark-green"></i></div>
-                    <h3>Caregiver Senior</h3>
-                    <p>Develop specialized skills required for elder care, ensuring dignity and professional health support.</p>
-                    <a href="programs.html" class="teal-link prog-card-link">Learn More &rarr;</a>
-                </div>
-                
-                <!-- Program 3: Caregiver Infant -->
-                <div class="modern-card accent-green reveal program-dual-card" style="transition-delay: 0.2s;">
-                    <div class="prog-icon-container bg-green-tint"><i class="fas fa-baby text-dark-green"></i></div>
-                    <h3>Caregiver Infant</h3>
-                    <p>Explore early childhood development, neonatal care, and fundamental pediatric support strategies.</p>
-                    <a href="programs.html" class="teal-link prog-card-link">Learn More &rarr;</a>
-                </div>
-
-                <!-- Program 4: Video Content -->
-                <div class="modern-card reveal program-dual-card" style="transition-delay: 0.3s;">
-                    <div class="prog-icon-container bg-green-tint"><i class="fas fa-video text-dark-green"></i></div>
-                    <h3>Video & Content Creation</h3>
-                    <p>Learn end-to-end media production, editing software, and viral engagement concepts.</p>
-                    <a href="programs.html" class="teal-link prog-card-link">Learn More &rarr;</a>
-                </div>
-
-                <!-- Program 5 -->
-                <div class="modern-card accent-green reveal program-dual-card" style="transition-delay: 0.4s;">
-                    <div class="prog-icon-container bg-green-tint"><i class="fas fa-hotel text-dark-green"></i></div>
-                    <h3>Hospitality Diploma</h3>
-                    <p>Your pathway to global opportunities. Earn triple credentials and smooth transitions to degree programs.</p>
-                    <a href="programs.html" class="teal-link prog-card-link">Learn More &rarr;</a>
-                </div>
-                
-                <!-- Program 6 -->
-                <div class="modern-card accent-teal reveal program-dual-card" style="transition-delay: 0.5s;">
-                    <div class="prog-icon-container bg-green-tint"><i class="fas fa-gamepad text-dark-green"></i></div>
-                    <h3>Esports Diploma</h3>
-                    <p>The only program of its kind in Canada. Turn your passion for competitive gaming into a thriving career.</p>
-                    <a href="programs.html" class="teal-link prog-card-link">Learn More &rarr;</a>
-                </div>
+            <div class="pathway-grid">
+                <article class="pathway-card reveal">
+                    <h3>Technology and Creative Media</h3>
+                    <p>For students who want modern digital skills with visible portfolios and job-ready tools.</p>
+                    <ul class="card-list">
+                        <li>AI Microcredential for emerging workflow and automation skills</li>
+                        <li>Video & Content Creation for digital storytelling and production</li>
+                        <li>Project-based learning with clear portfolio outcomes</li>
+                    </ul>
+                    <a href="programs.html" class="subtle-link">Explore media and tech programs <i class="fas fa-arrow-right"></i></a>
+                </article>
+                <article class="pathway-card accent-teal reveal" style="transition-delay:0.1s;">
+                    <h3>Care and Community Support</h3>
+                    <p>For students preparing for people-focused careers rooted in responsibility, service, and practical care.</p>
+                    <ul class="card-list">
+                        <li>Caregiver Senior and Caregiver Infant pathways</li>
+                        <li>Hands-on training and real-world support preparation</li>
+                        <li>Built for students seeking meaningful community impact</li>
+                    </ul>
+                    <a href="admission-requirements.html" class="subtle-link">View entry requirements <i class="fas fa-arrow-right"></i></a>
+                </article>
+                <article class="pathway-card accent-deep reveal" style="transition-delay:0.2s;">
+                    <h3>Hospitality, Esports, and Emerging Industries</h3>
+                    <p>For learners who want industry-connected training in sectors shaped by customer experience, operations, and fast-moving culture.</p>
+                    <ul class="card-list">
+                        <li>Hospitality Diploma with service and operations focus</li>
+                        <li>Esports Diploma for one of Canada's most distinctive pathways</li>
+                        <li>Career support for students entering high-energy industries</li>
+                    </ul>
+                    <a href="career-services.html" class="subtle-link">See career support <i class="fas fa-arrow-right"></i></a>
+                </article>
             </div>
         </section>
 
-        <!-- Quick Links Grid -->
-        <section class="quick-links-section bg-light-gray content-section">
-            <div class="quick-links-grid">
-                <a href="about.html" class="quick-link-tile reveal">
-                    <div class="quick-link-icon-container"><i class="fas fa-info-circle tile-icon"></i></div>
-                    <h3>About MCC</h3>
-                    <p>Learn about our mission, values, and what makes MCC different.</p>
-                    <span class="tile-link">Explore MCC &rarr;</span>
-                </a>
-                <a href="admission-requirements.html" class="quick-link-tile reveal" style="transition-delay:0.1s;">
-                    <div class="quick-link-icon-container"><i class="fas fa-clipboard-check tile-icon"></i></div>
-                    <h3>Admission Requirements</h3>
-                    <p>View requirements for each program and check your eligibility.</p>
-                    <span class="tile-link">Check Requirements &rarr;</span>
-                </a>
-                <a href="tuition-fees.html" class="quick-link-tile reveal" style="transition-delay:0.2s;">
-                    <div class="quick-link-icon-container"><i class="fas fa-file-invoice-dollar tile-icon"></i></div>
-                    <h3>Tuition & Fees</h3>
-                    <p>Understand our tuition structure and payment options.</p>
-                    <span class="tile-link">Estimate Costs &rarr;</span>
-                </a>
-                <a href="contact.html" class="quick-link-tile reveal" style="transition-delay:0.3s;">
-                    <div class="quick-link-icon-container"><i class="fas fa-comments tile-icon"></i></div>
-                    <h3>Contact Us</h3>
-                    <p>Have questions? Reach out to our admissions team.</p>
-                    <span class="tile-link">Get in Touch &rarr;</span>
-                </a>
+        <section class="section-shell">
+            <div class="section-intro reveal">
+                <span class="section-kicker">Student Experience</span>
+                <h2 class="section-title center">Support that keeps your momentum moving</h2>
+                <p class="section-copy">A strong homepage should not just inspire. It should answer the next questions students actually have once they are interested.</p>
             </div>
-        </section>
-
-        <!-- Campus Portals -->
-        <section class="campus-portals bg-white content-section" style="padding-top: 5rem; padding-bottom: 5rem;">
-            <div style="text-align:center; max-width:800px; margin:0 auto 4rem;">
-                <h2 class="section-title">Campus <span class="text-gold">Portals</span></h2>
-            </div>
-            <div class="portals-container">
-                <div class="portal-card student-portal reveal">
-                    <div class="portal-overlay" style="background: linear-gradient(to top, var(--deep-green-dark), rgba(6,43,26,0.5));"></div>
-                    <div class="portal-content">
-                        <i class="fas fa-user-graduate portal-icon"></i>
-                        <h2 style="color: white;">Student LMS</h2>
-                        <p style="color: #e0e0e0;">Access your courses, grades, and campus resources.</p>
-                        <button class="btn-outline-gold">Enter LMS</button>
+            <div class="support-grid">
+                <article class="support-card featured reveal">
+                    <div class="feature-media">
+                        <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=1200&q=80" alt="Students speaking with an advisor in a student services setting">
                     </div>
-                </div>
-                
-                <div class="portal-card staff-portal reveal" style="transition-delay: 0.15s;">
-                    <div class="portal-overlay" style="background: linear-gradient(to top, var(--deep-green-dark), rgba(6,43,26,0.5));"></div>
-                    <div class="portal-content">
-                        <i class="fas fa-id-badge portal-icon"></i>
-                        <h2 style="color: white;">Staff CRM</h2>
-                        <p style="color: #e0e0e0;">Manage student interactions, admissions, and records.</p>
-                        <button class="btn-outline-gold">Enter CRM</button>
+                    <div class="feature-copy">
+                        <span class="section-kicker">International Support</span>
+                        <h3>Study permit guidance, onboarding, and a smooth Vancouver start</h3>
+                        <p>International students need more than a brochure. MCC offers admissions guidance, document clarity, language expectations, and local support to help students arrive prepared.</p>
+                        <div class="tag-row">
+                            <span>Study permit planning</span>
+                            <span>Arrival support</span>
+                            <span>Language guidance</span>
+                        </div>
+                        <a href="international-students.html" class="subtle-link">Explore international student support <i class="fas fa-arrow-right"></i></a>
                     </div>
-                </div>
+                </article>
+                <article class="support-card accent-teal reveal" style="transition-delay:0.1s;">
+                    <h3>Career services built into the journey</h3>
+                    <p>Resume support, interview coaching, employer connections, and preparation for the transition from student to graduate.</p>
+                    <ul class="card-list">
+                        <li>Coaching and application materials support</li>
+                        <li>Employer-facing readiness and industry alignment</li>
+                        <li>Career planning before graduation</li>
+                    </ul>
+                    <a href="career-services.html" class="subtle-link">See career services <i class="fas fa-arrow-right"></i></a>
+                </article>
+                <article class="support-card accent-deep reveal" style="transition-delay:0.2s;">
+                    <h3>Real answers for future students</h3>
+                    <p>Requirements, tuition planning, campus contact points, and application guidance should all be one click away from the homepage.</p>
+                    <ul class="card-list">
+                        <li>Admissions hub and step-by-step journey</li>
+                        <li>Requirements and tuition guidance</li>
+                        <li>Direct contact for personalized help</li>
+                    </ul>
+                    <a href="contact.html" class="subtle-link">Talk to admissions <i class="fas fa-arrow-right"></i></a>
+                </article>
             </div>
         </section>
 
-        <!-- Bottom CTA Band -->
-        <section class="bottom-cta-band reveal">
-            <div class="cta-band-inner">
-                <div class="cta-col">
-                    <h4>Why Choose MCC?</h4>
-                    <p>Innovative curriculum and global opportunities.</p>
-                    <a href="about.html">Explore MCC &rarr;</a>
-                </div>
-                <div class="cta-col border-left">
-                    <h4>Admission Information</h4>
-                    <p>Start your journey today.</p>
-                    <a href="admission-requirements.html">Check Requirements &rarr;</a>
-                </div>
-                <div class="cta-col border-left">
-                    <h4>Important Dates</h4>
-                    <p>Stay updated on deadlines.</p>
-                    <a href="newsletter.html">View Newsletter &rarr;</a>
-                </div>
-                <div class="cta-col cta-apply-col border-left">
-                    <h4 class="ready-to-apply-heading">Ready to Apply?</h4>
-                    <a href="apply-admissions.html" class="btn-solid-gold btn-large">Apply Now</a>
-                </div>
+        <section class="section-shell" style="background:#ffffff;">
+            <div class="section-intro reveal">
+                <span class="section-kicker">Admissions Journey</span>
+                <h2 class="section-title center">A clearer path from interest to enrollment</h2>
+                <p class="section-copy">This section replaces the large homepage portal block with something more useful for future students: a simple, visible admissions pathway.</p>
+            </div>
+            <div class="journey-grid">
+                <article class="journey-card reveal">
+                    <div class="journey-step">1</div>
+                    <h3>Discover your fit</h3>
+                    <p>Compare programs, learning styles, outcomes, and start dates before you begin an application.</p>
+                    <a href="programs.html" class="subtle-link">Browse programs <i class="fas fa-arrow-right"></i></a>
+                </article>
+                <article class="journey-card accent-deep reveal" style="transition-delay:0.1s;">
+                    <div class="journey-step">2</div>
+                    <h3>Check requirements</h3>
+                    <p>Review academic, language, and program-specific entry expectations with no guesswork.</p>
+                    <a href="admission-requirements.html" class="subtle-link">View requirements <i class="fas fa-arrow-right"></i></a>
+                </article>
+                <article class="journey-card reveal" style="transition-delay:0.2s;">
+                    <div class="journey-step">3</div>
+                    <h3>Plan tuition and support</h3>
+                    <p>Understand payment timing, fee categories, and where to ask for a personalized estimate.</p>
+                    <a href="tuition-fees.html" class="subtle-link">Review tuition guidance <i class="fas fa-arrow-right"></i></a>
+                </article>
+                <article class="journey-card accent-teal reveal" style="transition-delay:0.3s;">
+                    <div class="journey-step">4</div>
+                    <h3>Apply with confidence</h3>
+                    <p>Submit your application through a guided step-by-step form and know what happens next.</p>
+                    <a href="apply-admissions.html" class="subtle-link">Apply now <i class="fas fa-arrow-right"></i></a>
+                </article>
+            </div>
+        </section>
+
+        <section class="section-shell">
+            <div class="section-intro reveal">
+                <span class="section-kicker">Community and News</span>
+                <h2 class="section-title center">A homepage with more life, more activity, and more reasons to explore</h2>
+                <p class="section-copy">Instead of short generic blocks, the homepage now pulls students into what is happening at MCC: events, newsletters, and practical next steps.</p>
+            </div>
+            <div class="story-grid">
+                <article class="story-panel featured reveal">
+                    <div class="story-media">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80" alt="A group of students taking a group photo together">
+                    </div>
+                    <div class="story-copy">
+                        <span class="section-kicker">Latest Newsletter</span>
+                        <h3>Read the latest MCC updates, events, and student milestones</h3>
+                        <p>Our newsletter archive is one of the easiest ways for future students to understand what campus life, new programs, and academic momentum look like at MCC.</p>
+                        <div class="tag-row">
+                            <span>Events and deadlines</span>
+                            <span>Program launches</span>
+                            <span>Student stories</span>
+                        </div>
+                        <a href="newsletter.html" class="subtle-link">Visit the newsletter archive <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+                <article class="story-panel accent-teal reveal" style="transition-delay:0.1s;">
+                    <h3>Need direct guidance?</h3>
+                    <p>Contact admissions for personalized help with program fit, required documents, and application planning.</p>
+                    <ul class="card-list">
+                        <li>One-to-one inquiry support</li>
+                        <li>Fast answers on next steps</li>
+                        <li>Guidance for domestic and international applicants</li>
+                    </ul>
+                    <a href="contact.html" class="subtle-link">Connect with MCC <i class="fas fa-arrow-right"></i></a>
+                </article>
+                <article class="story-panel accent-deep reveal" style="transition-delay:0.2s;">
+                    <h3>Explore student outcomes</h3>
+                    <p>Career services, alumni stories, and student support should all reinforce why studying here is worth the decision.</p>
+                    <ul class="card-list">
+                        <li>Career preparation before graduation</li>
+                        <li>Community beyond the classroom</li>
+                        <li>Support for long-term student success</li>
+                    </ul>
+                    <a href="alumni.html" class="subtle-link">Meet the alumni community <i class="fas fa-arrow-right"></i></a>
+                </article>
+            </div>
+        </section>
+
+        <section class="section-shell" style="background:#ffffff;">
+            <div class="section-intro reveal">
+                <span class="section-kicker">Next Actions</span>
+                <h2 class="section-title center">Take the next step with confidence</h2>
+            </div>
+            <div class="conversion-grid">
+                <article class="conversion-card reveal">
+                    <h3>Admissions Hub</h3>
+                    <p>Everything future students need in one place, from overview to application.</p>
+                    <a href="admissions.html" class="subtle-link">Explore admissions <i class="fas fa-arrow-right"></i></a>
+                </article>
+                <article class="conversion-card reveal" style="transition-delay:0.1s;">
+                    <h3>Requirements</h3>
+                    <p>Check general and program-specific entry expectations before you apply.</p>
+                    <a href="admission-requirements.html" class="subtle-link">Review requirements <i class="fas fa-arrow-right"></i></a>
+                </article>
+                <article class="conversion-card reveal" style="transition-delay:0.2s;">
+                    <h3>Tuition Guidance</h3>
+                    <p>Understand fee categories, payment timing, and where to get a personal estimate.</p>
+                    <a href="tuition-fees.html" class="subtle-link">Plan tuition <i class="fas fa-arrow-right"></i></a>
+                </article>
+                <article class="conversion-card reveal" style="transition-delay:0.3s;">
+                    <h3>Talk to Us</h3>
+                    <p>Reach out if you want help comparing programs or preparing your application.</p>
+                    <a href="contact.html" class="subtle-link">Contact MCC <i class="fas fa-arrow-right"></i></a>
+                </article>
             </div>
         </section>
     </main>
@@ -290,20 +330,29 @@
         <div class="footer-grid reveal">
             <div class="footer-brand">
                 <span class="mcc-logo large">MCC</span>
-                <p>Metropolitan Community College</p>
+                <p>Metropolitan Community College helps future students move from curiosity to career-ready confidence with practical programs and student-first support in Vancouver.</p>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
             <div class="footer-links">
                 <h4>Quick Links</h4>
                 <ul>
-                    <li><a href="#">Admissions</a></li>
-                    <li><a href="#">International Students</a></li>
-                    <li><a href="#">Career Services</a></li>
-                    <li><a href="#">Alumni</a></li>
+                    <li><a href="admissions.html">Admissions</a></li>
+                    <li><a href="international-students.html">International Students</a></li>
+                    <li><a href="career-services.html">Career Services</a></li>
+                    <li><a href="alumni.html">Alumni</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Explore MCC</h4>
+                <ul>
+                    <li><a href="programs.html">Programs</a></li>
+                    <li><a href="about.html">About MCC</a></li>
+                    <li><a href="newsletter.html">News & Newsletter</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
                 </ul>
             </div>
             <div class="footer-contact">
@@ -311,6 +360,7 @@
                 <p><i class="fas fa-map-marker-alt"></i> Water Street, Vancouver, BC</p>
                 <p><i class="fas fa-phone"></i> +1 (604) 555-0100</p>
                 <p><i class="fas fa-envelope"></i> admissions@mcc.edu</p>
+                <p><i class="fas fa-clock"></i> Monday - Friday, 9:00 AM - 5:00 PM PST</p>
             </div>
         </div>
         <div class="footer-bottom">

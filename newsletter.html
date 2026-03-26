@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -19,7 +19,7 @@
         </div>
         <div class="header-main">
             <div class="logo-container">
-                <a href="index.html" style="text-decoration:none; display:flex; align-items:center; gap:15px;">
+                <a href="index.html" class="logo-link">
                     <span class="mcc-logo">MCC</span>
                     <span class="logo-text">Metropolitan<br>Community College</span>
                 </a>
@@ -28,8 +28,9 @@
             <nav class="main-nav" role="navigation">
                 <a href="programs.html">Programs</a>
                 <div class="nav-dropdown">
-                    <a class="nav-dropdown-toggle">Admissions <i class="fas fa-chevron-down" style="font-size:0.8em;margin-left:5px;"></i></a>
+                    <a href="admissions.html" class="nav-dropdown-toggle">Admissions <i class="fas fa-chevron-down" style="font-size:0.8em;margin-left:5px;"></i></a>
                     <div class="dropdown-content">
+                        <a href="admissions.html">Admissions Overview</a>
                         <a href="admission-procedure.html">Admission Procedure</a>
                         <a href="admission-requirements.html">Admission Requirements</a>
                         <a href="tuition-fees.html">Tuition, Fees & Payments</a>
@@ -38,21 +39,47 @@
                 </div>
                 <a href="about.html">About</a>
                 <a href="contact.html">Contact</a>
-                <a href="newsletter.html" style="color:var(--accent-gold) !important;">Newsletter</a>
+                <a href="newsletter.html" class="active">Newsletter</a>
             </nav>
         </div>
     </header>
 
-    <main class="newsletter-page">
-        <!-- Hero Banner -->
-        <section class="newsletter-hero reveal">
-            <h1>MCC <span style="color:var(--accent-gold);">Newsletter</span></h1>
-            <p style="font-size:1.2rem; margin-bottom: 2rem;">Stay informed with monthly updates from Metropolitan Community College</p>
-            
-            <form class="subscribe-bar" onsubmit="event.preventDefault(); alert('Subscribed successfully!');">
-                <input type="email" placeholder="Enter your email address..." required>
-                <button type="submit" class="btn-solid-gold">Subscribe</button>
-            </form>
+    <main class="page-main newsletter-page">
+        <section class="page-hero">
+            <div class="page-hero-grid reveal">
+                <div>
+                    <span class="page-eyebrow">Newsletter Archive</span>
+                    <h1 class="page-hero-title">Stay connected to MCC news, deadlines, and campus momentum</h1>
+                    <p class="page-hero-subtitle">The newsletter archive should feel like part of the living site, not an isolated database. Use it to follow program launches, student stories, important dates, and community updates.</p>
+                    <div class="page-stat-list">
+                        <span class="page-stat-pill"><i class="fas fa-newspaper"></i> Archive from 2023 to 2026</span>
+                        <span class="page-stat-pill"><i class="fas fa-calendar-alt"></i> Deadlines and events</span>
+                        <span class="page-stat-pill"><i class="fas fa-bullhorn"></i> Program and campus updates</span>
+                    </div>
+                </div>
+                <div class="page-hero-media">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80" alt="Students reading and working together in a college commons area">
+                </div>
+            </div>
+        </section>
+
+        <section class="section-shell" style="background:#ffffff; padding-bottom:2rem;">
+            <div class="section-surface">
+                <article class="spotlight-card reveal">
+                    <div class="spotlight-media">
+                        <img src="https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&w=1200&q=80" alt="Students celebrating together at a campus event">
+                    </div>
+                    <div class="spotlight-content">
+                        <span class="section-kicker">Why this archive matters</span>
+                        <h2 class="section-title" style="margin-bottom:1rem;">Future students should be able to see what is actually happening at MCC</h2>
+                        <p class="section-copy">This page helps turn the newsletter into a stronger recruitment and community tool by surfacing real movement: launches, support initiatives, deadlines, and stories from across the college.</p>
+                        <form class="subscribe-bar" onsubmit="event.preventDefault(); alert('Subscribed successfully!');">
+                            <input type="email" placeholder="Enter your email address..." required>
+                            <button type="submit" class="btn-solid-gold">Subscribe</button>
+                        </form>
+                    </div>
+                </article>
+            </div>
         </section>
 
         <!-- Year Filters -->
@@ -72,7 +99,7 @@
                 <div class="news-card-accent card-color-1"></div>
                 <div class="news-card-date">March 2026</div>
                 <div class="news-card-issue">Issue #39</div>
-                <div class="news-card-title">Spring Enrollment Opens — AI Microcredential & French Programs Expanding</div>
+                <div class="news-card-title">Spring Enrollment Opens  -  AI Microcredential & French Programs Expanding</div>
                 <div class="news-card-preview">MCC opens Spring 2026 enrollment with expanded seats in the AI Microcredential and all French-language programs including ESL French, French Hospitality, and TEF Prep.</div>
                 <a href="#" class="news-card-link">Read More <i class="fas fa-arrow-right"></i></a>
                 <div class="full-content-data" style="display:none;">
@@ -87,11 +114,11 @@
                 <div class="news-card-accent card-color-2"></div>
                 <div class="news-card-date">February 2026</div>
                 <div class="news-card-issue">Issue #38</div>
-                <div class="news-card-title">Winter Career Fair — Bilingual Careers in Demand</div>
+                <div class="news-card-title">Winter Career Fair  -  Bilingual Careers in Demand</div>
                 <div class="news-card-preview">A recap of this year's career fair featuring top employers seeking bilingual French-English candidates, plus standout student presentations.</div>
                 <a href="#" class="news-card-link">Read More <i class="fas fa-arrow-right"></i></a>
                 <div class="full-content-data" style="display:none;">
-                    <p>Our Winter 2026 Career Fair transformed the main campus atrium into a bustling hub of opportunity, drawing over 50 regional and national employers. A recurring theme across hiring managers was the urgent demand for versatile candidates—specifically, those armed with both technical knowledge and bilingual proficiency.</p>
+                    <p>Our Winter 2026 Career Fair transformed the main campus atrium into a bustling hub of opportunity, drawing over 50 regional and national employers. A recurring theme across hiring managers was the urgent demand for versatile candidates - specifically, those armed with both technical knowledge and bilingual proficiency.</p>
                     <p>This year, companies spanning tech, healthcare, and hospitality actively recruited from our student body. Recruiters were notably impressed by students from the French Hospitality and ESL French programs, emphasizing that French-English bilingualism is a crucial differentiator in today's competitive Canadian hiring landscape.</p>
                     <p>Highlights of the event included a keynote panel featuring hiring managers from leading hospitality groups in Montreal and Vancouver, as well as a showcase of student-led AI projects. Thank you to the Career Services team for orchestrating an event that truly bridges the gap between the classroom and the workforce.</p>
                 </div>
@@ -102,12 +129,12 @@
                 <div class="news-card-accent card-color-3"></div>
                 <div class="news-card-date">January 2026</div>
                 <div class="news-card-issue">Issue #37</div>
-                <div class="news-card-title">🇫🇷 First MCC French Cultural Week & Francophonie Celebration</div>
-                <div class="news-card-preview">MCC kicks off 2026 with its inaugural French Cultural Week — a week of Francophone film screenings, guest speakers from Quebec, French cooking workshops, and a campus-wide celebration of Francophonie.</div>
+                <div class="news-card-title">First MCC French Cultural Week & Francophonie Celebration</div>
+                <div class="news-card-preview">MCC kicks off 2026 with its inaugural French Cultural Week  -  a week of Francophone film screenings, guest speakers from Quebec, French cooking workshops, and a campus-wide celebration of Francophonie.</div>
                 <a href="#" class="news-card-link">Read More <i class="fas fa-arrow-right"></i></a>
                 <div class="full-content-data" style="display:none;">
                     <p>January marked a historic moment at Metropolitan Community College as we proudly hosted our inaugural French Cultural Week. An immersive celebration of Francophonie, the event week transformed our campus and brought our expansive French curriculum to life beyond the classroom walls.</p>
-                    <p>Organized in collaboration with Alliance Française Vancouver, the week featured a rich tapestry of activities. Students enjoyed screenings of award-winning Francophone films, attended specialized French culinary workshops, and joined highly engaging conversational cafes. Guest speakers from Quebec's hospitality sector also joined us virtually, sharing insights on the cultural nuances of bilingual customer service.</p>
+                    <p>Organized in collaboration with Alliance Francaise Vancouver, the week featured a rich tapestry of activities. Students enjoyed screenings of award-winning Francophone films, attended specialized French culinary workshops, and joined highly engaging conversational cafes. Guest speakers from Quebec's hospitality sector also joined us virtually, sharing insights on the cultural nuances of bilingual customer service.</p>
                     <p>The unquestionable highlight was the student showcase. Learners from the ESL French, French Hospitality, and TEF Prep programs presented collaborative projects entirely in French. It was an inspiring testament to how far MCC has come since we first integrated French language education into our core disciplines. The week concluded with a campus-wide reception featuring authentic French cuisine, ending our first month of 2026 on a soaring, celebratory note.</p>
                 </div>
             </div>
@@ -117,7 +144,7 @@
                 <div class="news-card-accent card-color-4"></div>
                 <div class="news-card-date">December 2025</div>
                 <div class="news-card-issue">Issue #36</div>
-                <div class="news-card-title">Fall Semester Wrap-Up — A Record Year for MCC</div>
+                <div class="news-card-title">Fall Semester Wrap-Up  -  A Record Year for MCC</div>
                 <div class="news-card-preview">Highlights from a landmark fall semester: the TEF Prep program's successful launch, esports team victories, and a look at campus holiday events and closures.</div>
                 <a href="#" class="news-card-link">Read More <i class="fas fa-arrow-right"></i></a>
                 <div class="full-content-data" style="display:none;">
@@ -133,7 +160,7 @@
                 <div class="news-card-date">November 2025</div>
                 <div class="news-card-issue">Issue #35</div>
                 <div class="news-card-title">Hospitality Students Shine at National Competition</div>
-                <div class="news-card-preview">Our hospitality diploma students — including the first cohort from the French Hospitality program — represented MCC at the Canadian Hospitality Awards in Montreal.</div>
+                <div class="news-card-preview">Our hospitality diploma students  -  including the first cohort from the French Hospitality program  -  represented MCC at the Canadian Hospitality Awards in Montreal.</div>
                 <a href="#" class="news-card-link">Read More <i class="fas fa-arrow-right"></i></a>
                 <div class="full-content-data" style="display:none;">
                     <p>In November, a select delegation of students from MCC's Hospitality Diploma programs traveled to Montreal to compete in the prestigious Canadian Hospitality Awards. Navigating rigorous scenarios in guest relations, crisis management, and event planning, our student teams delivered performances that earned them exceptional marks from industry judges.</p>
@@ -147,13 +174,13 @@
                 <div class="news-card-accent card-color-2"></div>
                 <div class="news-card-date">October 2025</div>
                 <div class="news-card-issue">Issue #34</div>
-                <div class="news-card-title">🇫🇷 TEF Preparation Program Officially Launches</div>
+                <div class="news-card-title">TEF Preparation Program Officially Launches</div>
                 <div class="news-card-preview">MCC introduces its new TEF Preparation Program, designed to help students achieve certification for immigration, university admission, and professional opportunities.</div>
                 <a href="#" class="news-card-link">Read More <i class="fas fa-arrow-right"></i></a>
                 <div class="full-content-data" style="display:none;">
-                    <p>This October, Metropolitan Community College proudly officially launched its newest academic offering: the TEF (Test d'évaluation de français) Preparation Program. This marks the culmination of months of meticulous curriculum design, establishing MCC as a premier destination for formal French assessment preparation on the West Coast.</p>
+                    <p>This October, Metropolitan Community College proudly officially launched its newest academic offering: the TEF (Test d'evaluation de francais) Preparation Program. This marks the culmination of months of meticulous curriculum design, establishing MCC as a premier destination for formal French assessment preparation on the West Coast.</p>
                     <p>Tailored for students targeting immigration to Francophone regions, federal employment, or admission to Francophone universities, the program provides comprehensive training across all four crucial components of the TEF exam: reading, listening, writing, and speaking. Our expert instructors, many of whom have experience as official examiners, utilize targeted simulations and intensive workshops to build essential test-taking strategies.</p>
-                    <p>With both 8-week intensive and 12-week standard formats available, the TEF Prep Program operates in powerful synergy with our existing ESL French suites (A1–C1). This launch ensures that our students are not only learning French, but are expertly equipped to translate their bilingualism into recognized credentials and tangible, life-changing opportunities.</p>
+                    <p>With both 8-week intensive and 12-week standard formats available, the TEF Prep Program operates in powerful synergy with our existing ESL French suites (A1-C1). This launch ensures that our students are not only learning French, but are expertly equipped to translate their bilingualism into recognized credentials and tangible, life-changing opportunities.</p>
                 </div>
             </div>
 
@@ -162,7 +189,7 @@
             <div class="news-card" data-year="2025">
                 <div class="news-card-accent card-color-3"></div>
                 <div class="news-card-date">September 2025</div><div class="news-card-issue">Issue #33</div>
-                <div class="news-card-title">Welcome Back! Fall 2025 Orientation — Biggest Year Yet</div>
+                <div class="news-card-title">Welcome Back! Fall 2025 Orientation  -  Biggest Year Yet</div>
                 <div class="news-card-preview">New students explore campus, meet faculty, and kick off the academic year. This fall welcomes MCC's largest incoming class, including growing enrollment in all French-language programs.</div>
                 <a href="#" class="news-card-link">Read More <i class="fas fa-arrow-right"></i></a>
                 <div class="full-content-data" style="display:none;"><p>Full newsletter content is available in the MCC archives. Contact us for more information.</p></div>
@@ -171,7 +198,7 @@
             <div class="news-card" data-year="2025">
                 <div class="news-card-accent card-color-4"></div>
                 <div class="news-card-date">August 2025</div><div class="news-card-issue">Issue #32</div>
-                <div class="news-card-title">Getting Ready for Fall — New TEF Prep Program & Enrollment Deadlines</div>
+                <div class="news-card-title">Getting Ready for Fall  -  New TEF Prep Program & Enrollment Deadlines</div>
                 <div class="news-card-preview">Important reminders for incoming students. Exciting news: MCC's new TEF Preparation Program opens for registration this fall alongside all existing programs.</div>
                 <a href="#" class="news-card-link">Read More <i class="fas fa-arrow-right"></i></a>
                 <div class="full-content-data" style="display:none;"><p>Full newsletter content is available in the MCC archives. Contact us for more information.</p></div>
@@ -189,7 +216,7 @@
             <div class="news-card" data-year="2025">
                 <div class="news-card-accent card-color-2"></div>
                 <div class="news-card-date">June 2025</div><div class="news-card-issue">Issue #30</div>
-                <div class="news-card-title">🇫🇷 MCC Students Visit the French Consulate in Vancouver</div>
+                <div class="news-card-title">MCC Students Visit the French Consulate in Vancouver</div>
                 <div class="news-card-preview">Students from the ESL French and French Hospitality programs visited the Consulate General of France in Vancouver for a special cultural exchange event.</div>
                 <a href="#" class="news-card-link">Read More <i class="fas fa-arrow-right"></i></a>
                 <div class="full-content-data" style="display:none;">
@@ -212,7 +239,7 @@
             <div class="news-card" data-year="2025">
                 <div class="news-card-accent card-color-4"></div>
                 <div class="news-card-date">April 2025</div><div class="news-card-issue">Issue #28</div>
-                <div class="news-card-title">Spring Open House — Record Attendance & French Program Interest Surges</div>
+                <div class="news-card-title">Spring Open House  -  Record Attendance & French Program Interest Surges</div>
                 <div class="news-card-preview">Over 300 prospective students visited MCC during the annual spring open house. The French Hospitality and ESL French booths were among the most visited.</div>
                 <a href="#" class="news-card-link">Read More <i class="fas fa-arrow-right"></i></a>
                 <div class="full-content-data" style="display:none;"><p>Full newsletter content is available in the MCC archives. Contact us for more information.</p></div>
@@ -221,13 +248,13 @@
             <div class="news-card" data-year="2025">
                 <div class="news-card-accent card-color-1"></div>
                 <div class="news-card-date">March 2025</div><div class="news-card-issue">Issue #27</div>
-                <div class="news-card-title">🇫🇷 French Hospitality Program Launches with Montreal Hotel Partnerships</div>
+                <div class="news-card-title">French Hospitality Program Launches with Montreal Hotel Partnerships</div>
                 <div class="news-card-preview">MCC proudly launches its new French Hospitality Program in partnership with leading hotels in Montreal. Students will study hospitality operations with a French-language focus.</div>
                 <a href="#" class="news-card-link">Read More <i class="fas fa-arrow-right"></i></a>
                 <div class="full-content-data" style="display:none;">
                     <p>March 2025 marks a transformative milestone for Metropolitan Community College with the much-anticipated launch of our French Hospitality Diploma. 
                     Merging elite hospitality management training with comprehensive Francophone cultural and linguistic immersion, this program is designed to forge the next generation of bilingual industry leaders.</p>
-                    <p>What sets this program apart is our exclusive nexus of partnerships with some of Montreal's most prestigious properties, including Fairmont The Queen Elizabeth, Hôtel Nelligan, and Le Mount Stephen. Through these strategic alliances, students not only master the operational intricacies of high-end hotels and resorts in the classroom, but subsequently transition into guaranteed co-op placements right in the heart of Quebec's luxury hospitality sector.</p>
+                    <p>What sets this program apart is our exclusive nexus of partnerships with some of Montreal's most prestigious properties, including Fairmont The Queen Elizabeth, Hotel Nelligan, and Le Mount Stephen. Through these strategic alliances, students not only master the operational intricacies of high-end hotels and resorts in the classroom, but subsequently transition into guaranteed co-op placements right in the heart of Quebec's luxury hospitality sector.</p>
                     <p>The curriculum, taught by industry veterans with deep ties to the Francophone market, ensures graduates possess the bilingual customer experience skills that global brands aggressively seek. The successful launch of this program underscores MCC's innovative approach to bridging niche academic pathways with direct, high-trajectory employment.</p>
                 </div>
             </div>
@@ -244,7 +271,7 @@
             <div class="news-card" data-year="2025">
                 <div class="news-card-accent card-color-3"></div>
                 <div class="news-card-date">January 2025</div><div class="news-card-issue">Issue #25</div>
-                <div class="news-card-title">Winter 2025 Semester Begins — French Hospitality Program Coming in March</div>
+                <div class="news-card-title">Winter 2025 Semester Begins  -  French Hospitality Program Coming in March</div>
                 <div class="news-card-preview">New courses, updated schedules, and a welcome message from the Dean. A major announcement: the French Hospitality Program is set to launch.</div>
                 <a href="#" class="news-card-link">Read More <i class="fas fa-arrow-right"></i></a>
                 <div class="full-content-data" style="display:none;"><p>Full newsletter content is available in the MCC archives. Contact us for more information.</p></div>
@@ -254,8 +281,8 @@
             <div class="news-card" data-year="2024">
                 <div class="news-card-accent card-color-4"></div>
                 <div class="news-card-date">December 2024</div><div class="news-card-issue">Issue #24</div>
-                <div class="news-card-title">Year in Review — MCC's Biggest Moments of 2024</div>
-                <div class="news-card-preview">A landmark year: the ESL French Program launched, we partnered with Alliance Française, EQA was renewed, and we celebrated our largest convocation.</div>
+                <div class="news-card-title">Year in Review  -  MCC's Biggest Moments of 2024</div>
+                <div class="news-card-preview">A landmark year: the ESL French Program launched, we partnered with Alliance Francaise, EQA was renewed, and we celebrated our largest convocation.</div>
                 <a href="#" class="news-card-link">Read More <i class="fas fa-arrow-right"></i></a>
                 <div class="full-content-data" style="display:none;"><p>Full newsletter content is available in the MCC archives. Contact us for more information.</p></div>
             </div>
@@ -281,7 +308,7 @@
             <div class="news-card" data-year="2024">
                 <div class="news-card-accent card-color-3"></div>
                 <div class="news-card-date">September 2024</div><div class="news-card-issue">Issue #21</div>
-                <div class="news-card-title">🇫🇷 Full ESL French Program Launches — All Levels A1 to C1</div>
+                <div class="news-card-title">Full ESL French Program Launches  -  All Levels A1 to C1</div>
                 <div class="news-card-preview">MCC officially launches its comprehensive ESL French Program covering all proficiency levels from A1 (Beginner) through C1 (Advanced).</div>
                 <a href="#" class="news-card-link">Read More <i class="fas fa-arrow-right"></i></a>
                 <div class="full-content-data" style="display:none;">
@@ -294,7 +321,7 @@
             <div class="news-card" data-year="2024">
                 <div class="news-card-accent card-color-4"></div>
                 <div class="news-card-date">August 2024</div><div class="news-card-issue">Issue #20</div>
-                <div class="news-card-title">Preparing for Fall — Important Dates & ESL French Program Registration</div>
+                <div class="news-card-title">Preparing for Fall  -  Important Dates & ESL French Program Registration</div>
                 <div class="news-card-preview">Key dates for registration, tuition payment, and orientation. Spotlight: the full ESL French Program opens for enrollment this September.</div>
                 <a href="#" class="news-card-link">Read More <i class="fas fa-arrow-right"></i></a>
                 <div class="full-content-data" style="display:none;"><p>Full newsletter content is available in the MCC archives. Contact us for more information.</p></div>
@@ -303,7 +330,7 @@
             <div class="news-card" data-year="2024">
                 <div class="news-card-accent card-color-1"></div>
                 <div class="news-card-date">July 2024</div><div class="news-card-issue">Issue #19</div>
-                <div class="news-card-title">Summer Learning — Online Courses & French Program Development</div>
+                <div class="news-card-title">Summer Learning  -  Online Courses & French Program Development</div>
                 <div class="news-card-preview">MCC introduces its first set of summer online learning modules. Behind the scenes, the team is finalizing curriculum for the ESL French launch.</div>
                 <a href="#" class="news-card-link">Read More <i class="fas fa-arrow-right"></i></a>
                 <div class="full-content-data" style="display:none;"><p>Full newsletter content is available in the MCC archives. Contact us for more information.</p></div>
@@ -312,12 +339,12 @@
             <div class="news-card" data-year="2024">
                 <div class="news-card-accent card-color-2"></div>
                 <div class="news-card-date">June 2024</div><div class="news-card-issue">Issue #18</div>
-                <div class="news-card-title">🇫🇷 MCC Partners with Alliance Française Vancouver</div>
-                <div class="news-card-preview">MCC signs a formal partnership with Alliance Française Vancouver to enhance its French-language education offerings and cultural programming.</div>
+                <div class="news-card-title">MCC Partners with Alliance Francaise Vancouver</div>
+                <div class="news-card-preview">MCC signs a formal partnership with Alliance Francaise Vancouver to enhance its French-language education offerings and cultural programming.</div>
                 <a href="#" class="news-card-link">Read More <i class="fas fa-arrow-right"></i></a>
                 <div class="full-content-data" style="display:none;">
-                    <p>Metropolitan Community College is honored to announce the signing of a strategic partnership with Alliance Française Vancouver. This landmark agreement represents a fundamental pillar in our vision to bring premier French-language education and robust cultural engagement to our student body.</p>
-                    <p>With its deep-rooted legacy of promoting Francophone culture globally, the Alliance Française will be instrumental in enriching our upcoming curriculums. Through this partnership, MCC students will gain unprecedented access to premium, authentic DELF/DALF exam preparation resources. Furthermore, the agreement initiates an exciting exchange of expert instructors and guest lecturers, ensuring our classrooms are infused with vibrant, native linguistic expertise.</p>
+                    <p>Metropolitan Community College is honored to announce the signing of a strategic partnership with Alliance Francaise Vancouver. This landmark agreement represents a fundamental pillar in our vision to bring premier French-language education and robust cultural engagement to our student body.</p>
+                    <p>With its deep-rooted legacy of promoting Francophone culture globally, the Alliance Francaise will be instrumental in enriching our upcoming curriculums. Through this partnership, MCC students will gain unprecedented access to premium, authentic DELF/DALF exam preparation resources. Furthermore, the agreement initiates an exciting exchange of expert instructors and guest lecturers, ensuring our classrooms are infused with vibrant, native linguistic expertise.</p>
                     <p>Beyond academics, this collaboration will also bring vibrant cultural programming to the MCC campus, from film screenings to art exhibits. This vital partnership actively lays the essential groundwork for our highly anticipated, comprehensive ESL French Program slated to launch this fall.</p>
                 </div>
             </div>
@@ -325,7 +352,7 @@
             <div class="news-card" data-year="2024">
                 <div class="news-card-accent card-color-3"></div>
                 <div class="news-card-date">May 2024</div><div class="news-card-issue">Issue #17</div>
-                <div class="news-card-title">Student Success Stories — Where Are They Now?</div>
+                <div class="news-card-title">Student Success Stories  -  Where Are They Now?</div>
                 <div class="news-card-preview">Alumni profiles showcasing career paths after graduating from MCC, from AI roles to hospitality management.</div>
                 <a href="#" class="news-card-link">Read More <i class="fas fa-arrow-right"></i></a>
                 <div class="full-content-data" style="display:none;"><p>Full newsletter content is available in the MCC archives. Contact us for more information.</p></div>
@@ -334,7 +361,7 @@
             <div class="news-card" data-year="2024">
                 <div class="news-card-accent card-color-4"></div>
                 <div class="news-card-date">April 2024</div><div class="news-card-issue">Issue #16</div>
-                <div class="news-card-title">Open House 2024 — Sneak Peek at Upcoming French Programs</div>
+                <div class="news-card-title">Open House 2024  -  Sneak Peek at Upcoming French Programs</div>
                 <div class="news-card-preview">Open house event draws prospective students with program demos. A special preview booth highlights upcoming French-language programs.</div>
                 <a href="#" class="news-card-link">Read More <i class="fas fa-arrow-right"></i></a>
                 <div class="full-content-data" style="display:none;"><p>Full newsletter content is available in the MCC archives. Contact us for more information.</p></div>
@@ -352,7 +379,7 @@
             <div class="news-card" data-year="2024">
                 <div class="news-card-accent card-color-2"></div>
                 <div class="news-card-date">February 2024</div><div class="news-card-issue">Issue #14</div>
-                <div class="news-card-title">Love for Learning — Valentine's Feature on Favourite Courses</div>
+                <div class="news-card-title">Love for Learning  -  Valentine's Feature on Favourite Courses</div>
                 <div class="news-card-preview">Students share which courses inspired them the most and why, from AI fundamentals to hospitality guest relations.</div>
                 <a href="#" class="news-card-link">Read More <i class="fas fa-arrow-right"></i></a>
                 <div class="full-content-data" style="display:none;"><p>Full newsletter content is available in the MCC archives. Contact us for more information.</p></div>
@@ -361,7 +388,7 @@
             <div class="news-card" data-year="2024">
                 <div class="news-card-accent card-color-3"></div>
                 <div class="news-card-date">January 2024</div><div class="news-card-issue">Issue #13</div>
-                <div class="news-card-title">Happy New Year — Winter Preview & Exciting Plans Ahead</div>
+                <div class="news-card-title">Happy New Year  -  Winter Preview & Exciting Plans Ahead</div>
                 <div class="news-card-preview">What to expect this semester. Looking ahead: MCC is developing French-language programs including an ESL French Program.</div>
                 <a href="#" class="news-card-link">Read More <i class="fas fa-arrow-right"></i></a>
                 <div class="full-content-data" style="display:none;"><p>Full newsletter content is available in the MCC archives. Contact us for more information.</p></div>
@@ -371,7 +398,7 @@
             <div class="news-card" data-year="2023">
                 <div class="news-card-accent card-color-4"></div>
                 <div class="news-card-date">December 2023</div><div class="news-card-issue">Issue #12</div>
-                <div class="news-card-title">Holiday Giving Campaign — MCC Gives Back</div>
+                <div class="news-card-title">Holiday Giving Campaign  -  MCC Gives Back</div>
                 <div class="news-card-preview">Students and staff participate in community volunteer events over the holiday season, including a food drive and local shelter assistance.</div>
                 <a href="#" class="news-card-link">Read More <i class="fas fa-arrow-right"></i></a>
                 <div class="full-content-data" style="display:none;"><p>Full newsletter content is available in the MCC archives. Contact us for more information.</p></div>
@@ -398,7 +425,7 @@
             <div class="news-card" data-year="2023">
                 <div class="news-card-accent card-color-3"></div>
                 <div class="news-card-date">September 2023</div><div class="news-card-issue">Issue #9</div>
-                <div class="news-card-title">Fall 2023 — Biggest Incoming Class Yet</div>
+                <div class="news-card-title">Fall 2023  -  Biggest Incoming Class Yet</div>
                 <div class="news-card-preview">Record enrollment numbers as MCC welcomes its largest cohort to date across all programs.</div>
                 <a href="#" class="news-card-link">Read More <i class="fas fa-arrow-right"></i></a>
                 <div class="full-content-data" style="display:none;"><p>Full newsletter content is available in the MCC archives. Contact us for more information.</p></div>
@@ -434,7 +461,7 @@
             <div class="news-card" data-year="2023">
                 <div class="news-card-accent card-color-3"></div>
                 <div class="news-card-date">May 2023</div><div class="news-card-issue">Issue #5</div>
-                <div class="news-card-title">Student Wellness Week — Events & Resources</div>
+                <div class="news-card-title">Student Wellness Week  -  Events & Resources</div>
                 <div class="news-card-preview">A week of wellness activities, workshops, and mental health support for students.</div>
                 <a href="#" class="news-card-link">Read More <i class="fas fa-arrow-right"></i></a>
                 <div class="full-content-data" style="display:none;"><p>Full newsletter content is available in the MCC archives. Contact us for more information.</p></div>
@@ -443,7 +470,7 @@
             <div class="news-card" data-year="2023">
                 <div class="news-card-accent card-color-4"></div>
                 <div class="news-card-date">April 2023</div><div class="news-card-issue">Issue #4</div>
-                <div class="news-card-title">Spring Open House — Meet Our Programs</div>
+                <div class="news-card-title">Spring Open House  -  Meet Our Programs</div>
                 <div class="news-card-preview">Prospective students tour the campus and learn about each program offering from AI to hospitality.</div>
                 <a href="#" class="news-card-link">Read More <i class="fas fa-arrow-right"></i></a>
                 <div class="full-content-data" style="display:none;"><p>Full newsletter content is available in the MCC archives. Contact us for more information.</p></div>
@@ -461,7 +488,7 @@
             <div class="news-card" data-year="2023">
                 <div class="news-card-accent card-color-2"></div>
                 <div class="news-card-date">February 2023</div><div class="news-card-issue">Issue #2</div>
-                <div class="news-card-title">Building Our Community — First Student Social</div>
+                <div class="news-card-title">Building Our Community  -  First Student Social</div>
                 <div class="news-card-preview">The inaugural student mixer brings together MCC's first cohort of learners for an evening of connection.</div>
                 <a href="#" class="news-card-link">Read More <i class="fas fa-arrow-right"></i></a>
                 <div class="full-content-data" style="display:none;"><p>Full newsletter content is available in the MCC archives. Contact us for more information.</p></div>
@@ -470,7 +497,7 @@
             <div class="news-card" data-year="2023">
                 <div class="news-card-accent card-color-3"></div>
                 <div class="news-card-date">January 2023</div><div class="news-card-issue">Issue #1</div>
-                <div class="news-card-title">Inaugural Issue — Welcome to Metropolitan Community College</div>
+                <div class="news-card-title">Inaugural Issue  -  Welcome to Metropolitan Community College</div>
                 <div class="news-card-preview">Introducing MCC's mission, vision, and the programs launching this year. The beginning of something extraordinary.</div>
                 <a href="#" class="news-card-link">Read More <i class="fas fa-arrow-right"></i></a>
                 <div class="full-content-data" style="display:none;"><p>Full newsletter content is available in the MCC archives. Contact us for more information.</p></div>
@@ -499,20 +526,29 @@
         <div class="footer-grid reveal">
             <div class="footer-brand">
                 <span class="mcc-logo large">MCC</span>
-                <p>Metropolitan Community College</p>
+                <p>Metropolitan Community College helps future students move from curiosity to career-ready confidence with practical programs and student-first support in Vancouver.</p>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
             <div class="footer-links">
                 <h4>Quick Links</h4>
                 <ul>
-                    <li><a href="admission-procedure.html">Admissions</a></li>
-                    <li><a href="#">International Students</a></li>
-                    <li><a href="#">Career Services</a></li>
-                    <li><a href="#">Alumni</a></li>
+                    <li><a href="admissions.html">Admissions</a></li>
+                    <li><a href="international-students.html">International Students</a></li>
+                    <li><a href="career-services.html">Career Services</a></li>
+                    <li><a href="alumni.html">Alumni</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Explore MCC</h4>
+                <ul>
+                    <li><a href="programs.html">Programs</a></li>
+                    <li><a href="about.html">About MCC</a></li>
+                    <li><a href="newsletter.html">News & Newsletter</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
                 </ul>
             </div>
             <div class="footer-contact">
@@ -520,6 +556,7 @@
                 <p><i class="fas fa-map-marker-alt"></i> Water Street, Vancouver, BC</p>
                 <p><i class="fas fa-phone"></i> +1 (604) 555-0100</p>
                 <p><i class="fas fa-envelope"></i> admissions@mcc.edu</p>
+                <p><i class="fas fa-clock"></i> Monday - Friday, 9:00 AM - 5:00 PM PST</p>
             </div>
         </div>
         <div class="footer-bottom">
@@ -529,3 +566,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+

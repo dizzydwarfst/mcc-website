@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Step-by-step admission procedure for Metropolitan Community College.">
+    <meta name="description" content="Follow the Metropolitan Community College admission procedure from inquiry to acceptance.">
     <title>Admission Procedure - Metropolitan Community College</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
         </div>
         <div class="header-main">
             <div class="logo-container">
-                <a href="index.html" style="text-decoration:none; display:flex; align-items:center; gap:15px;">
+                <a href="index.html" class="logo-link">
                     <span class="mcc-logo">MCC</span>
                     <span class="logo-text">Metropolitan<br>Community College</span>
                 </a>
@@ -28,9 +28,10 @@
             <nav class="main-nav" role="navigation">
                 <a href="programs.html">Programs</a>
                 <div class="nav-dropdown">
-                    <a class="nav-dropdown-toggle">Admissions <i class="fas fa-chevron-down" style="font-size:0.8em;margin-left:5px;"></i></a>
+                    <a href="admissions.html" class="nav-dropdown-toggle active">Admissions <i class="fas fa-chevron-down" style="font-size:0.8em;margin-left:5px;"></i></a>
                     <div class="dropdown-content">
-                        <a href="admission-procedure.html" style="color:var(--accent-gold) !important;">Admission Procedure</a>
+                        <a href="admissions.html">Admissions Overview</a>
+                        <a href="admission-procedure.html" class="nav-current">Admission Procedure</a>
                         <a href="admission-requirements.html">Admission Requirements</a>
                         <a href="tuition-fees.html">Tuition, Fees & Payments</a>
                         <a href="apply-admissions.html">Apply for Admissions</a>
@@ -43,61 +44,102 @@
         </div>
     </header>
 
-    <main class="admissions-page">
-        <!-- Hero Strip -->
-        <div class="hero-strip reveal">
-            <h1>Admission Procedure</h1>
-            <p>Your step-by-step guide to joining Metropolitan Community College.</p>
-        </div>
-
-        <section class="content-section bg-white">
-            <div class="reveal" style="max-width: 1200px; margin: 0 auto; margin-bottom: 2rem;">
-                <h2 class="section-title">How to apply</h2>
-                <p style="font-size: 1.1rem; color: #555;">We encourage prospective students to review our program offering and welcome qualified students to apply for admissions to our programs. Follow these four simple steps.</p>
-            </div>
-
-            <div class="procedure-steps reveal">
-                <div class="proc-step step-1">
-                    <div class="step-number">1</div>
-                    <h3>Application</h3>
-                    <p>Submit the online application form and pay the application fee.</p>
-                    <div style="margin-top:auto">
-                        <a href="apply-admissions.html" class="btn-solid-gold" style="padding: 0.5rem 1rem; font-size: 0.9rem; margin-bottom: 0.5rem; display:block; text-align:center;">Online Application</a>
-                        <a href="#" class="btn-outline-gold" style="padding: 0.5rem 1rem; font-size: 0.9rem; border-color: rgba(255,255,255,0.4); color: #041B10; display:block; text-align:center;">Download PDF Form</a>
+    <main class="page-main">
+        <section class="page-hero">
+            <div class="page-hero-grid reveal">
+                <div>
+                    <span class="page-eyebrow">Admission Procedure</span>
+                    <h1 class="page-hero-title">A simple four-step admissions journey</h1>
+                    <p class="page-hero-subtitle">The procedure should feel clear, not intimidating. Here is how MCC moves students from interest to official acceptance.</p>
+                    <div class="page-stat-list">
+                        <span class="page-stat-pill"><i class="fas fa-list-check"></i> Four core steps</span>
+                        <span class="page-stat-pill"><i class="fas fa-folder-open"></i> Document review included</span>
+                        <span class="page-stat-pill"><i class="fas fa-envelope-open-text"></i> Offer and acceptance workflow</span>
+                    </div>
+                    <div class="page-highlight-card">
+                        <strong>Recommended preparation</strong>
+                        <p>Before starting the application, review the requirements page and prepare your identity, education, and language documentation.</p>
                     </div>
                 </div>
-                <div class="proc-step step-2">
-                    <div class="step-number">2</div>
-                    <h3>Documentation</h3>
-                    <p>Submit the required documents, such as:</p>
-                    <ul>
-                        <li>Passport / ID</li>
-                        <li>Transcripts (high school and post-secondary)</li>
-                        <li>Proof of English Proficiency (e.g., IELTS)</li>
-                        <li>Study permit or visitor visa, if available (for international students)</li>
-                    </ul>
-                </div>
-                <div class="proc-step step-3">
-                    <div class="step-number">3</div>
-                    <h3>Offer of Admission</h3>
-                    <p>We will review the application and issue an Offer of Admissions if admission requirements are met.</p>
-                </div>
-                <div class="proc-step step-4">
-                    <div class="step-number">4</div>
-                    <h3>Acceptance</h3>
-                    <p>Upon receiving the payment of tuition fees, we will issue an official Letter of Acceptance (LOA) stating the amount received and details of program enrollment.</p>
-                    <p style="margin-top: 15px; font-size: 0.85rem; opacity: 0.9;">International students can use the official LOA to apply for a Study Permit before the commencement of the program.</p>
+                <div class="page-hero-media">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80" alt="Students reviewing documents at a table">
                 </div>
             </div>
         </section>
 
-        <!-- CTA Band -->
-        <section class="cta-band reveal">
-            <h2>Still have questions?</h2>
-            <p>Our admissions team is here to help you navigate your educational journey.</p>
-            <div class="cta-buttons">
-                <a href="apply-admissions.html" class="btn-solid-gold">Apply Now</a>
-                <a href="contact.html" class="btn-outline-gold">Contact Us</a>
+        <section class="section-shell" style="background:#ffffff;">
+            <div class="section-intro reveal">
+                <span class="section-kicker">Step-by-Step</span>
+                <h2 class="section-title center">How the MCC admissions process works</h2>
+                <p class="section-copy">The content here replaces the older block-style admissions panel with an editorial sequence that is easier to understand at a glance.</p>
+            </div>
+            <div class="journey-grid">
+                <article class="journey-card reveal">
+                    <div class="journey-step">1</div>
+                    <h3>Choose a program and start your application</h3>
+                    <p>Select the program that matches your goals, then complete the online admissions form with your personal and contact details.</p>
+                    <a href="apply-admissions.html" class="subtle-link">Open the application form <i class="fas fa-arrow-right"></i></a>
+                </article>
+                <article class="journey-card accent-deep reveal" style="transition-delay:0.1s;">
+                    <div class="journey-step">2</div>
+                    <h3>Submit supporting documents</h3>
+                    <p>Provide the documents needed to confirm identity, educational background, and language readiness where applicable.</p>
+                    <a href="admission-requirements.html" class="subtle-link">Review document expectations <i class="fas fa-arrow-right"></i></a>
+                </article>
+                <article class="journey-card reveal" style="transition-delay:0.2s;">
+                    <div class="journey-step">3</div>
+                    <h3>Receive admissions review and offer</h3>
+                    <p>MCC reviews the application package and issues an offer when the admission requirements are satisfied.</p>
+                    <a href="contact.html" class="subtle-link">Ask admissions a question <i class="fas fa-arrow-right"></i></a>
+                </article>
+                <article class="journey-card accent-teal reveal" style="transition-delay:0.3s;">
+                    <div class="journey-step">4</div>
+                    <h3>Confirm your seat and prepare for intake</h3>
+                    <p>Once payment requirements are met, students receive the next enrollment documents and can prepare for the start of their program.</p>
+                    <a href="tuition-fees.html" class="subtle-link">See tuition planning guidance <i class="fas fa-arrow-right"></i></a>
+                </article>
+            </div>
+        </section>
+
+        <section class="section-shell">
+            <div class="two-column-panel">
+                <article class="info-panel reveal">
+                    <h3>Typical documents students prepare</h3>
+                    <ul class="checklist">
+                        <li>Passport or government-issued identification</li>
+                        <li>High school and post-secondary transcripts where relevant</li>
+                        <li>English proficiency documentation when required by program</li>
+                        <li>Study permit planning materials for international applicants</li>
+                    </ul>
+                    <p>Students who prepare these items early usually move through the process more smoothly.</p>
+                </article>
+                <article class="info-panel accent-teal reveal" style="transition-delay:0.1s;">
+                    <h3>What happens after submission</h3>
+                    <ul class="checklist">
+                        <li>Admissions confirms the application package is ready for review</li>
+                        <li>Any missing information can be clarified with the applicant</li>
+                        <li>Qualified applicants receive next-step communication and offer details</li>
+                        <li>Accepted students move into tuition planning and enrollment preparation</li>
+                    </ul>
+                    <p>International students should allow extra time for visa-related preparation after admission.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section-shell" style="background:#ffffff;">
+            <div class="spotlight-card reveal">
+                <div class="spotlight-media">
+                    <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1200&q=80" alt="Application checklist and laptop on a desk">
+                </div>
+                <div class="spotlight-content">
+                    <span class="section-kicker">Best Next Step</span>
+                    <h2 class="section-title" style="margin-bottom:1rem;">Start by checking your requirements</h2>
+                    <p class="section-copy">Students often move faster when they confirm their eligibility before starting the application. That prevents unnecessary delays and makes the admissions review cleaner.</p>
+                    <div class="hero-action-row">
+                        <a href="admission-requirements.html" class="btn-solid-gold">Check Requirements</a>
+                        <a href="apply-admissions.html" class="btn-outline-gold">Apply Online</a>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
@@ -106,20 +148,29 @@
         <div class="footer-grid reveal">
             <div class="footer-brand">
                 <span class="mcc-logo large">MCC</span>
-                <p>Metropolitan Community College</p>
+                <p>Metropolitan Community College helps future students move from curiosity to career-ready confidence with practical programs and student-first support in Vancouver.</p>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
             <div class="footer-links">
                 <h4>Quick Links</h4>
                 <ul>
-                    <li><a href="#">Admissions</a></li>
-                    <li><a href="#">International Students</a></li>
-                    <li><a href="#">Career Services</a></li>
-                    <li><a href="#">Alumni</a></li>
+                    <li><a href="admissions.html">Admissions</a></li>
+                    <li><a href="international-students.html">International Students</a></li>
+                    <li><a href="career-services.html">Career Services</a></li>
+                    <li><a href="alumni.html">Alumni</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Explore MCC</h4>
+                <ul>
+                    <li><a href="programs.html">Programs</a></li>
+                    <li><a href="about.html">About MCC</a></li>
+                    <li><a href="newsletter.html">News & Newsletter</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
                 </ul>
             </div>
             <div class="footer-contact">
@@ -127,13 +178,14 @@
                 <p><i class="fas fa-map-marker-alt"></i> Water Street, Vancouver, BC</p>
                 <p><i class="fas fa-phone"></i> +1 (604) 555-0100</p>
                 <p><i class="fas fa-envelope"></i> admissions@mcc.edu</p>
+                <p><i class="fas fa-clock"></i> Monday - Friday, 9:00 AM - 5:00 PM PST</p>
             </div>
         </div>
         <div class="footer-bottom">
             <p>&copy; 2026 Metropolitan Community College. All rights reserved.</p>
         </div>
     </footer>
+
     <script src="script.js"></script>
 </body>
 </html>
-

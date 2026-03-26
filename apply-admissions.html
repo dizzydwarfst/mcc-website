@@ -8,12 +8,6 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        .form-section-title { font-size: 1.2rem; color: var(--accent-teal); margin-bottom: 2rem; font-weight: 800; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; }
-        .checkbox-group { display: flex; align-items: flex-start; gap: 10px; margin-top: 2rem; margin-bottom: 2rem; }
-        .checkbox-group input { margin-top: 3px; }
-        .checkbox-group label { font-size: 0.9rem; color: #555; }
-    </style>
 </head>
 <body>
     <header class="solid-header sticky">
@@ -25,7 +19,7 @@
         </div>
         <div class="header-main">
             <div class="logo-container">
-                <a href="index.html" style="text-decoration:none; display:flex; align-items:center; gap:15px;">
+                <a href="index.html" class="logo-link">
                     <span class="mcc-logo">MCC</span>
                     <span class="logo-text">Metropolitan<br>Community College</span>
                 </a>
@@ -34,12 +28,13 @@
             <nav class="main-nav" role="navigation">
                 <a href="programs.html">Programs</a>
                 <div class="nav-dropdown">
-                    <a class="nav-dropdown-toggle">Admissions <i class="fas fa-chevron-down" style="font-size:0.8em;margin-left:5px;"></i></a>
+                    <a href="admissions.html" class="nav-dropdown-toggle active">Admissions <i class="fas fa-chevron-down" style="font-size:0.8em;margin-left:5px;"></i></a>
                     <div class="dropdown-content">
+                        <a href="admissions.html">Admissions Overview</a>
                         <a href="admission-procedure.html">Admission Procedure</a>
                         <a href="admission-requirements.html">Admission Requirements</a>
                         <a href="tuition-fees.html">Tuition, Fees & Payments</a>
-                        <a href="apply-admissions.html" style="color:var(--accent-gold) !important;">Apply for Admissions</a>
+                        <a href="apply-admissions.html" class="nav-current">Apply for Admissions</a>
                     </div>
                 </div>
                 <a href="about.html">About</a>
@@ -49,17 +44,58 @@
         </div>
     </header>
 
-    <main class="admissions-page">
-        <!-- Hero Strip -->
-        <div class="hero-strip reveal" style="padding-bottom: 120px;">
-            <h1>Start Your Journey Today</h1>
-            <p>Join an aspiring community focused on innovation, care, and success.</p>
-        </div>
+    <main class="page-main">
+        <section class="page-hero">
+            <div class="page-hero-grid reveal">
+                <div>
+                    <span class="page-eyebrow">Apply for Admissions</span>
+                    <h1 class="page-hero-title">A guided application experience with clear steps</h1>
+                    <p class="page-hero-subtitle">The wizard remains the core of this page, but the shell around it now gives students better context, clearer expectations, and a more welcoming admissions experience.</p>
+                    <div class="page-stat-list">
+                        <span class="page-stat-pill"><i class="fas fa-user-edit"></i> Five-step application flow</span>
+                        <span class="page-stat-pill"><i class="fas fa-shield-alt"></i> Review before submission</span>
+                        <span class="page-stat-pill"><i class="fas fa-headset"></i> Advisor support available</span>
+                    </div>
+                    <div class="page-highlight-card">
+                        <strong>Before you begin</strong>
+                        <p>Choose your intended program, review the requirements, and prepare your core personal and contact information before starting the form.</p>
+                    </div>
+                </div>
+                <div class="page-hero-media">
+                    <img src="https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?auto=format&fit=crop&w=1200&q=80" alt="Student working through an online college application">
+                </div>
+            </div>
+        </section>
 
-        <section class="content-section bg-light-gray" style="padding-top: 0;">
-            <!-- Main Wizard Container -->
-            <div class="wizard-container reveal" id="wizard-container">
-                <!-- Progress Header -->
+        <section style="padding-bottom: 2rem;">
+            <div class="application-layout">
+                <aside class="application-sidebar reveal">
+                    <span class="section-kicker" style="background:rgba(255,255,255,0.1); color:var(--accent-gold);">Application Guide</span>
+                    <h2>What to have ready</h2>
+                    <p>Students should not have to guess what belongs in the form. This sidebar keeps the process grounded and practical.</p>
+                    <div class="sidebar-stack">
+                        <div class="sidebar-panel">
+                            <strong>Personal details</strong>
+                            <p>Name, citizenship, date of birth, and any current status information.</p>
+                        </div>
+                        <div class="sidebar-panel">
+                            <strong>Contact information</strong>
+                            <p>An active email address and the phone number admissions should use.</p>
+                        </div>
+                        <div class="sidebar-panel">
+                            <strong>Program choice</strong>
+                            <p>Your selected program and intended start term before the review step.</p>
+                        </div>
+                        <div class="sidebar-panel">
+                            <strong>Need help first?</strong>
+                            <p><a href="contact.html" style="color:var(--accent-gold); text-decoration:none; font-weight:700;">Contact admissions</a> if you want support before submitting.</p>
+                        </div>
+                    </div>
+                </aside>
+
+                <div class="application-main-shell reveal">
+                    <div class="wizard-container" id="wizard-container">
+                        <!-- Progress Header -->
                 <div class="progress-bar-container">
                     <div class="progress-line">
                         <div class="progress-line-fill"></div>
@@ -86,7 +122,7 @@
                     </div>
                 </div>
 
-                <form id="wizard-form" novalidate>
+                        <form id="wizard-form" novalidate>
                     <!-- STEP 1: Personal Info -->
                     <div class="form-step" data-step="1">
                         <h3 class="form-section-title">Step 1: Personal Information</h3>
@@ -385,22 +421,37 @@
                 </form>
             </div>
 
-            <!-- Success State Container -->
-            <div class="wizard-container success-state" id="wizard-success" style="display: none;">
-                <i class="fas fa-check-circle success-icon"></i>
-                <h2 style="color: var(--deep-green); font-size: 2.2rem; margin-bottom: 1rem;">Application Received!</h2>
-                <p style="color: #666; font-size: 1.1rem; max-width: 500px; margin: 0 auto 3rem;">Thank you for applying to Metropolitan Community College. We'll review your application and contact you within 5 business days.</p>
-                <a href="index.html" class="btn-solid-gold">Return to Homepage</a>
+                        <div class="wizard-container success-state" id="wizard-success" style="display: none;">
+                            <i class="fas fa-check-circle success-icon"></i>
+                            <h2 style="color: var(--deep-green); font-size: 2.2rem; margin-bottom: 1rem;">Application Received</h2>
+                            <p style="color: #666; font-size: 1.1rem; max-width: 500px; margin: 0 auto 3rem;">Thank you for applying to Metropolitan Community College. Our admissions team will review your information and follow up with next-step communication.</p>
+                            <a href="index.html" class="btn-solid-gold">Return to Homepage</a>
+                        </div>
+                    </div>
+                </div>
+
+            <div class="application-support-rail reveal">
+                <div class="support-rail-card">
+                    <strong>Application guide</strong>
+                    <p>Review the admissions process page if you want a complete overview before you submit.</p>
+                </div>
+                <div class="support-rail-card">
+                    <strong>Requirements matter</strong>
+                    <p>Students who confirm requirements early usually finish the application with fewer delays.</p>
+                </div>
+                <div class="support-rail-card">
+                    <strong>Questions welcome</strong>
+                    <p>If anything feels unclear, contact admissions instead of guessing and submitting incomplete information.</p>
+                </div>
             </div>
         </section>
 
-        <!-- CTA Band -->
-        <section class="cta-band reveal">
-            <h2>Need assistance with your application?</h2>
-            <p>Our admissions advisors are available to guide you through every step.</p>
-            <div class="cta-buttons">
-                <a href="admission-procedure.html" class="btn-solid-gold">View Application Guide</a>
-                <a href="contact.html" class="btn-outline-gold">Contact Advisors</a>
+        <section class="section-shell">
+            <div class="section-surface">
+                <div class="hero-action-row" style="justify-content:center;">
+                    <a href="admission-procedure.html" class="btn-solid-gold">View Application Guide</a>
+                    <a href="contact.html" class="btn-outline-gold">Contact Advisors</a>
+                </div>
             </div>
         </section>
     </main>
@@ -409,20 +460,29 @@
         <div class="footer-grid reveal">
             <div class="footer-brand">
                 <span class="mcc-logo large">MCC</span>
-                <p>Metropolitan Community College</p>
+                <p>Metropolitan Community College helps future students move from curiosity to career-ready confidence with practical programs and student-first support in Vancouver.</p>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
             <div class="footer-links">
                 <h4>Quick Links</h4>
                 <ul>
-                    <li><a href="admission-procedure.html">Admissions</a></li>
-                    <li><a href="#">International Students</a></li>
-                    <li><a href="#">Career Services</a></li>
-                    <li><a href="#">Alumni</a></li>
+                    <li><a href="admissions.html">Admissions</a></li>
+                    <li><a href="international-students.html">International Students</a></li>
+                    <li><a href="career-services.html">Career Services</a></li>
+                    <li><a href="alumni.html">Alumni</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Explore MCC</h4>
+                <ul>
+                    <li><a href="programs.html">Programs</a></li>
+                    <li><a href="about.html">About MCC</a></li>
+                    <li><a href="newsletter.html">News & Newsletter</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
                 </ul>
             </div>
             <div class="footer-contact">
@@ -430,6 +490,7 @@
                 <p><i class="fas fa-map-marker-alt"></i> Water Street, Vancouver, BC</p>
                 <p><i class="fas fa-phone"></i> +1 (604) 555-0100</p>
                 <p><i class="fas fa-envelope"></i> admissions@mcc.edu</p>
+                <p><i class="fas fa-clock"></i> Monday - Friday, 9:00 AM - 5:00 PM PST</p>
             </div>
         </div>
         <div class="footer-bottom">
