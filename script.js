@@ -192,22 +192,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const yearBtns = document.querySelectorAll('.year-btn');
     const newsCards = document.querySelectorAll('.news-card');
 
-    if (yearBtns.length > 0) {
+    if (yearBtns.length > 0 && newsCards.length > 0) {
+        const applyNewsletterFilter = (filterYear = 'all') => {
+            yearBtns.forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-year') === filterYear);
+            });
+
+            newsCards.forEach(card => {
+                const shouldShow = filterYear === 'all' || card.getAttribute('data-year') === filterYear;
+                card.style.display = shouldShow ? '' : 'none';
+            });
+        };
+
         yearBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                yearBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                
-                const filterYear = btn.getAttribute('data-year');
-                
-                newsCards.forEach(card => {
-                    if (filterYear === 'all' || card.getAttribute('data-year') === filterYear) {
-                        card.style.display = 'flex';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
+                applyNewsletterFilter(btn.getAttribute('data-year') || 'all');
             });
+        });
+
+        const activeYearBtn = document.querySelector('.year-btn.active') || yearBtns[0];
+        applyNewsletterFilter(activeYearBtn ? activeYearBtn.getAttribute('data-year') : 'all');
+
+        window.addEventListener('pageshow', () => {
+            const selectedYearBtn = document.querySelector('.year-btn.active') || yearBtns[0];
+            applyNewsletterFilter(selectedYearBtn ? selectedYearBtn.getAttribute('data-year') : 'all');
         });
     }
 
@@ -252,6 +260,159 @@ document.addEventListener('DOMContentLoaded', () => {
             if (e.target === modalOverlay) {
                 modalOverlay.classList.remove('active');
                 document.body.style.overflow = '';
+            }
+        });
+    }
+
+    // ==========================================
+    // Portal Login Modal Logic
+    // ==========================================
+    const portalTriggers = document.querySelectorAll('.btn-top-portal, .campus-portals .btn-outline-gold');
+
+    if (portalTriggers.length > 0) {
+        const portalModal = document.createElement('div');
+        portalModal.className = 'portal-modal-overlay';
+        portalModal.id = 'portal-login-modal';
+        portalModal.setAttribute('aria-hidden', 'true');
+        portalModal.innerHTML = `
+            <div class="portal-modal-shell" role="dialog" aria-modal="true" aria-labelledby="portal-modal-title">
+                <button type="button" class="portal-modal-close" aria-label="Close login panel">&times;</button>
+                <div class="portal-modal-intro">
+                    <span class="portal-modal-kicker">Portal Access Preview</span>
+                    <h2 id="portal-modal-title">MCC LMS & CRM Login</h2>
+                    <p>The live CRM and LMS systems are still being connected, but both login panels are ready to preview right now.</p>
+                    <div class="portal-switcher" role="tablist" aria-label="Portal selection">
+                        <button type="button" class="portal-tab active" data-portal="student" role="tab" aria-selected="true">Student LMS</button>
+                        <button type="button" class="portal-tab" data-portal="staff" role="tab" aria-selected="false">Staff CRM</button>
+                    </div>
+                </div>
+                <div class="portal-modal-body">
+                    <section class="portal-panel active" data-portal-panel="student">
+                        <span class="portal-panel-label">Student Access</span>
+                        <h3>Student LMS Login</h3>
+                        <p>Preview the student sign-in experience for courses, grades, schedules, and campus resources.</p>
+                        <form class="portal-login-form" data-portal-form="student">
+                            <label>
+                                Student Email or ID
+                                <input type="text" name="student-identity" placeholder="student@mcc.edu" required>
+                            </label>
+                            <label>
+                                Password
+                                <input type="password" name="student-password" placeholder="Password" required>
+                            </label>
+                            <button type="submit" class="btn-solid-gold">Sign In to LMS</button>
+                        </form>
+                        <p class="portal-panel-note">Live LMS authentication will be connected in a future update.</p>
+                        <div class="portal-feedback" aria-live="polite"></div>
+                    </section>
+                    <section class="portal-panel" data-portal-panel="staff">
+                        <span class="portal-panel-label">Staff Access</span>
+                        <h3>Staff CRM Login</h3>
+                        <p>Preview the staff sign-in experience for admissions workflows, student records, and follow-up activity.</p>
+                        <form class="portal-login-form" data-portal-form="staff">
+                            <label>
+                                Staff Email or ID
+                                <input type="text" name="staff-identity" placeholder="staff@mcc.edu" required>
+                            </label>
+                            <label>
+                                Password
+                                <input type="password" name="staff-password" placeholder="Password" required>
+                            </label>
+                            <button type="submit" class="btn-solid-gold">Sign In to CRM</button>
+                        </form>
+                        <p class="portal-panel-note">Live CRM authentication will be connected in a future update.</p>
+                        <div class="portal-feedback" aria-live="polite"></div>
+                    </section>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(portalModal);
+
+        const portalTabs = portalModal.querySelectorAll('.portal-tab');
+        const portalPanels = portalModal.querySelectorAll('.portal-panel');
+        const portalForms = portalModal.querySelectorAll('.portal-login-form');
+        const portalCloseBtn = portalModal.querySelector('.portal-modal-close');
+
+        const setActivePortal = (portalType) => {
+            portalTabs.forEach(tab => {
+                const isActive = tab.getAttribute('data-portal') === portalType;
+                tab.classList.toggle('active', isActive);
+                tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+            });
+
+            portalPanels.forEach(panel => {
+                const isActive = panel.getAttribute('data-portal-panel') === portalType;
+                panel.classList.toggle('active', isActive);
+            });
+        };
+
+        const openPortalModal = (portalType) => {
+            setActivePortal(portalType);
+            portalForms.forEach(form => form.reset());
+            portalModal.querySelectorAll('.portal-feedback').forEach(feedback => {
+                feedback.textContent = '';
+                feedback.classList.remove('active');
+            });
+            portalModal.classList.add('active');
+            portalModal.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('portal-modal-open');
+
+            const firstInput = portalModal.querySelector(`.portal-panel[data-portal-panel="${portalType}"] input`);
+            if (firstInput) {
+                firstInput.focus();
+            }
+        };
+
+        const closePortalModal = () => {
+            portalModal.classList.remove('active');
+            portalModal.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('portal-modal-open');
+        };
+
+        portalTriggers.forEach(trigger => {
+            const triggerText = trigger.textContent.toLowerCase();
+            const portalType = triggerText.includes('crm') ? 'staff' : 'student';
+
+            trigger.setAttribute('data-portal-open', portalType);
+            trigger.setAttribute('aria-haspopup', 'dialog');
+            trigger.setAttribute('aria-controls', 'portal-login-modal');
+
+            trigger.addEventListener('click', (e) => {
+                e.preventDefault();
+                openPortalModal(portalType);
+            });
+        });
+
+        portalTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                setActivePortal(tab.getAttribute('data-portal'));
+            });
+        });
+
+        portalForms.forEach(form => {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const portalType = form.getAttribute('data-portal-form');
+                const feedback = form.parentElement.querySelector('.portal-feedback');
+                const portalName = portalType === 'staff' ? 'Staff CRM' : 'Student LMS';
+
+                feedback.textContent = `${portalName} access is coming soon. This panel is live as a temporary preview for now.`;
+                feedback.classList.add('active');
+            });
+        });
+
+        portalCloseBtn.addEventListener('click', closePortalModal);
+
+        portalModal.addEventListener('click', (e) => {
+            if (e.target === portalModal) {
+                closePortalModal();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && portalModal.classList.contains('active')) {
+                closePortalModal();
             }
         });
     }
