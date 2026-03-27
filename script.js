@@ -1,13 +1,18 @@
 // Scroll Handler for sticky Header
 const header = document.querySelector('.glass-header, .solid-header');
 
-window.addEventListener('scroll', () => {
+const syncHeaderState = () => {
+    if (!header) return;
+
     if (window.scrollY > 50) {
         header.classList.add('scrolled');
     } else {
         header.classList.remove('scrolled');
     }
-});
+};
+
+syncHeaderState();
+window.addEventListener('scroll', syncHeaderState);
 
 // Intersection Observer for reveal animations
 const revealElements = document.querySelectorAll('.reveal');
@@ -31,6 +36,22 @@ const revealOnScroll = new IntersectionObserver(function(entries, observer) {
 revealElements.forEach(el => {
     revealOnScroll.observe(el);
 });
+
+const activateVisibleRevealElements = () => {
+    revealElements.forEach(el => {
+        if (el.classList.contains('active')) return;
+
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= window.innerHeight * 0.92) {
+            el.classList.add('active');
+            revealOnScroll.unobserve(el);
+        }
+    });
+};
+
+requestAnimationFrame(activateVisibleRevealElements);
+window.addEventListener('load', activateVisibleRevealElements);
+window.addEventListener('pageshow', activateVisibleRevealElements);
 
 // Smooth scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
