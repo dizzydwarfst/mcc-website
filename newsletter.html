@@ -12,35 +12,40 @@
 <body>
     <header class="solid-header sticky">
         <div class="header-top">
-            <div class="portal-logins">
-                <a href="#" class="btn-top-portal"><i class="fas fa-user-graduate"></i> Student LMS</a>
-                <a href="#" class="btn-top-portal"><i class="fas fa-id-badge"></i> Staff CRM</a>
+            <div class="header-top-inner">
+                <div class="portal-logins">
+                    <a href="#" class="btn-top-portal" data-portal-open="student"><i class="fas fa-right-to-bracket"></i> MCC Portal</a>
+                    <a href="contact.html" class="btn-top-link">Contact</a>
+                    <a href="apply-admissions.html" class="btn-top-link">Apply</a>
+                </div>
             </div>
         </div>
         <div class="header-main">
-            <div class="logo-container">
-                <a href="index.html" class="logo-link">
-                    <span class="mcc-logo">MCC</span>
-                    <span class="logo-text">Metropolitan<br>Community College</span>
-                </a>
-            </div>
-            <button class="mobile-menu-btn" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
-            <nav class="main-nav" role="navigation">
-                <a href="programs.html">Programs</a>
-                <div class="nav-dropdown">
-                    <a href="admissions.html" class="nav-dropdown-toggle">Admissions <i class="fas fa-chevron-down" style="font-size:0.8em;margin-left:5px;"></i></a>
-                    <div class="dropdown-content">
-                        <a href="admissions.html">Admissions Overview</a>
-                        <a href="admission-procedure.html">Admission Procedure</a>
-                        <a href="admission-requirements.html">Admission Requirements</a>
-                        <a href="tuition-fees.html">Tuition, Fees & Payments</a>
-                        <a href="apply-admissions.html">Apply for Admissions</a>
-                    </div>
+            <div class="header-main-inner">
+                <div class="logo-container">
+                    <a href="index.html" class="logo-link">
+                        <span class="mcc-logo">MCC</span>
+                        <span class="logo-text">Metropolitan<br>Community College</span>
+                    </a>
                 </div>
-                <a href="about.html">About</a>
-                <a href="contact.html">Contact</a>
-                <a href="newsletter.html" class="active">Newsletter</a>
-            </nav>
+                <button class="mobile-menu-btn" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
+                <nav class="main-nav" role="navigation">
+                    <a href="about.html">About</a>
+                    <a href="programs.html">Programs</a>
+                    <div class="nav-dropdown">
+                        <a href="admissions.html" class="nav-dropdown-toggle">Admissions <i class="fas fa-chevron-down nav-chevron"></i></a>
+                        <div class="dropdown-content">
+                            <a href="admissions.html">Admissions Overview</a>
+                            <a href="admission-procedure.html">Admission Procedure</a>
+                            <a href="admission-requirements.html">Admission Requirements</a>
+                            <a href="tuition-fees.html">Tuition, Fees & Payments</a>
+                            <a href="apply-admissions.html">Apply for Admissions</a>
+                        </div>
+                    </div>
+                    <a href="career-services.html">Student Support</a>
+                    <a href="newsletter.html" class="active">Newsletter</a>
+                </nav>
+            </div>
         </div>
     </header>
 

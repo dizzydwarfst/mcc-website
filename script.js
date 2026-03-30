@@ -300,8 +300,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 <button type="button" class="portal-modal-close" aria-label="Close login panel">&times;</button>
                 <div class="portal-modal-intro">
                     <span class="portal-modal-kicker">Portal Access Preview</span>
-                    <h2 id="portal-modal-title">MCC LMS & CRM Login</h2>
-                    <p>The live CRM and LMS systems are still being connected, but both login panels are ready to preview right now.</p>
+                    <h2 id="portal-modal-title">MCC Portal Login</h2>
+                    <p>Choose LMS or CRM access below. The live systems are still being connected, but both login panels are ready to preview right now.</p>
                     <div class="portal-switcher" role="tablist" aria-label="Portal selection">
                         <button type="button" class="portal-tab active" data-portal="student" role="tab" aria-selected="true">Student LMS</button>
                         <button type="button" class="portal-tab" data-portal="staff" role="tab" aria-selected="false">Staff CRM</button>
@@ -391,8 +391,9 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         portalTriggers.forEach(trigger => {
+            const configuredPortal = trigger.getAttribute('data-portal-open');
             const triggerText = trigger.textContent.toLowerCase();
-            const portalType = triggerText.includes('crm') ? 'staff' : 'student';
+            const portalType = configuredPortal || (triggerText.includes('crm') ? 'staff' : 'student');
 
             trigger.setAttribute('data-portal-open', portalType);
             trigger.setAttribute('aria-haspopup', 'dialog');

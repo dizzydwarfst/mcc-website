@@ -9,6 +9,9 @@
     --light-gray: #F7F8FA;
     --text-dark: #1A1A2E;
     --text-muted: #A0B0A8;
+    --content-max-width: clamp(1200px, 78vw, 1600px);
+    --narrow-max-width: clamp(760px, 44vw, 920px);
+    --page-gutter: clamp(1.25rem, 3vw, 4.5rem);
 }
 
 html {
@@ -93,46 +96,93 @@ h1, h2, h3, h4 {
 }
 
 .header-top {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 0.5rem 5%;
+    padding: 0.5rem 0;
     background: rgba(4, 27, 16, 0.4);
     border-bottom: 1px solid rgba(255,255,255,0.05);
     width: 100%;
 }
 
+.header-top-inner,
+.header-main-inner {
+    width: min(calc(100% - var(--page-gutter) - var(--page-gutter)), var(--content-max-width));
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+.header-top-inner {
+    justify-content: flex-end;
+}
+
 .portal-logins {
     display: flex;
-    gap: 1.5rem;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.85rem 1.35rem;
+}
+
+.btn-top-portal,
+.btn-top-link {
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    padding-bottom: 0.15rem;
+    transition: color 0.3s ease, opacity 0.3s ease;
 }
 
 .btn-top-portal {
     color: var(--accent-gold);
-    text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: opacity 0.3s;
 }
 
-.btn-top-portal:hover {
-    opacity: 0.8;
+.btn-top-link {
+    color: rgba(255, 255, 255, 0.82);
+}
+
+.btn-top-portal::after,
+.btn-top-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -0.1rem;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.btn-top-portal:hover,
+.btn-top-link:hover,
+.btn-top-link.active {
+    color: var(--accent-gold);
+    opacity: 1;
+}
+
+.btn-top-portal:hover::after,
+.btn-top-link:hover::after,
+.btn-top-link.active::after {
+    transform: scaleX(1);
 }
 
 .header-main {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 5%;
+    padding: 1rem 0;
     width: 100%;
     transition: all 0.3s ease;
 }
 
 .glass-header.scrolled .header-main {
-    padding: 0.6rem 5%;
+    padding: 0.6rem 0;
+}
+
+.header-main-inner {
+    justify-content: space-between;
+    gap: clamp(1.5rem, 2vw, 3rem);
 }
 
 .solid-header.scrolled {
@@ -171,7 +221,10 @@ h1, h2, h3, h4 {
 
 .main-nav {
     display: flex;
-    gap: 2rem;
+    align-items: center;
+    justify-content: flex-end;
+    gap: clamp(1.25rem, 1.4vw, 2.15rem);
+    min-width: 0;
 }
 
 .main-nav a {
@@ -1139,8 +1192,11 @@ h1, h2, h3, h4 {
     .mobile-menu-btn { display: block; }
 
     .header-top {
+        padding: 0.65rem 0;
+    }
+
+    .header-top-inner {
         justify-content: center;
-        padding: 0.65rem 5%;
     }
 
     .portal-logins {
@@ -1150,6 +1206,10 @@ h1, h2, h3, h4 {
     }
 
     .header-main {
+        padding: 1rem 0;
+    }
+
+    .header-main-inner {
         gap: 1rem;
     }
 
@@ -2073,6 +2133,7 @@ body.nav-open {
     display: inline-flex;
     align-items: center;
     line-height: inherit;
+    white-space: nowrap;
 }
 
 input[type="text"],
@@ -4049,5 +4110,60 @@ textarea {
 
     .year-filter-bar {
         justify-content: center;
+    }
+}
+
+.header-top-inner,
+.header-main-inner,
+.section-surface,
+.editorial-hero-grid,
+.page-hero-grid,
+.proof-strip-grid,
+.pathway-grid,
+.support-grid,
+.journey-grid,
+.route-grid,
+.detail-grid,
+.requirements-grid,
+.resource-grid,
+.program-cluster,
+.story-grid,
+.conversion-grid,
+.interactive-panel-grid,
+.two-column-panel,
+.application-layout,
+.application-support-rail,
+.spotlight-card,
+.feature-split,
+.support-card.featured,
+.story-panel.featured,
+.footer-grid,
+.footer-bottom {
+    max-width: var(--content-max-width);
+}
+
+.section-intro {
+    max-width: var(--narrow-max-width);
+}
+
+@media (min-width: 1800px) {
+    .hero-visual-frame,
+    .interactive-panel-grid,
+    .interactive-panel {
+        min-height: 560px;
+    }
+
+    .hero-visual-frame > img {
+        min-height: 620px;
+    }
+
+    .page-hero-media,
+    .page-hero-media img {
+        min-height: 460px;
+    }
+
+    .home-hero-subtitle,
+    .page-hero-subtitle {
+        max-width: 720px;
     }
 }
