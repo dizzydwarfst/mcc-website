@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MCC French Language programs — four structured levels from beginner to advanced, plus TEF Canada and TCF Canada exam preparation for immigration and academic goals.">
+    <title>French Language Programs - Metropolitan Community College</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .french-level-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .french-cefr-tag {
+            background: var(--accent-gold);
+            color: #041b10;
+            font-weight: 800;
+            font-size: 0.78rem;
+            padding: 0.22rem 0.6rem;
+            border-radius: 8px;
+            letter-spacing: 0.05em;
+        }
+        .french-level-name {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-medium);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        .exam-prep-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 18px 50px rgba(8, 22, 18, 0.08);
+            border-top: 4px solid var(--accent-gold);
+        }
+        .exam-prep-card h3 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+        .exam-prep-card .exam-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            margin-bottom: 1.25rem;
+        }
+        .pricing-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .pricing-option {
+            background: #f4f7f5;
+            border-radius: 14px;
+            padding: 1.25rem;
+        }
+        .pricing-option .price-label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-medium);
+            margin-bottom: 0.3rem;
+        }
+        .pricing-option .price-value {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            line-height: 1;
+            margin-bottom: 0.25rem;
+        }
+        .pricing-option .price-sub {
+            font-size: 0.8rem;
+            color: var(--text-medium);
+        }
+        .pricing-option.recommended {
+            background: var(--accent-gold);
+        }
+        .pricing-option.recommended .price-label,
+        .pricing-option.recommended .price-value,
+        .pricing-option.recommended .price-sub {
+            color: #041b10;
+        }
+        .skills-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        .skill-chip {
+            background: rgba(8, 22, 18, 0.06);
+            border-radius: 20px;
+            padding: 0.3rem 0.85rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        .regular-program-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 2rem 2.25rem;
+            box-shadow: 0 18px 50px rgba(8, 22, 18, 0.08);
+        }
+        @media (max-width: 600px) {
+            .pricing-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="solid-header sticky">
+        <div class="header-top">
+            <div class="header-top-inner">
+                <div class="portal-logins">
+                    <a href="#" class="btn-top-portal" data-portal-open="student"><i class="fas fa-right-to-bracket"></i> MCC Portal</a>
+                    <a href="contact.html" class="btn-top-link">Contact</a>
+                    <a href="apply-admissions.html" class="btn-top-link">Apply</a>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="header-main-inner">
+                <div class="logo-container">
+                    <a href="index.html" class="logo-link">
+                        <span class="mcc-logo">MCC</span>
+                        <span class="logo-text">Metropolitan<br>Community College</span>
+                    </a>
+                </div>
+                <button class="mobile-menu-btn" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
+                <nav class="main-nav" role="navigation">
+                    <a href="about.html">About</a>
+                    <div class="nav-dropdown">
+                        <a href="programs.html" class="nav-dropdown-toggle active">Programs <i class="fas fa-chevron-down nav-chevron"></i></a>
+                        <div class="dropdown-content">
+                            <a href="programs.html">All Programs</a>
+                            <a href="programs-diploma.html">Diploma Programs</a>
+                            <a href="programs-esl.html">English (ESL)</a>
+                            <a href="programs-french.html">French Language</a>
+                        </div>
+                    </div>
+                    <div class="nav-dropdown">
+                        <a href="admissions.html" class="nav-dropdown-toggle">Admissions <i class="fas fa-chevron-down nav-chevron"></i></a>
+                        <div class="dropdown-content">
+                            <a href="admissions.html">Admissions Overview</a>
+                            <a href="admission-procedure.html">Admission Procedure</a>
+                            <a href="admission-requirements.html">Admission Requirements</a>
+                            <a href="tuition-fees.html">Tuition, Fees & Payments</a>
+                            <a href="apply-admissions.html">Apply for Admissions</a>
+                        </div>
+                    </div>
+                    <a href="career-services.html">Student Support</a>
+                    <a href="newsletter.html">Newsletter</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-main">
+
+        <!-- HERO -->
+        <section class="page-hero">
+            <div class="page-hero-grid reveal">
+                <div>
+                    <span class="page-eyebrow"><a href="programs.html" style="color:inherit;text-decoration:none;">Programs</a> / French Language</span>
+                    <h1 class="page-hero-title">French language programs for immigration, academics, and professional life</h1>
+                    <p class="page-hero-subtitle">A complete, structured French pathway from beginner to advanced — designed to Canadian academic standards. Includes dedicated TEF Canada and TCF Canada exam preparation for immigration and citizenship goals.</p>
+                    <div class="page-stat-list">
+                        <span class="page-stat-pill"><i class="fas fa-layer-group"></i> 4 structured levels (A1–B2)</span>
+                        <span class="page-stat-pill"><i class="fas fa-passport"></i> TEF &amp; TCF Canada prep</span>
+                        <span class="page-stat-pill"><i class="fas fa-laptop"></i> In-person &amp; online</span>
+                    </div>
+                </div>
+                <div class="page-hero-media">
+                    <img src="https://images.unsplash.com/photo-1431540015161-0bf868a2d407?auto=format&fit=crop&w=1200&q=80" alt="French language students at MCC">
+                </div>
+            </div>
+        </section>
+
+        <!-- WHY FRENCH -->
+        <section class="section-shell" style="background:#ffffff;">
+            <div class="section-intro reveal">
+                <span class="section-kicker">Why French at MCC</span>
+                <h2 class="section-title center">French opens doors across Canada</h2>
+                <p style="text-align:center;color:var(--text-medium);max-width:660px;margin:0 auto;">French is an official language of Canada and a direct pathway to faster immigration, higher CRS scores, and academic admission. MCC's French program teaches the language properly — not as a theme, but as a full linguistic and communicative system.</p>
+            </div>
+            <div class="requirements-grid" style="margin-top:2rem;">
+                <article class="req-card reveal">
+                    <i class="fas fa-id-card" style="font-size:1.5rem;color:var(--accent-gold);margin-bottom:0.75rem;display:block;"></i>
+                    <h3>Express Entry Advantage</h3>
+                    <p>Achieving NCLC 7 in French (TEF Canada B2) can add up to 50 CRS bonus points — a significant advantage in Canada's Express Entry immigration system.</p>
+                </article>
+                <article class="req-card accent-teal reveal" style="transition-delay:0.1s;">
+                    <i class="fas fa-university" style="font-size:1.5rem;color:var(--accent-gold);margin-bottom:0.75rem;display:block;"></i>
+                    <h3>Academic Admission</h3>
+                    <p>French B2 (Niveau Avancé) meets the language requirements for college and university admission at many Canadian francophone and bilingual institutions.</p>
+                </article>
+                <article class="req-card accent-deep reveal" style="transition-delay:0.2s;">
+                    <i class="fas fa-briefcase" style="font-size:1.5rem;color:var(--accent-gold);margin-bottom:0.75rem;display:block;"></i>
+                    <h3>Professional Reach</h3>
+                    <p>Bilingualism is a competitive edge in the Canadian federal workforce, healthcare, education, and any sector serving Canada's francophone communities.</p>
+                </article>
+                <article class="req-card reveal" style="transition-delay:0.3s;">
+                    <i class="fas fa-map-marked-alt" style="font-size:1.5rem;color:var(--accent-gold);margin-bottom:0.75rem;display:block;"></i>
+                    <h3>Provincial Nominee Programs</h3>
+                    <p>French proficiency is recognized across multiple Provincial Nominee Programs (PNPs), opening additional immigration pathways beyond Express Entry.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- REGULAR PROGRAM LEVELS -->
+        <section class="section-shell" style="background:#f4f7f5;" id="levels">
+            <div class="section-intro reveal">
+                <span class="section-kicker">Regular French Program</span>
+                <h2 class="section-title center">Four levels. One complete pathway.</h2>
+                <p style="text-align:center;color:var(--text-medium);max-width:640px;margin:0 auto 2rem;">Each level follows a 12-week session of 120 instructional hours — 2 hours per class, 5 days per week. Available in-person in Vancouver or fully online.</p>
+            </div>
+
+            <div style="max-width:1200px;margin:0 auto;padding:0 5%;">
+                <div class="regular-program-card reveal" style="margin-bottom:1.5rem;display:grid;grid-template-columns:1fr 2.5fr;gap:2rem;align-items:start;">
+                    <div>
+                        <div class="french-level-badge">
+                            <span class="french-cefr-tag">A1</span>
+                            <span class="french-level-name">Élémentaire</span>
+                        </div>
+                        <h3 style="font-size:1.4rem;font-weight:800;color:var(--text-dark);margin-bottom:0.5rem;">Niveau 1 — Élémentaire</h3>
+                        <p style="color:var(--text-medium);font-size:0.92rem;">Absolute beginner. Zero prior French knowledge required.</p>
+                    </div>
+                    <div>
+                        <p style="color:var(--text-medium);margin-bottom:1rem;">Learn French pronunciation from the ground up — vowel sounds, liaison, intonation. Build core grammar: articles, gender, present tense, basic sentence structure. Develop the vocabulary for greetings, introductions, numbers, time, dates, and immediate surroundings.</p>
+                        <ul class="checklist" style="columns:2;gap:1rem;">
+                            <li>Pronunciation and phonetics</li>
+                            <li>Gender and articles (le, la, les)</li>
+                            <li>Greetings and introductions</li>
+                            <li>Numbers, dates, and time</li>
+                            <li>Present tense — regular verbs</li>
+                            <li>Describing people and places</li>
+                            <li>Common nouns and adjectives</li>
+                            <li>Simple questions and answers</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="regular-program-card reveal" style="margin-bottom:1.5rem;display:grid;grid-template-columns:1fr 2.5fr;gap:2rem;align-items:start;border-top:4px solid #2a9d8f;">
+                    <div>
+                        <div class="french-level-badge">
+                            <span class="french-cefr-tag">A2</span>
+                            <span class="french-level-name">Pré-Intermédiaire</span>
+                        </div>
+                        <h3 style="font-size:1.4rem;font-weight:800;color:var(--text-dark);margin-bottom:0.5rem;">Niveau 2 — Pré-Intermédiaire</h3>
+                        <p style="color:var(--text-medium);font-size:0.92rem;">Expanding vocabulary and daily communication.</p>
+                    </div>
+                    <div>
+                        <p style="color:var(--text-medium);margin-bottom:1rem;">Build the language for daily life in French: shopping, travel, appointments, and social situations. Introduce the passé composé and imparfait to talk about the past. Read simple texts with comprehension and write short messages and descriptions.</p>
+                        <ul class="checklist" style="columns:2;gap:1rem;">
+                            <li>Passé composé — past actions</li>
+                            <li>Imparfait — descriptions in past</li>
+                            <li>Vocabulary for shopping and travel</li>
+                            <li>Irregular verbs (être, avoir, aller)</li>
+                            <li>Negation and question forms</li>
+                            <li>Reading simple texts and signs</li>
+                            <li>Writing short messages and emails</li>
+                            <li>Listening to everyday dialogues</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="regular-program-card reveal" style="margin-bottom:1.5rem;display:grid;grid-template-columns:1fr 2.5fr;gap:2rem;align-items:start;border-top:4px solid #1a6e5c;">
+                    <div>
+                        <div class="french-level-badge">
+                            <span class="french-cefr-tag">B1</span>
+                            <span class="french-level-name">Intermédiaire</span>
+                        </div>
+                        <h3 style="font-size:1.4rem;font-weight:800;color:var(--text-dark);margin-bottom:0.5rem;">Niveau 3 — Intermédiaire</h3>
+                        <p style="color:var(--text-medium);font-size:0.92rem;">All four skills — preparing for academic and work contexts.</p>
+                    </div>
+                    <div>
+                        <p style="color:var(--text-medium);margin-bottom:1rem;">Develop all four core skills — listening, speaking, reading, and writing — with equal attention. Express opinions, narrate stories, handle school and workplace situations, and begin preparing for the TEF and TCF exams. Develop the grammatical and lexical range needed for NCLC 5–6.</p>
+                        <ul class="checklist" style="columns:2;gap:1rem;">
+                            <li>Futur simple and conditionnel</li>
+                            <li>Subjonctif — expressing opinion</li>
+                            <li>Workplace and academic language</li>
+                            <li>Expressing disagreement and nuance</li>
+                            <li>Reading news articles and reports</li>
+                            <li>Structured oral presentations</li>
+                            <li>Formal and informal writing registers</li>
+                            <li>Introduction to TEF/TCF format</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="regular-program-card reveal" style="display:grid;grid-template-columns:1fr 2.5fr;gap:2rem;align-items:start;border-top:4px solid var(--accent-gold);">
+                    <div>
+                        <div class="french-level-badge">
+                            <span class="french-cefr-tag">B2</span>
+                            <span class="french-level-name">Avancé</span>
+                        </div>
+                        <h3 style="font-size:1.4rem;font-weight:800;color:var(--text-dark);margin-bottom:0.5rem;">Niveau 4 — Avancé</h3>
+                        <p style="color:var(--text-medium);font-size:0.92rem;">Immigration-ready, university-ready, professionally functional.</p>
+                    </div>
+                    <div>
+                        <p style="color:var(--text-medium);margin-bottom:1rem;">Reach the level required for Canadian immigration (NCLC 7+), college and university admission, and professional use of French. Understand complex spoken and written content, produce sophisticated written work, and communicate fluently in high-stakes situations — including the full TEF Canada and TCF Canada exams.</p>
+                        <ul class="checklist" style="columns:2;gap:1rem;">
+                            <li>Complex grammatical structures</li>
+                            <li>Idiomatic and register variation</li>
+                            <li>Argumentative and analytical writing</li>
+                            <li>Listening to native-speed audio</li>
+                            <li>NCLC 7–9 target outcomes</li>
+                            <li>Full TEF Canada simulation</li>
+                            <li>Full TCF Canada simulation</li>
+                            <li>CRS score strategy for immigration</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Session info box -->
+            <div style="max-width:1200px;margin:2.5rem auto 0;padding:0 5%;">
+                <div class="reveal" style="background:#ffffff;border-radius:20px;padding:2rem 2.25rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.5rem;box-shadow:0 18px 50px rgba(8,22,18,0.07);">
+                    <div style="text-align:center;">
+                        <div style="font-size:2rem;font-weight:800;color:var(--accent-gold);">12</div>
+                        <div style="font-size:0.85rem;color:var(--text-medium);font-weight:600;">weeks per session</div>
+                    </div>
+                    <div style="text-align:center;">
+                        <div style="font-size:2rem;font-weight:800;color:var(--accent-gold);">120</div>
+                        <div style="font-size:0.85rem;color:var(--text-medium);font-weight:600;">instructional hours</div>
+                    </div>
+                    <div style="text-align:center;">
+                        <div style="font-size:2rem;font-weight:800;color:var(--accent-gold);">2h</div>
+                        <div style="font-size:0.85rem;color:var(--text-medium);font-weight:600;">per class, 5 days/week</div>
+                    </div>
+                    <div style="text-align:center;">
+                        <div style="font-size:2rem;font-weight:800;color:var(--accent-gold);">CAD 1,800</div>
+                        <div style="font-size:0.85rem;color:var(--text-medium);font-weight:600;">per 120-hour session</div>
+                    </div>
+                    <div style="text-align:center;">
+                        <div style="font-size:2rem;font-weight:800;color:var(--accent-gold);"><i class="fas fa-check"></i></div>
+                        <div style="font-size:0.85rem;color:var(--text-medium);font-weight:600;">In-person &amp; online</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TEF CANADA -->
+        <section class="section-shell" style="background:#ffffff;" id="tef">
+            <div class="section-intro reveal">
+                <span class="section-kicker">Exam Preparation</span>
+                <h2 class="section-title center">TEF Canada — Test d'Évaluation de Français</h2>
+                <p style="text-align:center;color:var(--text-medium);max-width:660px;margin:0 auto;">TEF Canada is the official French language exam recognized by IRCC (Immigration, Refugees and Citizenship Canada) for Express Entry, Provincial Nominee Programs, and Canadian citizenship applications.</p>
+            </div>
+
+            <div style="max-width:1200px;margin:2.5rem auto 0;padding:0 5%;display:grid;grid-template-columns:1fr 1fr;gap:2rem;">
+
+                <div class="exam-prep-card reveal">
+                    <h3>What TEF Canada Tests</h3>
+                    <p class="exam-subtitle">TEF Canada assesses all four official IRCC language skills. Each component is scored and mapped to the NCLC (Niveaux de compétence linguistique canadiens) scale.</p>
+                    <div class="skills-row">
+                        <span class="skill-chip"><i class="fas fa-headphones"></i> Compréhension de l'oral (Listening)</span>
+                        <span class="skill-chip"><i class="fas fa-book-open"></i> Compréhension des écrits (Reading)</span>
+                        <span class="skill-chip"><i class="fas fa-pen"></i> Expression écrite (Writing)</span>
+                        <span class="skill-chip"><i class="fas fa-microphone"></i> Expression orale (Speaking)</span>
+                    </div>
+                    <ul class="checklist">
+                        <li>Recognized by IRCC for permanent residence</li>
+                        <li>Required for Express Entry and PNP applications</li>
+                        <li>Accepted for Canadian citizenship</li>
+                        <li>NCLC 7 = B2 level = up to 50 CRS bonus points</li>
+                        <li>Results valid for 2 years from exam date</li>
+                    </ul>
+                </div>
+
+                <div class="exam-prep-card reveal" style="transition-delay:0.1s;">
+                    <h3>How MCC Prepares You</h3>
+                    <p class="exam-subtitle">Our TEF Canada preparation is targeted and exam-specific — not a general French class. Every session is built around the official exam format.</p>
+                    <ul class="checklist">
+                        <li>Full-length mock exams with real exam conditions</li>
+                        <li>Targeted strategies for each of the four components</li>
+                        <li>Individualized feedback on writing and speaking</li>
+                        <li>Score prediction and NCLC estimation</li>
+                        <li>CRS simulation to model your immigration profile</li>
+                        <li>Taught by instructors familiar with official TEF format</li>
+                    </ul>
+                    <div class="pricing-row">
+                        <div class="pricing-option">
+                            <div class="price-label">Small Group</div>
+                            <div class="price-value">CAD 300</div>
+                            <div class="price-sub">per 10 hours — best value</div>
+                        </div>
+                        <div class="pricing-option recommended">
+                            <div class="price-label">Private 1-on-1 ★ Recommended</div>
+                            <div class="price-value">CAD 600</div>
+                            <div class="price-sub">per 10 hours — fastest progress</div>
+                        </div>
+                    </div>
+                    <p style="font-size:0.82rem;color:var(--text-medium);margin-top:0.75rem;">Packages are flexible — purchase 10 hours and renew at any time. No fixed session lock-in.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- TCF CANADA -->
+        <section class="section-shell" style="background:#f4f7f5;" id="tcf">
+            <div class="section-intro reveal">
+                <span class="section-kicker">Exam Preparation</span>
+                <h2 class="section-title center">TCF Canada — Test de Connaissance du Français</h2>
+                <p style="text-align:center;color:var(--text-medium);max-width:660px;margin:0 auto;">TCF Canada is the second official French language exam recognized by IRCC. Like TEF Canada, it is accepted for Express Entry, PNPs, and Canadian citizenship applications. Both exams are equally valid — your choice depends on format preference and test availability.</p>
+            </div>
+
+            <div style="max-width:1200px;margin:2.5rem auto 0;padding:0 5%;display:grid;grid-template-columns:1fr 1fr;gap:2rem;">
+
+                <div class="exam-prep-card reveal">
+                    <h3>TEF Canada vs TCF Canada</h3>
+                    <p class="exam-subtitle">Both are accepted by IRCC with equal weight. The differences are in exam format and question style.</p>
+                    <div style="overflow-x:auto;">
+                        <table style="width:100%;border-collapse:collapse;font-size:0.88rem;">
+                            <thead>
+                                <tr style="background:#f4f7f5;">
+                                    <th style="padding:0.6rem 0.75rem;text-align:left;font-weight:700;color:var(--text-dark);border-bottom:2px solid #e0e8e4;"></th>
+                                    <th style="padding:0.6rem 0.75rem;text-align:center;font-weight:700;color:var(--text-dark);border-bottom:2px solid #e0e8e4;">TEF Canada</th>
+                                    <th style="padding:0.6rem 0.75rem;text-align:center;font-weight:700;color:var(--text-dark);border-bottom:2px solid #e0e8e4;">TCF Canada</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding:0.55rem 0.75rem;color:var(--text-medium);border-bottom:1px solid #e8eeeb;">Listening</td>
+                                    <td style="padding:0.55rem 0.75rem;text-align:center;border-bottom:1px solid #e8eeeb;"><i class="fas fa-check" style="color:#2a9d8f;"></i></td>
+                                    <td style="padding:0.55rem 0.75rem;text-align:center;border-bottom:1px solid #e8eeeb;"><i class="fas fa-check" style="color:#2a9d8f;"></i></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:0.55rem 0.75rem;color:var(--text-medium);border-bottom:1px solid #e8eeeb;">Reading</td>
+                                    <td style="padding:0.55rem 0.75rem;text-align:center;border-bottom:1px solid #e8eeeb;"><i class="fas fa-check" style="color:#2a9d8f;"></i></td>
+                                    <td style="padding:0.55rem 0.75rem;text-align:center;border-bottom:1px solid #e8eeeb;"><i class="fas fa-check" style="color:#2a9d8f;"></i></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:0.55rem 0.75rem;color:var(--text-medium);border-bottom:1px solid #e8eeeb;">Writing</td>
+                                    <td style="padding:0.55rem 0.75rem;text-align:center;border-bottom:1px solid #e8eeeb;"><i class="fas fa-check" style="color:#2a9d8f;"></i></td>
+                                    <td style="padding:0.55rem 0.75rem;text-align:center;border-bottom:1px solid #e8eeeb;"><i class="fas fa-check" style="color:#2a9d8f;"></i></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:0.55rem 0.75rem;color:var(--text-medium);border-bottom:1px solid #e8eeeb;">Speaking</td>
+                                    <td style="padding:0.55rem 0.75rem;text-align:center;border-bottom:1px solid #e8eeeb;"><i class="fas fa-check" style="color:#2a9d8f;"></i></td>
+                                    <td style="padding:0.55rem 0.75rem;text-align:center;border-bottom:1px solid #e8eeeb;"><i class="fas fa-check" style="color:#2a9d8f;"></i></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:0.55rem 0.75rem;color:var(--text-medium);border-bottom:1px solid #e8eeeb;">IRCC Accepted</td>
+                                    <td style="padding:0.55rem 0.75rem;text-align:center;border-bottom:1px solid #e8eeeb;"><i class="fas fa-check" style="color:#2a9d8f;"></i></td>
+                                    <td style="padding:0.55rem 0.75rem;text-align:center;border-bottom:1px solid #e8eeeb;"><i class="fas fa-check" style="color:#2a9d8f;"></i></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:0.55rem 0.75rem;color:var(--text-medium);">Question Format</td>
+                                    <td style="padding:0.55rem 0.75rem;text-align:center;font-size:0.82rem;color:var(--text-medium);">Multiple choice + written</td>
+                                    <td style="padding:0.55rem 0.75rem;text-align:center;font-size:0.82rem;color:var(--text-medium);">Adaptive + written</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="exam-prep-card reveal" style="transition-delay:0.1s;">
+                    <h3>TCF Canada Preparation at MCC</h3>
+                    <p class="exam-subtitle">Our TCF Canada prep follows the same rigorous approach as our TEF prep — format-specific strategies, mock exams, and personalized feedback.</p>
+                    <ul class="checklist">
+                        <li>Full TCF Canada practice tests under timed conditions</li>
+                        <li>Strategies for the adaptive listening and reading modules</li>
+                        <li>Written production practice with examiner-style marking</li>
+                        <li>Oral production coaching and scoring breakdown</li>
+                        <li>NCLC estimation and CRS point projection</li>
+                    </ul>
+                    <div class="pricing-row">
+                        <div class="pricing-option">
+                            <div class="price-label">Small Group</div>
+                            <div class="price-value">CAD 300</div>
+                            <div class="price-sub">per 10 hours — best value</div>
+                        </div>
+                        <div class="pricing-option recommended">
+                            <div class="price-label">Private 1-on-1 ★ Recommended</div>
+                            <div class="price-value">CAD 600</div>
+                            <div class="price-sub">per 10 hours — fastest progress</div>
+                        </div>
+                    </div>
+                    <p style="font-size:0.82rem;color:var(--text-medium);margin-top:0.75rem;">Packages are flexible — purchase 10 hours and renew at any time.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- NCLC/CRS EXPLAINER -->
+        <section class="section-shell" style="background:#ffffff;">
+            <div class="section-intro reveal">
+                <span class="section-kicker">Immigration Context</span>
+                <h2 class="section-title center">Understanding NCLC and CRS</h2>
+            </div>
+            <div style="max-width:1000px;margin:2rem auto 0;padding:0 5%;">
+                <div class="requirements-grid">
+                    <article class="req-card reveal">
+                        <i class="fas fa-chart-bar" style="font-size:1.5rem;color:var(--accent-gold);margin-bottom:0.75rem;display:block;"></i>
+                        <h3>What is NCLC?</h3>
+                        <p>The Niveaux de compétence linguistique canadiens (NCLC) is Canada's official French language proficiency scale. It runs from NCLC 1 to NCLC 12 and is used by IRCC to assess immigration applicants' French ability.</p>
+                        <ul class="checklist">
+                            <li>NCLC 4–5 → A2 level (basic)</li>
+                            <li>NCLC 5–6 → B1 level (intermediate)</li>
+                            <li>NCLC 7–8 → B2 level (advanced)</li>
+                            <li>NCLC 9–10 → C1 level (proficient)</li>
+                        </ul>
+                    </article>
+                    <article class="req-card accent-teal reveal" style="transition-delay:0.1s;">
+                        <i class="fas fa-star" style="font-size:1.5rem;color:var(--accent-gold);margin-bottom:0.75rem;display:block;"></i>
+                        <h3>CRS Bonus Points</h3>
+                        <p>Under Express Entry, strong French proficiency earns additional Comprehensive Ranking System (CRS) points beyond your core skills score — a meaningful advantage in competitive draws.</p>
+                        <ul class="checklist">
+                            <li>NCLC 7+ in all 4 skills: up to 50 CRS points</li>
+                            <li>NCLC 7+ in some skills: up to 25 CRS points</li>
+                            <li>French + English bilingual bonus applies separately</li>
+                            <li>Points can make the difference between an ITA and a missed draw</li>
+                        </ul>
+                    </article>
+                    <article class="req-card accent-deep reveal" style="transition-delay:0.2s;">
+                        <i class="fas fa-route" style="font-size:1.5rem;color:var(--accent-gold);margin-bottom:0.75rem;display:block;"></i>
+                        <h3>Your Path at MCC</h3>
+                        <p>Most students reach NCLC 7 (B2) after completing Niveau 3 and Niveau 4 of the regular program. The TEF or TCF preparation packages are then used to fine-tune exam performance and maximize your score.</p>
+                        <ul class="checklist">
+                            <li>Niveau 1–2: Foundation for NCLC 4–5</li>
+                            <li>Niveau 3: NCLC 5–6 range</li>
+                            <li>Niveau 4: NCLC 7+ target</li>
+                            <li>TEF/TCF Prep: Exam-specific score maximization</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="section-shell" style="background:#f4f7f5;text-align:center;">
+            <div class="reveal" style="max-width:620px;margin:0 auto;">
+                <span class="section-kicker">Enroll Today</span>
+                <h2 class="section-title center">Start your French journey</h2>
+                <p style="color:var(--text-medium);margin-bottom:2rem;">Speak with an advisor to discuss your immigration goals, current French level, and which combination of regular program and exam prep makes the most sense for your timeline.</p>
+                <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+                    <a href="contact.html" class="btn-solid-gold">Talk to an Advisor</a>
+                    <a href="apply-admissions.html" class="btn-outline-gold">Apply Now</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer id="contact" class="site-footer">
+        <div class="footer-grid reveal">
+            <div class="footer-brand">
+                <span class="mcc-logo large">MCC</span>
+                <p>Metropolitan Community College helps future students move from curiosity to career-ready confidence with practical programs and student-first support in Vancouver.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="admissions.html">Admissions</a></li>
+                    <li><a href="international-students.html">International Students</a></li>
+                    <li><a href="career-services.html">Career Services</a></li>
+                    <li><a href="alumni.html">Alumni</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Explore MCC</h4>
+                <ul>
+                    <li><a href="programs.html">Programs</a></li>
+                    <li><a href="programs-diploma.html">Diploma Programs</a></li>
+                    <li><a href="programs-esl.html">English (ESL)</a></li>
+                    <li><a href="programs-french.html">French Language</a></li>
+                    <li><a href="about.html">About MCC</a></li>
+                    <li><a href="newsletter.html">News &amp; Newsletter</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-map-marker-alt"></i> Water Street, Vancouver, BC</p>
+                <p><i class="fas fa-phone"></i> +1 (604) 555-0100</p>
+                <p><i class="fas fa-envelope"></i> admissions@mcc.edu</p>
+                <p><i class="fas fa-clock"></i> Monday - Friday, 9:00 AM - 5:00 PM PST</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Metropolitan Community College. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
