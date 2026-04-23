@@ -610,3 +610,108 @@ document.addEventListener('DOMContentLoaded', () => {
     const counterObserver = new IntersectionObserver(animateCounters, { threshold: 0.5 });
     statNums.forEach(num => counterObserver.observe(num));
 });
+
+// ==========================================
+// Language Flip Toggle (EN / FR) + Google Translate
+// ==========================================
+(function initLanguageToggle() {
+    const COOKIE = 'googtrans';
+
+    function readLang() {
+        const match = document.cookie.match(/(?:^|;\s*)googtrans=([^;]+)/);
+        if (!match) return 'en';
+        return decodeURIComponent(match[1]).endsWith('/fr') ? 'fr' : 'en';
+    }
+
+    function writeCookie(lang) {
+        const value = lang === 'fr' ? '/en/fr' : '/en/en';
+        const host = location.hostname;
+        // set for current path
+        document.cookie = `googtrans=${value};path=/`;
+        // set for host (and parent domain if applicable)
+        document.cookie = `googtrans=${value};path=/;domain=${host}`;
+        const parts = host.split('.');
+        if (parts.length > 2) {
+            document.cookie = `googtrans=${value};path=/;domain=.${parts.slice(-2).join('.')}`;
+        }
+    }
+
+    function clearCookie() {
+        const host = location.hostname;
+        const past = 'Thu, 01 Jan 1970 00:00:00 GMT';
+        document.cookie = `googtrans=;path=/;expires=${past}`;
+        document.cookie = `googtrans=;path=/;domain=${host};expires=${past}`;
+        const parts = host.split('.');
+        if (parts.length > 2) {
+            document.cookie = `googtrans=;path=/;domain=.${parts.slice(-2).join('.')};expires=${past}`;
+        }
+    }
+
+    function buildToggle() {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'lang-flip-toggle';
+        btn.setAttribute('aria-label', 'Toggle language between English and French');
+        btn.setAttribute('title', 'Switch language / Changer de langue');
+        btn.innerHTML = `
+            <span class="lang-thumb" aria-hidden="true"></span>
+            <span class="lang-label" data-lang-code="en">EN</span>
+            <span class="lang-label" data-lang-code="fr">FR</span>
+        `;
+        return btn;
+    }
+
+    function injectGoogleTranslate() {
+        if (document.getElementById('google_translate_element')) return;
+        const container = document.createElement('div');
+        container.id = 'google_translate_element';
+        document.body.appendChild(container);
+
+        window.googleTranslateElementInit = function () {
+            // eslint-disable-next-line no-undef
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,fr',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        };
+
+        const script = document.createElement('script');
+        script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+        script.async = true;
+        document.body.appendChild(script);
+    }
+
+    function applyLang(lang) {
+        if (lang === 'fr') {
+            writeCookie('fr');
+        } else {
+            clearCookie();
+        }
+        // Reload so Google Translate's frame re-runs against the fresh cookie.
+        // This is the most reliable approach across all pages.
+        location.reload();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const host = document.querySelector('.portal-logins');
+        if (!host) return;
+
+        const btn = buildToggle();
+        const current = readLang();
+        btn.setAttribute('data-lang', current);
+
+        // Place as the first item so it's visually prominent
+        host.insertBefore(btn, host.firstChild);
+
+        btn.addEventListener('click', () => {
+            const next = btn.getAttribute('data-lang') === 'fr' ? 'en' : 'fr';
+            btn.classList.add('is-flipping');
+            btn.setAttribute('data-lang', next);
+            setTimeout(() => applyLang(next), 260);
+        });
+
+        injectGoogleTranslate();
+    });
+})();

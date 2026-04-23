@@ -4703,3 +4703,99 @@ textarea {
 .testimonial-meta .flag {
     margin-right: 0.35rem;
 }
+
+/* ==========================================
+   Language Flip Toggle (EN / FR)
+   ========================================== */
+.lang-flip-toggle {
+    --flip-h: 30px;
+    --flip-w: 74px;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    width: var(--flip-w);
+    height: var(--flip-h);
+    padding: 0;
+    border: 1px solid rgba(212, 175, 55, 0.55);
+    border-radius: 999px;
+    background: rgba(6, 43, 26, 0.55);
+    backdrop-filter: blur(6px);
+    cursor: pointer;
+    overflow: hidden;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    font-family: 'Outfit', sans-serif;
+    flex-shrink: 0;
+}
+
+.lang-flip-toggle:hover {
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.18);
+}
+
+.lang-flip-toggle .lang-thumb {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: calc(50% - 2px);
+    height: calc(var(--flip-h) - 6px);
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--accent-gold) 0%, #b8932b 100%);
+    box-shadow: 0 2px 8px rgba(212, 175, 55, 0.45);
+    transition: transform 0.45s cubic-bezier(0.68, -0.3, 0.32, 1.3);
+}
+
+.lang-flip-toggle[data-lang="fr"] .lang-thumb {
+    transform: translateX(100%);
+}
+
+.lang-flip-toggle .lang-label {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    text-align: center;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.65);
+    transition: color 0.3s ease;
+    line-height: 1;
+    pointer-events: none;
+    text-transform: uppercase;
+}
+
+.lang-flip-toggle[data-lang="en"] .lang-label[data-lang-code="en"],
+.lang-flip-toggle[data-lang="fr"] .lang-label[data-lang-code="fr"] {
+    color: var(--deep-green-dark);
+}
+
+.lang-flip-toggle.is-flipping .lang-thumb {
+    animation: langFlipPulse 0.45s ease;
+}
+
+@keyframes langFlipPulse {
+    0% { box-shadow: 0 2px 8px rgba(212, 175, 55, 0.45); }
+    50% { box-shadow: 0 0 0 6px rgba(212, 175, 55, 0.3), 0 2px 8px rgba(212, 175, 55, 0.6); }
+    100% { box-shadow: 0 2px 8px rgba(212, 175, 55, 0.45); }
+}
+
+/* Hide the Google Translate bar/branding + prevent body offset */
+.goog-te-banner-frame.skiptranslate,
+.goog-te-gadget,
+#goog-gt-tt,
+.goog-te-balloon-frame {
+    display: none !important;
+}
+body { top: 0 !important; }
+.goog-tooltip,
+.goog-tooltip:hover { display: none !important; }
+.goog-text-highlight {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+#google_translate_element { display: none; }
+font[style*="background-color"] { background: transparent !important; }
+
+@media (max-width: 768px) {
+    .lang-flip-toggle { --flip-w: 66px; --flip-h: 28px; }
+    .lang-flip-toggle .lang-label { font-size: 0.68rem; }
+}
