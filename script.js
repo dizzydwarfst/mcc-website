@@ -255,13 +255,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const card = link.closest('.news-card');
                 const title = card.querySelector('.news-card-title').textContent;
                 const date = card.querySelector('.news-card-date').textContent;
-                const issue = card.querySelector('.news-card-issue').textContent;
                 const modalHtml = card.querySelector('.full-content-data').innerHTML;
                 const accentClass = card.querySelector('.news-card-accent').className.split(' ')[1];
-                
+
                 modalOverlay.querySelector('.modal-title').textContent = title;
                 modalOverlay.querySelector('.modal-date').textContent = date;
-                modalOverlay.querySelector('.modal-issue').textContent = issue;
                 modalOverlay.querySelector('.modal-text').innerHTML = modalHtml;
                 
                 const modalAccent = modalOverlay.querySelector('.modal-accent-top');
