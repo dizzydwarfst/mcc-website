@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm --version)",
+      "Read(//c/Users/doguk/Desktop/**)",
+      "Bash(npx create-next-app@latest mcc-lms --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-turbopack)",
+      "Bash(npx create-next-app@latest mcc-lms --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-turbopack --yes)",
+      "Bash(npm install:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm run:*)",
+      "Bash(cp src/middleware.ts src/proxy.ts)",
+      "Bash(rm src/middleware.ts)",
+      "mcp__Claude_Preview__preview_start"
+    ]
+  }
+}

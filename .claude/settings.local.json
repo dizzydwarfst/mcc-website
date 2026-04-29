@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -n -iE \"fee|tuition|\\\\\\\\\\\\$[0-9]|cost|price|CAD\" programs-french.html)",
+      "Bash(grep -nE \"CAD|\\\\\\\\\\\\$[0-9]|price-value|pricing-option\" programs-french.html)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)"
+    ]
+  }
+}
