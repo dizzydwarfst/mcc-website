@@ -1,0 +1,769 @@
+{
+  "source": {
+    "url": "https://www.metropolitancollege.ca/",
+    "extractedOn": "2026-05-04",
+    "note": "Content extracted from the existing MCC website for use in a new site. Design is NOT preserved — only business content."
+  },
+
+  "site": {
+    "name": "Metropolitan Community College",
+    "shortName": "MCC",
+    "established": 1993,
+    "type": "Private post-secondary institution",
+    "tagline": "Proudly Canadian. Pride in Quality. Prepared for the Future.",
+    "valueProposition": "Inspiring — Develop passion for Learning",
+    "headPageTitle": "Metropolitan Community College | English ESL | MCC | Esports Program | Vancouver",
+    "copyright": "© Copyright 2002-2025 Metropolitan Community College",
+    "designations": [
+      {
+        "name": "Private Training Institutions Branch (PTIB)",
+        "issuer": "Ministry of Post-Secondary Education and Future Skills, British Columbia",
+        "status": "Registered and Designated"
+      },
+      {
+        "name": "Designated Learning Institution",
+        "issuer": "Immigration, Refugees and Citizenship Canada (IRCC)",
+        "dliNumber": "O19329963492"
+      },
+      {
+        "name": "British Columbia Education Quality Assurance",
+        "shortName": "BC EQA",
+        "status": "Recognized"
+      },
+      {
+        "name": "EduCanada",
+        "status": "Affiliated"
+      }
+    ]
+  },
+
+  "contact": {
+    "phone": "+1.604.300.3123",
+    "email": "info@metropolitancollege.ca",
+    "supportEmail": "admin@metropolitancollege.ca",
+    "campus": {
+      "name": "Vancouver Main Campus",
+      "address": "100 - 322 Water Street, Vancouver BC, Canada, V6B 1B6",
+      "alternateAddressListed": "900 - 549 Howe Street, Vancouver BC, Canada, V6C 2C2",
+      "neighbourhood": "Gastown — near the Steam Clock, bordering Chinatown and steps from Canada Place",
+      "size": "Over 4,200 sq ft",
+      "facilities": [
+        "Four classrooms",
+        "One seminar room",
+        "One computer lab",
+        "Two offices",
+        "Student lounge with kitchen"
+      ],
+      "delivery": "In-person and distance education"
+    }
+  },
+
+  "social": {
+    "linkedin": "https://www.linkedin.com/company/metropolitan-community-college-canada/",
+    "facebook": "https://www.facebook.com/adam.brian.1000469",
+    "twitter": "https://twitter.com/MetropolitanCC",
+    "instagram": "https://www.instagram.com/mcc_vancouver/"
+  },
+
+  "leadership": [
+    { "name": "Harman Li", "title": "Executive Director, Registrar" },
+    { "name": "Kris Kubinski", "title": "Senior Educational Administrator" },
+    { "name": "Dogukan Kasoglu", "title": "Associate Director, Academic" },
+    { "name": "Jody He", "title": "Associate Director, Marketing" },
+    { "name": "Karissa Li", "title": "Office Administrator, Student Services" },
+    { "name": "Ana Lana Guerini", "title": "Program Head" }
+  ],
+
+  "missionStatement": "At Metropolitan Community College, we are committed to equipping students with the critical thinking skills, resourcefulness and knowledge that add value to themselves, their families and the community. We bring together the latest technologies, diverse cultural backgrounds and dynamic learning environment to identify solutions to the complex global problems of the 21st Century.",
+
+  "advantages": [
+    "In providing the path to educational success, the college offers excellent educational opportunities in vocational and academic studies.",
+    "In eliminating barriers to career success, course delivery is geared towards benefiting learners of all social and cultural backgrounds.",
+    "In promoting collegiality in educational and career success, courses are taught in a collegial atmosphere where consistent standards of integrity and educational competence are maintained at all times.",
+    "Both our mission statement and educational objectives are driven by our core values — based on the belief that every person must have effective access to lifelong learning."
+  ],
+
+  "primaryCTAs": [
+    { "label": "Take the Free Quiz", "url": "https://cr-mcc.virtualadviser.com/?lead_src=w-header", "purpose": "Career Training Ready assessment" },
+    { "label": "Apply for Admissions", "url": "/apply-for-admissions" },
+    { "label": "Contact Us", "url": "/contact" }
+  ],
+
+  "navigation": [
+    {
+      "label": "Home",
+      "url": "/"
+    },
+    {
+      "label": "Brochures",
+      "url": "/brochures"
+    },
+    {
+      "label": "About",
+      "url": "/about",
+      "children": [
+        { "label": "About MCC", "url": "/about-us-mcc" },
+        { "label": "Mission Statement", "url": "/mission-statement" },
+        { "label": "The MCC Advantage", "url": "/mccadvantage" },
+        { "label": "Policies", "url": "/policies" }
+      ]
+    },
+    {
+      "label": "Programs",
+      "url": "/programs",
+      "children": [
+        { "label": "Business Communication", "url": "/businesscommunications" },
+        { "label": "CELPIP Preparation", "url": "/celpippreparation" },
+        { "label": "Hospitality Operations", "url": "/hospitalityoperations" },
+        { "label": "Global Management in Hospitality", "url": "/globalmanagementinhospitality" },
+        { "label": "International Esports Management", "url": "/internationalesportsmanagement" },
+        { "label": "Advanced Paralegal", "url": "/advancedparalegal", "status": "Discontinued" }
+      ]
+    },
+    {
+      "label": "Admissions",
+      "url": "/admissions",
+      "children": [
+        { "label": "Admission Procedure", "url": "/admission-procedure" },
+        { "label": "Admission Requirements", "url": "/admission-requirements" },
+        { "label": "Tuition, Fees & Payments", "url": "/tuition-fees-payments" },
+        { "label": "Apply for Admissions", "url": "/apply-for-admissions" }
+      ]
+    },
+    {
+      "label": "Student Life",
+      "url": "/student-life",
+      "children": [
+        { "label": "Academic Calendar", "url": "/academic-calendar" },
+        { "label": "Arrival in Canada", "url": "/arrival-in-canada" },
+        { "label": "Housing & Accommodations", "url": "/housing-and-accommodations" },
+        { "label": "Health & Safety", "url": "/health-and-safety" },
+        { "label": "Financial Aid, Scholarships & Bursaries", "url": "/financial-aid-scholarships-bursaries" },
+        { "label": "Academic & Learning Support", "url": "/academic-learning-support" },
+        { "label": "Career Success Centre", "url": "/career-success-cenre" },
+        { "label": "Living in Vancouver", "url": "/living-in-vancouver" },
+        { "label": "Integration with Local Community", "url": "/integration-with-local-community" },
+        { "label": "Student Information Change Form", "url": "/student-information-change-form" }
+      ]
+    },
+    {
+      "label": "Contact",
+      "url": "/contact",
+      "children": [
+        { "label": "Agent Cooperation", "url": "/agent-cooperation" }
+      ]
+    }
+  ],
+
+  "pages": {
+    "home": {
+      "slug": "/",
+      "title": "Metropolitan Community College | English ESL | MCC | Esports Program | Vancouver",
+      "h1": "Welcome to Metropolitan Community College",
+      "secondaryHeadings": ["INSPIRING", "Develop passion for Learning", "Latest News", "Featured Programs", "Affiliation & Accreditation"],
+      "hero": "We are pleased to welcome students, visitors and faculty members to Metropolitan Community College. Metropolitan Community College is fully registered and designated by the Private Training Institutions Branch (PTIB) of the Ministry of Post-Secondary Education and Future Skills in British Columbia.",
+      "latestNews": "Metropolitan Community College welcomes all visitors to our campus. Our website is currently under development for updates of new upcoming programs. This will not affect regular usage of the website. For appointments, please leave a message on our website or inform us by email at info@metropolitancollege.ca or by filling in the Contact Form. For program-related information, please refer to our Programs page. For all applications, please refer to our Admissions page.",
+      "featuredPrograms": [
+        { "name": "CELPIP Test Preparation", "blurb": "Our CELPIP Test Preparation course is a 3-week intense course. We guarantee at least 1 CLB level improvement for all of our students. *some conditions may apply." },
+        { "name": "Hospitality Diploma Program", "blurb": "Our Hospitality program can be taken full-time or part-time in one or two years. Graduates have a variety of career options after completion. Pathway to Degree Programs. Potential Triple Credentials – AHLA, MCC and UCW." },
+        { "name": "Esports Diploma Program", "blurb": "The one and only esports management program in Canada, the International Esports Management Diploma program is targeted to provide students with management knowledge focused on all aspects of the ever-growing e-sport industry." }
+      ],
+      "imagery": [
+        { "alt": "Original Logo File PNG", "subject": "MCC logo" },
+        { "alt": "Smiling Student in Lecture", "subject": "Student in lecture hall" },
+        { "alt": "College Campus", "subject": "Campus building exterior" },
+        { "alt": "Close-up of Hands Playing Video", "subject": "Esports / gaming imagery" }
+      ]
+    },
+
+    "about": {
+      "slug": "/about-us-mcc",
+      "title": "About MCC",
+      "headings": ["About Us", "The MCC Story", "The MCC Campus", "Meet Our Leadership Team"],
+      "story": "Established in 1993, Metropolitan Community College is a Canadian post-secondary institution registered with and designated by the Private Training Institutions Regulatory Unit (PTIRU) of the Ministry of Post-Secondary Education and Future Skills in British Columbia. The College holds Designated Learning Institution (DLI #O19329963492) status from Immigration, Refugees and Citizenship Canada. International students who want to study in Canada may apply for study permits. Students in most programs can work part-time up to 20 hours weekly while studying full-time. The institution is recognized by British Columbia Education Quality Assurance (BC EQA). Programs feature small class sizes with interactive teaching. The Advisory Board regularly examines program competencies to ensure student success.",
+      "campus": "Located at 100 - 322 Water Street, Vancouver, BC, the main campus occupies over 4,200 square feet including four classrooms, one seminar room, one computer lab, two offices, and a student lounge with kitchen. Both in-person and distance education are offered. Campus tours are available for prospective students.",
+      "shortAbout": "Since its foundation in 1993, Metropolitan Community College has established itself as a community of learners, working in partnership with other institutes of higher education, agencies and organizations in providing affordable educational opportunities to students of all social backgrounds and different geographic locations. Courses are taught in a collegial atmosphere that fosters small class sizes for efficient instructor-student interaction."
+    },
+
+    "missionStatement": {
+      "slug": "/mission-statement",
+      "title": "Mission Statement",
+      "body": "At Metropolitan Community College, we are committed to equipping students with the critical thinking skills, resourcefulness and knowledge that add value to themselves, their families and the community. We bring together the latest technologies, diverse cultural backgrounds and dynamic learning environment to identify solutions to the complex global problems of the 21st Century."
+    },
+
+    "mccAdvantage": {
+      "slug": "/mccadvantage",
+      "title": "The MCC Advantage",
+      "headings": ["About Metropolitan Community College", "The MCC Advantage"],
+      "pillars": [
+        "Excellent educational opportunities in vocational and academic studies",
+        "Elimination of barriers to career success",
+        "Course delivery benefiting learners of all social and cultural backgrounds",
+        "Collegial teaching atmosphere",
+        "Consistent standards of integrity and educational competence",
+        "Effective access to lifelong learning"
+      ]
+    },
+
+    "policies": {
+      "slug": "/policies",
+      "title": "Policies",
+      "list": [
+        "Respectful and Fair Treatment of Students – Non-discrimination Policy",
+        "Safety Policy",
+        "Sexual Misconduct Policy",
+        "Student Attendance Policy",
+        "Student Dismissal Policy",
+        "Dispute Resolution Policy",
+        "Student Statement of Rights",
+        "Privacy Policy",
+        "Refund Policy",
+        "Critical Incident and Crisis Management Policy"
+      ],
+      "format": "Linked PDF documents — full text resides in the PDFs."
+    },
+
+    "programsOverview": {
+      "slug": "/programs",
+      "title": "Programs",
+      "intro": "Programs Overview — explore MCC's vocational and academic programs.",
+      "callToAction": ["Take the Free Quiz", "Learn more"]
+    },
+
+    "admissions": {
+      "slug": "/admissions",
+      "title": "Admissions",
+      "intro": "Interested in Studying at MCC?",
+      "fourStepFlow": [
+        { "step": "Plan", "text": "Look at our list of programs to know in which field you want to study and to choose the ones that fit best." },
+        { "step": "Process", "text": "Visit our admission procedure page to know the admission process." },
+        { "step": "Apply", "text": "Start out by filling the application form so we can understand your needs better to help you become a part of MCC." },
+        { "step": "Connect", "text": "Join our Facebook page and other social networking sites to stay updated." }
+      ]
+    },
+
+    "admissionProcedure": {
+      "slug": "/admission-procedure",
+      "title": "Admission Procedure",
+      "intro": "We encourage prospective students to review our program offerings and welcome qualified students to apply for admissions to our programs.",
+      "steps": [
+        { "step": 1, "text": "Submit the online application form and pay the application fee." },
+        { "step": 2, "text": "Submit required documents including passport/ID, transcripts, proof of English proficiency, and study permit or visitor visa if applicable." },
+        { "step": 3, "text": "We will review the application and issue an Offer of Admissions if admission requirements are met." },
+        { "step": 4, "text": "Upon receiving the payment of tuition fees, we will issue an official Letter of Acceptance (LOA) stating the amount received and details of program enrollment." }
+      ],
+      "note": "International students can use the official LOA to apply for a Study Permit before the commencement of the program."
+    },
+
+    "admissionRequirements": {
+      "slug": "/admission-requirements",
+      "title": "Admission Requirements",
+      "general": "In general, applicants should be over 18 years old, have completed high school education, and have attained an acceptable level of proficiency in the English language. International applicants must obtain a study permit for any program longer than 6 months.",
+      "perProgram": {
+        "advancedParalegal": "Completion of high school or mature student status (over 18). Evidence of IELTS 5.5 or equivalent (TOEFL IBT). Alternatively, complete the Business Communication or EPAS program, or pass the College's language proficiency exam with at least 70%.",
+        "businessCommunications": "Generally, an IELTS 5.0 or equivalent (may take a college diagnostic test). Students bridging into diploma studies must satisfy the target diploma program requirements.",
+        "celpipPreparation": "Previous CELPIP Test Score, OR take a CELPIP Diagnostic Test at the college.",
+        "hospitalityOperations": "At least 18 years old. Evidence of IELTS 5.5 or equivalent (TOEFL IBT), or pass the College's language proficiency exam with at least 70%.",
+        "globalManagementInHospitality": "At least 18 years old. Evidence of IELTS 5.5 or equivalent (TOEFL IBT), or pass the College's language proficiency exam with at least 70%.",
+        "internationalEsportsManagement": "Completion of high school or mature student status (over 18). IELTS-A 5.5 with no band score lower than 5.0 (or equivalent TOEFL/CAEL). Alternative: Language Proficiency Test or completion of Business Communication program."
+      }
+    },
+
+    "tuitionFeesPayments": {
+      "slug": "/tuition-fees-payments",
+      "title": "Tuition, Fees & Payments",
+      "headings": ["Tuition & Program Fees", "Miscellaneous Fees", "Payment Methods", "Contact Our Student Support Team"],
+      "note": "Refer to the Programs Page for updated tuition and program-related fees in each program.",
+      "miscellaneousFees": [
+        { "item": "Official Transcripts", "amount": "CAD 15.00" },
+        { "item": "Credential Replacement", "amount": "CAD 35.00" },
+        { "item": "Document Shipping with Tracking", "amount": "CAD 12.00" }
+      ]
+    },
+
+    "applyForAdmissions": {
+      "slug": "/apply-for-admissions",
+      "title": "Apply for Admissions",
+      "headings": ["Apply for Admissions", "Step 1 - Student's Personal Information", "Start Your Journey Today."],
+      "formStep1Fields": [
+        "First Name",
+        "Last Name",
+        "Preferred Name (i.e. English Name)",
+        "Date of Birth (required)",
+        "Gender",
+        "Country of Citizenship",
+        "Phone Country Code",
+        "Student's Own Phone Number",
+        "Student's Own Email",
+        "Status in Canada",
+        "Status Expiry Date",
+        "Social Insurance Number (SIN)",
+        "Apartment / Unit / Suite #",
+        "Street Address",
+        "City",
+        "Province",
+        "Postal Code",
+        "Country"
+      ],
+      "instruction": "If any of the above contact information changes, I will update it on the Student Registration Page."
+    },
+
+    "studentLife": {
+      "slug": "/student-life",
+      "title": "Student Life",
+      "intro": "Student Life & Support Hub — Information and Services",
+      "modules": [
+        { "label": "Academic Calendar", "blurb": "Access the yearly Academic Calendar with general information on semester starting dates and local statutory holidays." },
+        { "label": "Arrival in Vancouver", "blurb": "Welcome to Canada! Useful information for your first day in Vancouver, from obtaining your first Study Permit to airport pick-up." },
+        { "label": "Housing & Accommodations", "blurb": "Vancouver offers a variety of housing options to suit different budgets and preferences." },
+        { "label": "Health & Safety", "blurb": "How to obtain Medical Insurance and maintain a healthy and safe life in Vancouver as a student." },
+        { "label": "Financial Aid, Scholarships & Bursaries", "blurb": "Financial barriers should never stand in the way of obtaining quality education." },
+        { "label": "Academic & Learning Support", "blurb": "Academic and learning support to ensure you receive quality knowledge and training while studying at MCC." },
+        { "label": "Career Success Centre", "blurb": "Our Career Service team is ready to work with you to uncover your next career opportunity." },
+        { "label": "Living in Vancouver", "blurb": "Useful tips to help you quickly adapt to studies in Vancouver." }
+      ]
+    },
+
+    "academicCalendar": {
+      "slug": "/academic-calendar",
+      "title": "Academic Calendar",
+      "intro": "MCC Vancouver Campus Academic Calendar serves as official documentation regarding programs and courses. Beginning January 1, 2022, MCC implemented standard scheduling across most diploma programs with semesters: Fall (September - December), Winter (January - April), and Summer (May - August). Some programs and part-time offerings may operate on different schedules. Attendance is mandatory from the first through final day of each semester for successful course completion.",
+      "termDates": {
+        "2025": [
+          { "term": "Winter", "start": "January 6" },
+          { "term": "Summer", "start": "May 5" },
+          { "term": "Fall", "start": "September 2" }
+        ],
+        "2026": [
+          { "term": "Winter", "start": "January 5" },
+          { "term": "Summer", "start": "May 8" },
+          { "term": "Fall", "start": "September 8" }
+        ]
+      },
+      "holidays": [
+        "New Year's Day",
+        "Family Day",
+        "Good Friday",
+        "Victoria Day",
+        "Canada Day",
+        "BC Day",
+        "Labour Day",
+        "National Day for Truth and Reconciliation",
+        "Thanksgiving Day",
+        "Remembrance Day",
+        "Christmas Day"
+      ]
+    },
+
+    "arrivalInCanada": {
+      "slug": "/arrival-in-canada",
+      "title": "Arrival in Canada",
+      "headings": [
+        "Welcome to Vancouver, Canada!",
+        "If you have applied for a Study Permit and got an Approval Letter",
+        "If you are a short-term visiting student or already have a Study Permit",
+        "General Information Before Travelling to Canada",
+        "Passport",
+        "Key Documents to Travel to Canada",
+        "Additional Documents and Items",
+        "At the Port of Entry",
+        "If you arrive in Canada by AIR",
+        "If you arrive in Canada by LAND",
+        "New Student Orientation",
+        "Virtual Campus Tours and Online Webinars",
+        "Campus Tours and Social Networking Events",
+        "Community Resources for New Students",
+        "Introduction to Canadian Culture and Laws"
+      ],
+      "keyDocuments": [
+        "A valid passport",
+        "A valid Electronic Travel Authorization (eTA) or Temporary Resident Visa (TRV)",
+        "A valid Study Permit or a port of entry (POE) letter",
+        "A Confirmation of Enrolment (COE) if you are a current student",
+        "Recent proof of financial support",
+        "If required, valid immigration medical exam results"
+      ],
+      "whatToBring": [
+        "Other immunization records",
+        "Identity document from your country (e.g. driver's license)",
+        "Marriage certificate and English translation (if applicable)",
+        "Toiletries",
+        "Medication",
+        "Weather appropriate clothes",
+        "Electronic devices for internet access",
+        "Credit card and/or cash (declare if over CAD 10,000)"
+      ],
+      "portOfEntryNote": "The CBSA officer will ask to see travel documents, ask questions, and confirm eligibility. Entry remains at the discretion of a CBSA officer."
+    },
+
+    "housingAndAccommodations": {
+      "slug": "/housing-and-accommodations",
+      "title": "Housing & Accommodations",
+      "intro": "Although on-campus housing is not available, there are various housing options for students to consider. MCC offers free assistance through admin@metropolitancollege.ca.",
+      "options": [
+        { "type": "Homestay", "description": "Affordable housing and meal package with the opportunity to learn Canadian culture through screened host families. Pricing varies." },
+        { "type": "Student Residences", "description": "Modern, fully furnished accommodations operated by third-party providers (e.g. GEC).", "partner": "GEC Living — https://gecliving.com/" },
+        { "type": "Apartment Rental", "description": "Direct rental options. The college usually does not encourage new students to rent an apartment directly." }
+      ],
+      "tenantResources": [
+        "Before you Rent",
+        "Living with Others",
+        "Protect your Belongings",
+        "Conflict in the Home",
+        "Preparing to Move-Out"
+      ]
+    },
+
+    "healthAndSafety": {
+      "slug": "/health-and-safety",
+      "title": "Health & Safety",
+      "headings": [
+        "Medical Insurance for Newcomer Students",
+        "BC Medical Service Plan (MSP)",
+        "What Does MSP Cover?",
+        "Additional Services (Not Covered by MSP)",
+        "How to Apply for MSP",
+        "Why MSP Is Essential for International Students",
+        "Mental Health and Wellness",
+        "Addictions and Overdose",
+        "Emergency Contacts"
+      ],
+      "insurance": {
+        "requirement": "All international students in British Columbia are required to have valid medical insurance coverage. Students must obtain private coverage within their first 90 days before becoming eligible for provincial plans.",
+        "privateProviderExample": "GuardMe",
+        "msp": {
+          "description": "BC Medical Service Plan — the province's health insurance program providing essential medical coverage for residents, including international students staying over six months.",
+          "covers": ["Doctor visits and primary care", "Hospital services (surgeries, stays, specialist referrals)", "Diagnostic services (X-rays, ultrasounds, lab tests)"],
+          "doesNotCover": ["Prescription drugs (with exceptions)", "Dental care", "Vision care", "Physiotherapy", "Chiropractic services"],
+          "process": "Apply online via the BC government website. Three-month processing period. Receive BC Services Card upon approval.",
+          "premium": "Approximately $75 per month"
+        }
+      },
+      "mentalHealth": [
+        "Here2Talk program (Government of BC) — confidential counseling",
+        "Simply Counselling — personalized one-on-one sessions",
+        "Regular workshops on stress management and work-life balance"
+      ],
+      "addictionsSupport": "Naloxone kits are available at our campus to address opioid-related emergencies. Students can request kits discreetly at the front desk with instructions provided. The Student Support Team offers assistance and referrals to recovery centers.",
+      "emergency": {
+        "publicEmergency": "Dial 911 in Canada for police, fire, and ambulance.",
+        "campusSecurity": "Security services provided by third-party contractors with passcode-protected entrance. The Student Support team is available to assist with safety concerns or emergencies."
+      }
+    },
+
+    "financialAid": {
+      "slug": "/financial-aid-scholarships-bursaries",
+      "title": "Financial Aid, Scholarships & Bursaries",
+      "intro": "We understand the situation and are here to help you achieve your academic goal by providing financial assistance opportunities such as scholarships and bursaries. Up to one (1) scholarship or bursary per eligible student is allowed.",
+      "bcStudentLoan": "Available through StudentAidBC — low-interest rates, flexible repayment plans, and tailored options for eligible students. Applications are processed first-come, first-served.",
+      "scholarships": [
+        {
+          "name": "Entrance Scholarship",
+          "amount": "CAD 2,000",
+          "eligiblePrograms": ["International Esports Management Diploma"],
+          "applicants": "New students (international and domestic)",
+          "englishRequirement": "Meeting program requirements",
+          "payment": "Tuition credit applied final semester"
+        },
+        {
+          "name": "English Excellence Scholarship for International Student",
+          "amount": "CAD 5,000",
+          "eligiblePrograms": ["International Esports Management Diploma"],
+          "applicants": "New international students",
+          "englishRequirement": "IELTS Academic overall 6.5 or other equivalent language proficiency tests",
+          "payment": "Tuition credit applied final semester"
+        },
+        {
+          "name": "Special Bursary for Turkish International Student",
+          "amount": "CAD 14,400",
+          "eligiblePrograms": ["International Esports Management Diploma"],
+          "applicants": "New international students with Turkish passport",
+          "englishRequirement": "Meeting program requirements",
+          "payment": "Pro-rated tuition credit each semester"
+        }
+      ]
+    },
+
+    "academicLearningSupport": {
+      "slug": "/academic-learning-support",
+      "title": "Academic & Learning Support",
+      "advisorTopics": [
+        "Course planning",
+        "Understanding GPA and your grade",
+        "Addressing missed classes",
+        "Course withdrawal policies",
+        "Plagiarism charges",
+        "Authorized Leave policy",
+        "Academic advancement opportunities",
+        "Grade appeals",
+        "Complaint procedures"
+      ],
+      "learningSupport": [
+        "Academic coaching",
+        "Support for students with academic difficulties",
+        "Connecting students with external professionals",
+        "Clarifying student rights and responsibilities"
+      ],
+      "howToConnect": "Complete a form or visit the Front Desk to book meetings in person or online with an Academic Advisor."
+    },
+
+    "careerSuccessCentre": {
+      "slug": "/career-success-cenre",
+      "title": "Career Success Centre",
+      "headline": "Get Ahead with Career Services — At MCC, we are here to help you thrive beyond the classroom.",
+      "services": [
+        { "name": "Resume & Cover Letter Support", "description": "Refining job application documents, with guidance on showcasing work experience, education, and skills." },
+        { "name": "Career & Employment Workshops", "description": "Topics include networking, interviewing skills, and job search techniques." },
+        { "name": "Interview Preparation", "description": "Mock interviews to help students prepare for the job market." },
+        { "name": "Career Assessment", "description": "Identifying career goals through formal and informal assessments." },
+        { "name": "Job Search Support", "description": "Connecting students to resources to enhance job search strategies." },
+        { "name": "LinkedIn Development", "description": "Building an online presence through LinkedIn." },
+        { "name": "Networking", "description": "Creating and finding networking opportunities for students." },
+        { "name": "One-on-One Career Advising", "description": "Private sessions with experienced Career Advisors." }
+      ]
+    },
+
+    "livingInVancouver": {
+      "slug": "/living-in-vancouver",
+      "title": "Living in Vancouver",
+      "intro": "Vancouver is one of the most spectacular cities in the world, as well as one of its cleanest and safest.",
+      "climate": "Vancouver has the mildest climate of any major city in Canada. Temperatures range from 6°C to 18°C (January–May) and 17°C to 24°C (May–August).",
+      "neighbourhoodNote": "MCC is situated near the Steam Clock in Gastown — one of Vancouver's oldest and most culturally diverse neighbourhoods, bordered by Chinatown and steps from public transit and Canada Place.",
+      "transportation": {
+        "system": "TransLink",
+        "modes": ["Bus", "SkyTrain", "SeaBus"],
+        "note": "Ecologically friendly, reliable and inexpensive."
+      },
+      "cellularServices": "Phone plans typically require two forms of ID and proof of address.",
+      "banking": ["Opening a Bank Account", "Debit Card", "Credit Card", "Building a Credit Score"]
+    },
+
+    "integrationWithCommunity": {
+      "slug": "/integration-with-local-community",
+      "title": "Integration with Local Community",
+      "intro": "Student success goes beyond academics. Our student life programs are thoughtfully designed to help students actively engage with the local Vancouver community.",
+      "pillars": [
+        {
+          "name": "Community-Based Clubs & Activities",
+          "description": "Student-led clubs enable peers to collaborate on Vancouver-based projects, participate in language exchange, and engage with professional networking and business clubs tied to local industries."
+        },
+        {
+          "name": "Cultural Celebrations with Local Engagement",
+          "description": "Inclusive cultural events including public showcases and international food fairs, in collaboration with local artists, cultural organizations, and guest speakers.",
+          "examples": ["Lunar New Year", "Diwali", "Eid", "Indigenous Peoples Day"]
+        },
+        {
+          "name": "Volunteering & Community Leadership",
+          "description": "Local volunteering with non-profits, shelters, food banks, and community centres. Civic engagement activities and leadership training programs for peer mentoring and ambassador roles."
+        },
+        {
+          "name": "Field Trips & Cultural Immersion",
+          "description": "Guided tours of historical sites, art galleries, Indigenous museums, and civic institutions; visits to local businesses, government facilities, and non-profit organizations; outdoor excursions throughout Vancouver."
+        }
+      ]
+    },
+
+    "agentCooperation": {
+      "slug": "/agent-cooperation",
+      "title": "Agent Cooperation",
+      "intro": "MCC works closely with agents worldwide to recruit qualified students. We provide promotional materials, training sessions, campus tours and other resources to support our agents in their recruitment effort. We also keep our agents posted regarding our important updates for advising prospective students.",
+      "benefitsToAgents": [
+        "Promotional materials",
+        "Training sessions",
+        "Campus tours",
+        "Ongoing updates for advising prospective students"
+      ],
+      "callToAction": "If you are interested in cooperating with us, please fill in the Appointed Agent Application form.",
+      "confirmation": "Thanks for your interest in cooperating with us! We will get back to you soon."
+    },
+
+    "contact": {
+      "slug": "/contact",
+      "title": "Contact",
+      "headings": ["Have any questions?", "Get in touch with us today!", "Contact Us"],
+      "intro": "For more information on our programs of study, student services, career opportunities or other inquiries, please contact us or complete and submit the contact form.",
+      "successMessage": "Thanks for contacting us! We will get back to you soon."
+    }
+  },
+
+  "programs": [
+    {
+      "slug": "/globalmanagementinhospitality",
+      "name": "Global Management in Hospitality",
+      "credential": "Diploma",
+      "tagline": "Join a growing industry & gain opportunities worldwide",
+      "description": "The Global Management in Hospitality Diploma program is offered in collaboration with the American Hotel & Lodging Education Institute (AHLEI) to prepare students for various management roles in the hospitality industry. Students gain industry-specific skills in computer applications, financial management, room division management, food and beverage management, marketing and sales.",
+      "duration": "12–16 months (96 full-time / part-time weeks)",
+      "structure": { "courses": 15, "credits": 45, "contactHours": 960 },
+      "delivery": "In-class",
+      "location": "Vancouver Main Campus — 100 - 322 Water Street",
+      "semesters": ["Fall (Sep–Dec)", "Winter (Jan–Apr)", "Summer (May–Aug)"],
+      "highlights": [
+        "Accredited by American Hotel and Lodging Association (AHLA)",
+        "Double diplomas — from both AHLEI and MCC",
+        "Potential Triple Credentials — AHLA, MCC and UCW",
+        "Pathway to Degree Programs in as little as 3 years",
+        "Team-based teaching model"
+      ],
+      "admissionRequirements": [
+        "Completion of high school OR mature student (18+)",
+        "Evidence of IELTS 5.5 or equivalent (e.g. TOEFL IBT)",
+        "OR successful completion of Business Communication / EPAS preparatory programs",
+        "OR pass the College's language proficiency exam with at least 70%"
+      ],
+      "fees": {
+        "applicationFee": "CAD 200",
+        "domestic": { "tuition": "CAD 19,350", "perCredit": "CAD 430", "perCourse": "CAD 1,290", "materials": "CAD 1,800" },
+        "international": { "tuition": "CAD 25,650", "perCredit": "CAD 570", "perCourse": "CAD 1,710", "materials": "CAD 1,800" }
+      },
+      "applicationDeadline": "4 weeks prior to start of classes; late admission possible based on intake",
+      "graduationRequirement": "Successfully complete all required courses",
+      "pgwpEligible": false,
+      "studentLoanEligible": "StudentAid BC (SABC)",
+      "ctas": ["Apply now", "Contact Us", "More Programs"]
+    },
+    {
+      "slug": "/hospitalityoperations",
+      "name": "Hospitality Operations",
+      "credential": "Diploma",
+      "tagline": "Join a growing industry & gain opportunities worldwide",
+      "description": "The Hospitality Operations Diploma program is offered in collaboration with the American Hotel & Lodging Education Institute (AHLEI) to prepare students for various roles in the hospitality industry. Students learn industry-specific skills in computer applications, finance, operations, marketing and sales. Graduates receive both a Hospitality Operations Diploma from MCC and the AHLA equivalent.",
+      "duration": "8 months (52 full-time / part-time weeks)",
+      "structure": { "courses": 8, "credits": 24, "contactHours": 512 },
+      "highlights": [
+        "Accredited by American Hotel and Lodging Association (AHLA)",
+        "Double diplomas — from both AHLEI and MCC",
+        "Potential Triple Credentials — AHLA, MCC and UCW",
+        "Opportunity to advance to Global Hospitality Management Diploma"
+      ],
+      "admissionRequirements": [
+        "High school completion OR 18+ as mature student",
+        "Evidence of IELTS 5.5 or equivalent",
+        "OR successful completion of Business Communication / EPAS",
+        "OR pass college language proficiency exam with 70%"
+      ],
+      "fees": {
+        "applicationFee": "CAD 200",
+        "domestic": { "tuition": "CAD 10,320", "materials": "CAD 960" },
+        "international": { "tuition": "CAD 13,680", "materials": "CAD 960" }
+      },
+      "applicationDeadline": "4 weeks prior to start of classes; late admission possible based on intake",
+      "ctas": ["Apply now", "Contact Us", "More Programs"]
+    },
+    {
+      "slug": "/businesscommunications",
+      "name": "Business Communication",
+      "credential": "Certificate",
+      "tagline": "Introduction to International Business Communication & Workplace Diversity",
+      "description": "The Business Communication program enhances students' communication skills in a business environment. The program consists of two courses to upgrade business writing, presentation and public speaking skills essential to succeed in today's complex business environment. Designed for non-native English speakers.",
+      "duration": "8 full-time weeks",
+      "structure": { "courses": 2, "credits": 6, "contactHours": 160 },
+      "admissionRequirements": [
+        "Generally an IELTS 4.0 or equivalent (may take a college diagnostic test for placement)"
+      ],
+      "fees": {
+        "applicationFee": "CAD 200",
+        "tuition": "CAD 3,900",
+        "materials": "CAD 100"
+      },
+      "ctas": ["Apply now", "Contact Us", "More Programs"]
+    },
+    {
+      "slug": "/celpippreparation",
+      "name": "CELPIP Preparation",
+      "credential": "Test Preparation",
+      "tagline": "CELPIP Preparation Program",
+      "description": "Our CELPIP Preparation Program offers in-depth strategies and skill-building for each component of the CELPIP-General Test. Developed in collaboration with the program administrator and delivered by experienced instructors, the program aims to improve student scores by 1–2 CLB levels.",
+      "tracks": [
+        { "name": "Intense Program", "duration": "3 weeks", "schedule": "4 hours/day, 5 days/week", "fee": "CAD 1,450" },
+        { "name": "Regular Program", "duration": "12 weeks", "schedule": "2 hours/day, 5 days/week", "fee": "CAD 2,800" }
+      ],
+      "fees": { "courseMaterials": "CAD 125" },
+      "admissionRequirements": [
+        "Previous CELPIP Test Score, OR",
+        "Take a CELPIP Diagnostic Test at the College"
+      ],
+      "pgwpEligible": false,
+      "intakeStatus": "Currently not intaking new students due to restructuring",
+      "ctas": ["Take the Free Quiz"]
+    },
+    {
+      "slug": "/internationalesportsmanagement",
+      "name": "International Esports Management",
+      "credential": "Diploma",
+      "tagline": "Be a part of the Esports Ecosystem with Metropolitan Community College",
+      "uniqueClaim": "The one and only academic program in Esports Management in Canada.",
+      "description": "The International Esports Management diploma program provides students with the opportunity to turn their passion for playing video games into a viable career in the esports industry. Students learn the history, development, concept, culture, and management of esports teams and related organizations.",
+      "duration": "60–120 full-time / part-time weeks",
+      "structure": { "courses": 20, "credits": 60, "contactHours": 1200 },
+      "admissionRequirements": [
+        "Completion of high school OR 19+ as mature student",
+        "Grade C+ in English 12, OR IELTS-Academic 5.5 (no band lower than 5.0), OR equivalent language proficiency",
+        "Alternative: Language Proficiency Test or completion of Business Communication program"
+      ],
+      "fees": {
+        "applicationFee": "CAD 200",
+        "domestic": { "tuition": "CAD 19,800", "materials": "CAD 2,800", "equipmentImprovementFee": "CAD 1,200" },
+        "international": { "tuition": "CAD 34,200", "materials": "CAD 2,800", "equipmentImprovementFee": "CAD 1,200" }
+      },
+      "ctas": ["Apply now", "Contact Us", "More Programs"]
+    },
+    {
+      "slug": "/advancedparalegal",
+      "name": "Advanced Paralegal (Without Co-op)",
+      "credential": "Diploma",
+      "status": "Discontinued — for record and reference only. No longer taking students in 2025.",
+      "tagline": "Dive into the world of laws…",
+      "description": "The Advanced Paralegal Diploma is a 50-week intensive program providing training in traditional legal administrative skills and legal procedures. Students handle and format legal correspondence such as deeds, wills, affidavits and briefs, along with civil and family litigation, under qualified instructors.",
+      "duration": "50 full-time weeks",
+      "structure": { "courses": 22, "credits": 66, "contactHours": 1250 },
+      "delivery": "In-class",
+      "location": "Vancouver Main Campus — 100 - 322 Water Street",
+      "semesters": ["Fall", "Winter", "Summer"],
+      "highlights": [
+        "Written and verbal communication",
+        "Drafting legal documents",
+        "Advocacy — examination, cross-examination, submission of arguments",
+        "Legal research and writing",
+        "Ability to analyze and apply legislation to real-life situations",
+        "Negotiation and conflict resolution"
+      ],
+      "admissionRequirements": [
+        "Completion of high school OR 18+ as mature student",
+        "IELTS 5.5 or equivalent (TOEFL IBT)",
+        "OR successful completion of Business Communication / EPAS",
+        "OR pass College language proficiency exam with 70%"
+      ],
+      "fees": {
+        "domestic": { "applicationFee": "CAD 250", "tuition": "CAD 12,500", "assessmentFee": "CAD 40 (if applicable)", "materials": "CAD 2,300", "otherFees": "CAD 195" },
+        "international": { "applicationFee": "CAD 1,000", "tuition": "CAD 15,500", "assessmentFee": "CAD 40 (if applicable)", "materials": "CAD 2,300", "otherFees": "CAD 195" }
+      },
+      "applicationDeadline": "4 weeks prior to start of classes (program now discontinued)",
+      "graduationRequirement": "Successfully complete all required courses",
+      "pgwpEligible": false,
+      "studentLoanEligible": "StudentAid BC (SABC)",
+      "ctas": ["Apply now", "Contact Us", "More Programs"]
+    }
+  ],
+
+  "footer": {
+    "address": "100 - 322 Water Street, Vancouver BC, Canada, V6B 1B6",
+    "phone": "+1.604.300.3123",
+    "email": "info@metropolitancollege.ca",
+    "copyright": "© Copyright 2002-2025 Metropolitan Community College",
+    "accreditationLogos": ["PTIB Designated", "BC EQA", "EduCanada"]
+  },
+
+  "seoNotes": {
+    "metaDescriptions": "Not visible in extracted markup — page-level meta descriptions should be authored from the body content for the new site.",
+    "titleConventions": "All page titles in the source follow the pattern: '<Page Name> | metropolitancollege' — recommend keeping one consistent brand suffix on the new site.",
+    "missingFromSource": [
+      "Testimonials — none found on any visited page",
+      "FAQ section — no dedicated FAQ page found",
+      "Blog or news archive (only a single 'Latest News' notice on the home page)",
+      "Detailed refund/payment policy (lives in linked PDFs only)",
+      "Per-course curriculum titles (programs list course count but not individual course names)",
+      "Brochure files (Brochures page is a placeholder)"
+    ]
+  }
+}
