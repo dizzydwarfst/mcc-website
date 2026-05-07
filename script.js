@@ -520,6 +520,7 @@ document.addEventListener('DOMContentLoaded', () => {
         function validateStep() {
             const currentStepEl = wizardForm.querySelector(`.form-step[data-step="${currentStep}"]`);
             currentStepEl.querySelectorAll('.input-error').forEach(el => el.classList.remove('input-error'));
+            currentStepEl.querySelectorAll('.has-error').forEach(el => el.classList.remove('has-error'));
 
             let isValid = true;
 
@@ -540,7 +541,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const checked = currentStepEl.querySelector(`input[name="${radio.name}"]:checked`);
                 if (!checked) {
                     isValid = false;
-                    currentStepEl.querySelectorAll(`input[name="${radio.name}"]`).forEach(r => markInvalid(r, true));
+                    const parentGroup = radio.closest('.form-group');
+                    if (parentGroup) parentGroup.classList.add('has-error');
                 }
             });
 
@@ -554,6 +556,20 @@ document.addEventListener('DOMContentLoaded', () => {
                             markInvalid(input, true);
                         }
                     });
+                }
+            }
+
+            // Step 4: terms checkbox lives outside the form-group structure; toggle its error msg
+            if (currentStep === 4) {
+                const terms = currentStepEl.querySelector('#terms_agreement');
+                const termsErrorMsg = terms ? terms.closest('.checkbox-group').nextElementSibling : null;
+                if (terms && !terms.checked) {
+                    isValid = false;
+                    if (termsErrorMsg && termsErrorMsg.classList.contains('error-msg')) {
+                        termsErrorMsg.style.display = 'block';
+                    }
+                } else if (termsErrorMsg && termsErrorMsg.classList.contains('error-msg')) {
+                    termsErrorMsg.style.display = '';
                 }
             }
 
