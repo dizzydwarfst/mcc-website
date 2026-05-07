@@ -455,30 +455,39 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
-    // Form Wizard Logic
+    // Form Wizard Logic (4 steps)
     // ==========================================
     const wizardForm = document.getElementById('wizard-form');
     if (wizardForm) {
         let currentStep = 1;
-        const totalSteps = 5;
-        const steps = document.querySelectorAll('.form-step');
+        const totalSteps = 4;
+        const steps = wizardForm.querySelectorAll('.form-step');
         const indicators = document.querySelectorAll('.step-indicator');
         const progressFill = document.querySelector('.progress-line-fill');
 
+        // Conditional agency fields (Step 2)
+        const agencyFields = document.getElementById('agency-fields');
+        const agencyRadios = wizardForm.querySelectorAll('input[name="using_agency"]');
+        function syncAgencyVisibility() {
+            const checked = wizardForm.querySelector('input[name="using_agency"]:checked');
+            const showFields = checked && checked.value === 'yes';
+            if (agencyFields) {
+                agencyFields.style.display = showFields ? '' : 'none';
+            }
+        }
+        agencyRadios.forEach(r => r.addEventListener('change', syncAgencyVisibility));
+        syncAgencyVisibility();
+
         function updateWizardUI() {
             steps.forEach((step, idx) => {
-                if (idx + 1 === currentStep) {
-                    step.classList.add('active');
-                } else {
-                    step.classList.remove('active');
-                }
+                step.classList.toggle('active', idx + 1 === currentStep);
             });
 
             indicators.forEach((ind, idx) => {
                 const stepNum = idx + 1;
                 ind.classList.remove('active', 'completed');
                 const circle = ind.querySelector('.step-circle');
-                
+
                 if (stepNum === currentStep) {
                     ind.classList.add('active');
                     circle.innerHTML = stepNum;
@@ -494,81 +503,83 @@ document.addEventListener('DOMContentLoaded', () => {
             if (progressFill) progressFill.style.width = `${progressPercentage}%`;
         }
 
-        function validateStep() {
-            let isValid = true;
-            const currentStepEl = document.querySelector(`.form-step[data-step="${currentStep}"]`);
-            const requiredInputs = currentStepEl.querySelectorAll('input[required], select[required], textarea[required]');
-            
-            currentStepEl.querySelectorAll('.input-error').forEach(el => el.classList.remove('input-error'));
-            
-            if (currentStep === 4) {
-                const checkedRadio = currentStepEl.querySelector('input[name="program"]:checked');
-                if (!checkedRadio) {
-                    isValid = false;
-                    alert('Please select a program.');
-                }
-            } else {
-                requiredInputs.forEach(input => {
-                    if (!input.value.trim() || (input.type === 'checkbox' && !input.checked)) {
-                        isValid = false;
-                        input.classList.add('input-error');
-                    }
-                });
+        function fieldFilled(input) {
+            if (input.type === 'checkbox' || input.type === 'radio') {
+                return input.checked;
             }
-            
+            if (input.type === 'file') {
+                return input.files && input.files.length > 0;
+            }
+            return input.value && input.value.trim() !== '';
+        }
+
+        function markInvalid(input, invalid) {
+            input.classList.toggle('input-error', invalid);
+        }
+
+        function validateStep() {
+            const currentStepEl = wizardForm.querySelector(`.form-step[data-step="${currentStep}"]`);
+            currentStepEl.querySelectorAll('.input-error').forEach(el => el.classList.remove('input-error'));
+
+            let isValid = true;
+
+            // Standard required inputs/selects/textareas
+            currentStepEl.querySelectorAll('input[required], select[required], textarea[required]').forEach(input => {
+                if (input.type === 'radio') return; // handled in groups below
+                if (!fieldFilled(input)) {
+                    isValid = false;
+                    markInvalid(input, true);
+                }
+            });
+
+            // Required radio groups: every required radio represents a group; validate by name once
+            const seenRadioGroups = new Set();
+            currentStepEl.querySelectorAll('input[type="radio"][required]').forEach(radio => {
+                if (seenRadioGroups.has(radio.name)) return;
+                seenRadioGroups.add(radio.name);
+                const checked = currentStepEl.querySelector(`input[name="${radio.name}"]:checked`);
+                if (!checked) {
+                    isValid = false;
+                    currentStepEl.querySelectorAll(`input[name="${radio.name}"]`).forEach(r => markInvalid(r, true));
+                }
+            });
+
+            // Step 2: if "Yes" on agency, validate conditional agency fields
+            if (currentStep === 2) {
+                const usingAgency = wizardForm.querySelector('input[name="using_agency"]:checked');
+                if (usingAgency && usingAgency.value === 'yes') {
+                    currentStepEl.querySelectorAll('[data-agency-required]').forEach(input => {
+                        if (!fieldFilled(input)) {
+                            isValid = false;
+                            markInvalid(input, true);
+                        }
+                    });
+                }
+            }
+
             return isValid;
         }
 
-        function populateSummary() {
-            if (currentStep !== 5) return;
-            
-            function val(id, isSelect=false) {
-                const el = document.getElementById(id);
-                if (!el) return '';
-                if (isSelect && el.options) {
-                    return el.options[el.selectedIndex].text;
-                }
-                return el.value;
-            }
-
-            document.getElementById('sum-name').textContent = `${val('first_name')} ${val('last_name')}` + (val('preferred_name') ? ` (${val('preferred_name')})` : '');
-            document.getElementById('sum-dob-gender').textContent = `${val('dob')} | ${val('gender', true)}`;
-            document.getElementById('sum-citizen').textContent = val('citizenship');
-
-            const pCode = val('phone_code', true);
-            document.getElementById('sum-phone').textContent = `${pCode !== "Other" ? pCode : ""} ${val('phone_number')}`.trim();
-            document.getElementById('sum-email').textContent = val('email');
-            document.getElementById('sum-status').textContent = `${val('status', true)} (Exp: ${val('status_expiry') || 'N/A'})`;
-
-            const street = val('street_address');
-            document.getElementById('sum-address').textContent = `${street ? street + ', ' : ''}${val('city')}, ${val('province')} ${val('postal_code')} - ${val('country', true)}`;
-
-            const selectedProgram = document.querySelector('input[name="program"]:checked');
-            if (selectedProgram) {
-                document.getElementById('sum-program').textContent = selectedProgram.value;
-            }
-            document.getElementById('sum-term').textContent = val('term', true);
-        }
-
-        document.querySelectorAll('.btn-next').forEach(btn => {
+        wizardForm.querySelectorAll('.btn-next').forEach(btn => {
             btn.addEventListener('click', () => {
                 if (validateStep() && currentStep < totalSteps) {
                     currentStep++;
-                    if(currentStep === 5) populateSummary();
                     updateWizardUI();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
             });
         });
 
-        document.querySelectorAll('.btn-back').forEach(btn => {
+        wizardForm.querySelectorAll('.btn-back').forEach(btn => {
             btn.addEventListener('click', () => {
                 if (currentStep > 1) {
                     currentStep--;
                     updateWizardUI();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
             });
         });
-        
+
         wizardForm.addEventListener('submit', (e) => {
             e.preventDefault();
             if (validateStep()) {
@@ -576,14 +587,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('wizard-success').style.display = 'block';
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
-        });
-        
-        document.querySelectorAll('.summary-edit').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                currentStep = parseInt(link.getAttribute('data-target-step'), 10);
-                updateWizardUI();
-            });
         });
 
         updateWizardUI();
