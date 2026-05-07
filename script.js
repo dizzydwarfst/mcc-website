@@ -170,18 +170,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Admissions Dropdown Mobile Toggle
-    const dropdownToggle = document.querySelector('.nav-dropdown-toggle');
-    const dropdownContent = document.querySelector('.dropdown-content');
+    // Top-level Dropdown Mobile Toggle (About / Programs / Admissions / Student Life)
+    document.querySelectorAll('.nav-dropdown').forEach((dropdown) => {
+        const toggle = dropdown.querySelector(':scope > .nav-dropdown-toggle');
+        const content = dropdown.querySelector(':scope > .dropdown-content');
+        if (!toggle || !content) return;
 
-    if (dropdownToggle && dropdownContent) {
-        dropdownToggle.addEventListener('click', (e) => {
+        toggle.addEventListener('click', (e) => {
             if (window.innerWidth <= 900) {
                 e.preventDefault();
-                dropdownContent.classList.toggle('show');
+                const wasOpen = content.classList.contains('show');
+                document.querySelectorAll('.dropdown-content.show').forEach((c) => c.classList.remove('show'));
+                if (!wasOpen) content.classList.add('show');
             }
         });
-    }
+    });
 
     // ==========================================
     // FAQ Accordion Logic
