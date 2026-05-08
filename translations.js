@@ -258,6 +258,416 @@ window.MCC_TRANSLATIONS = {
         next4_link: { en: "Contact MCC", fr: "Contacter MCC" }
     },
 
+    // ESL programs (programs-esl.html) — hero + overview + 6 levels
+    esl: {
+        breadcrumb_html: {
+            en: '<a href="programs.html" style="color:inherit;text-decoration:none;">Programs</a> / English (ESL)',
+            fr: '<a href="programs.html" style="color:inherit;text-decoration:none;">Programmes</a> / Anglais (ALS)'
+        },
+        hero_title: { en: "English language training designed for life and work in Canada", fr: "Une formation en anglais conçue pour la vie et le travail au Canada" },
+        hero_subtitle: { en: "Six progressive CEFR-aligned levels — from first steps in English through near-native fluency. Build reading, writing, listening, and speaking skills with a structured, outcome-focused program.", fr: "Six niveaux progressifs alignés sur le CECR — des premiers pas en anglais jusqu'à une maîtrise presque native. Développez la lecture, l'écriture, l'écoute et l'oral grâce à un programme structuré, axé sur les résultats." },
+        pill_levels: { en: "6 CEFR levels (A1–C1)", fr: "6 niveaux CECR (A1 à C1)" },
+        pill_modes: { en: "In-person & online", fr: "En présentiel et en ligne" },
+        pill_test: { en: "Free placement test", fr: "Test de placement gratuit" },
+
+        ov_kicker: { en: "Program Overview", fr: "Aperçu du programme" },
+        ov_title: { en: "How the ESL program works", fr: "Comment fonctionne le programme d'ALS" },
+        ov1_title: { en: "Free Placement Test", fr: "Test de placement gratuit" },
+        ov1_p: { en: "All new students complete a placement assessment so you start at the level that matches your current English ability — no guesswork.", fr: "Tous les nouveaux étudiants passent une évaluation de placement pour commencer au niveau qui correspond à leur anglais actuel — sans deviner." },
+        ov2_title: { en: "Progressive Levels", fr: "Niveaux progressifs" },
+        ov2_p: { en: "Each level builds on the previous one. Clear outcomes at every stage mean you always know what you're working toward and when you're ready to advance.", fr: "Chaque niveau s'appuie sur le précédent. Des objectifs clairs à chaque étape vous indiquent toujours ce que vous visez et quand vous êtes prêt à passer au suivant." },
+        ov3_title: { en: "All Four Skills", fr: "Les quatre compétences" },
+        ov3_p: { en: "Every level integrates listening, speaking, reading, and writing — the same four skills tested in official Canadian language assessments.", fr: "Chaque niveau intègre l'écoute, l'oral, la lecture et l'écriture — les quatre compétences évaluées par les examens linguistiques officiels canadiens." },
+        ov4_title: { en: "Small Class Sizes", fr: "Petites classes" },
+        ov4_p: { en: "Capped cohorts ensure every student gets attention from their instructor. Less waiting, more practising.", fr: "Des effectifs limités garantissent à chaque étudiant l'attention de son enseignant. Moins d'attente, plus de pratique." },
+
+        levels_kicker: { en: "Six Levels", fr: "Six niveaux" },
+        levels_title: { en: "Find your starting point", fr: "Trouvez votre point de départ" },
+        levels_p: { en: "All levels are CEFR-aligned. If you're unsure where you belong, our free placement test will identify the right fit.", fr: "Tous les niveaux sont alignés sur le CECR. Si vous hésitez sur le bon niveau, notre test de placement gratuit vous orientera." },
+
+        l1_title: { en: "Level 1 — Foundation", fr: "Niveau 1 — Fondation" },
+        l1_p: { en: "For absolute beginners. Learn greetings, numbers, dates, and the language of everyday survival — building real confidence in English from your very first class.", fr: "Pour les grands débutants. Apprenez les salutations, les nombres, les dates et la langue de la survie quotidienne — gagnez en confiance dès votre tout premier cours." },
+        l1_li1: { en: "Introduce yourself and others", fr: "Vous présenter et présenter les autres" },
+        l1_li2: { en: "Ask and answer basic questions", fr: "Poser et répondre à des questions simples" },
+        l1_li3: { en: "Understand simple written signs and forms", fr: "Comprendre des panneaux et formulaires simples" },
+        l1_li4: { en: "Handle basic transactions and directions", fr: "Gérer des transactions de base et des indications" },
+
+        l2_title: { en: "Level 2 — Elementary", fr: "Niveau 2 — Élémentaire" },
+        l2_p: { en: "Expand your vocabulary and start holding simple conversations confidently. Navigate everyday situations — shopping, appointments, phone calls — in English.", fr: "Élargissez votre vocabulaire et tenez vos premières conversations simples avec assurance. Gérez les situations courantes — achats, rendez-vous, appels — en anglais." },
+        l2_li1: { en: "Describe routines, people, and places", fr: "Décrire des routines, des personnes et des lieux" },
+        l2_li2: { en: "Read and write short messages and notes", fr: "Lire et rédiger de courts messages et notes" },
+        l2_li3: { en: "Handle common service interactions", fr: "Gérer les interactions de service courantes" },
+        l2_li4: { en: "Follow simple instructions and announcements", fr: "Suivre des consignes et des annonces simples" },
+
+        l3_title: { en: "Level 3 — Pre-Intermediate", fr: "Niveau 3 — Pré-Intermédiaire" },
+        l3_p: { en: "Move from survival English toward practical fluency. Handle most common real-life situations and begin expressing your opinions clearly.", fr: "Passez d'un anglais de survie à une aisance pratique. Gérez la plupart des situations courantes et commencez à exprimer vos opinions clairement." },
+        l3_li1: { en: "Discuss past experiences and future plans", fr: "Discuter d'expériences passées et de projets futurs" },
+        l3_li2: { en: "Understand the main points of clear speech", fr: "Comprendre les idées principales d'un discours clair" },
+        l3_li3: { en: "Write structured paragraphs and emails", fr: "Rédiger des paragraphes et courriels structurés" },
+        l3_li4: { en: "Engage in conversations on familiar topics", fr: "Tenir des conversations sur des sujets familiers" },
+
+        l4_title: { en: "Level 4 — Intermediate", fr: "Niveau 4 — Intermédiaire" },
+        l4_p: { en: "Build consistent, confident communication for daily life, study, and entry-level work situations. Begin preparing for Canadian academic and professional contexts.", fr: "Bâtissez une communication régulière et confiante pour la vie quotidienne, les études et les premiers emplois. Commencez à vous préparer aux contextes universitaires et professionnels canadiens." },
+        l4_li1: { en: "Express opinions with supporting reasons", fr: "Exprimer des opinions appuyées par des arguments" },
+        l4_li2: { en: "Understand longer spoken and written texts", fr: "Comprendre des textes oraux et écrits plus longs" },
+        l4_li3: { en: "Write multi-paragraph essays and reports", fr: "Rédiger des essais et rapports en plusieurs paragraphes" },
+        l4_li4: { en: "Participate actively in group discussions", fr: "Participer activement à des discussions de groupe" },
+
+        l5_title: { en: "Level 5 — Upper-Intermediate", fr: "Niveau 5 — Intermédiaire avancé" },
+        l5_p: { en: "Develop the academic and professional English skills needed for college entry, workplace advancement, and complex communication in Canadian settings.", fr: "Développez l'anglais universitaire et professionnel nécessaire à l'entrée au collège, à la progression au travail et à la communication complexe en contexte canadien." },
+        l5_li1: { en: "Read and analyse complex texts independently", fr: "Lire et analyser des textes complexes en autonomie" },
+        l5_li2: { en: "Write research-level academic writing", fr: "Rédiger des textes universitaires de niveau recherche" },
+        l5_li3: { en: "Follow lectures, debates, and presentations", fr: "Suivre cours, débats et présentations" },
+        l5_li4: { en: "Communicate fluently on a wide range of topics", fr: "Communiquer avec aisance sur une grande variété de sujets" },
+
+        l6_title: { en: "Level 6 — Advanced", fr: "Niveau 6 — Avancé" },
+        l6_p: { en: "Reach near-native fluency with the ability to communicate spontaneously, precisely, and effectively in complex academic and professional environments.", fr: "Atteignez une maîtrise presque native, capable de communiquer spontanément, avec précision et efficacité, dans des environnements universitaires et professionnels complexes." },
+        l6_li1: { en: "Communicate with spontaneity and precision", fr: "Communiquer avec spontanéité et précision" },
+        l6_li2: { en: "Understand implicit meaning and nuance", fr: "Comprendre le sens implicite et la nuance" },
+        l6_li3: { en: "Produce clear, well-structured complex writing", fr: "Produire un écrit complexe, clair et bien structuré" },
+        l6_li4: { en: "Engage confidently in high-level professional settings", fr: "Évoluer avec assurance dans des contextes professionnels exigeants" }
+    },
+
+    // Programs landing (programs.html) — hero + categories + why
+    progs: {
+        hero_eyebrow: { en: "Programs", fr: "Programmes" },
+        hero_title: { en: "Build credentials that open doors in Canada and beyond", fr: "Bâtissez des compétences qui ouvrent des portes au Canada et ailleurs" },
+        hero_subtitle: { en: "MCC offers diploma programs, structured English language training, and a full French language pathway — all designed around practical outcomes and Canadian standards.", fr: "MCC offre des programmes de diplôme, une formation structurée en anglais et un parcours complet en français — tous conçus autour de résultats concrets et des normes canadiennes." },
+        pill_diploma: { en: "Diploma credentials", fr: "Diplômes reconnus" },
+        pill_lang: { en: "ESL & French", fr: "ALS et français" },
+        pill_imm: { en: "Immigration-aligned", fr: "Aligné sur l'immigration" },
+
+        cats_kicker: { en: "Program Categories", fr: "Catégories de programmes" },
+        cats_title: { en: "Choose your pathway", fr: "Choisissez votre parcours" },
+        cats_p: { en: "Three distinct program areas — each built with clear learning outcomes, qualified instructors, and a straightforward path from enrollment to credential.", fr: "Trois grands domaines — chacun avec des objectifs d'apprentissage clairs, des enseignants qualifiés et un parcours simple, de l'inscription au diplôme." },
+        cat1_title: { en: "Diploma Programs", fr: "Programmes de diplôme" },
+        cat1_p: { en: "Career-focused diplomas in high-growth fields. From AI and digital media to caregiving, hospitality, and esports — each program delivers applied skills and a recognized credential.", fr: "Des diplômes axés sur la carrière dans des domaines en forte croissance. De l'IA aux médias numériques en passant par les soins, l'hôtellerie et le sport électronique — chaque programme apporte des compétences appliquées et un diplôme reconnu." },
+        cat1_li1: { en: "6 programs available", fr: "6 programmes disponibles" },
+        cat1_li2: { en: "PTIB accredited & BC EQA designated", fr: "Accrédité PTIB et désigné BC EQA" },
+        cat1_li3: { en: "Applied, career-ready learning", fr: "Apprentissage appliqué et prêt pour la carrière" },
+        cat1_li4: { en: "International student support", fr: "Soutien aux étudiants internationaux" },
+        cat1_link: { en: "Explore Diploma Programs", fr: "Voir les programmes de diplôme" },
+
+        cat2_title: { en: "English Language (ESL)", fr: "Anglais langue seconde (ALS)" },
+        cat2_p: { en: "Six progressive CEFR-aligned levels from absolute beginner through advanced. Build reading, writing, listening, and speaking skills for academic, professional, and everyday life in Canada.", fr: "Six niveaux progressifs alignés sur le CECR, du grand débutant à l'avancé. Développez la lecture, l'écriture, l'écoute et l'oral pour la vie universitaire, professionnelle et quotidienne au Canada." },
+        cat2_li1: { en: "6 levels: A1 through C1", fr: "6 niveaux : du A1 au C1" },
+        cat2_li2: { en: "Free placement test included", fr: "Test de placement gratuit inclus" },
+        cat2_li3: { en: "In-person & online delivery", fr: "En présentiel et en ligne" },
+        cat2_li4: { en: "Academic & workplace readiness", fr: "Préparation académique et professionnelle" },
+        cat2_link: { en: "Explore ESL Programs", fr: "Voir les programmes d'ALS" },
+
+        cat3_title: { en: "French Language", fr: "Langue française" },
+        cat3_p: { en: "A structured French language pathway from beginner to advanced, plus dedicated TEF Canada and TCF Canada exam preparation. Designed for immigration, academic admission, and professional goals.", fr: "Un parcours structuré en français du débutant à l'avancé, accompagné d'une préparation dédiée aux examens TEF Canada et TCF Canada. Conçu pour l'immigration, l'admission universitaire et les objectifs professionnels." },
+        cat3_li1: { en: "4 levels: A1 through B2", fr: "4 niveaux : du A1 au B2" },
+        cat3_li2: { en: "TEF Canada & TCF Canada prep", fr: "Préparation au TEF Canada et au TCF Canada" },
+        cat3_li3: { en: "Immigration-focused outcomes", fr: "Objectifs axés sur l'immigration" },
+        cat3_li4: { en: "Small classes, expert instructors", fr: "Petites classes, enseignants experts" },
+        cat3_link: { en: "Explore French Programs", fr: "Voir les programmes de français" },
+
+        why_kicker: { en: "Why MCC", fr: "Pourquoi MCC" },
+        why_title: { en: "Built for real outcomes", fr: "Conçu pour de vrais résultats" },
+        why1_title: { en: "Accredited & Recognized", fr: "Accrédité et reconnu" },
+        why1_p: { en: "PTIB accredited and BC EQA designated. French exam preparation is aligned with IRCC requirements for TEF Canada and TCF Canada.", fr: "Accrédité PTIB et désigné BC EQA. La préparation aux examens de français est alignée sur les exigences d'IRCC pour le TEF Canada et le TCF Canada." },
+        why2_title: { en: "Small Class Sizes", fr: "Petites classes" },
+        why2_p: { en: "Capped cohorts in every program ensure instructors can provide focused feedback and support at every stage of learning.", fr: "Des cohortes à effectif limité dans chaque programme permettent aux enseignants d'offrir un retour ciblé et un soutien à toutes les étapes." },
+        why3_title: { en: "Vancouver-Based", fr: "Au cœur de Vancouver" },
+        why3_p: { en: "Located in one of Canada's most multilingual cities — a practical advantage for language learners and students building professional networks.", fr: "Situé dans l'une des villes les plus multilingues du Canada — un avantage concret pour les apprenants en langues et pour bâtir un réseau professionnel." },
+        why4_title: { en: "In-Person & Online", fr: "En présentiel et en ligne" },
+        why4_p: { en: "All language programs are available both in-person and online, giving you flexibility without compromising on instruction quality.", fr: "Tous les programmes de langues sont offerts en présentiel et en ligne, pour plus de flexibilité sans compromis sur la qualité de l'enseignement." },
+
+        cta_kicker: { en: "Get Started", fr: "Commencez ici" },
+        cta_title: { en: "Not sure where to begin?", fr: "Vous ne savez pas par où commencer ?" },
+        cta_p: { en: "Speak with an advisor or take a free placement test to find the program and level that matches your goals.", fr: "Parlez à un conseiller ou passez un test de placement gratuit pour trouver le programme et le niveau qui correspondent à vos objectifs." },
+        cta_btn_advisor: { en: "Talk to an Advisor", fr: "Parler à un conseiller" },
+        cta_btn_apply: { en: "Apply Now", fr: "Postuler maintenant" }
+    },
+
+    // French Programs hub (programs-french.html)
+    frhub: {
+        breadcrumb_html: {
+            en: '<a href="programs.html" style="color:inherit;text-decoration:none;">Programs</a> / French Language',
+            fr: '<a href="programs.html" style="color:inherit;text-decoration:none;">Programmes</a> / Langue française'
+        },
+        hero_title: { en: "French language programs for immigration, academics, and professional life", fr: "Programmes de français pour l'immigration, les études et la vie professionnelle" },
+        hero_subtitle: { en: "A complete, structured French pathway from beginner to advanced — designed to Canadian academic standards. Includes dedicated TEF Canada and TCF Canada exam preparation for immigration and citizenship goals.", fr: "Un parcours de français complet et structuré, du débutant à l'avancé — aligné sur les normes universitaires canadiennes. Comprend une préparation dédiée aux examens TEF Canada et TCF Canada pour l'immigration et la citoyenneté." },
+        pill_levels: { en: "4 structured levels (A1–B2)", fr: "4 niveaux structurés (A1 à B2)" },
+        pill_exam: { en: "TEF & TCF Canada prep", fr: "Préparation TEF et TCF Canada" },
+        pill_modes: { en: "In-person & online", fr: "En présentiel et en ligne" },
+
+        // Use existing flang.* and fexam.* keys for the level descriptions and CRS sections
+        // Page-specific narrowed differences:
+        why1_p_hub: { en: "Achieving NCLC 7 in French (TEF Canada B2) can add up to 50 CRS bonus points — a significant advantage in Canada's Express Entry immigration system.", fr: "Atteindre le NCLC 7 en français (TEF Canada B2) peut rapporter jusqu'à 50 points CRS supplémentaires — un avantage important dans le système Entrée express." },
+
+        // TEF section header (shared with #tef anchor)
+        tef_kicker: { en: "Exam Preparation", fr: "Préparation aux examens" },
+        tef_title: { en: "TEF Canada — Test d'Évaluation de Français", fr: "TEF Canada — Test d'Évaluation de Français" },
+        tef_p: { en: "TEF Canada is the official French language exam recognized by IRCC (Immigration, Refugees and Citizenship Canada) for Express Entry, Provincial Nominee Programs, and Canadian citizenship applications.", fr: "Le TEF Canada est l'examen officiel de français reconnu par IRCC (Immigration, Réfugiés et Citoyenneté Canada) pour Entrée express, les Programmes des candidats des provinces et les demandes de citoyenneté canadienne." },
+
+        tef_what_title: { en: "What TEF Canada Tests", fr: "Ce que le TEF Canada évalue" },
+        tef_what_p: { en: "TEF Canada assesses all four official IRCC language skills. Each component is scored and mapped to the NCLC (Niveaux de compétence linguistique canadiens) scale.", fr: "Le TEF Canada évalue les quatre compétences linguistiques officielles d'IRCC. Chaque épreuve est notée et alignée sur l'échelle NCLC (Niveaux de compétence linguistique canadiens)." },
+        tef_how_title: { en: "How MCC Prepares You", fr: "Comment MCC vous prépare" },
+        tef_how_p: { en: "Our TEF Canada preparation is targeted and exam-specific — not a general French class. Every session is built around the official exam format.", fr: "Notre préparation au TEF Canada est ciblée et propre à l'examen — pas un cours de français général. Chaque séance est conçue autour du format officiel." },
+        tef_how_li1: { en: "Full-length mock exams with real exam conditions", fr: "Examens blancs complets en conditions réelles" },
+        tef_how_li2: { en: "Targeted strategies for each of the four components", fr: "Stratégies ciblées pour chacune des quatre épreuves" },
+        tef_how_li3: { en: "Individualized feedback on writing and speaking", fr: "Retours individualisés sur l'écrit et l'oral" },
+        tef_how_li4: { en: "Score prediction and NCLC estimation", fr: "Prédiction de score et estimation NCLC" },
+        tef_how_li5: { en: "CRS simulation to model your immigration profile", fr: "Simulation CRS pour modéliser votre profil d'immigration" },
+        tef_how_li6: { en: "Taught by instructors familiar with official TEF format", fr: "Enseigné par des formateurs qui connaissent le format officiel du TEF" },
+        tef_how_li7: { en: "Available in small-group or private 1-on-1 formats", fr: "Disponible en petit groupe ou en privé en tête-à-tête" },
+        tef_how_li8: { en: "Flexible 10-hour packages — renew at any time, no fixed session lock-in", fr: "Forfaits flexibles de 10 heures — renouvelables à tout moment, sans engagement de session" },
+
+        tcf_title: { en: "TCF Canada — Test de Connaissance du Français", fr: "TCF Canada — Test de connaissance du français" },
+        tcf_p: { en: "TCF Canada is the second official French language exam recognized by IRCC. Like TEF Canada, it is accepted for Express Entry, PNPs, and Canadian citizenship applications. Both exams are equally valid — your choice depends on format preference and test availability.", fr: "Le TCF Canada est le second examen officiel de français reconnu par IRCC. Comme le TEF Canada, il est accepté pour Entrée express, les PCP et la citoyenneté. Les deux examens sont également valides — votre choix dépend du format et de la disponibilité." },
+        tcf_compare_title: { en: "TEF Canada vs TCF Canada", fr: "TEF Canada vs TCF Canada" },
+        tcf_compare_p: { en: "Both are accepted by IRCC with equal weight. The differences are in exam format and question style.", fr: "Les deux examens sont reconnus à parts égales par IRCC. Les différences concernent le format et le style des questions." },
+        diff_q_format: { en: "Question Format", fr: "Format des questions" },
+        diff_format_tef: { en: "Multiple choice + written", fr: "Choix multiples + écrit" },
+        diff_format_tcf: { en: "Adaptive + written", fr: "Adaptatif + écrit" },
+        tcf_how_title: { en: "TCF Canada Preparation at MCC", fr: "Préparation au TCF Canada à MCC" },
+        tcf_how_p: { en: "Our TCF Canada prep follows the same rigorous approach as our TEF prep — format-specific strategies, mock exams, and personalized feedback.", fr: "Notre préparation au TCF Canada suit la même approche rigoureuse que notre préparation au TEF — stratégies propres au format, examens blancs et retours personnalisés." },
+        tcf_how_li1: { en: "Full TCF Canada practice tests under timed conditions", fr: "Examens blancs complets de TCF Canada en conditions chronométrées" },
+        tcf_how_li2: { en: "Strategies for the adaptive listening and reading modules", fr: "Stratégies pour les modules adaptatifs d'écoute et de lecture" },
+        tcf_how_li3: { en: "Written production practice with examiner-style marking", fr: "Pratique de production écrite avec notation à la manière d'un examinateur" },
+        tcf_how_li4: { en: "Oral production coaching and scoring breakdown", fr: "Coaching de production orale et décomposition du score" },
+        tcf_how_li5: { en: "NCLC estimation and CRS point projection", fr: "Estimation NCLC et projection des points CRS" },
+        tcf_how_li6: { en: "Available in small-group or private 1-on-1 formats", fr: "Disponible en petit groupe ou en privé en tête-à-tête" },
+        tcf_how_li7: { en: "Flexible 10-hour packages — renew at any time", fr: "Forfaits flexibles de 10 heures — renouvelables à tout moment" },
+
+        nclc_kicker: { en: "Immigration Context", fr: "Contexte d'immigration" },
+        nclc_title: { en: "Understanding NCLC and CRS", fr: "Comprendre le NCLC et le CRS" },
+        nclc_path_title: { en: "Your Path at MCC", fr: "Votre parcours à MCC" },
+        nclc_path_p: { en: "Most students reach NCLC 7 (B2) after completing Niveau 3 and Niveau 4 of the regular program. The TEF or TCF preparation packages are then used to fine-tune exam performance and maximize your score.", fr: "La plupart des étudiants atteignent le NCLC 7 (B2) après les Niveaux 3 et 4 du programme régulier. Les forfaits de préparation au TEF ou au TCF servent ensuite à peaufiner la performance et à maximiser le score." },
+        nclc_path_li1: { en: "Niveau 1–2: Foundation for NCLC 4–5", fr: "Niveaux 1–2 : socle pour le NCLC 4–5" },
+        nclc_path_li2: { en: "Niveau 3: NCLC 5–6 range", fr: "Niveau 3 : tranche NCLC 5–6" },
+        nclc_path_li3: { en: "Niveau 4: NCLC 7+ target", fr: "Niveau 4 : cible NCLC 7+" },
+        nclc_path_li4: { en: "TEF/TCF Prep: Exam-specific score maximization", fr: "Préparation TEF/TCF : maximisation du score propre à l'examen" },
+
+        testimonials_kicker: { en: "Student Voices", fr: "Témoignages d'étudiants" },
+        testimonials_title: { en: "From first bonjour to Express Entry", fr: "Du premier bonjour à Entrée express" },
+        testimonials_p: { en: "International students share how MCC's French program opened immigration, academic, and career pathways in Canada.", fr: "Des étudiants internationaux racontent comment le programme de français de MCC leur a ouvert des voies d'immigration, d'études et de carrière au Canada." },
+
+        cta_kicker: { en: "Enroll Today", fr: "Inscrivez-vous dès aujourd'hui" },
+        cta_title: { en: "Start your French journey", fr: "Lancez votre parcours en français" },
+        cta_p: { en: "Speak with an advisor to discuss your immigration goals, current French level, and which combination of regular program and exam prep makes the most sense for your timeline.", fr: "Discutez avec un conseiller de vos objectifs d'immigration, de votre niveau actuel et de la combinaison de programme régulier et de préparation aux examens qui convient le mieux à votre échéancier." }
+    },
+
+    // Shared content for the TEF/TCF exam-prep pages
+    fexam: {
+        // Hero pills + CTAs (shared)
+        pill_career: { en: "Career-focused French", fr: "Français axé sur la carrière" },
+        pill_speaking: { en: "Real speaking confidence", fr: "Aisance réelle à l'oral" },
+        pill_personalized: { en: "Personalized study plan", fr: "Plan d'études personnalisé" },
+        cta_apply: { en: "Apply Now", fr: "Postuler maintenant" },
+
+        // Hero shared title/subtitle (the title is identical on both pages)
+        hero_title: { en: "More than a test — French for your future in Canada", fr: "Plus qu'un examen — le français pour votre avenir au Canada" },
+
+        // Program Promise (5 benefit cards — shared)
+        promise_kicker: { en: "The Program Promise", fr: "Notre engagement" },
+        promise_title: { en: "We do more than prepare you for a test", fr: "Nous faisons bien plus que vous préparer à un examen" },
+        b1_title: { en: "Career advantage", fr: "Avantage professionnel" },
+        b1_p: { en: "French opens access to bilingual workplaces, customer-facing roles, hospitality, education, business, government, and community-serving jobs across Canada.", fr: "Le français donne accès à des milieux de travail bilingues : service à la clientèle, hôtellerie, éducation, affaires, fonction publique et organismes communautaires à travers le Canada." },
+        b1_li1: { en: "Bilingual job markets", fr: "Marchés de l'emploi bilingues" },
+        b1_li2: { en: "Stronger resume signal", fr: "Un signal plus fort sur le CV" },
+        b1_li3: { en: "Federal & public-sector eligibility", fr: "Admissibilité au fédéral et au secteur public" },
+
+        b2_title: { en: "Academic & skill development", fr: "Développement académique et compétences" },
+        b2_li1: { en: "Grammar & vocabulary expansion", fr: "Élargissement du vocabulaire et de la grammaire" },
+        b2_li2: { en: "Reading and listening accuracy", fr: "Précision en lecture et en écoute" },
+        b2_li3: { en: "Writing structure & clarity", fr: "Structure et clarté à l'écrit" },
+
+        b3_title: { en: "Personal confidence & communication", fr: "Confiance personnelle et communication" },
+        b3_p: { en: "Practise real situations: interviews, professional conversations, travel, community life. Leave the program more confident speaking French than when you started.", fr: "Pratiquez des situations réelles : entretiens, échanges professionnels, voyages, vie communautaire. Vous quitterez le programme plus à l'aise à l'oral qu'à votre arrivée." },
+        b3_li1: { en: "Speaking under pressure", fr: "Parler sous pression" },
+        b3_li2: { en: "Pronunciation coaching", fr: "Coaching de prononciation" },
+        b3_li3: { en: "Workplace-ready expression", fr: "Expression prête pour le milieu de travail" },
+
+        b4_title: { en: "Immigration & citizenship support", fr: "Soutien à l'immigration et à la citoyenneté" },
+        b4_li1: { en: "IRCC-recognized exam", fr: "Examen reconnu par IRCC" },
+        b4_li2: { en: "NCLC score targeting", fr: "Cibles de score NCLC" },
+        b4_li3: { en: "One pathway among many", fr: "Une voie parmi d'autres" },
+
+        b5_title: { en: "Cultural & Canadian connection", fr: "Lien culturel et canadien" },
+        b5_p: { en: "French is one of Canada's two official languages. Learning it helps you connect more deeply with Canadian society, media, communities, and culture.", fr: "Le français est l'une des deux langues officielles du Canada. L'apprendre vous aide à mieux vous connecter à la société, aux médias, aux communautés et à la culture canadiennes." },
+        b5_li1: { en: "Bilingual Canadian identity", fr: "Identité canadienne bilingue" },
+        b5_li2: { en: "Quebec & Francophone communities", fr: "Communautés québécoise et francophones" },
+        b5_li3: { en: "Canadian media & arts access", fr: "Accès aux médias et aux arts canadiens" },
+
+        // Who this is for
+        who_kicker: { en: "Who this is for", fr: "À qui ce programme s'adresse" },
+        who_title: { en: "Five kinds of students. One supportive program.", fr: "Cinq profils d'étudiants. Un seul programme bienveillant." },
+        s1_title: { en: "Career-focused students", fr: "Étudiants axés sur la carrière" },
+        s1_p: { en: "You want better job opportunities. French strengthens your resume and helps you stand out in bilingual roles, hospitality, customer service, education, business, and community organizations.", fr: "Vous cherchez de meilleures occasions d'emploi. Le français renforce votre CV et vous distingue dans des rôles bilingues : hôtellerie, service à la clientèle, éducation, affaires et organismes communautaires." },
+        s2_title: { en: "Newcomers & international students", fr: "Nouveaux arrivants et étudiants internationaux" },
+        s2_p: { en: "You want to feel more confident in Canada. French helps you understand the country's bilingual identity and gives you another communication skill for future opportunities.", fr: "Vous voulez vous sentir plus à l'aise au Canada. Le français vous aide à comprendre l'identité bilingue du pays et vous donne une compétence de communication supplémentaire." },
+        s3_title: { en: "Academic students", fr: "Étudiants à visée académique" },
+        s4_title: { en: "Working professionals", fr: "Professionnels en activité" },
+        s4_p: { en: "You want to upgrade your professional profile. The program helps working adults build practical communication skills while preparing for recognized French language testing.", fr: "Vous souhaitez rehausser votre profil professionnel. Le programme aide les adultes en activité à bâtir des compétences de communication concrètes tout en préparant un examen officiel de français." },
+        s5_title: { en: "Immigration / citizenship students", fr: "Étudiants en démarche d'immigration ou de citoyenneté" },
+
+        // What you'll gain (table)
+        gain_kicker: { en: "What You'll Gain", fr: "Ce que vous y gagnerez" },
+        gain_title: { en: "Outcomes, not just classes", fr: "Des résultats, pas seulement des cours" },
+        gain_intro: { en: "Students complete the program with stronger French communication skills, better exam awareness, more speaking confidence, improved writing structure, and a clearer study plan. Here's how each program feature maps to a real student outcome.", fr: "Les étudiants terminent le programme avec une meilleure communication en français, une meilleure connaissance de l'examen, plus d'aisance à l'oral, une structure d'écriture améliorée et un plan d'études clair. Voici comment chaque élément du programme se traduit en résultat concret." },
+        gain_th_feature: { en: "Program feature", fr: "Élément du programme" },
+        gain_th_outcome: { en: "Student outcome", fr: "Résultat pour l'étudiant" },
+        gain_r1_f: { en: "Free level assessment", fr: "Évaluation de niveau gratuite" },
+        gain_r1_o: { en: "You know your starting point and the right entry into the program.", fr: "Vous connaissez votre point de départ et l'entrée idéale dans le programme." },
+        gain_r3_f: { en: "Speaking practice", fr: "Pratique de l'oral" },
+        gain_r3_o: { en: "You become more confident speaking French in real and high-pressure situations.", fr: "Vous prenez confiance à l'oral, en situations réelles et sous pression." },
+        gain_r4_f: { en: "Writing correction", fr: "Correction de l'écrit" },
+        gain_r4_o: { en: "You improve sentence structure, accuracy, and register for written tasks.", fr: "Vous améliorez la structure des phrases, la précision et le registre à l'écrit." },
+        gain_r6_f: { en: "Reading strategies", fr: "Stratégies de lecture" },
+        gain_r6_o: { en: "You manage exam time better and read with purpose, not panic.", fr: "Vous gérez mieux le temps d'examen et lisez avec méthode plutôt qu'en panique." },
+        gain_r7_f: { en: "Mock tests", fr: "Examens blancs" },
+        gain_r7_o: { en: "You practise under test-like conditions and arrive on exam day prepared.", fr: "Vous vous entraînez en conditions d'examen et arrivez préparé le jour J." },
+        gain_r8_f: { en: "Teacher feedback", fr: "Retour de l'enseignant" },
+        gain_r8_o: { en: "You understand exactly where you lose points and how to fix it.", fr: "Vous savez précisément où vous perdez des points et comment corriger." },
+        gain_r9_f: { en: "Progress tracking", fr: "Suivi des progrès" },
+        gain_r9_o: { en: "You see measurable improvement across each of the four skills.", fr: "Vous mesurez vos progrès dans chacune des quatre compétences." },
+        gain_r10_f: { en: "Career-focused French vocabulary", fr: "Vocabulaire de français axé sur la carrière" },
+        gain_r10_o: { en: "You leave with French you can use beyond the exam — in work, study, and daily life.", fr: "Vous repartez avec un français utile au-delà de l'examen — au travail, dans les études et au quotidien." },
+
+        // About the exam
+        about_kicker: { en: "About the Exam", fr: "À propos de l'examen" },
+        four_components_title: { en: "The Four Components", fr: "Les quatre épreuves" },
+        chip_listening: { en: "Compréhension de l'oral (Listening)", fr: "Compréhension de l'oral" },
+        chip_reading: { en: "Compréhension des écrits (Reading)", fr: "Compréhension des écrits" },
+        chip_writing: { en: "Expression écrite (Writing)", fr: "Expression écrite" },
+        chip_speaking: { en: "Expression orale (Speaking)", fr: "Expression orale" },
+        ircc_li1: { en: "Recognized by IRCC for permanent residence", fr: "Reconnu par IRCC pour la résidence permanente" },
+        ircc_li2: { en: "Required for Express Entry and PNP applications", fr: "Requis pour Entrée express et les demandes PCP" },
+        ircc_li3: { en: "Accepted for Canadian citizenship", fr: "Accepté pour la citoyenneté canadienne" },
+        ircc_li4: { en: "NCLC 7 = B2 level = up to 50 CRS bonus points", fr: "NCLC 7 = niveau B2 = jusqu'à 50 points CRS supplémentaires" },
+        ircc_li5: { en: "Results valid for 2 years from exam date", fr: "Résultats valides 2 ans à compter de la date de l'examen" },
+
+        // Comparison table
+        diff_compare_intro: { en: "Both TEF and TCF are accepted by IRCC with equal weight. The differences are in format and question style — choose the one that fits how you test best.", fr: "Le TEF et le TCF sont reconnus par IRCC à parts égales. Les différences résident dans le format et le type de questions — choisissez celui qui correspond le mieux à votre style d'examen." },
+        diff_listening: { en: "Listening", fr: "Écoute" },
+        diff_reading: { en: "Reading", fr: "Lecture" },
+        diff_writing: { en: "Writing", fr: "Écrit" },
+        diff_speaking: { en: "Speaking", fr: "Oral" },
+        diff_ircc: { en: "IRCC Accepted", fr: "Accepté par IRCC" },
+        diff_standard_mcq: { en: "Standard MCQ", fr: "QCM classique" },
+        diff_adaptive_mcq: { en: "Adaptive MCQ", fr: "QCM adaptatif" },
+        diff_2_writing: { en: "2 written tasks", fr: "2 productions écrites" },
+        diff_3_writing: { en: "3 written tasks", fr: "3 productions écrites" },
+        diff_15_min: { en: "15-min interview", fr: "Entretien de 15 min" },
+        diff_12_min: { en: "12-min interview", fr: "Entretien de 12 min" },
+
+        // Approach
+        approach_kicker: { en: "Our Approach", fr: "Notre approche" },
+        included_title: { en: "What's included", fr: "Ce qui est inclus" },
+
+        // Immigration block
+        imm_kicker: { en: "Immigration & Citizenship Pathways", fr: "Voies d'immigration et de citoyenneté" },
+        imm_title: { en: "If immigration is part of your goal", fr: "Si l'immigration fait partie de votre projet" },
+        nclc_title: { en: "What is NCLC?", fr: "Qu'est-ce que le NCLC ?" },
+        nclc_p: { en: "The Niveaux de compétence linguistique canadiens (NCLC) is Canada's official French language proficiency scale, running from NCLC 1 to NCLC 12. IRCC uses it to assess immigration applicants.", fr: "Les Niveaux de compétence linguistique canadiens (NCLC) constituent l'échelle officielle de français au Canada, de NCLC 1 à NCLC 12. IRCC les utilise pour évaluer les candidats à l'immigration." },
+        nclc_li1: { en: "NCLC 4–5 → A2 level (basic)", fr: "NCLC 4–5 → niveau A2 (élémentaire)" },
+        nclc_li2: { en: "NCLC 5–6 → B1 level (intermediate)", fr: "NCLC 5–6 → niveau B1 (intermédiaire)" },
+        nclc_li3: { en: "NCLC 7–8 → B2 level (advanced)", fr: "NCLC 7–8 → niveau B2 (avancé)" },
+        nclc_li4: { en: "NCLC 9–10 → C1 level (proficient)", fr: "NCLC 9–10 → niveau C1 (autonome)" },
+        crs_title: { en: "CRS Bonus Points", fr: "Points CRS supplémentaires" },
+        crs_p: { en: "Strong French proficiency under Express Entry earns additional Comprehensive Ranking System (CRS) points beyond your core skills score — meaningful in competitive draws.", fr: "Un bon niveau de français dans Entrée express octroie des points CRS supplémentaires au-delà des compétences de base — un atout dans les rondes les plus compétitives." },
+        crs_li1: { en: "NCLC 7+ in all 4 skills: up to 50 CRS points", fr: "NCLC 7+ dans les 4 compétences : jusqu'à 50 points CRS" },
+        crs_li2: { en: "NCLC 7+ in some skills: up to 25 CRS points", fr: "NCLC 7+ dans certaines compétences : jusqu'à 25 points CRS" },
+        crs_li3: { en: "French + English bilingual bonus applies separately", fr: "Le bonus bilingue (français + anglais) s'applique séparément" },
+
+        // Final CTA
+        final_kicker: { en: "Start When You're Ready", fr: "Commencez quand vous êtes prêt" },
+        final_title: { en: "French skills that open doors", fr: "Des compétences en français qui ouvrent des portes" },
+        final_p: { en: "Book a free French level assessment. We'll talk about your goals — career, study, communication, immigration, or all of the above — and map out the right combination of prep, mock testing, and practice for you.", fr: "Réservez une évaluation gratuite de votre niveau. Nous parlerons de vos objectifs — carrière, études, communication, immigration ou tout cela à la fois — et bâtirons la bonne combinaison de préparation, d'examens blancs et de pratique." },
+        final_btn_view_lang: { en: "View Regular French Program", fr: "Voir le programme régulier de français" }
+    },
+
+    // TEF-page-specific keys (subtitle, pill, prep details, exam name)
+    tef: {
+        breadcrumb_html: {
+            en: '<a href="programs.html" style="color:inherit;text-decoration:none;">Programs</a> / <a href="programs-french.html" style="color:inherit;text-decoration:none;">French Programs</a> / TEF Canada',
+            fr: '<a href="programs.html" style="color:inherit;text-decoration:none;">Programmes</a> / <a href="programs-french.html" style="color:inherit;text-decoration:none;">Programmes de français</a> / TEF Canada'
+        },
+        hero_subtitle: { en: "Our TEF Canada Preparation Program helps you build practical French skills for career, study, communication, and future opportunities in Canada — while preparing for the speaking, writing, listening, and reading tasks of the official TEF Canada exam. Improve your confidence, strengthen your resume, and open more doors.", fr: "Notre programme de préparation au TEF Canada vous aide à bâtir un français concret pour la carrière, les études, la communication et vos futures occasions au Canada — tout en préparant les épreuves d'expression, d'écrits, d'écoute et de lecture de l'examen officiel. Gagnez en confiance, renforcez votre CV et ouvrez davantage de portes." },
+        pill_format: { en: "TEF-style mock practice", fr: "Examens blancs au format TEF" },
+
+        promise_p: { en: "French is not only for immigration. French is a career advantage, a confidence builder, a study pathway, and a way to participate more fully in Canadian life. Our TEF Preparation Program gives you French skills you can use in real life — not just on exam day.", fr: "Le français n'est pas réservé à l'immigration. C'est un atout professionnel, une source de confiance, un chemin d'études et une façon de prendre part pleinement à la vie canadienne. Notre programme de préparation au TEF vous donne un français utile dans la vraie vie — pas seulement le jour de l'examen." },
+
+        b2_p: { en: "Build structured language habits across speaking, listening, reading, writing, and test strategy — the same skills that translate into academic success.", fr: "Bâtissez des habitudes linguistiques structurées en expression orale, écoute, lecture, écriture et stratégie d'examen — les mêmes compétences qui mènent à la réussite académique." },
+        b4_p: { en: "For students exploring immigration or citizenship, TEF Canada may be one accepted way to demonstrate French proficiency. We help you prepare with structured practice and feedback.", fr: "Pour les étudiants qui envisagent l'immigration ou la citoyenneté, le TEF Canada peut être une voie reconnue pour démontrer leur niveau de français. Nous vous aidons à vous y préparer avec une pratique structurée et des retours détaillés." },
+
+        who_p: { en: "Students join our TEF Preparation Program for very different reasons. The structure is the same, but the outcomes are personal — we help you reach your specific goal.", fr: "Les étudiants choisissent notre préparation au TEF pour des raisons très diverses. La structure est la même, mais les résultats sont personnels — nous vous aidons à atteindre votre objectif." },
+        s3_p: { en: "You want structured language improvement. The program builds grammar, vocabulary, reading comprehension, writing structure, listening accuracy, and speaking fluency through guided TEF-style practice.", fr: "Vous cherchez une progression linguistique structurée. Le programme renforce grammaire, vocabulaire, compréhension écrite, structure de l'écrit, précision de l'écoute et aisance à l'oral grâce à une pratique guidée au format TEF." },
+        s5_p: { en: "You're exploring immigration or citizenship pathways and want to demonstrate French proficiency. TEF Canada may be one accepted route — we help you prepare through structured practice.", fr: "Vous envisagez l'immigration ou la citoyenneté et souhaitez démontrer votre niveau de français. Le TEF Canada peut être une voie reconnue — nous vous y préparons avec une pratique structurée." },
+
+        gain_r2_f: { en: "TEF exam orientation", fr: "Orientation à l'examen TEF" },
+        gain_r2_o: { en: "You understand the test format, timing, and scoring before exam day.", fr: "Vous comprenez le format, le minutage et la notation avant le jour de l'examen." },
+        gain_r5_f: { en: "Listening training", fr: "Entraînement à l'écoute" },
+        gain_r5_o: { en: "You handle native-speed audio with better comprehension and stamina.", fr: "Vous gérez les enregistrements à vitesse native avec plus de compréhension et d'endurance." },
+
+        about_title: { en: "What TEF Canada tests", fr: "Ce qu'évalue le TEF Canada" },
+        about_p: { en: "TEF Canada assesses all four core language skills — the same skills that matter in real-world communication. Each component is scored and, for students pursuing immigration or citizenship pathways, mapped to the NCLC (Niveaux de compétence linguistique canadiens) scale.", fr: "Le TEF Canada évalue les quatre compétences linguistiques essentielles — celles qui comptent vraiment dans la communication. Chaque épreuve est notée et, pour les étudiants en démarche d'immigration ou de citoyenneté, alignée sur l'échelle NCLC (Niveaux de compétence linguistique canadiens)." },
+        about_format: { en: "TEF Canada uses a standardized multiple-choice format for listening and reading, plus separate written and oral production tasks.", fr: "Le TEF Canada utilise un format à choix multiples standardisé pour l'écoute et la lecture, avec des épreuves distinctes d'écriture et d'expression orale." },
+
+        diff_title: { en: "How TEF Canada Differs", fr: "Ce qui distingue le TEF Canada" },
+
+        approach_title: { en: "How MCC prepares you for TEF Canada", fr: "Comment MCC vous prépare au TEF Canada" },
+        approach_p: { en: "Our TEF Canada prep is targeted and exam-specific. Every session is built around the official format, the question types, and the score breakdown that determines your NCLC level.", fr: "Notre préparation au TEF Canada est ciblée et propre à l'examen. Chaque séance est conçue autour du format officiel, des types de questions et de la grille de notation qui détermine votre NCLC." },
+        included_li1: { en: "Full-length mock exams under timed conditions", fr: "Examens blancs complets en conditions chronométrées" },
+        included_li2: { en: "Targeted strategies for each of the four components", fr: "Stratégies ciblées pour chacune des quatre épreuves" },
+        included_li3: { en: "Individualized feedback on writing and speaking", fr: "Retours individualisés sur l'écrit et l'oral" },
+        included_li4: { en: "Score prediction and NCLC estimation", fr: "Prédiction de score et estimation NCLC" },
+        included_li5: { en: "CRS simulation to model your immigration profile", fr: "Simulation CRS pour modéliser votre profil d'immigration" },
+        included_li6: { en: "Taught by instructors familiar with official TEF format", fr: "Enseigné par des formateurs qui connaissent le format officiel du TEF" },
+        included_li7: { en: "Available in small-group or private 1-on-1 formats", fr: "Disponible en petit groupe ou en privé en tête-à-tête" },
+        included_li8: { en: "Flexible 10-hour packages — renew at any time, no fixed session lock-in", fr: "Forfaits flexibles de 10 heures — renouvelables à tout moment, sans engagement de session" },
+
+        imm_p: { en: "For students whose plans include Canadian immigration or citizenship, TEF Canada is one accepted way to demonstrate French proficiency. It's not the only reason to learn French — but if it's part of your goal, here's the context that matters.", fr: "Pour les étudiants dont le projet inclut l'immigration ou la citoyenneté canadienne, le TEF Canada est une voie reconnue pour démontrer leur niveau de français. Ce n'est pas la seule raison d'apprendre le français — mais si c'est dans vos plans, voici le contexte essentiel." }
+    },
+
+    // TCF-page-specific keys
+    tcf: {
+        breadcrumb_html: {
+            en: '<a href="programs.html" style="color:inherit;text-decoration:none;">Programs</a> / <a href="programs-french.html" style="color:inherit;text-decoration:none;">French Programs</a> / TCF Canada',
+            fr: '<a href="programs.html" style="color:inherit;text-decoration:none;">Programmes</a> / <a href="programs-french.html" style="color:inherit;text-decoration:none;">Programmes de français</a> / TCF Canada'
+        },
+        hero_subtitle: { en: "Our TCF Canada Preparation Program helps you build practical French skills for career, study, communication, and future opportunities in Canada — while preparing for the adaptive listening, reading, writing, and speaking tasks of the official TCF Canada exam. Improve your confidence, strengthen your resume, and open more doors.", fr: "Notre programme de préparation au TCF Canada vous aide à bâtir un français concret pour la carrière, les études, la communication et vos futures occasions au Canada — tout en préparant les épreuves adaptatives d'écoute, de lecture, d'écriture et d'expression orale de l'examen officiel. Gagnez en confiance, renforcez votre CV et ouvrez davantage de portes." },
+        pill_format: { en: "TCF adaptive practice", fr: "Pratique adaptative TCF" },
+
+        promise_p: { en: "French is not only for immigration. French is a career advantage, a confidence builder, a study pathway, and a way to participate more fully in Canadian life. Our TCF Preparation Program gives you French skills you can use in real life — not just on exam day.", fr: "Le français n'est pas réservé à l'immigration. C'est un atout professionnel, une source de confiance, un chemin d'études et une façon de prendre part pleinement à la vie canadienne. Notre programme de préparation au TCF vous donne un français utile dans la vraie vie — pas seulement le jour de l'examen." },
+
+        b2_p: { en: "Build structured language habits across speaking, listening, reading, writing, and adaptive test strategy — the same skills that translate into academic success.", fr: "Bâtissez des habitudes linguistiques structurées en expression orale, écoute, lecture, écriture et stratégie d'examen adaptatif — les mêmes compétences qui mènent à la réussite académique." },
+        b4_p: { en: "For students exploring immigration or citizenship, TCF Canada may be one accepted way to demonstrate French proficiency. We help you prepare with structured practice and feedback.", fr: "Pour les étudiants qui envisagent l'immigration ou la citoyenneté, le TCF Canada peut être une voie reconnue pour démontrer leur niveau de français. Nous vous aidons à vous y préparer avec une pratique structurée et des retours détaillés." },
+
+        who_p: { en: "Students join our TCF Preparation Program for very different reasons. The structure is the same, but the outcomes are personal — we help you reach your specific goal.", fr: "Les étudiants choisissent notre préparation au TCF pour des raisons très diverses. La structure est la même, mais les résultats sont personnels — nous vous aidons à atteindre votre objectif." },
+        s3_p: { en: "You want structured language improvement. The program builds grammar, vocabulary, reading comprehension, writing structure, listening accuracy, and speaking fluency through guided TCF-style practice.", fr: "Vous cherchez une progression linguistique structurée. Le programme renforce grammaire, vocabulaire, compréhension écrite, structure de l'écrit, précision de l'écoute et aisance à l'oral grâce à une pratique guidée au format TCF." },
+        s5_p: { en: "You're exploring immigration or citizenship pathways and want to demonstrate French proficiency. TCF Canada may be one accepted route — we help you prepare through structured practice.", fr: "Vous envisagez l'immigration ou la citoyenneté et souhaitez démontrer votre niveau de français. Le TCF Canada peut être une voie reconnue — nous vous y préparons avec une pratique structurée." },
+
+        gain_r2_f: { en: "TCF exam orientation", fr: "Orientation à l'examen TCF" },
+        gain_r2_o: { en: "You understand the adaptive format, timing, and scoring before exam day.", fr: "Vous comprenez le format adaptatif, le minutage et la notation avant le jour de l'examen." },
+        gain_r5_f: { en: "Listening training", fr: "Entraînement à l'écoute" },
+        gain_r5_o: { en: "You handle adaptive audio with better comprehension and stamina.", fr: "Vous gérez les enregistrements adaptatifs avec plus de compréhension et d'endurance." },
+
+        about_title: { en: "What TCF Canada tests", fr: "Ce qu'évalue le TCF Canada" },
+        about_p: { en: "TCF Canada assesses all four core language skills — the same skills that matter in real-world communication. Each component is scored and, for students pursuing immigration or citizenship pathways, mapped to the NCLC (Niveaux de compétence linguistique canadiens) scale.", fr: "Le TCF Canada évalue les quatre compétences linguistiques essentielles — celles qui comptent vraiment dans la communication. Chaque épreuve est notée et, pour les étudiants en démarche d'immigration ou de citoyenneté, alignée sur l'échelle NCLC (Niveaux de compétence linguistique canadiens)." },
+        about_format: { en: "TCF Canada uses an adaptive format for the listening and reading sections, plus separate written and oral production tasks.", fr: "Le TCF Canada utilise un format adaptatif pour les sections d'écoute et de lecture, avec des épreuves distinctes d'écriture et d'expression orale." },
+
+        diff_title: { en: "How TCF Canada Differs", fr: "Ce qui distingue le TCF Canada" },
+        diff_intro: { en: "Both TCF and TEF are accepted by IRCC with equal weight. The differences are in format and question style — choose the one that fits how you test best.", fr: "Le TCF et le TEF sont reconnus par IRCC à parts égales. Les différences résident dans le format et le type de questions — choisissez celui qui correspond le mieux à votre style d'examen." },
+
+        approach_title: { en: "How MCC prepares you for TCF Canada", fr: "Comment MCC vous prépare au TCF Canada" },
+        approach_p: { en: "Our TCF Canada prep is targeted and exam-specific — not a general French class. Every session is built around the official adaptive format and the score breakdown that determines your NCLC level.", fr: "Notre préparation au TCF Canada est ciblée et propre à l'examen — pas un cours de français général. Chaque séance est conçue autour du format adaptatif officiel et de la grille de notation qui détermine votre NCLC." },
+        included_li1: { en: "Full TCF Canada practice tests under timed conditions", fr: "Examens blancs complets de TCF Canada en conditions chronométrées" },
+        included_li2: { en: "Adaptive listening and reading strategy training", fr: "Stratégies ciblées pour les sections adaptatives d'écoute et de lecture" },
+        included_li3: { en: "Written production practice with examiner-style marking", fr: "Pratique de production écrite avec notation à la manière d'un examinateur" },
+        included_li4: { en: "Oral production coaching and scoring breakdown", fr: "Coaching de production orale et décomposition du score" },
+        included_li5: { en: "NCLC estimation and CRS point projection", fr: "Estimation NCLC et projection des points CRS" },
+        included_li6: { en: "Personalized feedback after every mock exam", fr: "Retours personnalisés après chaque examen blanc" },
+        included_li7: { en: "Available in small-group or private 1-on-1 formats", fr: "Disponible en petit groupe ou en privé en tête-à-tête" },
+        included_li8: { en: "Flexible 10-hour packages — renew at any time", fr: "Forfaits flexibles de 10 heures — renouvelables à tout moment" },
+
+        imm_p: { en: "For students whose plans include Canadian immigration or citizenship, TCF Canada is one accepted way to demonstrate French proficiency. It's not the only reason to learn French — but if it's part of your goal, here's the context that matters.", fr: "Pour les étudiants dont le projet inclut l'immigration ou la citoyenneté canadienne, le TCF Canada est une voie reconnue pour démontrer leur niveau de français. Ce n'est pas la seule raison d'apprendre le français — mais si c'est dans vos plans, voici le contexte essentiel." }
+    },
+
     flang: {
         breadcrumb_html: {
             en: '<a href="programs.html" style="color:inherit;text-decoration:none;">Programs</a> / <a href="programs-french.html" style="color:inherit;text-decoration:none;">French Programs</a> / French Language',
