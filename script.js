@@ -70,37 +70,51 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Typewriter Effect
-const words = ["Learning", "Growth", "Excellence", "Innovation", "Success"];
+// Typewriter Effect (language-aware; re-queries element so language swaps don't orphan it)
+const TYPEWRITER_WORDS = {
+    en: ["Learning", "Growth", "Excellence", "Innovation", "Success"],
+    fr: ["l'apprentissage", "la croissance", "l'excellence", "l'innovation", "la réussite"]
+};
+
 let wordIndex = 0;
-let charIndex = words[0].length;
+let charIndex = 0;
 let isDeleting = true;
-const typewriterElement = document.querySelector('.typewriter');
+
+function currentTypewriterLang() {
+    return (document.body && document.body.getAttribute('data-lang') === 'fr') ? 'fr' : 'en';
+}
 
 function type() {
-    if (!typewriterElement) return;
+    const el = document.querySelector('.typewriter');
+    if (!el) {
+        setTimeout(type, 500);
+        return;
+    }
 
-    const currentWord = words[wordIndex];
-    
+    const list = TYPEWRITER_WORDS[currentTypewriterLang()] || TYPEWRITER_WORDS.en;
+    const currentWord = list[wordIndex % list.length];
+
     if (isDeleting) {
         charIndex--;
     } else {
         charIndex++;
     }
-    
-    typewriterElement.textContent = currentWord.substring(0, charIndex);
-    
+    if (charIndex < 0) charIndex = 0;
+    if (charIndex > currentWord.length) charIndex = currentWord.length;
+
+    el.textContent = currentWord.substring(0, charIndex);
+
     let typeSpeed = isDeleting ? 40 : 100;
-    
+
     if (!isDeleting && charIndex === currentWord.length) {
         typeSpeed = 2000;
         isDeleting = true;
     } else if (isDeleting && charIndex === 0) {
         isDeleting = false;
-        wordIndex = (wordIndex + 1) % words.length;
+        wordIndex = (wordIndex + 1) % list.length;
         typeSpeed = 400;
     }
-    
+
     setTimeout(type, typeSpeed);
 }
 
@@ -646,47 +660,77 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ==========================================
-// Language Flip Toggle (EN / FR) + Google Translate
+// Language Flip Toggle (EN / FR) — native i18n
+// Translations live in translations.js (window.MCC_TRANSLATIONS)
 // ==========================================
 (function initLanguageToggle() {
-    const COOKIE = 'googtrans';
+    const STORAGE_KEY = 'mcc_lang';
 
     function readLang() {
-        const match = document.cookie.match(/(?:^|;\s*)googtrans=([^;]+)/);
-        if (!match) return 'en';
-        return decodeURIComponent(match[1]).endsWith('/fr') ? 'fr' : 'en';
+        const stored = (typeof localStorage !== 'undefined') ? localStorage.getItem(STORAGE_KEY) : null;
+        return stored === 'fr' ? 'fr' : 'en';
     }
 
-    function writeCookie(lang) {
-        const value = lang === 'fr' ? '/en/fr' : '/en/en';
-        const host = location.hostname;
-        // set for current path
-        document.cookie = `googtrans=${value};path=/`;
-        // set for host (and parent domain if applicable)
-        document.cookie = `googtrans=${value};path=/;domain=${host}`;
-        const parts = host.split('.');
-        if (parts.length > 2) {
-            document.cookie = `googtrans=${value};path=/;domain=.${parts.slice(-2).join('.')}`;
+    function writeLang(lang) {
+        try { localStorage.setItem(STORAGE_KEY, lang); } catch (_) { /* no-op */ }
+    }
+
+    function lookup(key) {
+        if (!window.MCC_TRANSLATIONS || !key) return null;
+        const parts = key.split('.');
+        let node = window.MCC_TRANSLATIONS;
+        for (const p of parts) {
+            if (!node || typeof node !== 'object') return null;
+            node = node[p];
         }
+        return (node && typeof node === 'object' && ('en' in node || 'fr' in node)) ? node : null;
     }
 
-    function clearCookie() {
-        const host = location.hostname;
-        const past = 'Thu, 01 Jan 1970 00:00:00 GMT';
-        document.cookie = `googtrans=;path=/;expires=${past}`;
-        document.cookie = `googtrans=;path=/;domain=${host};expires=${past}`;
-        const parts = host.split('.');
-        if (parts.length > 2) {
-            document.cookie = `googtrans=;path=/;domain=.${parts.slice(-2).join('.')};expires=${past}`;
-        }
+    function valueFor(entry, lang) {
+        if (!entry) return null;
+        if (lang === 'fr' && entry.fr != null) return entry.fr;
+        return entry.en != null ? entry.en : null;
     }
 
-    function buildToggle() {
+    const ATTR_KEYS = ['placeholder', 'alt', 'title', 'aria-label'];
+
+    function applyTranslations(lang) {
+        document.documentElement.setAttribute('lang', lang);
+        document.body.setAttribute('data-lang', lang);
+
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const v = valueFor(lookup(el.getAttribute('data-i18n')), lang);
+            if (v != null) el.textContent = v;
+        });
+
+        document.querySelectorAll('[data-i18n-html]').forEach(el => {
+            const v = valueFor(lookup(el.getAttribute('data-i18n-html')), lang);
+            if (v != null) el.innerHTML = v;
+        });
+
+        ATTR_KEYS.forEach(attr => {
+            const selector = `[data-i18n-${attr}]`;
+            document.querySelectorAll(selector).forEach(el => {
+                const v = valueFor(lookup(el.getAttribute(`data-i18n-${attr}`)), lang);
+                if (v != null) el.setAttribute(attr, v);
+            });
+        });
+
+        // Update toggle button visual state
+        document.querySelectorAll('.lang-flip-toggle').forEach(btn => {
+            btn.setAttribute('data-lang', lang);
+        });
+    }
+
+    function buildToggle(lang) {
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'lang-flip-toggle';
-        btn.setAttribute('aria-label', 'Toggle language between English and French');
-        btn.setAttribute('title', 'Switch language / Changer de langue');
+        btn.setAttribute('data-lang', lang);
+        const ariaEntry = lookup('lang_toggle.aria');
+        const titleEntry = lookup('lang_toggle.title');
+        btn.setAttribute('aria-label', valueFor(ariaEntry, lang) || 'Toggle language');
+        btn.setAttribute('title', valueFor(titleEntry, lang) || 'Switch language');
         btn.innerHTML = `
             <span class="lang-thumb" aria-hidden="true"></span>
             <span class="lang-label" data-lang-code="en">EN</span>
@@ -695,57 +739,26 @@ document.addEventListener('DOMContentLoaded', () => {
         return btn;
     }
 
-    function injectGoogleTranslate() {
-        if (document.getElementById('google_translate_element')) return;
-        const container = document.createElement('div');
-        container.id = 'google_translate_element';
-        document.body.appendChild(container);
-
-        window.googleTranslateElementInit = function () {
-            // eslint-disable-next-line no-undef
-            new google.translate.TranslateElement({
-                pageLanguage: 'en',
-                includedLanguages: 'en,fr',
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-                autoDisplay: false
-            }, 'google_translate_element');
-        };
-
-        const script = document.createElement('script');
-        script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-        script.async = true;
-        document.body.appendChild(script);
-    }
-
-    function applyLang(lang) {
-        if (lang === 'fr') {
-            writeCookie('fr');
-        } else {
-            clearCookie();
-        }
-        // Reload so Google Translate's frame re-runs against the fresh cookie.
-        // This is the most reliable approach across all pages.
-        location.reload();
-    }
-
     document.addEventListener('DOMContentLoaded', () => {
         const host = document.querySelector('.portal-logins');
         if (!host) return;
 
-        const btn = buildToggle();
         const current = readLang();
-        btn.setAttribute('data-lang', current);
-
-        // Place as the first item so it's visually prominent
+        const btn = buildToggle(current);
         host.insertBefore(btn, host.firstChild);
+
+        // Apply current language on load
+        applyTranslations(current);
 
         btn.addEventListener('click', () => {
             const next = btn.getAttribute('data-lang') === 'fr' ? 'en' : 'fr';
             btn.classList.add('is-flipping');
             btn.setAttribute('data-lang', next);
-            setTimeout(() => applyLang(next), 260);
+            writeLang(next);
+            setTimeout(() => {
+                applyTranslations(next);
+                btn.classList.remove('is-flipping');
+            }, 260);
         });
-
-        injectGoogleTranslate();
     });
 })();
