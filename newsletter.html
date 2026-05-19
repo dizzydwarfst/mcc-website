@@ -7,7 +7,7 @@
     <title>Newsletter Archive - Metropolitan Community College</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
     <header class="solid-header sticky">
@@ -134,9 +134,10 @@
                         <span class="section-kicker">Why this archive matters</span>
                         <h2 class="section-title" style="margin-bottom:1rem;">Future students should be able to see what is actually happening at MCC</h2>
                         <p class="section-copy">This page helps turn the newsletter into a stronger recruitment and community tool by surfacing real movement: launches, support initiatives, deadlines, and stories from across the college.</p>
-                        <form class="subscribe-bar" onsubmit="event.preventDefault(); alert('Subscribed successfully!');">
+                        <form id="newsletter-subscribe" class="subscribe-bar">
                             <input type="email" placeholder="Enter your email address..." required>
                             <button type="submit" class="btn-solid-gold">Subscribe</button>
+                            <span class="subscribe-feedback" aria-live="polite" style="display:none; margin-top:0.75rem; color:var(--accent-teal); font-weight:600;">Subscribed successfully!</span>
                         </form>
                     </div>
                 </article>

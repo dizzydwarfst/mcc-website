@@ -469,6 +469,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
+    // Contact Form (client-side preview submit)
+    // ==========================================
+    const contactForm = document.getElementById('contact-form');
+    const contactSuccess = document.getElementById('contact-success');
+    if (contactForm && contactSuccess) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            contactForm.style.display = 'none';
+            contactSuccess.style.display = 'block';
+        });
+    }
+
+    // ==========================================
+    // Newsletter Subscribe Bar (client-side preview submit)
+    // ==========================================
+    const subscribeForm = document.getElementById('newsletter-subscribe');
+    if (subscribeForm) {
+        subscribeForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const feedback = subscribeForm.querySelector('.subscribe-feedback');
+            const emailInput = subscribeForm.querySelector('input[type="email"]');
+            if (feedback) feedback.style.display = 'block';
+            if (emailInput) emailInput.value = '';
+        });
+    }
+
+    // ==========================================
     // Form Wizard Logic (4 steps)
     // ==========================================
     const wizardForm = document.getElementById('wizard-form');
