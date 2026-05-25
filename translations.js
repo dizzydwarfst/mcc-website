@@ -67,10 +67,6 @@ window.MCC_TRANSLATIONS = {
         btn_continue: { en: "Continue", fr: "Continuer" },
 
         // Footer
-        footer_brand_blurb: {
-            en: "Metropolitan Community College helps future students move from curiosity to career-ready confidence with practical programs and student-first support in Vancouver.",
-            fr: "Le Metropolitan Community College accompagne les futurs étudiants de la curiosité jusqu'à la confiance professionnelle, avec des programmes pratiques et un soutien centré sur l'étudiant à Vancouver."
-        },
         footer_quick_links: { en: "Quick Links", fr: "Liens rapides" },
         footer_explore: { en: "Explore MCC", fr: "Explorer MCC" },
         footer_contact_heading: { en: "Contact Us", fr: "Nous contacter" },

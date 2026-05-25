@@ -199,14 +199,9 @@ h1, h2, h3, h4 {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 76px;
-    height: 76px;
-    flex: 0 0 76px;
-    padding: 8px;
-    border-radius: 50%;
-    background: #ffffff;
-    border: 1px solid rgba(212, 175, 55, 0.45);
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+    width: 82px;
+    height: 102px;
+    flex: 0 0 82px;
 }
 
 .mcc-logo img {
@@ -214,12 +209,13 @@ h1, h2, h3, h4 {
     height: 100%;
     display: block;
     object-fit: contain;
+    filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.28));
 }
 
 .mcc-logo.large {
-    width: 128px;
-    height: 128px;
-    flex-basis: 128px;
+    width: 132px;
+    height: 165px;
+    flex-basis: 132px;
 }
 
 .logo-text {
@@ -740,6 +736,19 @@ h1, h2, h3, h4 {
     color: var(--text-muted);
     margin-top: 0.5rem;
     margin-bottom: 2rem;
+}
+
+.footer-brand-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+}
+
+.footer-logo-text {
+    display: inline-block;
+    font-size: 1.02rem;
+    line-height: 1.35;
 }
 
 .social-links {
@@ -4106,9 +4115,10 @@ textarea {
 }
 
 .footer-grid {
-    grid-template-columns: 1.4fr 1fr 1fr 1.1fr;
-    gap: 2rem;
+    grid-template-columns: 1.35fr 1fr 1fr 1.35fr;
+    gap: 2.5rem;
     max-width: 1200px;
+    align-items: start;
 }
 
 .footer-brand p,
@@ -4118,8 +4128,9 @@ textarea {
     color: #b4c0ba;
 }
 
-.footer-brand .mcc-logo {
-    font-size: 2.8rem;
+.footer-brand {
+    display: flex;
+    align-items: flex-start;
 }
 
 .footer-links h4,
@@ -4138,7 +4149,19 @@ textarea {
 }
 
 .footer-contact p {
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: 1.2rem minmax(0, 1fr);
+    align-items: start;
+    gap: 0.75rem;
+    line-height: 1.6;
+    text-align: left;
+}
+
+.footer-contact i {
+    width: 1.2rem;
+    min-width: 1.2rem;
+    margin-top: 0.2rem;
+    text-align: center;
 }
 
 .footer-contact strong {
@@ -4265,6 +4288,26 @@ textarea {
     .conversion-grid,
     .footer-grid {
         grid-template-columns: 1fr;
+    }
+
+    .footer-brand {
+        justify-content: center;
+    }
+
+    .footer-brand-logo {
+        flex-direction: column;
+        gap: 0.75rem;
+        text-align: center;
+    }
+
+    .footer-contact p {
+        max-width: 22rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .footer-bottom {
+        text-align: center;
     }
 
     .proof-item {
