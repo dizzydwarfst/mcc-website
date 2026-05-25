@@ -199,10 +199,10 @@ h1, h2, h3, h4 {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 66px;
-    height: 66px;
-    flex: 0 0 66px;
-    padding: 7px;
+    width: 76px;
+    height: 76px;
+    flex: 0 0 76px;
+    padding: 8px;
     border-radius: 50%;
     background: #ffffff;
     border: 1px solid rgba(212, 175, 55, 0.45);
@@ -217,9 +217,9 @@ h1, h2, h3, h4 {
 }
 
 .mcc-logo.large {
-    width: 112px;
-    height: 112px;
-    flex-basis: 112px;
+    width: 128px;
+    height: 128px;
+    flex-basis: 128px;
 }
 
 .logo-text {

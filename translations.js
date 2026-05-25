@@ -101,7 +101,7 @@ window.MCC_TRANSLATIONS = {
         hero_cta_find: { en: "Find Your Program", fr: "Trouvez votre programme" },
         hero_cta_apply: { en: "Apply Now", fr: "Postuler maintenant" },
         hero_proof_apps: { en: "Fall 2026 applications open", fr: "Candidatures ouvertes pour l'automne 2026" },
-        hero_proof_accred: { en: "<img class=\"accreditation-logo\" src=\"assets/ptib-designated.svg\" alt=\"PTIB Designated logo\"><img class=\"accreditation-logo\" src=\"assets/eqa-logo.svg\" alt=\"BC EQA logo\"> PTIB accredited and BC EQA designated", fr: "<img class=\"accreditation-logo\" src=\"assets/ptib-designated.svg\" alt=\"Logo PTIB désigné\"><img class=\"accreditation-logo\" src=\"assets/eqa-logo.svg\" alt=\"Logo BC EQA\"> Accrédité PTIB et désigné BC EQA" },
+        hero_proof_accred: { en: "<img class=\"accreditation-logo\" src=\"assets/ptib-designated.jpg\" alt=\"PTIB Designated logo\"><img class=\"accreditation-logo\" src=\"assets/eqa-logo.png\" alt=\"BC EQA logo\"> PTIB accredited and BC EQA designated", fr: "<img class=\"accreditation-logo\" src=\"assets/ptib-designated.jpg\" alt=\"Logo PTIB désigné\"><img class=\"accreditation-logo\" src=\"assets/eqa-logo.png\" alt=\"Logo BC EQA\"> Accrédité PTIB et désigné BC EQA" },
         hero_proof_intl: { en: "International student support available", fr: "Soutien aux étudiants internationaux disponible" },
         hero_note_strong: { en: "Why students choose MCC", fr: "Pourquoi les étudiants choisissent MCC" },
         hero_note_p: {
