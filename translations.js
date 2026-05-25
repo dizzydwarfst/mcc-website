@@ -75,7 +75,7 @@ window.MCC_TRANSLATIONS = {
         footer_explore: { en: "Explore MCC", fr: "Explorer MCC" },
         footer_contact_heading: { en: "Contact Us", fr: "Nous contacter" },
         footer_news_newsletter: { en: "News & Newsletter", fr: "Actualités et bulletin" },
-        footer_address: { en: "Water Street, Vancouver, BC", fr: "Water Street, Vancouver, C.-B." },
+        footer_address: { en: "322 Water St #100, Vancouver, BC V6B 1B6", fr: "322 Water St #100, Vancouver, C.-B. V6B 1B6" },
         footer_hours: { en: "Monday - Friday, 9:00 AM - 5:00 PM PST", fr: "Du lundi au vendredi, de 9 h à 17 h (HNP)" },
         footer_copyright: { en: "© 2026 Metropolitan Community College. All rights reserved.", fr: "© 2026 Metropolitan Community College. Tous droits réservés." },
         footer_microcredentials: { en: "Microcredentials", fr: "Microcertificats" },
@@ -84,7 +84,7 @@ window.MCC_TRANSLATIONS = {
         footer_french_language: { en: "French Language", fr: "Langue française" },
         footer_about_mcc: { en: "About MCC", fr: "À propos de MCC" },
         footer_contact_us_link: { en: "Contact Us", fr: "Nous contacter" },
-        footer_address_line: { en: "Water Street, Vancouver, BC", fr: "Water Street, Vancouver, C.-B." }
+        footer_address_line: { en: "322 Water St #100, Vancouver, BC V6B 1B6", fr: "322 Water St #100, Vancouver, C.-B. V6B 1B6" }
     },
 
     home: {
@@ -101,7 +101,7 @@ window.MCC_TRANSLATIONS = {
         hero_cta_find: { en: "Find Your Program", fr: "Trouvez votre programme" },
         hero_cta_apply: { en: "Apply Now", fr: "Postuler maintenant" },
         hero_proof_apps: { en: "Fall 2026 applications open", fr: "Candidatures ouvertes pour l'automne 2026" },
-        hero_proof_accred: { en: "PTIB accredited and BC EQA designated", fr: "Accrédité PTIB et désigné BC EQA" },
+        hero_proof_accred: { en: "<img class=\"accreditation-logo\" src=\"assets/ptib-designated.svg\" alt=\"PTIB Designated logo\"><img class=\"accreditation-logo\" src=\"assets/eqa-logo.svg\" alt=\"BC EQA logo\"> PTIB accredited and BC EQA designated", fr: "<img class=\"accreditation-logo\" src=\"assets/ptib-designated.svg\" alt=\"Logo PTIB désigné\"><img class=\"accreditation-logo\" src=\"assets/eqa-logo.svg\" alt=\"Logo BC EQA\"> Accrédité PTIB et désigné BC EQA" },
         hero_proof_intl: { en: "International student support available", fr: "Soutien aux étudiants internationaux disponible" },
         hero_note_strong: { en: "Why students choose MCC", fr: "Pourquoi les étudiants choisissent MCC" },
         hero_note_p: {
@@ -850,7 +850,7 @@ window.MCC_TRANSLATIONS = {
 
         campus_kicker: { en: "Our Campus", fr: "Notre campus" },
         campus_title: { en: "A downtown Vancouver learning environment with city access built in", fr: "Un environnement d'apprentissage au centre-ville de Vancouver, ouvert sur la ville" },
-        campus_p: { en: "Located on Water Street, MCC places students close to transit, culture, and the pace of city life. The campus setting supports both local and international students who want a connected Vancouver experience.", fr: "Situé sur Water Street, MCC place les étudiants à proximité des transports, de la culture et du rythme de la ville. Le campus convient autant aux étudiants locaux qu'internationaux qui souhaitent une expérience de Vancouver bien connectée." },
+        campus_p: { en: "Located at 322 Water St #100, Vancouver, BC V6B 1B6, MCC places students close to transit, culture, and the pace of city life. The campus setting supports both local and international students who want a connected Vancouver experience.", fr: "Situé au 322 Water St #100, Vancouver, C.-B. V6B 1B6, MCC place les étudiants à proximité des transports, de la culture et du rythme de la ville. Le campus convient autant aux étudiants locaux qu'internationaux qui souhaitent une expérience de Vancouver bien connectée." },
         campus_btn_contact: { en: "Contact MCC", fr: "Contacter MCC" },
         campus_btn_programs: { en: "Explore Programs", fr: "Explorer les programmes" }
     },
