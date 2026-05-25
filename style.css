@@ -199,9 +199,14 @@ h1, h2, h3, h4 {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 58px;
-    height: 58px;
-    flex: 0 0 58px;
+    width: 66px;
+    height: 66px;
+    flex: 0 0 66px;
+    padding: 7px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid rgba(212, 175, 55, 0.45);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
 }
 
 .mcc-logo img {
@@ -212,9 +217,9 @@ h1, h2, h3, h4 {
 }
 
 .mcc-logo.large {
-    width: 96px;
-    height: 96px;
-    flex-basis: 96px;
+    width: 112px;
+    height: 112px;
+    flex-basis: 112px;
 }
 
 .logo-text {
@@ -3327,6 +3332,32 @@ textarea {
     object-fit: contain;
     border-radius: 50%;
     background: #fff;
+}
+
+.credential-card {
+    display: grid;
+    grid-template-columns: 78px minmax(0, 1fr);
+    gap: 1.25rem;
+    align-items: start;
+}
+
+.credential-logo-badge {
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+    background: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px;
+    border: 1px solid rgba(6, 43, 26, 0.08);
+    box-shadow: 0 12px 24px rgba(7, 23, 16, 0.08);
+}
+
+.credential-logo-badge img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .hero-note-card,
