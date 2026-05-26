@@ -1,20 +1,11 @@
 {
+  "cleanUrls": true,
+  "trailingSlash": false,
   "redirects": [
     {
       "source": "/apply-admissions",
       "destination": "/apply-for-admissions",
       "permanent": true
-    },
-    {
-      "source": "/apply-admissions.html",
-      "destination": "/apply-for-admissions",
-      "permanent": true
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/apply-for-admissions",
-      "destination": "/apply-for-admissions.html"
     }
   ]
 }
