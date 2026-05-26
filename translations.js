@@ -895,6 +895,7 @@ window.MCC_TRANSLATIONS = {
         f_success_p: { en: "We will get back to you shortly.", fr: "Nous vous répondrons rapidement." },
 
         visit_title: { en: "Visit our campus", fr: "Visitez notre campus" },
+        visit_note: { en: "MCC is located in Vancouver's Gastown area. Appointments are recommended for admissions or advising visits so the right team member is available for you.", fr: "MCC est situé dans le quartier Gastown de Vancouver. Les rendez-vous sont recommandés pour les visites liées aux admissions ou aux conseils afin que la bonne personne soit disponible pour vous." },
         visit_btn: { en: "Get Directions", fr: "Obtenir l'itinéraire" },
 
         faq_title: { en: "Frequently Asked Questions", fr: "Questions fréquentes" },
