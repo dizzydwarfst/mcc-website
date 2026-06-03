@@ -915,12 +915,12 @@ window.MCC_TRANSLATIONS = {
         // Hero
         hero_eyebrow: { en: "Apply for Admissions", fr: "Postuler aux admissions" },
         hero_title: { en: "Start your journey today — in four guided steps", fr: "Commencez votre parcours aujourd'hui — en quatre étapes guidées" },
-        hero_subtitle: { en: "Tell us about yourself, your agency (if any), and the program you want to study. Each step is simple, and we'll guide you through — no documents to upload now.", fr: "Parlez-nous de vous, de votre agence (le cas échéant) et du programme qui vous intéresse. Chaque étape est simple, et nous vous accompagnons — aucun document à téléverser pour l'instant." },
+        hero_subtitle: { en: "Tell us about yourself, your agency (if any), the program you want to study, and upload your documents. Each step is simple, and we'll guide you through.", fr: "Parlez-nous de vous, de votre agence (le cas échéant), du programme qui vous intéresse et téléversez vos documents. Chaque étape est simple, et nous vous accompagnons." },
         pill_four_step: { en: "Four-step application", fr: "Candidature en quatre étapes" },
         pill_secure: { en: "Secure submission", fr: "Soumission sécurisée" },
         pill_advisor: { en: "Advisor support available", fr: "Soutien d'un conseiller disponible" },
         before_strong: { en: "Before you begin", fr: "Avant de commencer" },
-        before_p: { en: "You only need your personal, program, and (if applicable) agency details to complete this form. Our admissions team will reach out afterward to collect your documents securely.", fr: "Vous n'avez besoin que de vos renseignements personnels, du programme et (le cas échéant) des coordonnées de l'agence pour remplir ce formulaire. Notre équipe des admissions vous contactera ensuite pour recueillir vos documents en toute sécurité." },
+        before_p: { en: "Have your passport, study permit (if applicable), academic transcripts, and English-test results ready as PDF or image files (max 15 MB each).", fr: "Préparez votre passeport, votre permis d'études (le cas échéant), vos relevés de notes et vos résultats de tests d'anglais en format PDF ou image (max. 15 Mo chacun)." },
 
         // Sidebar
         sidebar_kicker: { en: "Application Guide", fr: "Guide de candidature" },
@@ -932,14 +932,14 @@ window.MCC_TRANSLATIONS = {
         sidebar_p2_p: { en: "If an agent is applying on your behalf, share their details. Skip if not.", fr: "Si un agent postule en votre nom, indiquez ses coordonnées. Sinon, passez à l'étape suivante." },
         sidebar_p3_strong: { en: "Step 3 — Program of choice", fr: "Étape 3 — Programme choisi" },
         sidebar_p3_p: { en: "Pick your program, intended semester, campus, and attendance mode.", fr: "Choisissez votre programme, la session souhaitée, le campus et le mode de présence." },
-        sidebar_p4_strong: { en: "Step 4 — Declaration", fr: "Étape 4 — Déclaration" },
-        sidebar_p4_p: { en: "Sign and agree to the policies. We'll collect your documents afterward.", fr: "Signez et acceptez les politiques. Nous recueillerons vos documents par la suite." },
+        sidebar_p4_strong: { en: "Step 4 — Upload documents", fr: "Étape 4 — Téléverser les documents" },
+        sidebar_p4_p: { en: "Passport, study permit, transcripts, English results, then sign and submit.", fr: "Passeport, permis d'études, relevés de notes, résultats d'anglais, puis signez et soumettez." },
 
         // Step indicators
         step_personal: { en: "Personal Info", fr: "Renseignements" },
         step_agency: { en: "Agency", fr: "Agence" },
         step_program: { en: "Program", fr: "Programme" },
-        step_documents: { en: "Declaration", fr: "Déclaration" },
+        step_documents: { en: "Documents", fr: "Documents" },
 
         // Step 1
         s1_title: { en: "Step 1 — Student's Personal Information", fr: "Étape 1 — Renseignements personnels de l'étudiant" },
@@ -1008,9 +1008,13 @@ window.MCC_TRANSLATIONS = {
         s3_pathway_undecided: { en: "Not decided yet", fr: "Pas encore décidé" },
 
         // Step 4
-        s4_title: { en: "Step 4 — Declaration", fr: "Étape 4 — Déclaration" },
-        s4_docs_notice_strong: { en: "Documents — next step", fr: "Documents — prochaine étape" },
-        s4_docs_notice_p: { en: "After you submit, our admissions team will contact you to securely collect your supporting documents (passport, study permit, transcripts, language test results, etc.). You don't need to upload anything here.", fr: "Après votre soumission, notre équipe des admissions vous contactera pour recueillir en toute sécurité vos documents justificatifs (passeport, permis d'études, relevés de notes, résultats des tests de langue, etc.). Vous n'avez rien à téléverser ici." },
+        s4_title: { en: "Step 4 — Upload Documents", fr: "Étape 4 — Téléverser les documents" },
+        s4_intro: { en: "Attach any documents you have ready. You can also submit now and send the rest later — our admissions team will follow up on anything missing.", fr: "Joignez les documents que vous avez sous la main. Vous pouvez aussi soumettre maintenant et envoyer le reste plus tard — notre équipe des admissions assurera le suivi des documents manquants." },
+        s4_passport: { en: "Passport", fr: "Passeport" },
+        s4_study_permit: { en: "Study Permit", fr: "Permis d'études" },
+        s4_transcripts: { en: "Academic Transcripts", fr: "Relevés de notes" },
+        s4_english_results: { en: "English Test Results", fr: "Résultats de test d'anglais" },
+        s4_doc_hint: { en: "PDF, JPG, or PNG · max 15 MB", fr: "PDF, JPG ou PNG · max. 15 Mo" },
         s4_signature: { en: "Your Signature", fr: "Votre signature" },
         s4_signature_ph: { en: "Type your full legal name as your signature", fr: "Saisissez votre nom légal complet en guise de signature" },
         s4_signature_help: { en: "Typing your full legal name above acts as your electronic signature.", fr: "Saisir votre nom légal complet ci-dessus tient lieu de signature électronique." },

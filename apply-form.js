@@ -1,8 +1,9 @@
 /**
  * MCC Apply-for-Admissions form handler.
  * Posts structured application data to the LMS Admissions API
- * (POST {API_BASE}/applications). Documents are deferred (no uploads here);
- * the admissions team collects them after submission.
+ * (POST {API_BASE}/applications). Supporting documents (optional) are presigned
+ * via POST {API_BASE}/applications/document-upload, uploaded with a raw PUT
+ * straight to R2, then referenced in the application's documents[] array.
  *
  * Loaded with `defer`, so it registers its submit listener before the wizard
  * code in script.js runs (on DOMContentLoaded). It then calls
@@ -15,6 +16,18 @@
 (function () {
   // Single source of truth for the API base. No other hardcoded URLs.
   const API_BASE = 'https://lms-system-backend-lake.vercel.app/api';
+
+  // Document uploads. Values below MUST match the backend's DocTypeLiteral /
+  // DocContentTypeLiteral (confirmed against the live lms-system backend).
+  const ALLOWED_CONTENT_TYPES = ['application/pdf', 'image/jpeg', 'image/png'];
+  const MAX_BYTES = 15 * 1024 * 1024; // client-side guard; presign max_bytes is authoritative
+
+  const DOC_FIELDS = [
+    { docType: 'passport',        label: 'Passport',             inputId: 'doc-passport' },
+    { docType: 'study_permit',    label: 'Study Permit',         inputId: 'doc-study-permit' },
+    { docType: 'transcripts',     label: 'Academic Transcripts', inputId: 'doc-transcripts' },
+    { docType: 'english_results', label: 'English Test Results', inputId: 'doc-english-results' },
+  ];
 
   const ready = (fn) => (document.readyState !== 'loading')
     ? fn()
@@ -50,9 +63,25 @@
 
       const payload = buildPayload(form);
 
+      // Step 1: upload any attached documents first. Optional this commit — an
+      // empty documents[] submits fine; the server only HEAD-checks when non-empty.
+      clearError(form);
+      clearDocErrors();
+      let documents = [];
+      try {
+        setBtn('<i class="fas fa-spinner fa-spin"></i> Uploading documents…', true);
+        documents = await collectDocuments();
+      } catch (e) {
+        console.error('[MCC apply] document upload failed', e);
+        if (e && e.field) showDocError(e.field, e.message);
+        showError(form, (e && e.message) || 'We couldn’t upload your documents. Please try again.');
+        setBtn(originalHTML, false);
+        return; // do not submit a partial application silently
+      }
+      payload.documents = documents;
+
       try {
         setBtn('<i class="fas fa-spinner fa-spin"></i> Submitting…', true);
-        clearError(form);
 
         const res = await fetch(API_BASE + '/applications', {
           method: 'POST',
@@ -103,6 +132,84 @@
 
   function isUsingAgency() {
     return radio('using_agency') === 'yes';
+  }
+
+  // ── Document uploads ──
+
+  function validateFile(file) {
+    if (!ALLOWED_CONTENT_TYPES.includes(file.type)) return 'Must be a PDF, JPG, or PNG.';
+    if (file.size < 1) return 'File looks empty.';
+    if (file.size > MAX_BYTES) return 'Must be 15 MB or smaller.';
+    return null;
+  }
+
+  // presign -> raw PUT to R2 -> resolve to the documents[] entry for this file.
+  async function uploadDocument(docType, file) {
+    // 1) Presign. Body keys are EXACTLY these — the backend model is extra="forbid".
+    //    company_website is the honeypot; pass the live form value (empty for humans).
+    const presignRes = await fetch(API_BASE + '/applications/document-upload', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        doc_type: docType,
+        filename: file.name,
+        content_type: file.type,
+        company_website: val('company_website'),
+      }),
+    });
+    if (!presignRes.ok) throw new Error(`Could not prepare upload (${presignRes.status})`);
+    const { url, method, headers, max_bytes, key } = await presignRes.json();
+
+    if (max_bytes && file.size > max_bytes) throw new Error('File exceeds the server limit.');
+
+    // 2) Raw PUT straight to R2 — body is the File itself, signed headers verbatim.
+    //    Do NOT use FormData/JSON and do NOT override Content-Type, or the signature breaks.
+    const putRes = await fetch(url, { method, headers, body: file });
+    if (!putRes.ok) throw new Error(`Upload failed (${putRes.status})`);
+
+    // 3) documents[] entry — EXACTLY these 5 keys (extra="forbid").
+    return {
+      doc_type: docType,
+      key,
+      filename: file.name,
+      content_type: file.type,
+      size: file.size,
+    };
+  }
+
+  // Validates + uploads every attached file in order. Throws { field, message }
+  // on the first problem so the error attributes cleanly to one field.
+  async function collectDocuments() {
+    const documents = [];
+    for (const f of DOC_FIELDS) {
+      const file = document.getElementById(f.inputId)?.files?.[0];
+      if (!file) continue; // optional this commit
+      const err = validateFile(file);
+      if (err) throw { field: f.docType, message: `${f.label}: ${err}` };
+      documents.push(await uploadDocument(f.docType, file)); // sequential = clean attribution
+    }
+    return documents;
+  }
+
+  function showDocError(docType, message) {
+    const field = DOC_FIELDS.find((f) => f.docType === docType);
+    if (!field) return;
+    const slot = document.getElementById(field.inputId + '-error');
+    if (slot) {
+      slot.textContent = message;
+      const group = slot.closest('.form-group');
+      if (group) group.classList.add('has-error');
+    }
+  }
+
+  function clearDocErrors() {
+    for (const f of DOC_FIELDS) {
+      const slot = document.getElementById(f.inputId + '-error');
+      if (!slot) continue;
+      slot.textContent = '';
+      const group = slot.closest('.form-group');
+      if (group) group.classList.remove('has-error');
+    }
   }
 
   function buildPayload(form) {

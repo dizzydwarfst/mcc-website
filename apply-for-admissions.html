@@ -111,7 +111,7 @@
                 <div>
                     <span class="page-eyebrow" data-i18n="apply.hero_eyebrow">Apply for Admissions</span>
                     <h1 class="page-hero-title" data-i18n="apply.hero_title">Start your journey today &mdash; in four guided steps</h1>
-                    <p class="page-hero-subtitle" data-i18n="apply.hero_subtitle">Tell us about yourself, your agency (if any), and the program you want to study. Each step is simple, and we'll guide you through &mdash; no documents to upload now.</p>
+                    <p class="page-hero-subtitle" data-i18n="apply.hero_subtitle">Tell us about yourself, your agency (if any), the program you want to study, and upload your documents. Each step is simple, and we'll guide you through.</p>
                     <div class="page-stat-list">
                         <span class="page-stat-pill"><i class="fas fa-user-edit"></i> <span data-i18n="apply.pill_four_step">Four-step application</span></span>
                         <span class="page-stat-pill"><i class="fas fa-shield-alt"></i> <span data-i18n="apply.pill_secure">Secure submission</span></span>
@@ -119,7 +119,7 @@
                     </div>
                     <div class="page-highlight-card">
                         <strong data-i18n="apply.before_strong">Before you begin</strong>
-                        <p data-i18n="apply.before_p">You only need your personal, program, and (if applicable) agency details to complete this form. Our admissions team will reach out afterward to collect your documents securely.</p>
+                        <p data-i18n="apply.before_p">Have your passport, study permit (if applicable), academic transcripts, and English-test results ready as PDF or image files (max 15&nbsp;MB each).</p>
                     </div>
                 </div>
                 <div class="page-hero-media">
@@ -148,8 +148,8 @@
                             <p data-i18n="apply.sidebar_p3_p">Pick your program, intended semester, campus, and attendance mode.</p>
                         </div>
                         <div class="sidebar-panel">
-                            <strong data-i18n="apply.sidebar_p4_strong">Step 4 &mdash; Declaration</strong>
-                            <p data-i18n="apply.sidebar_p4_p">Sign and agree to the policies. We'll collect your documents afterward.</p>
+                            <strong data-i18n="apply.sidebar_p4_strong">Step 4 &mdash; Upload documents</strong>
+                            <p data-i18n="apply.sidebar_p4_p">Passport, study permit, transcripts, English results, then sign and submit.</p>
                         </div>
                     </div>
                 </aside>
@@ -174,7 +174,7 @@
                             </div>
                             <div class="step-indicator" data-indicator="4">
                                 <div class="step-circle">4</div>
-                                <div class="step-label" data-i18n="apply.step_documents">Declaration</div>
+                                <div class="step-label" data-i18n="apply.step_documents">Documents</div>
                             </div>
                         </div>
 
@@ -493,11 +493,37 @@
 
                             <!-- STEP 4: Declaration (document collection deferred) -->
                             <div class="form-step" data-step="4">
-                                <h3 class="form-section-title" data-i18n="apply.s4_title">Step 4 &mdash; Declaration</h3>
+                                <h3 class="form-section-title" data-i18n="apply.s4_title">Step 4 &mdash; Upload Documents</h3>
+                                <p style="color:var(--text-medium);margin-bottom:1.5rem;font-size:0.95rem;" data-i18n="apply.s4_intro">Attach any documents you have ready. You can also submit now and send the rest later &mdash; our admissions team will follow up on anything missing.</p>
 
-                                <div class="page-highlight-card" style="margin-bottom:2rem;">
-                                    <strong><i class="fas fa-folder-open" style="margin-right:8px;color:var(--accent-gold);"></i> <span data-i18n="apply.s4_docs_notice_strong">Documents &mdash; next step</span></strong>
-                                    <p data-i18n="apply.s4_docs_notice_p">After you submit, our admissions team will contact you to securely collect your supporting documents (passport, study permit, transcripts, language test results, etc.). You don't need to upload anything here.</p>
+                                <div class="form-grid-2">
+                                    <div class="form-group">
+                                        <label for="doc-passport" data-i18n="apply.s4_passport">Passport</label>
+                                        <input type="file" name="doc_passport" id="doc-passport" accept="application/pdf,image/jpeg,image/png">
+                                        <small style="color:var(--text-medium);font-size:0.82rem;" data-i18n="apply.s4_doc_hint">PDF, JPG, or PNG &middot; max 15&nbsp;MB</small>
+                                        <span class="error-msg" id="doc-passport-error"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="doc-study-permit" data-i18n="apply.s4_study_permit">Study Permit</label>
+                                        <input type="file" name="doc_study_permit" id="doc-study-permit" accept="application/pdf,image/jpeg,image/png">
+                                        <small style="color:var(--text-medium);font-size:0.82rem;" data-i18n="apply.s4_doc_hint">PDF, JPG, or PNG &middot; max 15&nbsp;MB</small>
+                                        <span class="error-msg" id="doc-study-permit-error"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-grid-2">
+                                    <div class="form-group">
+                                        <label for="doc-transcripts" data-i18n="apply.s4_transcripts">Academic Transcripts</label>
+                                        <input type="file" name="doc_transcripts" id="doc-transcripts" accept="application/pdf,image/jpeg,image/png">
+                                        <small style="color:var(--text-medium);font-size:0.82rem;" data-i18n="apply.s4_doc_hint">PDF, JPG, or PNG &middot; max 15&nbsp;MB</small>
+                                        <span class="error-msg" id="doc-transcripts-error"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="doc-english-results" data-i18n="apply.s4_english_results">English Test Results</label>
+                                        <input type="file" name="doc_english_results" id="doc-english-results" accept="application/pdf,image/jpeg,image/png">
+                                        <small style="color:var(--text-medium);font-size:0.82rem;" data-i18n="apply.s4_doc_hint">PDF, JPG, or PNG &middot; max 15&nbsp;MB</small>
+                                        <span class="error-msg" id="doc-english-results-error"></span>
+                                    </div>
                                 </div>
 
                                 <div class="form-group" style="margin-top:2rem;">
