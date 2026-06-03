@@ -228,6 +228,32 @@ h1, h2, h3, h4 {
     color: var(--crisp-white);
 }
 
+/* Wordmark equal-width block: stretch the shorter lines with extra tracking so
+   every line's left AND right edges align. Font-size/letterforms are unchanged
+   (no scaleX) and the crest image is untouched. Values are in em so they scale
+   with the responsive font-size; tune the three vars if edges drift. */
+.logo-line {
+    display: block;
+    white-space: nowrap;
+}
+/* Header (2 lines): widen METROPOLITAN to match the wider COMMUNITY COLLEGE.
+   The negative margin-right cancels the trailing tracking after the last glyph
+   so the box hugs the visible text (keeps edges true when centered on mobile). */
+.logo-link .logo-line-1 {
+    letter-spacing: var(--wm-header-top, 0.46em);
+    margin-right: calc(-1 * var(--wm-header-top, 0.46em));
+}
+/* Footer (3 lines): widen COMMUNITY and COLLEGE up to METROPOLITAN's width
+   (COLLEGE is shortest, so it needs the most). */
+.footer-logo-text .logo-line-2 {
+    letter-spacing: var(--wm-footer-mid, 0.28em);
+    margin-right: calc(-1 * var(--wm-footer-mid, 0.28em));
+}
+.footer-logo-text .logo-line-3 {
+    letter-spacing: var(--wm-footer-bottom, 0.66em);
+    margin-right: calc(-1 * var(--wm-footer-bottom, 0.66em));
+}
+
 .nav-chevron {
     font-size: 0.8em;
     margin-left: 5px;
