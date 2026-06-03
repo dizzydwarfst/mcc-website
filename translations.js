@@ -1009,12 +1009,13 @@ window.MCC_TRANSLATIONS = {
 
         // Step 4
         s4_title: { en: "Step 4 — Upload Documents", fr: "Étape 4 — Téléverser les documents" },
-        s4_intro: { en: "Attach any documents you have ready. You can also submit now and send the rest later — our admissions team will follow up on anything missing.", fr: "Joignez les documents que vous avez sous la main. Vous pouvez aussi soumettre maintenant et envoyer le reste plus tard — notre équipe des admissions assurera le suivi des documents manquants." },
+        s4_intro: { en: "Your passport and academic transcripts are required. Upload your study permit and English test results too if you have them. PDF or image files, max 15 MB each.", fr: "Votre passeport et vos relevés de notes sont obligatoires. Téléversez aussi votre permis d'études et vos résultats de test d'anglais si vous les avez. Fichiers PDF ou image, max. 15 Mo chacun." },
         s4_passport: { en: "Passport", fr: "Passeport" },
         s4_study_permit: { en: "Study Permit", fr: "Permis d'études" },
         s4_transcripts: { en: "Academic Transcripts", fr: "Relevés de notes" },
         s4_english_results: { en: "English Test Results", fr: "Résultats de test d'anglais" },
         s4_doc_hint: { en: "PDF, JPG, or PNG · max 15 MB", fr: "PDF, JPG ou PNG · max. 15 Mo" },
+        s4_optional_hint: { en: "(optional — upload if you have it)", fr: "(facultatif — téléversez si vous l'avez)" },
         s4_signature: { en: "Your Signature", fr: "Votre signature" },
         s4_signature_ph: { en: "Type your full legal name as your signature", fr: "Saisissez votre nom légal complet en guise de signature" },
         s4_signature_help: { en: "Typing your full legal name above acts as your electronic signature.", fr: "Saisir votre nom légal complet ci-dessus tient lieu de signature électronique." },

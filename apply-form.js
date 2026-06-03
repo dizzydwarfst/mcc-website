@@ -23,10 +23,10 @@
   const MAX_BYTES = 15 * 1024 * 1024; // client-side guard; presign max_bytes is authoritative
 
   const DOC_FIELDS = [
-    { docType: 'passport',        label: 'Passport',             inputId: 'doc-passport' },
-    { docType: 'study_permit',    label: 'Study Permit',         inputId: 'doc-study-permit' },
-    { docType: 'transcripts',     label: 'Academic Transcripts', inputId: 'doc-transcripts' },
-    { docType: 'english_results', label: 'English Test Results', inputId: 'doc-english-results' },
+    { docType: 'passport',        label: 'Passport',             inputId: 'doc-passport',         required: true },
+    { docType: 'study_permit',    label: 'Study Permit',         inputId: 'doc-study-permit',     required: false },
+    { docType: 'transcripts',     label: 'Academic Transcripts', inputId: 'doc-transcripts',      required: true },
+    { docType: 'english_results', label: 'English Test Results', inputId: 'doc-english-results',  required: false },
   ];
 
   const ready = (fn) => (document.readyState !== 'loading')
@@ -63,10 +63,20 @@
 
       const payload = buildPayload(form);
 
-      // Step 1: upload any attached documents first. Optional this commit — an
-      // empty documents[] submits fine; the server only HEAD-checks when non-empty.
+      // Required documents must be attached before we upload or submit anything.
       clearError(form);
       clearDocErrors();
+      const missingDocs = DOC_FIELDS.filter(
+        (f) => f.required && !document.getElementById(f.inputId)?.files?.[0]
+      );
+      if (missingDocs.length) {
+        missingDocs.forEach((f) => showDocError(f.docType, `${f.label} is required.`));
+        showError(form, 'Please attach the required documents before submitting.');
+        return;
+      }
+
+      // Upload attached documents. Required fields are guaranteed present above;
+      // optional ones are skipped when empty (and type/size-checked when attached).
       let documents = [];
       try {
         setBtn('<i class="fas fa-spinner fa-spin"></i> Uploading documents…', true);
@@ -183,7 +193,7 @@
     const documents = [];
     for (const f of DOC_FIELDS) {
       const file = document.getElementById(f.inputId)?.files?.[0];
-      if (!file) continue; // optional this commit
+      if (!file) continue; // optional fields are skipped when empty
       const err = validateFile(file);
       if (err) throw { field: f.docType, message: `${f.label}: ${err}` };
       documents.push(await uploadDocument(f.docType, file)); // sequential = clean attribution
