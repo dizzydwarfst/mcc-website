@@ -25,7 +25,7 @@ window.MCC_TRANSLATIONS = {
         nav_program_caregiver_infant: { en: "Caregiver — Infant", fr: "Aide-soignant·e — Petite enfance" },
         nav_program_video: { en: "Video & Content Creation", fr: "Vidéo et création de contenu" },
         nav_program_business: { en: "Business Communication", fr: "Communication d'affaires" },
-        nav_esl: { en: "English (ESL) Programs", fr: "Programmes d'anglais (ALS)" },
+        nav_esl: { en: "English as a Second Language (ESL) Programs", fr: "Programmes d'Anglais Langue Seconde (ALS)" },
         nav_french: { en: "French Programs", fr: "Programmes de français" },
         nav_french_language: { en: "French as a Second Language (FSL)", fr: "Français langue seconde (FLS)" },
         nav_french_tcf: { en: "Test Preparation (TCF & TEF)", fr: "Préparation aux tests (TCF et TEF)" },
@@ -76,7 +76,7 @@ window.MCC_TRANSLATIONS = {
         footer_copyright: { en: "© 2026 Metropolitan Community College. All rights reserved.", fr: "© 2026 Metropolitan Community College. Tous droits réservés." },
         footer_microcredentials: { en: "Microcredentials", fr: "Microcertificats" },
         footer_diploma: { en: "Diploma Programs", fr: "Programmes de diplôme" },
-        footer_esl: { en: "English (ESL)", fr: "Anglais (ALS)" },
+        footer_esl: { en: "English as a Second Language (ESL)", fr: "Anglais Langue Seconde (ALS)" },
         footer_french_language: { en: "French Language", fr: "Langue française" },
         footer_about_mcc: { en: "About MCC", fr: "À propos de MCC" },
         footer_contact_us_link: { en: "Contact Us", fr: "Nous contacter" },
@@ -257,8 +257,8 @@ window.MCC_TRANSLATIONS = {
     // ESL programs (programs-esl.html) — hero + overview + 6 levels
     esl: {
         breadcrumb_html: {
-            en: '<a href="programs.html" style="color:inherit;text-decoration:none;">Programs</a> / English (ESL)',
-            fr: '<a href="programs.html" style="color:inherit;text-decoration:none;">Programmes</a> / Anglais (ALS)'
+            en: '<a href="programs.html" style="color:inherit;text-decoration:none;">Programs</a> / English as a Second Language (ESL)',
+            fr: '<a href="programs.html" style="color:inherit;text-decoration:none;">Programmes</a> / Anglais Langue Seconde (ALS)'
         },
         hero_title: { en: "English language training designed for life and work in Canada", fr: "Une formation en anglais conçue pour la vie et le travail au Canada" },
         hero_subtitle: { en: "Six progressive CEFR-aligned levels — from first steps in English through near-native fluency. Build reading, writing, listening, and speaking skills with a structured, outcome-focused program.", fr: "Six niveaux progressifs alignés sur le CECR — des premiers pas en anglais jusqu'à une maîtrise presque native. Développez la lecture, l'écriture, l'écoute et l'oral grâce à un programme structuré, axé sur les résultats." },
@@ -344,7 +344,7 @@ window.MCC_TRANSLATIONS = {
         cat1_li4: { en: "International student support", fr: "Soutien aux étudiants internationaux" },
         cat1_link: { en: "Explore Diploma Programs", fr: "Voir les programmes de diplôme" },
 
-        cat2_title: { en: "English Language (ESL)", fr: "Anglais langue seconde (ALS)" },
+        cat2_title: { en: "English as a Second Language (ESL)", fr: "Anglais Langue Seconde (ALS)" },
         cat2_p: { en: "Six progressive CEFR-aligned levels from absolute beginner through advanced. Build reading, writing, listening, and speaking skills for academic, professional, and everyday life in Canada.", fr: "Six niveaux progressifs alignés sur le CECR, du grand débutant à l'avancé. Développez la lecture, l'écriture, l'écoute et l'oral pour la vie universitaire, professionnelle et quotidienne au Canada." },
         cat2_li1: { en: "6 levels: A1 through C1", fr: "6 niveaux : du A1 au C1" },
         cat2_li2: { en: "Free placement test included", fr: "Test de placement gratuit inclus" },
