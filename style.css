@@ -5273,3 +5273,217 @@ font[style*="background-color"] { background: transparent !important; }
     .lang-flip-toggle { --flip-w: 66px; --flip-h: 28px; }
     .lang-flip-toggle .lang-label { font-size: 0.68rem; }
 }
+
+/* ===========================================================
+   FRENCH PROGRAM — shared cards
+   (previously defined inline on programs-french.html; moved
+   here so the FSL and Test Preparation pages render correctly)
+   =========================================================== */
+.french-level-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+.french-cefr-tag {
+    background: var(--accent-gold);
+    color: #041b10;
+    font-weight: 800;
+    font-size: 0.78rem;
+    padding: 0.22rem 0.6rem;
+    border-radius: 8px;
+    letter-spacing: 0.05em;
+}
+.french-level-name {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-medium);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+.exam-prep-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 18px 50px rgba(8, 22, 18, 0.08);
+    border-top: 4px solid var(--accent-gold);
+}
+.exam-prep-card h3 {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+.exam-prep-card .exam-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-medium);
+    margin-bottom: 1.25rem;
+}
+.skills-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+.skill-chip {
+    background: rgba(8, 22, 18, 0.06);
+    border-radius: 20px;
+    padding: 0.3rem 0.85rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+.regular-program-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 2rem 2.25rem;
+    box-shadow: 0 18px 50px rgba(8, 22, 18, 0.08);
+}
+
+/* ===========================================================
+   FRENCH LEVELS DIAGRAM
+   A responsive, stepped pathway from beginner (A1) to the
+   optional expert add-on (B2 / NCLC 7).
+   =========================================================== */
+.french-levels-diagram {
+    max-width: 1120px;
+    margin: 2.5rem auto 0;
+    padding: 0 5%;
+}
+.fld-track {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: stretch;
+}
+.fld-step {
+    position: relative;
+    flex: 1 1 200px;
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 1.6rem 1.4rem;
+    box-shadow: 0 18px 50px rgba(8, 22, 18, 0.08);
+    border-top: 4px solid #cbd6d0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+.fld-step .fld-cefr {
+    align-self: flex-start;
+    background: var(--deep-green);
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 0.95rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 10px;
+    letter-spacing: 0.04em;
+}
+.fld-step .fld-level {
+    font-size: 1.18rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    line-height: 1.2;
+}
+.fld-step .fld-nclc {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: var(--accent-teal);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+.fld-step .fld-desc {
+    font-size: 0.85rem;
+    color: var(--text-medium);
+    line-height: 1.55;
+}
+.fld-step .fld-meta {
+    margin-top: auto;
+    font-size: 0.76rem;
+    font-weight: 800;
+    color: var(--text-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding-top: 0.7rem;
+    border-top: 1px solid #eef2f0;
+}
+/* connector arrow between steps (horizontal layout) */
+.fld-step:not(:last-child)::after {
+    content: "\f061"; /* fa-arrow-right */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    right: -1.18rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent-gold);
+    font-size: 1.05rem;
+    z-index: 2;
+}
+/* highlighted optional add-on step */
+.fld-step.fld-addon {
+    border-top-color: var(--accent-gold);
+    background: linear-gradient(180deg, #fdf6e3 0%, #ffffff 55%);
+}
+.fld-step.fld-addon .fld-cefr {
+    background: var(--accent-gold);
+    color: #041b10;
+}
+.fld-addon-tag {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: rgba(212, 175, 55, 0.18);
+    color: #7a5c00;
+    font-size: 0.68rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.22rem 0.6rem;
+    border-radius: 999px;
+}
+@media (max-width: 860px) {
+    .fld-step:not(:last-child)::after {
+        content: "\f063"; /* fa-arrow-down */
+        right: 50%;
+        top: auto;
+        bottom: -1.18rem;
+        transform: translateX(50%);
+    }
+}
+
+/* ===========================================================
+   COMPLIANCE / PTIB DISCLAIMER
+   =========================================================== */
+.compliance-disclaimer {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 1.1rem 1.5rem;
+    display: flex;
+    gap: 0.85rem;
+    align-items: flex-start;
+    background: #f4f7f5;
+    border: 1px solid #e0e8e4;
+    border-left: 4px solid var(--accent-gold);
+    border-radius: 12px;
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: var(--text-medium);
+}
+.compliance-disclaimer i {
+    color: var(--accent-gold);
+    font-size: 1rem;
+    margin-top: 0.15rem;
+    flex-shrink: 0;
+}
+.compliance-disclaimer strong {
+    color: var(--text-dark);
+}
+.compliance-disclaimer a {
+    color: var(--deep-green);
+    font-weight: 700;
+    text-decoration: underline;
+}
+.compliance-disclaimer a:hover {
+    color: var(--accent-teal);
+}
