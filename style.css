@@ -2292,6 +2292,12 @@ body.nav-open {
     display: block;
 }
 
+.portal-feedback.error {
+    background: rgba(239, 68, 68, 0.08);
+    border-color: rgba(239, 68, 68, 0.22);
+    color: #991b1b;
+}
+
 .portal-modal-close {
     position: absolute;
     top: 1rem;

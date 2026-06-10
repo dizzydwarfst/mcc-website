@@ -328,49 +328,53 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="portal-modal-shell" role="dialog" aria-modal="true" aria-labelledby="portal-modal-title">
                 <button type="button" class="portal-modal-close" aria-label="Close login panel">&times;</button>
                 <div class="portal-modal-intro">
-                    <span class="portal-modal-kicker">Portal Access Preview</span>
+                    <span class="portal-modal-kicker">MCC Portal</span>
                     <h2 id="portal-modal-title">MCC Portal Login</h2>
-                    <p>Choose LMS or CRM access below. The live systems are still being connected, but both login panels are ready to preview right now.</p>
+                    <p>Sign in to the MCC Portal. Choose your role to continue to the secure portal sign-in.</p>
                     <div class="portal-switcher" role="tablist" aria-label="Portal selection">
-                        <button type="button" class="portal-tab active" data-portal="student" role="tab" aria-selected="true">Student LMS</button>
-                        <button type="button" class="portal-tab" data-portal="staff" role="tab" aria-selected="false">Staff CRM</button>
+                        <button type="button" class="portal-tab active" data-portal="student" role="tab" aria-selected="true">Student</button>
+                        <button type="button" class="portal-tab" data-portal="teacher" role="tab" aria-selected="false">Teacher</button>
+                        <button type="button" class="portal-tab" data-portal="admin" role="tab" aria-selected="false">Admin</button>
                     </div>
                 </div>
                 <div class="portal-modal-body">
                     <section class="portal-panel active" data-portal-panel="student">
                         <span class="portal-panel-label">Student Access</span>
-                        <h3>Student LMS Login</h3>
-                        <p>Preview the student sign-in experience for courses, grades, schedules, and campus resources.</p>
+                        <h3>Student sign-in</h3>
+                        <p>Enter your email to continue to the secure portal sign-in.</p>
                         <form class="portal-login-form" data-portal-form="student">
                             <label>
-                                Student Email or ID
-                                <input type="text" name="student-identity" placeholder="student@mcc.edu" required>
+                                Email
+                                <input type="email" name="student-email" placeholder="student@example.com" autocomplete="email" required>
                             </label>
-                            <label>
-                                Password
-                                <input type="password" name="student-password" placeholder="Password" required>
-                            </label>
-                            <button type="submit" class="btn-solid-gold">Sign In to LMS</button>
+                            <button type="submit" class="btn-solid-gold">Continue</button>
                         </form>
-                        <p class="portal-panel-note">Live LMS authentication will be connected in a future update.</p>
                         <div class="portal-feedback" aria-live="polite"></div>
                     </section>
-                    <section class="portal-panel" data-portal-panel="staff">
-                        <span class="portal-panel-label">Staff Access</span>
-                        <h3>Staff CRM Login</h3>
-                        <p>Preview the staff sign-in experience for admissions workflows, student records, and follow-up activity.</p>
-                        <form class="portal-login-form" data-portal-form="staff">
+                    <section class="portal-panel" data-portal-panel="teacher">
+                        <span class="portal-panel-label">Teacher Access</span>
+                        <h3>Teacher sign-in</h3>
+                        <p>Enter your email to continue to the secure portal sign-in.</p>
+                        <form class="portal-login-form" data-portal-form="teacher">
                             <label>
-                                Staff Email or ID
-                                <input type="text" name="staff-identity" placeholder="staff@mcc.edu" required>
+                                Email
+                                <input type="email" name="teacher-email" placeholder="teacher@example.com" autocomplete="email" required>
                             </label>
-                            <label>
-                                Password
-                                <input type="password" name="staff-password" placeholder="Password" required>
-                            </label>
-                            <button type="submit" class="btn-solid-gold">Sign In to CRM</button>
+                            <button type="submit" class="btn-solid-gold">Continue</button>
                         </form>
-                        <p class="portal-panel-note">Live CRM authentication will be connected in a future update.</p>
+                        <div class="portal-feedback" aria-live="polite"></div>
+                    </section>
+                    <section class="portal-panel" data-portal-panel="admin">
+                        <span class="portal-panel-label">Admin Access</span>
+                        <h3>Admin sign-in</h3>
+                        <p>Enter your email to continue to the secure portal sign-in.</p>
+                        <form class="portal-login-form" data-portal-form="admin">
+                            <label>
+                                Email
+                                <input type="email" name="admin-email" placeholder="admin@example.com" autocomplete="email" required>
+                            </label>
+                            <button type="submit" class="btn-solid-gold">Continue</button>
+                        </form>
                         <div class="portal-feedback" aria-live="polite"></div>
                     </section>
                 </div>
@@ -383,31 +387,49 @@ document.addEventListener('DOMContentLoaded', () => {
         const portalForms = portalModal.querySelectorAll('.portal-login-form');
         const portalCloseBtn = portalModal.querySelector('.portal-modal-close');
 
+        const portalLoginUrl = 'https://portal.metropolitancollege.ca/login';
+        const validPortalRoles = ['student', 'teacher', 'admin'];
+        const normalizePortalRole = (portalType) => {
+            if (validPortalRoles.includes(portalType)) return portalType;
+            if (portalType === 'staff' || portalType === 'crm') return 'admin';
+            return 'student';
+        };
+
+        const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
         const setActivePortal = (portalType) => {
+            const activePortalType = normalizePortalRole(portalType);
+
             portalTabs.forEach(tab => {
-                const isActive = tab.getAttribute('data-portal') === portalType;
+                const isActive = tab.getAttribute('data-portal') === activePortalType;
                 tab.classList.toggle('active', isActive);
                 tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
             });
 
             portalPanels.forEach(panel => {
-                const isActive = panel.getAttribute('data-portal-panel') === portalType;
+                const isActive = panel.getAttribute('data-portal-panel') === activePortalType;
                 panel.classList.toggle('active', isActive);
             });
+
+            return activePortalType;
         };
 
         const openPortalModal = (portalType) => {
-            setActivePortal(portalType);
+            const activePortalType = setActivePortal(portalType);
             portalForms.forEach(form => form.reset());
+            portalModal.querySelectorAll('.portal-login-form input').forEach(input => {
+                input.classList.remove('error-state');
+                input.removeAttribute('aria-invalid');
+            });
             portalModal.querySelectorAll('.portal-feedback').forEach(feedback => {
                 feedback.textContent = '';
-                feedback.classList.remove('active');
+                feedback.classList.remove('active', 'error');
             });
             portalModal.classList.add('active');
             portalModal.setAttribute('aria-hidden', 'false');
             document.body.classList.add('portal-modal-open');
 
-            const firstInput = portalModal.querySelector(`.portal-panel[data-portal-panel="${portalType}"] input`);
+            const firstInput = portalModal.querySelector(`.portal-panel[data-portal-panel="${activePortalType}"] input`);
             if (firstInput) {
                 firstInput.focus();
             }
@@ -422,7 +444,7 @@ document.addEventListener('DOMContentLoaded', () => {
         portalTriggers.forEach(trigger => {
             const configuredPortal = trigger.getAttribute('data-portal-open');
             const triggerText = trigger.textContent.toLowerCase();
-            const portalType = configuredPortal || (triggerText.includes('crm') ? 'staff' : 'student');
+            const portalType = normalizePortalRole(configuredPortal || (triggerText.includes('admin') || triggerText.includes('crm') ? 'admin' : triggerText.includes('teacher') ? 'teacher' : 'student'));
 
             trigger.setAttribute('data-portal-open', portalType);
             trigger.setAttribute('aria-haspopup', 'dialog');
@@ -444,12 +466,31 @@ document.addEventListener('DOMContentLoaded', () => {
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
 
-                const portalType = form.getAttribute('data-portal-form');
+                const portalType = normalizePortalRole(form.getAttribute('data-portal-form'));
                 const feedback = form.parentElement.querySelector('.portal-feedback');
-                const portalName = portalType === 'staff' ? 'Staff CRM' : 'Student LMS';
+                const emailInput = form.querySelector('input[type="email"]');
+                const email = emailInput ? emailInput.value.trim() : '';
 
-                feedback.textContent = `${portalName} access is coming soon. This panel is live as a temporary preview for now.`;
-                feedback.classList.add('active');
+                if (!isValidEmail(email)) {
+                    if (emailInput) {
+                        emailInput.classList.add('error-state');
+                        emailInput.setAttribute('aria-invalid', 'true');
+                        emailInput.focus();
+                    }
+                    feedback.textContent = 'Enter a valid email address to continue.';
+                    feedback.classList.add('active', 'error');
+                    return;
+                }
+
+                if (emailInput) {
+                    emailInput.classList.remove('error-state');
+                    emailInput.removeAttribute('aria-invalid');
+                }
+
+                const portalUrl = new URL(portalLoginUrl);
+                portalUrl.searchParams.set('email', email);
+                portalUrl.searchParams.set('role', portalType);
+                window.location.href = portalUrl.toString();
             });
         });
 
