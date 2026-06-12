@@ -404,24 +404,15 @@
                                         <label for="program"><span data-i18n="apply.s3_program">What program are you applying for?</span> <span style="color:#D4AF37">*</span></label>
                                         <select name="program" id="program" required>
                                             <option value="" data-i18n="apply.s3_choose">Choose an option</option>
-                                            <optgroup label="Microcredentials">
-                                                <option value="AI Microcredential">AI Microcredential</option>
-                                                <option value="Caregiver Senior/Infant">Caregiver &mdash; Senior</option>
-                                                <option value="Caregiver Senior/Infant">Caregiver &mdash; Infant</option>
-                                                <option value="Video & Content Creation">Video &amp; Content Creation</option>
-                                                <option value="Business Communication">Business Communication</option>
-                                            </optgroup>
-                                            <optgroup label="Diploma Programs">
-                                                <option value="International Esports Management Diploma">International Esports Management Diploma</option>
-                                                <option value="Hospitality Operations Diploma">Hospitality Operations Diploma</option>
-                                                <option value="Global Management in Hospitality">Global Management in Hospitality</option>
-                                            </optgroup>
-                                            <optgroup label="Language Programs">
-                                                <option value="English as a Second Language (ESL)">English as a Second Language (ESL) Program</option>
-                                                <option value="French Language">French Language</option>
-                                                <option value="TCF Canada">TCF Canada Preparation</option>
-                                                <option value="TEF Canada">TEF Canada Preparation</option>
-                                            </optgroup>
+                                            <!-- Hardcoded fallback. On load, apply-form.js replaces these with the
+                                                 live portal list (GET /api/public/programs). If that fetch fails
+                                                 (network / CORS / offline) these stay, so the form never breaks.
+                                                 Option value = program name, matching the submitted payload. -->
+                                            <option value="International Esports Management Diploma">International Esports Management Diploma</option>
+                                            <option value="Hospitality Operations Diploma">Hospitality Operations Diploma</option>
+                                            <option value="Global Management in Hospitality Diploma">Global Management in Hospitality Diploma</option>
+                                            <option value="French as a Second Language (FSL)">French as a Second Language (FSL)</option>
+                                            <option value="French Test Preparation (TCF &amp; TEF)">French Test Preparation (TCF &amp; TEF)</option>
                                         </select>
                                         <span class="error-msg">Please choose a program</span>
                                     </div>

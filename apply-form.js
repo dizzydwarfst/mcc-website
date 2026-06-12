@@ -17,6 +17,11 @@
   // Single source of truth for the API base. No other hardcoded URLs.
   const API_BASE = 'https://lms-system-backend-lake.vercel.app/api';
 
+  // Public, active-only program list. CORS is locked to the marketing origin,
+  // so a localhost/file:// preview is expected to fall back to the page's
+  // hardcoded <option>s — verified live post-deploy.
+  const PUBLIC_PROGRAMS_URL = API_BASE + '/public/programs';
+
   // Document uploads. Values below MUST match the backend's DocTypeLiteral /
   // DocContentTypeLiteral (confirmed against the live lms-system backend).
   const ALLOWED_CONTENT_TYPES = ['application/pdf', 'image/jpeg', 'image/png'];
@@ -36,7 +41,46 @@
   ready(() => {
     const form = document.getElementById('wizard-form');
     if (form) attach(form);
+    loadLivePrograms();
   });
+
+  // ── Live program list ──
+  // Swap the hardcoded <option>s for the portal's live, active-only programs so
+  // adding/archiving a program in the portal admin reflects here with no
+  // marketing redeploy. Only the option *source* changes; the submitted program
+  // value stays whatever the <select> sends — now constrained to canonical names.
+  async function loadLivePrograms() {
+    const select = document.getElementById('program');
+    if (!select) return;
+    try {
+      const res = await fetch(PUBLIC_PROGRAMS_URL);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const programs = await res.json();
+      if (!Array.isArray(programs) || programs.length === 0) {
+        throw new Error('empty or malformed program list');
+      }
+      populatePrograms(select, programs);
+    } catch (err) {
+      // Network / CORS / timeout / bad shape — keep the hardcoded fallback and
+      // never block the form. (Locally, CORS blocks this; that's expected.)
+      console.warn('[MCC apply] live program list unavailable; using fallback options', err);
+    }
+  }
+
+  function populatePrograms(select, programs) {
+    const placeholder = select.querySelector('option[value=""]');
+    const previous = select.value; // preserve any selection across the swap
+    while (select.firstChild) select.removeChild(select.firstChild);
+    if (placeholder) select.appendChild(placeholder); // re-attach the detached placeholder
+    for (const p of programs) {
+      if (!p || !p.name) continue;
+      const opt = document.createElement('option');
+      opt.value = p.name;        // value = name — matches what buildPayload() submits
+      opt.textContent = p.name;
+      select.appendChild(opt);
+    }
+    select.value = previous; // restores the prior choice if it's still in the list
+  }
 
   function attach(form) {
     if (form.dataset.mccBound === '1') return;
