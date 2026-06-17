@@ -1039,7 +1039,7 @@ window.MCC_TRANSLATIONS = {
 
         // Success
         success_title: { en: "Application Received", fr: "Candidature reçue" },
-        success_p: { en: "Thank you for applying to Metropolitan Community College. Our admissions team will review your application and follow up with next-step communication.", fr: "Merci d'avoir postulé au Metropolitan Community College. Notre équipe des admissions examinera votre candidature et vous communiquera les prochaines étapes." },
+        success_p: { en: "Thank you for your application. We'll contact you by email within two business days.", fr: "Merci pour votre candidature. Nous vous contacterons par courriel dans les deux jours ouvrables." },
         success_btn: { en: "Return to Homepage", fr: "Retour à l'accueil" }
     },
 

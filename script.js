@@ -658,6 +658,19 @@ document.addEventListener('DOMContentLoaded', () => {
             return isValid;
         }
 
+        window.mccApplyWizard = {
+            goToStep(step) {
+                const nextStep = Number(step);
+                if (!Number.isFinite(nextStep)) return;
+                currentStep = Math.min(totalSteps, Math.max(1, nextStep));
+                syncAgencyVisibility();
+                updateWizardUI();
+            },
+            getCurrentStep() {
+                return currentStep;
+            }
+        };
+
         wizardForm.querySelectorAll('.btn-next').forEach(btn => {
             btn.addEventListener('click', () => {
                 if (validateStep() && currentStep < totalSteps) {

@@ -330,6 +330,7 @@
                                     <input type="checkbox" name="info_update_agreement" id="info_update" required>
                                     <label for="info_update"><span data-i18n="apply.s1_info_update">If any of the above contact information changes, I will update it on the Student Registration Page.</span> <span style="color:#D4AF37">*</span></label>
                                 </div>
+                                <span class="error-msg" id="info_update-error" style="margin-left: 25px; margin-top:6px; margin-bottom: 1.5rem;">Please confirm you will update your contact information if it changes</span>
 
                                 <div class="wizard-buttons">
                                     <button type="button" class="btn-solid-gold btn-next" style="margin-left: auto;"><span data-i18n="common.btn_continue">Continue</span> <i class="fas fa-arrow-right" style="margin-left:5px;"></i></button>
@@ -532,7 +533,7 @@
                                         <span style="color:#D4AF37">*</span>
                                     </label>
                                 </div>
-                                <span class="error-msg" style="margin-left: 25px; margin-top:-15px; margin-bottom: 1.5rem;display:block;">Please agree to the policies, terms and conditions</span>
+                                <span class="error-msg" id="terms_agreement-error" style="margin-left: 25px; margin-top:-15px; margin-bottom: 1.5rem;">Please agree to the policies, terms and conditions</span>
 
                                 <div class="wizard-buttons">
                                     <button type="button" class="btn-outline-gold btn-back"><i class="fas fa-arrow-left" style="margin-right:5px;"></i> <span data-i18n="common.btn_back">Back</span></button>
@@ -545,7 +546,7 @@
                     <div class="wizard-container success-state" id="wizard-success" style="display: none;">
                         <i class="fas fa-check-circle success-icon"></i>
                         <h2 style="color: var(--deep-green); font-size: 2.2rem; margin-bottom: 1rem;" data-i18n="apply.success_title">Application Received</h2>
-                        <p style="color: #666; font-size: 1.1rem; max-width: 500px; margin: 0 auto 3rem;" data-i18n="apply.success_p">Thank you for applying to Metropolitan Community College. Our admissions team will review your application and follow up with next-step communication.</p>
+                        <p style="color: #666; font-size: 1.1rem; max-width: 500px; margin: 0 auto 3rem;" data-i18n="apply.success_p">Thank you for your application. We'll contact you by email within two business days.</p>
                         <a href="index.html" class="btn-solid-gold" data-i18n="apply.success_btn">Return to Homepage</a>
                     </div>
                 </div>
