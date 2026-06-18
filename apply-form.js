@@ -32,6 +32,7 @@
     { docType: 'study_permit',    label: 'Study Permit',         inputId: 'doc-study-permit',     required: false },
     { docType: 'transcripts',     label: 'Academic Transcripts', inputId: 'doc-transcripts',      required: true },
     { docType: 'english_results', label: 'English Test Results', inputId: 'doc-english-results',  required: false },
+    { docType: 'photo',           label: 'Digital photo',        inputId: 'doc-photo',            required: false, allowedTypes: ['image/jpeg', 'image/png'], typeMessage: 'Must be a JPG or PNG.' },
   ];
 
   const FIELD_CONFIG = [
@@ -44,6 +45,7 @@
     { id: 'phone_number', label: 'Phone number', step: 1, message: 'Phone number is required.' },
     { id: 'email', label: 'Email', step: 1, message: 'A valid email is required.' },
     { id: 'status', label: 'Status in Canada', step: 1, message: 'Status in Canada is required.' },
+    { id: 'sin_number', label: 'Social Insurance Number', step: 1, optional: true },
     { id: 'street_address', label: 'Street address', step: 1, message: 'Street address is required.' },
     { id: 'city', label: 'City', step: 1, message: 'City is required.' },
     { id: 'province', label: 'Province / state', step: 1, message: 'Province / state is required.' },
@@ -81,6 +83,7 @@
     email: 'email',
     status_in_canada: 'status',
     status_expiry_date: 'status_expiry',
+    sin_number: 'sin_number',
     address: 'street_address',
     'address.unit': 'apt_unit',
     'address.street': 'street_address',
@@ -205,7 +208,7 @@
         documents = await collectDocuments();
       } catch (e) {
         const uploadError = normalizeUploadError(e);
-        console.error('[MCC apply] document upload failed', uploadError.message);
+        console.error('[MCC apply] document upload failed', sanitizeSensitiveText(uploadError.message));
         showValidationErrors(
           form,
           uploadError.field ? [uploadError] : [],
@@ -240,8 +243,8 @@
 
       } catch (err) {
         // Network / CORS / fetch rejection.
-        const message = `Network error: ${(err && err.message) || 'Could not reach the server'}. Please check your connection and try again, or email admissions@metropolitancollege.ca.`;
-        console.error('[MCC apply] network error', (err && err.message) || err);
+        const message = sanitizeSensitiveText(`Network error: ${(err && err.message) || 'Could not reach the server'}. Please check your connection and try again, or email admissions@metropolitancollege.ca.`);
+        console.error('[MCC apply] network error', sanitizeSensitiveText((err && err.message) || err));
         showValidationErrors(form, [], message);
         setBtn(originalHTML, false);
       }
@@ -264,8 +267,11 @@
 
   // ── Document uploads ──
 
-  function validateFile(file) {
-    if (!ALLOWED_CONTENT_TYPES.includes(file.type)) return 'Must be a PDF, JPG, or PNG.';
+  function validateFile(file, field) {
+    const allowedTypes = field && field.allowedTypes ? field.allowedTypes : ALLOWED_CONTENT_TYPES;
+    if (!allowedTypes.includes(file.type)) {
+      return (field && field.typeMessage) || 'Must be a PDF, JPG, or PNG.';
+    }
     if (file.size < 1) return 'File looks empty.';
     if (file.size > MAX_BYTES) return 'Must be 15 MB or smaller.';
     return null;
@@ -315,13 +321,13 @@
     for (const f of DOC_FIELDS) {
       const file = document.getElementById(f.inputId)?.files?.[0];
       if (!file) continue; // optional fields are skipped when empty
-      const err = validateFile(file);
-      if (err) throw { field: f.inputId, label: f.label, message: `${f.label}: ${err}` };
+      const err = validateFile(file, f);
+      if (err) throw { field: f.inputId, label: f.label, message: err };
       try {
         documents.push(await uploadDocument(f.docType, file)); // sequential = clean attribution
       } catch (uploadErr) {
         const message = uploadErr && uploadErr.message ? uploadErr.message : 'Upload failed.';
-        throw { field: f.inputId, label: f.label, message: `${f.label}: ${message}` };
+        throw { field: f.inputId, label: f.label, message };
       }
     }
     return documents;
@@ -334,7 +340,7 @@
     return {
       field: error.field,
       label: error.label || getFieldLabel(error.field),
-      message: error.message || 'We could not upload your documents. Please try again.',
+      message: sanitizeSensitiveText(error.message || 'We could not upload your documents. Please try again.'),
       step: error.step || getStepForField(error.field),
     };
   }
@@ -399,6 +405,9 @@
       company_website: val('company_website'),
     };
 
+    const sinNumber = val('sin_number');
+    if (sinNumber) payload.sin_number = sinNumber;
+
     if (usingAgency) {
       payload.agent_first_name = val('agent_first_name');
       payload.agent_last_name = val('agent_last_name');
@@ -430,6 +439,8 @@
         continue;
       }
 
+      if (field.optional && !val(field.id)) continue;
+
       if (!val(field.id)) {
         errors.push(toFieldError(field));
         continue;
@@ -460,9 +471,9 @@
     box.textContent = '';
 
     const title = document.createElement('strong');
-    title.textContent = summary || (uniqueErrors.length
+    title.textContent = sanitizeSensitiveText(summary || (uniqueErrors.length
       ? 'Please fix the highlighted fields before submitting.'
-      : 'We could not submit your application.');
+      : 'We could not submit your application.'));
     box.appendChild(title);
 
     if (uniqueErrors.length) {
@@ -470,7 +481,7 @@
       list.style.cssText = 'margin:0.6rem 0 0 1.1rem;padding:0;';
       uniqueErrors.forEach((error) => {
         const item = document.createElement('li');
-        item.textContent = `${error.label || getFieldLabel(error.field)}: ${error.message}`;
+        item.textContent = `${error.label || getFieldLabel(error.field)}: ${sanitizeSensitiveText(error.message)}`;
         list.appendChild(item);
       });
       box.appendChild(list);
@@ -497,7 +508,7 @@
       result.push({
         field: error.field,
         label: error.label || getFieldLabel(error.field),
-        message: error.message,
+        message: sanitizeSensitiveText(error.message),
         step: error.step || getStepForField(error.field),
       });
     }
@@ -522,7 +533,7 @@
       if (!Object.prototype.hasOwnProperty.call(slot.dataset, 'defaultError')) {
         slot.dataset.defaultError = slot.textContent;
       }
-      slot.textContent = error.message;
+      slot.textContent = sanitizeSensitiveText(error.message);
       slot.style.display = 'block';
     }
   }
@@ -648,7 +659,7 @@
       detail.forEach((item) => {
         const loc = Array.isArray(item.loc) ? item.loc : [];
         const field = mapServerLocToField(loc);
-        const message = item.msg || 'This field could not be accepted.';
+        const message = sanitizeSensitiveText(item.msg || 'This field could not be accepted.');
         if (field) {
           fieldErrors.push({
             field,
@@ -657,15 +668,15 @@
             step: getStepForField(field),
           });
         } else {
-          general.push(`${humanizeServerLoc(loc)}: ${message}`);
+          general.push(sanitizeSensitiveText(`${humanizeServerLoc(loc)}: ${message}`));
         }
       });
     } else if (typeof detail === 'string') {
-      general.push(detail);
+      general.push(sanitizeSensitiveText(detail));
     } else if (body && typeof body === 'object' && typeof body.error === 'string') {
-      general.push(body.error);
+      general.push(sanitizeSensitiveText(body.error));
     } else if (typeof body === 'string') {
-      general.push(body);
+      general.push(sanitizeSensitiveText(body));
     }
 
     return {
@@ -676,12 +687,19 @@
     };
   }
 
+  function sanitizeSensitiveText(value) {
+    if (typeof value !== 'string') return value;
+    return value
+      .replace(/((?:sin_number|social insurance number|sin)\s*[:=]\s*)["']?[\d -]{3,}["']?/gi, '$1[redacted]')
+      .replace(/\b\d{3}[- ]?\d{3}[- ]?\d{3}\b/g, '[redacted SIN]');
+  }
+
   function responseMessage(status, body, fallback) {
     if (body && typeof body === 'object') {
-      if (typeof body.detail === 'string') return body.detail;
-      if (typeof body.error === 'string') return body.error;
+      if (typeof body.detail === 'string') return sanitizeSensitiveText(body.detail);
+      if (typeof body.error === 'string') return sanitizeSensitiveText(body.error);
     }
-    if (typeof body === 'string' && body.trim()) return body.trim();
+    if (typeof body === 'string' && body.trim()) return sanitizeSensitiveText(body.trim());
     if (status === 429) return 'Too many attempts. Please wait a moment and try again.';
     if (status === 400 || status === 422) return `${fallback} (HTTP ${status}). Please review the highlighted fields.`;
     return `${fallback} (HTTP ${status}) without details. Please try again, or email admissions@metropolitancollege.ca.`;

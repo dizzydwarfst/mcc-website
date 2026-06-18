@@ -275,6 +275,11 @@
                                         <label for="status_expiry"><span data-i18n="apply.s1_status_expiry">Status Expiry Date</span> <span style="font-weight:400;color:var(--text-medium);" data-i18n="apply.s1_optional">(optional)</span></label>
                                         <input type="date" name="status_expiry" id="status_expiry">
                                     </div>
+                                    <div class="form-group">
+                                        <label for="sin_number" data-i18n="apply.s1_sin">Social Insurance Number (if applicable)</label>
+                                        <input type="text" name="sin_number" id="sin_number" placeholder="### - ### - ###" inputmode="numeric" autocomplete="off">
+                                        <span class="error-msg" id="sin_number-error"></span>
+                                    </div>
                                 </div>
 
                                 <h4 style="margin-top:2rem;margin-bottom:1rem;color:var(--text-dark);font-weight:700;font-size:1.05rem;" data-i18n="apply.s1_address_heading">Home Address</h4>
@@ -515,6 +520,15 @@
                                         <input type="file" name="doc_english_results" id="doc-english-results" accept="application/pdf,image/jpeg,image/png">
                                         <small style="color:var(--text-medium);font-size:0.82rem;" data-i18n="apply.s4_doc_hint">PDF, JPG, or PNG &middot; max 15&nbsp;MB</small>
                                         <span class="error-msg" id="doc-english-results-error"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-grid-2">
+                                    <div class="form-group">
+                                        <label for="doc-photo"><span data-i18n="apply.s4_photo">Digital Photo</span> <span style="font-weight:400;color:var(--text-medium);" data-i18n="apply.s1_optional">(optional)</span></label>
+                                        <input type="file" name="doc_photo" id="doc-photo" accept="image/jpeg,image/png">
+                                        <small style="color:var(--text-medium);font-size:0.82rem;" data-i18n="apply.s4_photo_hint">Optional &mdash; used for your school ID and profile picture.</small>
+                                        <span class="error-msg" id="doc-photo-error"></span>
                                     </div>
                                 </div>
 
