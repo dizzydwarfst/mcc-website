@@ -21,6 +21,9 @@
   // so a localhost/file:// preview is expected to fall back to the page's
   // hardcoded <option>s — verified live post-deploy.
   const PUBLIC_PROGRAMS_URL = API_BASE + '/public/programs';
+  const ASAP_SEMESTER = { value: 'asap', label: 'As soon as possible' };
+  let programsByName = new Map();
+  let semesterPlaceholderTemplate = null;
 
   // Document uploads. Values below MUST match the backend's DocTypeLiteral /
   // DocContentTypeLiteral (confirmed against the live lms-system backend).
@@ -115,6 +118,7 @@
   ready(() => {
     const form = document.getElementById('wizard-form');
     if (form) attach(form);
+    initializeSemesterSelect();
     loadLivePrograms();
   });
 
@@ -134,6 +138,7 @@
         throw new Error('empty or malformed program list');
       }
       populatePrograms(select, programs);
+      syncSemesterSelect(select.value, true);
     } catch (err) {
       // Network / CORS / timeout / bad shape — keep the hardcoded fallback and
       // never block the form. (Locally, CORS blocks this; that's expected.)
@@ -144,16 +149,94 @@
   function populatePrograms(select, programs) {
     const placeholder = select.querySelector('option[value=""]');
     const previous = select.value; // preserve any selection across the swap
+    programsByName = new Map(
+      programs
+        .filter((program) => program && typeof program.name === 'string' && program.name.trim())
+        .map((program) => [program.name, program])
+    );
     while (select.firstChild) select.removeChild(select.firstChild);
     if (placeholder) select.appendChild(placeholder); // re-attach the detached placeholder
-    for (const p of programs) {
-      if (!p || !p.name) continue;
+    for (const p of programsByName.values()) {
       const opt = document.createElement('option');
       opt.value = p.name;        // value = name — matches what buildPayload() submits
       opt.textContent = p.name;
       select.appendChild(opt);
     }
     select.value = previous; // restores the prior choice if it's still in the list
+  }
+
+  function initializeSemesterSelect() {
+    const programSelect = document.getElementById('program');
+    const semesterSelect = document.getElementById('semester');
+    if (!programSelect || !semesterSelect) return;
+
+    const placeholder = semesterSelect.querySelector('option[value=""]');
+    semesterPlaceholderTemplate = placeholder ? placeholder.cloneNode(true) : null;
+
+    syncSemesterSelect(programSelect.value, true);
+    programSelect.addEventListener('change', () => syncSemesterSelect(programSelect.value));
+  }
+
+  function syncSemesterSelect(programName, preserveSelection) {
+    const semesterSelect = document.getElementById('semester');
+    if (!semesterSelect) return;
+
+    const program = programsByName.get(programName);
+    const semesters = program && Array.isArray(program.semesters)
+      ? program.semesters
+      : [];
+    populateSemesters(semesterSelect, programName, semesters, preserveSelection);
+  }
+
+  function populateSemesters(select, programName, semesters, preserveSelection) {
+    const previous = preserveSelection ? select.value : '';
+    const placeholder = getSemesterPlaceholder();
+    const hasProgram = Boolean(programName);
+    const configuredSemesters = semesters
+      .filter((semester) => typeof semester === 'string' && semester.trim())
+      .map((semester) => semester.trim())
+      .filter((semester, index, values) => values.indexOf(semester) === index)
+      .filter((semester) => {
+        const normalized = semester.toLowerCase();
+        return normalized !== ASAP_SEMESTER.value && normalized !== ASAP_SEMESTER.label.toLowerCase();
+      });
+
+    while (select.firstChild) select.removeChild(select.firstChild);
+
+    if (!hasProgram) {
+      if (placeholder) select.appendChild(placeholder);
+      select.disabled = true;
+      select.value = '';
+      return;
+    }
+
+    // Programs without configured semesters intentionally show ASAP as their
+    // only available choice, rather than an empty or disabled control.
+    if (configuredSemesters.length && placeholder) select.appendChild(placeholder);
+    appendOption(select, ASAP_SEMESTER.value, ASAP_SEMESTER.label);
+    configuredSemesters.forEach((semester) => appendOption(select, semester, semester));
+
+    select.disabled = false;
+    if (previous && Array.from(select.options).some((option) => option.value === previous)) {
+      select.value = previous;
+    }
+  }
+
+  function appendOption(select, value, label) {
+    const option = document.createElement('option');
+    option.value = value;
+    option.textContent = label;
+    select.appendChild(option);
+  }
+
+  function getSemesterPlaceholder() {
+    if (semesterPlaceholderTemplate) return semesterPlaceholderTemplate.cloneNode(true);
+
+    const option = document.createElement('option');
+    option.value = '';
+    option.textContent = 'Choose an option';
+    option.setAttribute('data-i18n', 'apply.s3_choose');
+    return option;
   }
 
   function attach(form) {
