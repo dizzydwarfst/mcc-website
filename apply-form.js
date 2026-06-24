@@ -22,6 +22,10 @@
   // hardcoded <option>s — verified live post-deploy.
   const PUBLIC_PROGRAMS_URL = API_BASE + '/public/programs';
   const ASAP_SEMESTER = { value: 'asap', label: 'As soon as possible' };
+  const MONTH_NAMES = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December',
+  ];
   let programsByName = new Map();
   let semesterPlaceholderTemplate = null;
 
@@ -61,7 +65,7 @@
     { id: 'agent_phone', label: 'Agent phone', step: 2, agencyOnly: true, message: 'Agent phone is required.' },
     { id: 'agent_email', label: 'Agent email', step: 2, agencyOnly: true, message: 'A valid agent email is required.' },
     { id: 'program', label: 'Program', step: 3, message: 'Please choose a program.' },
-    { id: 'semester', label: 'Intended semester', step: 3, message: 'Please choose an intended semester.' },
+    { id: 'semester', label: 'Preferred start date', step: 3, message: 'Please choose a preferred start date.' },
     { id: 'attendance_mode', name: 'attendance_mode', label: 'Attendance mode', step: 3, type: 'radio', message: 'Please choose how you will attend classes.' },
     { id: 'pathway_plan', name: 'pathway_plan', label: 'University pathway question', step: 3, type: 'radio', message: 'Please answer the university-pathway question.' },
     { id: 'signature_name', label: 'Signature', step: 4, message: 'Please type your full legal name as your signature.' },
@@ -192,7 +196,7 @@
     const previous = preserveSelection ? select.value : '';
     const placeholder = getSemesterPlaceholder();
     const hasProgram = Boolean(programName);
-    const configuredSemesters = semesters
+    const configuredStartDates = semesters
       .filter((semester) => typeof semester === 'string' && semester.trim())
       .map((semester) => semester.trim())
       .filter((semester, index, values) => values.indexOf(semester) === index)
@@ -210,11 +214,13 @@
       return;
     }
 
-    // Programs without configured semesters intentionally show ASAP as their
+    // Programs without configured start dates intentionally show ASAP as their
     // only available choice, rather than an empty or disabled control.
-    if (configuredSemesters.length && placeholder) select.appendChild(placeholder);
+    if (configuredStartDates.length && placeholder) select.appendChild(placeholder);
     appendOption(select, ASAP_SEMESTER.value, ASAP_SEMESTER.label);
-    configuredSemesters.forEach((semester) => appendOption(select, semester, semester));
+    configuredStartDates.forEach((startDate) => {
+      appendOption(select, startDate, formatStartDate(startDate));
+    });
 
     select.disabled = false;
     if (previous && Array.from(select.options).some((option) => option.value === previous)) {
@@ -227,6 +233,31 @@
     option.value = value;
     option.textContent = label;
     select.appendChild(option);
+  }
+
+  // ISO dates must be split before formatting: new Date('YYYY-MM-DD') treats
+  // the value as UTC midnight and can render the prior day in Vancouver.
+  // Legacy free-text values remain visible unchanged until staff replace them.
+  function formatStartDate(value) {
+    const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+    if (!match) return value;
+
+    const year = Number(match[1]);
+    const monthIndex = Number(match[2]) - 1;
+    const day = Number(match[3]);
+    const localDate = new Date(year, monthIndex, day);
+
+    if (
+      monthIndex < 0 ||
+      monthIndex > 11 ||
+      localDate.getFullYear() !== year ||
+      localDate.getMonth() !== monthIndex ||
+      localDate.getDate() !== day
+    ) {
+      return value;
+    }
+
+    return `${MONTH_NAMES[monthIndex]} ${day}, ${year}`;
   }
 
   function getSemesterPlaceholder() {

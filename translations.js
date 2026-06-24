@@ -931,7 +931,7 @@ window.MCC_TRANSLATIONS = {
         sidebar_p2_strong: { en: "Step 2 — Agency contact", fr: "Étape 2 — Coordonnées de l'agence" },
         sidebar_p2_p: { en: "If an agent is applying on your behalf, share their details. Skip if not.", fr: "Si un agent postule en votre nom, indiquez ses coordonnées. Sinon, passez à l'étape suivante." },
         sidebar_p3_strong: { en: "Step 3 — Program of choice", fr: "Étape 3 — Programme choisi" },
-        sidebar_p3_p: { en: "Pick your program, intended semester, campus, and attendance mode.", fr: "Choisissez votre programme, la session souhaitée, le campus et le mode de présence." },
+        sidebar_p3_p: { en: "Pick your program, preferred start date, campus, and attendance mode.", fr: "Choisissez votre programme, la date de début préférée, le campus et le mode de présence." },
         sidebar_p4_strong: { en: "Step 4 — Upload documents", fr: "Étape 4 — Téléverser les documents" },
         sidebar_p4_p: { en: "Passport, study permit, transcripts, English results, then sign and submit.", fr: "Passeport, permis d'études, relevés de notes, résultats d'anglais, puis signez et soumettez." },
 
@@ -997,7 +997,7 @@ window.MCC_TRANSLATIONS = {
         s3_title: { en: "Step 3 — Program of Choice", fr: "Étape 3 — Programme choisi" },
         s3_program: { en: "What program are you applying for?", fr: "À quel programme postulez-vous ?" },
         s3_choose: { en: "Choose an option", fr: "Choisir une option" },
-        s3_semester: { en: "Which semester do you intend to start?", fr: "À quelle session prévoyez-vous commencer ?" },
+        s3_start_date: { en: "Preferred start date", fr: "Date de début préférée" },
         s3_campus: { en: "Which campus do you want to take your program?", fr: "Sur quel campus souhaitez-vous suivre votre programme ?" },
         s3_attendance: { en: "How will you attend classes?", fr: "Comment suivrez-vous les cours ?" },
         s3_in_person: { en: "In person", fr: "En personne" },
