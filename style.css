@@ -1305,17 +1305,18 @@ h1, h2, h3, h4 {
 .inline-option-list {
     display: flex;
     align-items: center;
-    gap: 1.25rem;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    padding-bottom: 0.15rem;
+    column-gap: 1.5rem;
+    row-gap: 0.65rem;
+    flex-wrap: wrap;
+    overflow-x: visible;
+    padding-bottom: 0;
 }
 
 .inline-option {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    flex: 0 0 auto;
+    gap: 0.55rem;
+    flex: 0 1 auto;
     cursor: pointer;
     color: var(--text-dark);
     font-weight: 500;
@@ -1323,6 +1324,7 @@ h1, h2, h3, h4 {
 }
 
 .inline-option input {
+    margin: 0;
     width: auto;
     flex: 0 0 auto;
 }
