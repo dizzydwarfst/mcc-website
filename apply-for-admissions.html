@@ -122,7 +122,7 @@
                     </div>
                     <div class="page-highlight-card">
                         <strong data-i18n="apply.before_strong">Before you begin</strong>
-                        <p data-i18n="apply.before_p">Have your passport, study permit (if applicable), academic transcripts, and English-test results ready as PDF or image files (max 15&nbsp;MB each).</p>
+                        <p data-i18n="apply.before_p">Have your passport or primary ID, permit or visa document, academic records, and language test results ready as PDF or image files (max 15&nbsp;MB each).</p>
                     </div>
                 </div>
                 <div class="page-hero-media">
@@ -148,11 +148,11 @@
                         </div>
                         <div class="sidebar-panel">
                             <strong data-i18n="apply.sidebar_p3_strong">Step 3 &mdash; Program of choice</strong>
-                            <p data-i18n="apply.sidebar_p3_p">Pick your program, intended semester, campus, and attendance mode.</p>
+                            <p data-i18n="apply.sidebar_p3_p">Pick your program, intake date, and available attendance options.</p>
                         </div>
                         <div class="sidebar-panel">
                             <strong data-i18n="apply.sidebar_p4_strong">Step 4 &mdash; Upload documents</strong>
-                            <p data-i18n="apply.sidebar_p4_p">Passport, study permit, transcripts, English results, then sign and submit.</p>
+                            <p data-i18n="apply.sidebar_p4_p">Passport or primary ID, permit/visa documents, academic records, language results, then sign and submit.</p>
                         </div>
                     </div>
                 </aside>
@@ -250,7 +250,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="phone_number"><span data-i18n="apply.s1_phone_number">Student's Own Phone Number</span> <span style="color:#D4AF37">*</span></label>
-                                        <input type="tel" name="phone_number" id="phone_number" placeholder="### - ### - ####" required>
+                                        <input type="tel" name="phone_number" id="phone_number" required>
                                         <span class="error-msg">Phone number is required</span>
                                     </div>
                                     <div class="form-group">
@@ -315,8 +315,9 @@
 
                                 <div class="form-grid-2">
                                     <div class="form-group">
-                                        <label for="postal_code"><span data-i18n="apply.s1_postal">Postal / Zip Code</span> <span style="font-weight:400;color:var(--text-medium);" data-i18n="apply.s1_optional">(optional)</span></label>
-                                        <input type="text" name="postal_code" id="postal_code">
+                                        <label for="postal_code"><span data-i18n="apply.s1_postal">Postal / Zip Code</span> <span style="color:#D4AF37">*</span></label>
+                                        <input type="text" name="postal_code" id="postal_code" required>
+                                        <span class="error-msg">Postal / zip code is required</span>
                                     </div>
                                     <div class="form-group">
                                         <label for="country"><span data-i18n="apply.s1_country">Country</span> <span style="color:#D4AF37">*</span></label>
@@ -376,9 +377,8 @@
                                             <span class="error-msg">Agent last name is required</span>
                                         </div>
                                         <div class="form-group">
-                                            <label for="agency_company"><span data-i18n="apply.s2_agency_company">Agency Company Name</span> <span style="color:#D4AF37">*</span></label>
-                                            <input type="text" name="agency_company" id="agency_company" data-agency-required>
-                                            <span class="error-msg">Agency company name is required</span>
+                                            <label for="agency_company" data-i18n="apply.s2_agency_company">Agency Company Name</label>
+                                            <input type="text" name="agency_company" id="agency_company">
                                         </div>
                                     </div>
                                     <div class="form-grid-3">
@@ -426,64 +426,51 @@
                                         </select>
                                         <span class="error-msg">Please choose a program</span>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="semester"><span data-i18n="apply.s3_semester">Which semester do you intend to start?</span> <span style="color:#D4AF37">*</span></label>
-                                        <select name="semester" id="semester" required>
-                                            <option value="" data-i18n="apply.s3_choose">Choose an option</option>
-                                            <option value="asap">As soon as possible</option>
-                                            <option value="Winter 2026">Winter 2026</option>
-                                            <option value="Spring 2026">Spring 2026</option>
-                                            <option value="Summer 2026">Summer 2026</option>
-                                            <option value="Fall 2026">Fall 2026</option>
-                                            <option value="Winter 2027">Winter 2027</option>
-                                            <option value="Spring 2027">Spring 2027</option>
-                                            <option value="Summer 2027">Summer 2027</option>
-                                            <option value="Fall 2027">Fall 2027</option>
-                                        </select>
-                                        <span class="error-msg">Please choose a semester</span>
-                                    </div>
                                 </div>
 
-                                <div class="form-group" style="max-width:480px;">
-                                    <label for="campus" data-i18n="apply.s3_campus">Which campus do you want to take your program?</label>
-                                    <select name="campus" id="campus">
+                                <div class="form-group" style="max-width:480px;margin-top:1.5rem;">
+                                    <label for="semester"><span data-i18n="apply.s3_semester">Intake Date</span> <span style="color:#D4AF37">*</span></label>
+                                    <select name="semester" id="semester" required>
                                         <option value="" data-i18n="apply.s3_choose">Choose an option</option>
-                                        <option value="vancouver_downtown">Vancouver &mdash; Downtown</option>
-                                        <option value="online">Online (no campus)</option>
-                                        <option value="undecided">Undecided</option>
+                                        <option value="asap">As soon as possible</option>
+                                        <option value="Winter 2026">Winter 2026</option>
+                                        <option value="Spring 2026">Spring 2026</option>
+                                        <option value="Summer 2026">Summer 2026</option>
+                                        <option value="Fall 2026">Fall 2026</option>
+                                        <option value="Winter 2027">Winter 2027</option>
+                                        <option value="Spring 2027">Spring 2027</option>
+                                        <option value="Summer 2027">Summer 2027</option>
+                                        <option value="Fall 2027">Fall 2027</option>
                                     </select>
+                                    <span class="error-msg">Please choose an intake date</span>
                                 </div>
 
-                                <div class="form-group" style="margin-top:1.5rem;">
+                                <div class="form-group" id="attendance-mode-group" style="margin-top:1.5rem;display:none;">
                                     <label style="display:block;margin-bottom:0.75rem;"><span data-i18n="apply.s3_attendance">How will you attend classes?</span> <span style="color:#D4AF37">*</span></label>
-                                    <div style="display:flex;gap:1.5rem;flex-wrap:wrap;">
-                                        <label style="display:inline-flex;align-items:center;gap:0.5rem;cursor:pointer;">
-                                            <input type="radio" name="attendance_mode" value="in_person" required> <span data-i18n="apply.s3_in_person">In person</span>
-                                        </label>
-                                        <label style="display:inline-flex;align-items:center;gap:0.5rem;cursor:pointer;">
-                                            <input type="radio" name="attendance_mode" value="online" required> <span data-i18n="apply.s3_online">Online</span>
-                                        </label>
-                                        <label style="display:inline-flex;align-items:center;gap:0.5rem;cursor:pointer;">
-                                            <input type="radio" name="attendance_mode" value="blended" required> <span data-i18n="apply.s3_blended">Blended</span>
-                                        </label>
-                                    </div>
+                                    <div class="inline-option-list" id="attendance-mode-options"></div>
                                     <span class="error-msg">Please choose how you will attend classes</span>
                                 </div>
 
-                                <div class="form-group" style="margin-top:1.25rem;">
-                                    <label style="display:block;margin-bottom:0.75rem;"><span data-i18n="apply.s3_pathway">Are you planning to apply for pathway to university after graduation?</span> <span style="color:#D4AF37">*</span></label>
-                                    <div style="display:flex;gap:1.5rem;flex-wrap:wrap;">
-                                        <label style="display:inline-flex;align-items:center;gap:0.5rem;cursor:pointer;">
-                                            <input type="radio" name="pathway_plan" value="yes" required> <span data-i18n="apply.s2_yes">Yes</span>
+                                <div class="form-group" id="pathway-interest-group" style="margin-top:1.25rem;display:none;">
+                                    <label style="display:block;margin-bottom:0.75rem;"><span data-i18n="apply.s3_pathway">Are you interested in a university pathway after graduation?</span> <span style="color:#D4AF37">*</span></label>
+                                    <div class="inline-option-list">
+                                        <label class="inline-option" style="display:inline-flex;align-items:center;gap:0.5rem;cursor:pointer;">
+                                            <input type="radio" name="pathway_interest" value="yes"> <span data-i18n="apply.s2_yes">Yes</span>
                                         </label>
-                                        <label style="display:inline-flex;align-items:center;gap:0.5rem;cursor:pointer;">
-                                            <input type="radio" name="pathway_plan" value="no" required> <span data-i18n="apply.s3_pathway_no">No</span>
+                                        <label class="inline-option" style="display:inline-flex;align-items:center;gap:0.5rem;cursor:pointer;">
+                                            <input type="radio" name="pathway_interest" value="no"> <span data-i18n="apply.s3_pathway_no">No</span>
                                         </label>
-                                        <label style="display:inline-flex;align-items:center;gap:0.5rem;cursor:pointer;">
-                                            <input type="radio" name="pathway_plan" value="undecided" required> <span data-i18n="apply.s3_pathway_undecided">Not decided yet</span>
+                                        <label class="inline-option" style="display:inline-flex;align-items:center;gap:0.5rem;cursor:pointer;">
+                                            <input type="radio" name="pathway_interest" value="undecided"> <span data-i18n="apply.s3_pathway_undecided">Not decided yet</span>
                                         </label>
                                     </div>
                                     <span class="error-msg">Please choose an option</span>
+                                </div>
+
+                                <div class="form-group" id="add-ons-group" style="margin-top:1.25rem;display:none;">
+                                    <label style="display:block;margin-bottom:0.75rem;" data-i18n="apply.s3_add_ons">Optional add-ons</label>
+                                    <div class="inline-option-list optional-add-ons" id="add-ons-options"></div>
+                                    <small style="color:var(--text-medium);font-size:0.82rem;" data-i18n="apply.s3_add_ons_hint">Choose any extras you want to include with this program.</small>
                                 </div>
 
                                 <div class="wizard-buttons">
@@ -495,17 +482,17 @@
                             <!-- STEP 4: Declaration (document collection deferred) -->
                             <div class="form-step" data-step="4">
                                 <h3 class="form-section-title" data-i18n="apply.s4_title">Step 4 &mdash; Upload Documents</h3>
-                                <p style="color:var(--text-medium);margin-bottom:1.5rem;font-size:0.95rem;" data-i18n="apply.s4_intro">Attach any documents you have ready. You can also submit now and send the rest later &mdash; our admissions team will follow up on anything missing.</p>
+                                <p style="color:var(--text-medium);margin-bottom:1.5rem;font-size:0.95rem;" data-i18n="apply.s4_intro">Passport or primary ID and academic records are required. Upload your permit or visa document and language test results too if you have them. PDF or image files, max 15&nbsp;MB each.</p>
 
                                 <div class="form-grid-2">
                                     <div class="form-group">
-                                        <label for="doc-passport"><span data-i18n="apply.s4_passport">Passport</span> <span style="color:#D4AF37">*</span></label>
+                                        <label for="doc-passport"><span data-i18n="apply.s4_passport">Passport or Primary ID</span> <span style="color:#D4AF37">*</span></label>
                                         <input type="file" name="doc_passport" id="doc-passport" accept="application/pdf,image/jpeg,image/png">
                                         <small style="color:var(--text-medium);font-size:0.82rem;" data-i18n="apply.s4_doc_hint">PDF, JPG, or PNG &middot; max 15&nbsp;MB</small>
                                         <span class="error-msg" id="doc-passport-error"></span>
                                     </div>
                                     <div class="form-group">
-                                        <label for="doc-study-permit"><span data-i18n="apply.s4_study_permit">Study Permit</span> <span style="font-weight:400;color:var(--text-medium);" data-i18n="apply.s4_optional_hint">(optional &mdash; upload if you have it)</span></label>
+                                        <label for="doc-study-permit"><span data-i18n="apply.s4_study_permit">Study Permit / Work Permit / Visa</span> <span style="font-weight:400;color:var(--text-medium);" data-i18n="apply.s4_optional_hint">(optional &mdash; upload if you have it)</span></label>
                                         <input type="file" name="doc_study_permit" id="doc-study-permit" accept="application/pdf,image/jpeg,image/png">
                                         <small style="color:var(--text-medium);font-size:0.82rem;" data-i18n="apply.s4_doc_hint">PDF, JPG, or PNG &middot; max 15&nbsp;MB</small>
                                         <span class="error-msg" id="doc-study-permit-error"></span>
@@ -514,13 +501,13 @@
 
                                 <div class="form-grid-2">
                                     <div class="form-group">
-                                        <label for="doc-transcripts"><span data-i18n="apply.s4_transcripts">Academic Transcripts</span> <span style="color:#D4AF37">*</span></label>
+                                        <label for="doc-transcripts"><span data-i18n="apply.s4_transcripts">Academic Records</span> <span style="color:#D4AF37">*</span></label>
                                         <input type="file" name="doc_transcripts" id="doc-transcripts" accept="application/pdf,image/jpeg,image/png">
                                         <small style="color:var(--text-medium);font-size:0.82rem;" data-i18n="apply.s4_doc_hint">PDF, JPG, or PNG &middot; max 15&nbsp;MB</small>
                                         <span class="error-msg" id="doc-transcripts-error"></span>
                                     </div>
                                     <div class="form-group">
-                                        <label for="doc-english-results"><span data-i18n="apply.s4_english_results">English Test Results</span> <span style="font-weight:400;color:var(--text-medium);" data-i18n="apply.s4_optional_hint">(optional &mdash; upload if you have it)</span></label>
+                                        <label for="doc-english-results" data-i18n="apply.s4_english_results">Language Test Results</label>
                                         <input type="file" name="doc_english_results" id="doc-english-results" accept="application/pdf,image/jpeg,image/png">
                                         <small style="color:var(--text-medium);font-size:0.82rem;" data-i18n="apply.s4_doc_hint">PDF, JPG, or PNG &middot; max 15&nbsp;MB</small>
                                         <span class="error-msg" id="doc-english-results-error"></span>

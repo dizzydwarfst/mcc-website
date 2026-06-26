@@ -22,6 +22,44 @@
   // hardcoded <option>s — verified live post-deploy.
   const PUBLIC_PROGRAMS_URL = API_BASE + '/public/programs';
   const ASAP_SEMESTER = { value: 'asap', label: 'As soon as possible' };
+  const DEFAULT_ATTENDANCE_MODES = [
+    { value: 'in_person', label: 'In-person', i18n: 'apply.s3_in_person' },
+    { value: 'online_live', label: 'Online (Live)', i18n: 'apply.s3_online' },
+    { value: 'online_self_paced', label: 'Online (Self-paced)', i18n: 'apply.s3_online_self_paced' },
+    { value: 'blended', label: 'Blended', i18n: 'apply.s3_blended' },
+  ];
+  const ATTENDANCE_LABELS = DEFAULT_ATTENDANCE_MODES.reduce((acc, mode) => {
+    acc[mode.value] = mode.label;
+    return acc;
+  }, {});
+  const ATTENDANCE_I18N = DEFAULT_ATTENDANCE_MODES.reduce((acc, mode) => {
+    acc[mode.value] = mode.i18n;
+    return acc;
+  }, {});
+  const ATTENDANCE_ORDER = DEFAULT_ATTENDANCE_MODES.map((mode) => mode.value);
+  const ATTENDANCE_ALIASES = {
+    'in person': 'in_person',
+    'in-person': 'in_person',
+    in_person: 'in_person',
+    inperson: 'in_person',
+    online: 'online_live',
+    'online live': 'online_live',
+    'online-live': 'online_live',
+    'online (live)': 'online_live',
+    online_live: 'online_live',
+    live_online: 'online_live',
+    live: 'online_live',
+    'online self paced': 'online_self_paced',
+    'online self-paced': 'online_self_paced',
+    'online-self-paced': 'online_self_paced',
+    'online (self-paced)': 'online_self_paced',
+    online_self_paced: 'online_self_paced',
+    online_selfpaced: 'online_self_paced',
+    self_paced: 'online_self_paced',
+    selfpaced: 'online_self_paced',
+    blended: 'blended',
+    hybrid: 'blended',
+  };
   const MONTH_NAMES = [
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December',
@@ -35,10 +73,10 @@
   const MAX_BYTES = 15 * 1024 * 1024; // client-side guard; presign max_bytes is authoritative
 
   const DOC_FIELDS = [
-    { docType: 'passport',        label: 'Passport',             inputId: 'doc-passport',         required: true },
-    { docType: 'study_permit',    label: 'Study Permit',         inputId: 'doc-study-permit',     required: false },
-    { docType: 'transcripts',     label: 'Academic Transcripts', inputId: 'doc-transcripts',      required: true },
-    { docType: 'english_results', label: 'English Test Results', inputId: 'doc-english-results',  required: false },
+    { docType: 'passport',        label: 'Passport or Primary ID',             inputId: 'doc-passport',         required: true },
+    { docType: 'study_permit',    label: 'Study Permit / Work Permit / Visa', inputId: 'doc-study-permit',     required: false },
+    { docType: 'transcripts',     label: 'Academic Records',                  inputId: 'doc-transcripts',      required: true },
+    { docType: 'english_results', label: 'Language Test Results',             inputId: 'doc-english-results',  required: false },
     { docType: 'photo',           label: 'Digital photo',        inputId: 'doc-photo',            required: false, allowedTypes: ['image/jpeg', 'image/png'], typeMessage: 'Must be a JPG or PNG.' },
   ];
 
@@ -56,18 +94,19 @@
     { id: 'street_address', label: 'Street address', step: 1, message: 'Street address is required.' },
     { id: 'city', label: 'City', step: 1, message: 'City is required.' },
     { id: 'province', label: 'Province / state', step: 1, message: 'Province / state is required.' },
+    { id: 'postal_code', label: 'Postal / zip code', step: 1, message: 'Postal / zip code is required.' },
     { id: 'country', label: 'Country', step: 1, message: 'Country is required.' },
     { id: 'info_update', label: 'Information update agreement', step: 1, message: 'Please confirm you will update your contact information if it changes.' },
     { id: 'using_agency', name: 'using_agency', label: 'Agency question', step: 2, type: 'radio', message: 'Please tell us whether you are using an agency.' },
     { id: 'agent_first_name', label: 'Agent first name', step: 2, agencyOnly: true, message: 'Agent first name is required.' },
     { id: 'agent_last_name', label: 'Agent last name', step: 2, agencyOnly: true, message: 'Agent last name is required.' },
-    { id: 'agency_company', label: 'Agency company name', step: 2, agencyOnly: true, message: 'Agency company name is required.' },
+    { id: 'agency_company', label: 'Agency company name', step: 2, agencyOnly: true, optional: true },
     { id: 'agent_phone', label: 'Agent phone', step: 2, agencyOnly: true, message: 'Agent phone is required.' },
     { id: 'agent_email', label: 'Agent email', step: 2, agencyOnly: true, message: 'A valid agent email is required.' },
     { id: 'program', label: 'Program', step: 3, message: 'Please choose a program.' },
-    { id: 'semester', label: 'Preferred start date', step: 3, message: 'Please choose a preferred start date.' },
-    { id: 'attendance_mode', name: 'attendance_mode', label: 'Attendance mode', step: 3, type: 'radio', message: 'Please choose how you will attend classes.' },
-    { id: 'pathway_plan', name: 'pathway_plan', label: 'University pathway question', step: 3, type: 'radio', message: 'Please answer the university-pathway question.' },
+    { id: 'semester', label: 'Intake date', step: 3, message: 'Please choose an intake date.' },
+    { id: 'attendance_mode', name: 'attendance_mode', label: 'Attendance mode', step: 3, type: 'radio', groupId: 'attendance-mode-group', message: 'Please choose how you will attend classes.' },
+    { id: 'pathway_interest', name: 'pathway_interest', label: 'Pathway interest', step: 3, type: 'radio', groupId: 'pathway-interest-group', message: 'Please answer the pathway question.' },
     { id: 'signature_name', label: 'Signature', step: 4, message: 'Please type your full legal name as your signature.' },
     { id: 'terms_agreement', label: 'Declaration and consent', step: 4, message: 'Please agree to the policies, terms and conditions before submitting.' },
     ...DOC_FIELDS.map((f) => ({ id: f.inputId, label: f.label, step: 4 })),
@@ -107,9 +146,9 @@
     agency_notes: 'agency_notes',
     program: 'program',
     intended_semester: 'semester',
-    campus: 'campus',
     attendance_mode: 'attendance_mode',
-    university_pathway: 'pathway_plan',
+    pathway_interest: 'pathway_interest',
+    university_pathway: 'pathway_interest',
     signature_full_name: 'signature_name',
     agreed_to_policies: 'terms_agreement',
     documents: 'doc-passport',
@@ -122,7 +161,7 @@
   ready(() => {
     const form = document.getElementById('wizard-form');
     if (form) attach(form);
-    initializeSemesterSelect();
+    initializeProgramControls();
     loadLivePrograms();
   });
 
@@ -142,7 +181,7 @@
         throw new Error('empty or malformed program list');
       }
       populatePrograms(select, programs);
-      syncSemesterSelect(select.value, true);
+      syncProgramSelection(select.value, true);
     } catch (err) {
       // Network / CORS / timeout / bad shape — keep the hardcoded fallback and
       // never block the form. (Locally, CORS blocks this; that's expected.)
@@ -169,7 +208,7 @@
     select.value = previous; // restores the prior choice if it's still in the list
   }
 
-  function initializeSemesterSelect() {
+  function initializeProgramControls() {
     const programSelect = document.getElementById('program');
     const semesterSelect = document.getElementById('semester');
     if (!programSelect || !semesterSelect) return;
@@ -177,8 +216,13 @@
     const placeholder = semesterSelect.querySelector('option[value=""]');
     semesterPlaceholderTemplate = placeholder ? placeholder.cloneNode(true) : null;
 
-    syncSemesterSelect(programSelect.value, true);
-    programSelect.addEventListener('change', () => syncSemesterSelect(programSelect.value));
+    syncProgramSelection(programSelect.value, true);
+    programSelect.addEventListener('change', () => syncProgramSelection(programSelect.value));
+  }
+
+  function syncProgramSelection(programName, preserveSelection) {
+    syncSemesterSelect(programName, preserveSelection);
+    syncProgramOptions(programName, preserveSelection);
   }
 
   function syncSemesterSelect(programName, preserveSelection) {
@@ -268,6 +312,208 @@
     option.textContent = 'Choose an option';
     option.setAttribute('data-i18n', 'apply.s3_choose');
     return option;
+  }
+
+  function syncProgramOptions(programName, preserveSelection) {
+    const program = programsByName.get(programName);
+    syncAttendanceModes(programName, program, preserveSelection);
+    syncPathwayInterest(program, preserveSelection);
+    syncAddOns(program, preserveSelection);
+  }
+
+  function syncAttendanceModes(programName, program, preserveSelection) {
+    const group = document.getElementById('attendance-mode-group');
+    const container = document.getElementById('attendance-mode-options');
+    if (!group || !container) return;
+
+    const previous = preserveSelection ? radio('attendance_mode') : '';
+    const hasConfiguredModes = program && Object.prototype.hasOwnProperty.call(program, 'attendance_modes');
+    let modes = normalizeAttendanceModes(hasConfiguredModes ? program.attendance_modes : []);
+
+    // If the public API is unavailable or an older projection is returned, keep
+    // the form usable with the default Doc 31 attendance set.
+    if (programName && !modes.length && !hasConfiguredModes) {
+      modes = DEFAULT_ATTENDANCE_MODES.slice();
+    }
+
+    container.textContent = '';
+    if (!programName || !modes.length) {
+      group.style.display = 'none';
+      return;
+    }
+
+    modes.forEach((mode) => {
+      const label = document.createElement('label');
+      label.className = 'inline-option';
+
+      const input = document.createElement('input');
+      input.type = 'radio';
+      input.name = 'attendance_mode';
+      input.value = mode.value;
+      input.required = true;
+
+      const text = document.createElement('span');
+      if (mode.i18n) text.setAttribute('data-i18n', mode.i18n);
+      text.textContent = mode.i18n ? translate(mode.i18n, mode.label) : mode.label;
+
+      label.appendChild(input);
+      label.appendChild(text);
+      container.appendChild(label);
+    });
+
+    if (previous && modes.some((mode) => mode.value === previous)) {
+      const match = Array.from(container.querySelectorAll('input[name="attendance_mode"]'))
+        .find((input) => input.value === previous);
+      if (match) match.checked = true;
+    }
+
+    group.style.display = '';
+  }
+
+  function syncPathwayInterest(program, preserveSelection) {
+    const group = document.getElementById('pathway-interest-group');
+    if (!group) return;
+
+    const inputs = Array.from(group.querySelectorAll('input[name="pathway_interest"]'));
+    const show = Boolean(program && program.pathway_enabled === true);
+    const previous = preserveSelection ? radio('pathway_interest') : '';
+
+    inputs.forEach((input) => {
+      input.required = show;
+      input.checked = show && previous && input.value === previous;
+    });
+    group.style.display = show ? '' : 'none';
+  }
+
+  function syncAddOns(program, preserveSelection) {
+    const group = document.getElementById('add-ons-group');
+    const container = document.getElementById('add-ons-options');
+    if (!group || !container) return;
+
+    const previous = preserveSelection ? getSelectedAddOns() : [];
+    const addOns = normalizeAddOns(program ? program.add_ons : []);
+
+    container.textContent = '';
+    if (!addOns.length) {
+      group.style.display = 'none';
+      return;
+    }
+
+    addOns.forEach((addOn) => {
+      const label = document.createElement('label');
+      label.className = 'inline-option optional-add-on';
+
+      const input = document.createElement('input');
+      input.type = 'checkbox';
+      input.name = 'selected_add_ons';
+      input.value = addOn.id;
+      input.dataset.addOnLabel = addOn.label;
+      input.checked = previous.includes(addOn.id);
+
+      const textWrap = document.createElement('span');
+      const title = document.createElement('span');
+      title.textContent = addOn.label;
+      textWrap.appendChild(title);
+
+      if (addOn.description) {
+        const description = document.createElement('small');
+        description.textContent = addOn.description;
+        textWrap.appendChild(description);
+      }
+
+      label.appendChild(input);
+      label.appendChild(textWrap);
+      container.appendChild(label);
+    });
+
+    group.style.display = '';
+  }
+
+  function normalizeAttendanceModes(rawModes) {
+    if (!Array.isArray(rawModes)) return [];
+    const seen = new Set();
+    return rawModes
+      .map(readOptionValue)
+      .filter(Boolean)
+      .map((rawValue) => {
+        const value = normalizeAttendanceValue(rawValue);
+        return {
+          value,
+          label: ATTENDANCE_LABELS[value] || humanizeOptionLabel(rawValue),
+          i18n: ATTENDANCE_I18N[value] || '',
+        };
+      })
+      .filter((mode) => {
+        if (!mode.value || seen.has(mode.value)) return false;
+        seen.add(mode.value);
+        return true;
+      })
+      .sort((a, b) => {
+        const aIndex = ATTENDANCE_ORDER.indexOf(a.value);
+        const bIndex = ATTENDANCE_ORDER.indexOf(b.value);
+        if (aIndex === -1 && bIndex === -1) return 0;
+        if (aIndex === -1) return 1;
+        if (bIndex === -1) return -1;
+        return aIndex - bIndex;
+      });
+  }
+
+  function normalizeAttendanceValue(value) {
+    const raw = String(value || '').trim();
+    const key = raw.toLowerCase().replace(/[_]+/g, ' ').replace(/\s+/g, ' ');
+    return ATTENDANCE_ALIASES[key] || ATTENDANCE_ALIASES[raw] || raw;
+  }
+
+  function normalizeAddOns(rawAddOns) {
+    if (!Array.isArray(rawAddOns)) return [];
+    const seen = new Set();
+    return rawAddOns
+      .map((item) => {
+        if (!item) return null;
+        if (typeof item === 'string') {
+          const label = item.trim();
+          return label ? { id: label, label, description: '' } : null;
+        }
+        if (typeof item !== 'object') return null;
+        const label = String(item.label || item.name || item.title || '').trim();
+        const id = String(item.id || item.value || label).trim();
+        const description = String(item.description || item.desc || '').trim();
+        return id && label ? { id, label, description } : null;
+      })
+      .filter((addOn) => {
+        if (!addOn || seen.has(addOn.id)) return false;
+        seen.add(addOn.id);
+        return true;
+      });
+  }
+
+  function readOptionValue(item) {
+    if (typeof item === 'string') return item.trim();
+    if (!item || typeof item !== 'object') return '';
+    return String(item.value || item.id || item.key || item.label || item.name || '').trim();
+  }
+
+  function humanizeOptionLabel(value) {
+    return String(value || '')
+      .replace(/[_-]+/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .replace(/\b\w/g, (char) => char.toUpperCase());
+  }
+
+  function translate(key, fallback) {
+    const entry = lookupTranslation(key);
+    if (!entry) return fallback;
+    const lang = document.body && document.body.getAttribute('data-lang') === 'fr' ? 'fr' : 'en';
+    return (lang === 'fr' && entry.fr != null) ? entry.fr : (entry.en || fallback);
+  }
+
+  function lookupTranslation(key) {
+    if (!window.MCC_TRANSLATIONS || !key) return null;
+    return key.split('.').reduce((node, part) => {
+      if (!node || typeof node !== 'object') return null;
+      return node[part];
+    }, window.MCC_TRANSLATIONS);
   }
 
   function attach(form) {
@@ -366,14 +612,26 @@
   }
 
   // ── Helpers ──
-  const val = (id) => {
+  function val(id) {
     const el = document.getElementById(id);
     return el ? el.value.trim() : '';
-  };
-  const radio = (name) => {
+  }
+
+  function radio(name) {
     const el = document.querySelector(`input[name="${name}"]:checked`);
     return el ? el.value : '';
-  };
+  }
+
+  function groupVisible(id) {
+    const el = id ? document.getElementById(id) : null;
+    return Boolean(el && el.style.display !== 'none');
+  }
+
+  function getSelectedAddOns() {
+    return Array.from(document.querySelectorAll('input[name="selected_add_ons"]:checked'))
+      .map((input) => input.value)
+      .filter(Boolean);
+  }
 
   function isUsingAgency() {
     return radio('using_agency') === 'yes';
@@ -507,9 +765,7 @@
       // Step 3 — Program
       program: val('program'),
       intended_semester: val('semester'),
-      campus: val('campus') || 'undecided',
-      attendance_mode: radio('attendance_mode'),
-      university_pathway: radio('pathway_plan'),
+      selected_add_ons: getSelectedAddOns(),
 
       // Step 4 — Declaration
       signature_full_name: val('signature_name'),
@@ -522,13 +778,20 @@
     const sinNumber = val('sin_number');
     if (sinNumber) payload.sin_number = sinNumber;
 
+    const attendanceMode = radio('attendance_mode');
+    if (attendanceMode) payload.attendance_mode = attendanceMode;
+
+    const pathwayInterest = radio('pathway_interest');
+    if (pathwayInterest) payload.pathway_interest = pathwayInterest;
+
     if (usingAgency) {
       payload.agent_first_name = val('agent_first_name');
       payload.agent_last_name = val('agent_last_name');
-      payload.agency_company_name = val('agency_company');
       payload.agent_phone = val('agent_phone');
       payload.agent_email = val('agent_email');
       payload.agency_notes = val('agency_notes');
+      const agencyCompany = val('agency_company');
+      if (agencyCompany) payload.agency_company_name = agencyCompany;
     }
 
     return payload;
@@ -539,6 +802,7 @@
     for (const field of FIELD_CONFIG) {
       if (field.id.startsWith('doc-')) continue;
       if (field.agencyOnly && !isUsingAgency()) continue;
+      if (field.groupId && !groupVisible(field.groupId)) continue;
 
       if (field.type === 'radio') {
         if (!radio(field.name || field.id)) errors.push(toFieldError(field));
