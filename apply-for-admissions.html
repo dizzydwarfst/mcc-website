@@ -484,7 +484,7 @@
                                 <h3 class="form-section-title" data-i18n="apply.s4_title">Step 4 &mdash; Upload Documents</h3>
                                 <p style="color:var(--text-medium);margin-bottom:1.5rem;font-size:0.95rem;" data-i18n="apply.s4_intro">Passport or primary ID and academic records are required. Upload your permit or visa document and language test results too if you have them. PDF or image files, max 15&nbsp;MB each.</p>
 
-                                <div class="form-grid-2">
+                                <div class="document-upload-grid">
                                     <div class="form-group">
                                         <label for="doc-passport"><span data-i18n="apply.s4_passport">Passport or Primary ID</span> <span style="color:#D4AF37">*</span></label>
                                         <input type="file" name="doc_passport" id="doc-passport" accept="application/pdf,image/jpeg,image/png">
@@ -492,14 +492,11 @@
                                         <span class="error-msg" id="doc-passport-error"></span>
                                     </div>
                                     <div class="form-group">
-                                        <label for="doc-study-permit"><span data-i18n="apply.s4_study_permit">Study Permit / Work Permit / Visa</span> <span style="font-weight:400;color:var(--text-medium);" data-i18n="apply.s4_optional_hint">(optional &mdash; upload if you have it)</span></label>
+                                        <label for="doc-study-permit"><span data-i18n="apply.s4_study_permit">Study Permit / Work Permit / Visa</span> <span style="font-weight:400;color:var(--text-medium);" data-i18n="apply.s4_optional_hint">&mdash; upload if you have it</span></label>
                                         <input type="file" name="doc_study_permit" id="doc-study-permit" accept="application/pdf,image/jpeg,image/png">
                                         <small style="color:var(--text-medium);font-size:0.82rem;" data-i18n="apply.s4_doc_hint">PDF, JPG, or PNG &middot; max 15&nbsp;MB</small>
                                         <span class="error-msg" id="doc-study-permit-error"></span>
                                     </div>
-                                </div>
-
-                                <div class="form-grid-2">
                                     <div class="form-group">
                                         <label for="doc-transcripts"><span data-i18n="apply.s4_transcripts">Academic Records</span> <span style="color:#D4AF37">*</span></label>
                                         <input type="file" name="doc_transcripts" id="doc-transcripts" accept="application/pdf,image/jpeg,image/png">
@@ -512,15 +509,13 @@
                                         <small style="color:var(--text-medium);font-size:0.82rem;" data-i18n="apply.s4_doc_hint">PDF, JPG, or PNG &middot; max 15&nbsp;MB</small>
                                         <span class="error-msg" id="doc-english-results-error"></span>
                                     </div>
-                                </div>
-
-                                <div class="form-grid-2">
                                     <div class="form-group">
                                         <label for="doc-photo"><span data-i18n="apply.s4_photo">Digital Photo</span> <span style="font-weight:400;color:var(--text-medium);" data-i18n="apply.s1_optional">(optional)</span></label>
                                         <input type="file" name="doc_photo" id="doc-photo" accept="image/jpeg,image/png">
                                         <small style="color:var(--text-medium);font-size:0.82rem;" data-i18n="apply.s4_photo_hint">Optional &mdash; used for your school ID and profile picture.</small>
                                         <span class="error-msg" id="doc-photo-error"></span>
                                     </div>
+                                    <div class="document-upload-spacer" aria-hidden="true"></div>
                                 </div>
 
                                 <div class="form-group" style="margin-top:2rem;">

@@ -1021,7 +1021,7 @@ window.MCC_TRANSLATIONS = {
         s4_photo: { en: "Digital Photo", fr: "Photo numérique" },
         s4_doc_hint: { en: "PDF, JPG, or PNG · max 15 MB", fr: "PDF, JPG ou PNG · max. 15 Mo" },
         s4_photo_hint: { en: "Optional — used for your school ID and profile picture.", fr: "Facultatif — utilisé pour votre carte étudiante et votre photo de profil." },
-        s4_optional_hint: { en: "(optional — upload if you have it)", fr: "(facultatif — téléversez si vous l'avez)" },
+        s4_optional_hint: { en: "— upload if you have it", fr: "— téléversez si vous l'avez" },
         s4_signature: { en: "Your Signature", fr: "Votre signature" },
         s4_signature_ph: { en: "Type your full legal name as your signature", fr: "Saisissez votre nom légal complet en guise de signature" },
         s4_signature_help: { en: "Typing your full legal name above acts as your electronic signature.", fr: "Saisir votre nom légal complet ci-dessus tient lieu de signature électronique." },

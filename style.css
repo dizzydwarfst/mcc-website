@@ -1302,6 +1302,33 @@ h1, h2, h3, h4 {
     border-color: #98a8a0;
 }
 
+.document-upload-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 1.5rem;
+    row-gap: 1.25rem;
+    align-items: stretch;
+}
+
+.document-upload-grid .form-group {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.document-upload-grid .form-group label {
+    min-height: 2.6em;
+    line-height: 1.3;
+}
+
+.document-upload-grid .form-group input[type="file"] {
+    margin-top: auto;
+}
+
+.document-upload-spacer {
+    min-height: 1px;
+}
+
 /* Reusable option rows (Step 3 attendance radios + add-on checkboxes).
    Selectors are scoped to .form-group so they out-specify the generic
    `.form-group label { display:block }` rule that would otherwise collapse
@@ -1604,6 +1631,18 @@ h1, h2, h3, h4 {
 
     .form-grid-2, .form-grid-3 {
         grid-template-columns: 1fr;
+    }
+
+    .document-upload-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .document-upload-grid .form-group label {
+        min-height: 0;
+    }
+
+    .document-upload-spacer {
+        display: none;
     }
     
     .banner-content { gap: 1.5rem; flex-direction: column; align-items: flex-start; }
