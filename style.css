@@ -4463,6 +4463,267 @@ textarea {
     margin: 0;
 }
 
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.agency-form-band {
+    background: var(--light-gray);
+    padding: 0 0 5rem;
+}
+
+.agency-application-layout {
+    grid-template-columns: 330px minmax(0, 1fr);
+}
+
+.agency-form-shell {
+    padding: clamp(1.5rem, 2.6vw, 2.75rem);
+}
+
+.agency-form {
+    display: grid;
+    gap: 2.25rem;
+}
+
+.agency-form-section {
+    display: grid;
+    gap: 1.35rem;
+    padding-bottom: 2.1rem;
+    border-bottom: 1px solid rgba(6, 43, 26, 0.1);
+}
+
+.agency-form-section:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+.agency-form .form-section-title {
+    margin-bottom: 0;
+}
+
+.agency-type-fieldset,
+.agency-form fieldset.form-group {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.agency-form fieldset.form-group legend {
+    display: block;
+    margin-bottom: 0.75rem;
+    font-weight: 700;
+    color: var(--deep-green);
+}
+
+.agency-type-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.agency-type-card,
+.agency-form .program-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    min-height: 100%;
+    margin: 0;
+    padding: 1rem;
+    border: 1.5px solid #c9d2cd;
+    border-radius: 14px;
+    background: #ffffff;
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.agency-type-card:hover,
+.agency-form .program-check:hover {
+    border-color: #98a8a0;
+    transform: translateY(-1px);
+}
+
+.agency-type-card:has(input:checked),
+.agency-form .program-check:has(input:checked) {
+    border-color: var(--accent-gold);
+    background: rgba(212, 175, 55, 0.06);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.16);
+}
+
+.agency-type-card input,
+.agency-form .program-check input {
+    width: auto;
+    flex: 0 0 auto;
+    margin-top: 0.18rem;
+    accent-color: var(--accent-gold);
+}
+
+.agency-type-card strong {
+    display: block;
+    color: var(--deep-green-dark);
+    line-height: 1.25;
+}
+
+.agency-type-card small,
+.field-hint,
+.optional-note {
+    color: #5b6a63;
+    font-size: 0.84rem;
+    line-height: 1.45;
+}
+
+.field-hint {
+    display: block;
+    margin-top: 0.4rem;
+}
+
+.program-section-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.program-counter {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.45rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(6, 43, 26, 0.08);
+    color: var(--deep-green);
+    font-size: 0.82rem;
+    font-weight: 800;
+}
+
+.program-check-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+}
+
+.agency-form .program-check {
+    font-weight: 600;
+}
+
+.agency-document-copy {
+    margin: 0;
+    max-width: 720px;
+}
+
+.agency-consent-stack {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.agency-consent-stack .checkbox-group {
+    margin: 0;
+    padding: 1rem;
+    border: 1px solid rgba(6, 43, 26, 0.12);
+    border-radius: 14px;
+    background: #f7faf8;
+}
+
+.agency-consent-stack .checkbox-group input {
+    accent-color: var(--accent-gold);
+    flex: 0 0 auto;
+}
+
+.agency-consent-stack .checkbox-group label {
+    color: #3b5248;
+    line-height: 1.55;
+}
+
+.agency-general-error {
+    padding: 1rem 1.15rem;
+    border-radius: 12px;
+    background: #fdecea;
+    border: 1px solid #f5c6cb;
+    color: #a12622;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.agency-submit-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.agency-submit-row p {
+    margin: 0;
+    color: #5b6a63;
+    font-size: 0.92rem;
+}
+
+.agency-success {
+    margin-bottom: 2rem;
+    padding: 2rem;
+    border-radius: 20px;
+    background: #f4f7f5;
+    border: 1px solid rgba(6, 43, 26, 0.12);
+    text-align: center;
+}
+
+.agency-success h2 {
+    color: var(--deep-green);
+    font-size: 2rem;
+    margin: 0.5rem 0;
+}
+
+.agency-success p {
+    color: #3b5248;
+    margin: 0 auto;
+    max-width: 640px;
+}
+
+.agency-reference {
+    margin-top: 1rem !important;
+    color: var(--deep-green) !important;
+    font-weight: 800;
+}
+
+.agency-form.is-submitted {
+    opacity: 0.72;
+}
+
+@media (max-width: 1100px) {
+    .agency-type-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 900px) {
+    .agency-application-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 700px) {
+    .program-check-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .agency-submit-row {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .agency-submit-row .btn-solid-gold {
+        width: 100%;
+    }
+}
+
 .site-footer {
     background: #05160f;
     padding: 4.5rem 5% 2rem;

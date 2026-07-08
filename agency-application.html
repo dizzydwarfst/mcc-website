@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Become an MCC Agency Partner. Submit a public agency application to partner with Metropolitan Community College.">
+    <title>Become an MCC Agency Partner - Metropolitan Community College</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous" referrerpolicy="no-referrer">
+</head>
+<body>
+    <header class="solid-header sticky">
+        <div class="header-top">
+            <div class="header-top-inner">
+                <div class="portal-logins">
+                    <a href="#" class="btn-top-portal" data-portal-open="student"><i class="fas fa-right-to-bracket"></i> <span data-i18n="common.topbar_portal">MCC Portal</span></a>
+                    <a href="contact.html" class="btn-top-link" data-i18n="common.topbar_contact">Contact</a>
+                    <a href="/apply-for-admissions" class="btn-top-link" data-i18n="common.topbar_apply">Apply</a>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="header-main-inner">
+                <div class="logo-container">
+                    <a href="index.html" class="logo-link">
+                        <span class="mcc-logo"><img src="assets/mcc-logo-outlined.png" alt="Metropolitan Community College logo"></span>
+                        <span class="logo-text"><span class="logo-line logo-line-1">Metropolitan</span><span class="logo-line logo-line-2">Community College</span></span>
+                    </a>
+                </div>
+                <button class="mobile-menu-btn" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
+                <nav class="main-nav" role="navigation">
+                    <div class="nav-dropdown">
+                        <a href="about.html" class="nav-dropdown-toggle active"><span data-i18n="common.nav_about">About</span> <i class="fas fa-chevron-down nav-chevron"></i></a>
+                        <div class="dropdown-content">
+                            <a href="about.html" data-i18n="common.nav_about_overview">About Overview</a>
+                            <a href="mission-statement.html" data-i18n="common.nav_mission">Mission Statement</a>
+                            <a href="mcc-advantage.html" data-i18n="common.nav_advantage">MCC Advantage</a>
+                            <a href="policies.html" data-i18n="common.nav_policies">Policies</a>
+                            <a href="alumni.html" data-i18n="common.nav_alumni">Alumni</a>
+                            <a href="agent-cooperation.html" data-i18n="common.nav_agent_coop">Agent Cooperation</a>
+                            <a href="/agency-application" class="nav-current">Agency Application</a>
+                        </div>
+                    </div>
+                    <div class="nav-dropdown">
+                        <a href="programs.html" class="nav-dropdown-toggle"><span data-i18n="common.nav_programs">Programs</span> <i class="fas fa-chevron-down nav-chevron"></i></a>
+                        <div class="dropdown-content">
+                            <div class="nav-submenu-item">
+                                <a href="programs-microcredentials.html" class="nav-submenu-toggle"><span data-i18n="common.nav_micro">Micro Certificate Programs</span> <i class="fas fa-chevron-right submenu-chevron"></i></a>
+                                <div class="nav-submenu">
+                                    <a href="program-business-communications.html" data-i18n="common.nav_program_business">Business Communication</a>
+                                </div>
+                            </div>
+                            <div class="nav-submenu-item">
+                                <a href="programs-diploma.html" class="nav-submenu-toggle"><span data-i18n="common.nav_diploma">Diploma Programs</span> <i class="fas fa-chevron-right submenu-chevron"></i></a>
+                                <div class="nav-submenu">
+                                    <a href="program-esports.html" data-i18n="common.nav_program_esports">International Esports Management Diploma</a>
+                                    <a href="program-hospitality.html" data-i18n="common.nav_program_hospitality">Hospitality Operations Diploma</a>
+                                    <a href="program-global-hospitality.html" data-i18n="common.nav_program_global_hosp">Global Management in Hospitality Diploma</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nav-dropdown">
+                        <a href="admissions.html" class="nav-dropdown-toggle"><span data-i18n="common.nav_admissions">Admissions</span> <i class="fas fa-chevron-down nav-chevron"></i></a>
+                        <div class="dropdown-content">
+                            <a href="admissions.html" data-i18n="common.nav_admissions_overview">Admissions Overview</a>
+                            <a href="admission-procedure.html" data-i18n="common.nav_admission_procedure">Admission Procedure</a>
+                            <a href="admission-requirements.html" data-i18n="common.nav_admission_requirements">Admission Requirements</a>
+                            <a href="tuition-fees.html" data-i18n="common.nav_tuition">Tuition, Fees & Payments</a>
+                            <a href="international-students.html" data-i18n="common.nav_international">International Students</a>
+                            <a href="/apply-for-admissions" data-i18n="common.nav_apply">Apply for Admissions</a>
+                        </div>
+                    </div>
+                    <div class="nav-dropdown">
+                        <a href="student-life.html" class="nav-dropdown-toggle"><span data-i18n="common.nav_student_life">Student Life</span> <i class="fas fa-chevron-down nav-chevron"></i></a>
+                        <div class="dropdown-content">
+                            <a href="student-life.html" data-i18n="common.nav_student_life_hub">Student Life Hub</a>
+                            <a href="academic-calendar.html" data-i18n="common.nav_academic_calendar">Academic Calendar</a>
+                            <a href="academic-support.html" data-i18n="common.nav_academic_support">Academic Support</a>
+                            <a href="career-services.html" data-i18n="common.nav_career_services">Career Services</a>
+                            <a href="financial-aid.html" data-i18n="common.nav_financial_aid">Financial Aid</a>
+                            <a href="housing.html" data-i18n="common.nav_housing">Housing</a>
+                            <a href="health-safety.html" data-i18n="common.nav_health_safety">Health &amp; Safety</a>
+                            <a href="arrival-in-canada.html" data-i18n="common.nav_arrival">Arrival in Canada</a>
+                            <a href="living-in-vancouver.html" data-i18n="common.nav_living_vancouver">Living in Vancouver</a>
+                            <a href="community-integration.html" data-i18n="common.nav_community">Community Integration</a>
+                        </div>
+                    </div>
+                    <a href="newsletter.html" data-i18n="common.nav_newsletter">Newsletter</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-main">
+        <section class="page-hero">
+            <div class="page-hero-grid reveal">
+                <div>
+                    <h1 class="page-hero-title">Become an MCC Agency Partner</h1>
+                    <p class="page-hero-subtitle">Submit your agency or individual agent application for review by MCC. This secure public form sends your information directly to the MCC Portal agency application endpoint.</p>
+                    <div class="hero-action-row">
+                        <a href="#agency-application-form" class="btn-solid-gold">Start Application</a>
+                        <a href="agent-cooperation.html" class="btn-outline-gold">Review Partner Support</a>
+                    </div>
+                    <div class="page-stat-list">
+                        <span class="page-stat-pill"><i class="fas fa-shield-alt"></i> Portal-connected submission</span>
+                        <span class="page-stat-pill"><i class="fas fa-file-arrow-up"></i> PDF, JPEG, or PNG uploads</span>
+                        <span class="page-stat-pill"><i class="fas fa-clock"></i> Submitted for MCC review</span>
+                    </div>
+                    <div class="page-highlight-card">
+                        <strong>Before you begin</strong>
+                        <p>Have your legal details, market region, contact information, and required document ready. Company agencies need a registration document; individual agents need government ID.</p>
+                    </div>
+                </div>
+                <div class="page-hero-media">
+                    <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=80" alt="Professional partners reviewing documents together">
+                </div>
+            </div>
+        </section>
+
+        <section class="agency-form-band">
+            <div class="application-layout agency-application-layout">
+                <aside class="application-sidebar reveal">
+                    <span class="section-kicker section-kicker-inverse">Application Guide</span>
+                    <h2>What this form collects</h2>
+                    <p>Your application is reviewed in the MCC Portal. The marketing website does not store agency applications.</p>
+                    <div class="sidebar-stack">
+                        <div class="sidebar-panel">
+                            <strong>Agency profile</strong>
+                            <p>Agency type, legal name, market region, and contact information.</p>
+                        </div>
+                        <div class="sidebar-panel">
+                            <strong>Program focus</strong>
+                            <p>Choose up to three programs you expect to introduce to prospective students.</p>
+                        </div>
+                        <div class="sidebar-panel">
+                            <strong>Required document</strong>
+                            <p>Upload company registration for agencies or government ID for individual agents.</p>
+                        </div>
+                    </div>
+                </aside>
+
+                <div class="application-main-shell agency-form-shell reveal">
+                    <div id="agency-application-success" class="agency-success" role="status" hidden>
+                        <i class="fas fa-check-circle success-icon"></i>
+                        <h2>Application Submitted</h2>
+                        <p>Thank you. Your agency application has been submitted successfully. MCC will review your application and contact you soon.</p>
+                        <p id="agency-application-reference" class="agency-reference" hidden></p>
+                    </div>
+
+                    <form id="agency-application-form" class="agency-form" novalidate>
+                        <section class="agency-form-section">
+                            <h2 class="form-section-title">1. Agency Type</h2>
+                            <fieldset class="agency-type-fieldset" data-field-group="agencyType" aria-describedby="agencyType-error">
+                                <legend class="sr-only">Agency type</legend>
+                                <div class="agency-type-grid">
+                                    <label class="agency-type-card">
+                                        <input type="radio" name="agencyType" value="Domestic Agency" checked>
+                                        <span>
+                                            <strong>Domestic Agency</strong>
+                                            <small>Registered agency operating primarily in Canada.</small>
+                                        </span>
+                                    </label>
+                                    <label class="agency-type-card">
+                                        <input type="radio" name="agencyType" value="International Agency">
+                                        <span>
+                                            <strong>International Agency</strong>
+                                            <small>Registered agency operating outside Canada.</small>
+                                        </span>
+                                    </label>
+                                    <label class="agency-type-card">
+                                        <input type="radio" name="agencyType" value="Personal / Individual Agent">
+                                        <span>
+                                            <strong>Personal / Individual Agent</strong>
+                                            <small>Independent agent applying as an individual.</small>
+                                        </span>
+                                    </label>
+                                </div>
+                                <span class="error-msg" id="agencyType-error"></span>
+                            </fieldset>
+                        </section>
+
+                        <section class="agency-form-section">
+                            <h2 class="form-section-title">2. Identity and Contact</h2>
+                            <div class="form-grid-2">
+                                <div class="form-group">
+                                    <label for="legalName"><span id="legalNameText">Company legal name</span> <span class="required-mark">*</span></label>
+                                    <input type="text" id="legalName" name="legalName" autocomplete="organization" required>
+                                    <span class="error-msg" id="legalName-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="preferredName"><span id="preferredNameText">Preferred/display name</span></label>
+                                    <input type="text" id="preferredName" name="preferredName">
+                                    <span class="error-msg" id="preferredName-error"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-grid-3">
+                                <div class="form-group">
+                                    <label for="mainContactName"><span id="mainContactNameText">Main contact name</span> <span class="required-mark">*</span></label>
+                                    <input type="text" id="mainContactName" name="mainContactName" autocomplete="name" required>
+                                    <span class="error-msg" id="mainContactName-error"></span>
+                                </div>
+                                <div class="form-group" data-agency-only>
+                                    <label for="mainContactJobTitle">Main contact job title</label>
+                                    <input type="text" id="mainContactJobTitle" name="mainContactJobTitle" autocomplete="organization-title">
+                                    <span class="error-msg" id="mainContactJobTitle-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="mainContactEmail"><span id="mainContactEmailText">Main contact email</span> <span class="required-mark">*</span></label>
+                                    <input type="email" id="mainContactEmail" name="mainContactEmail" autocomplete="email" required>
+                                    <span class="error-msg" id="mainContactEmail-error"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-grid-3">
+                                <div class="form-group">
+                                    <label for="mainContactPhone"><span id="mainContactPhoneText">Main contact phone</span> <span class="required-mark">*</span></label>
+                                    <input type="tel" id="mainContactPhone" name="mainContactPhone" autocomplete="tel" required>
+                                    <span class="error-msg" id="mainContactPhone-error"></span>
+                                </div>
+                                <div class="form-group" data-agency-only>
+                                    <label for="companyEmail">Company email</label>
+                                    <input type="email" id="companyEmail" name="companyEmail" autocomplete="email">
+                                    <span class="error-msg" id="companyEmail-error"></span>
+                                </div>
+                                <div class="form-group" data-agency-only>
+                                    <label for="companyPhone">Company phone</label>
+                                    <input type="tel" id="companyPhone" name="companyPhone" autocomplete="tel">
+                                    <span class="error-msg" id="companyPhone-error"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group" data-personal-only>
+                                <label for="sin">SIN <span class="optional-note">(optional / if applicable)</span></label>
+                                <input type="text" id="sin" name="sin" inputmode="numeric" autocomplete="off" maxlength="20">
+                                <small class="field-hint">Only enter this if MCC has requested it for your individual agent application.</small>
+                                <span class="error-msg" id="sin-error"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="generalContactInfo">General contact info</label>
+                                <textarea id="generalContactInfo" name="generalContactInfo" rows="3" placeholder="Office hours, WhatsApp, WeChat, website, or other contact notes"></textarea>
+                                <span class="error-msg" id="generalContactInfo-error"></span>
+                            </div>
+                        </section>
+
+                        <section class="agency-form-section">
+                            <h2 class="form-section-title">3. Market and Location</h2>
+                            <div class="form-grid-2">
+                                <div class="form-group">
+                                    <label for="primaryMarketRegion">Primary market region <span class="required-mark">*</span></label>
+                                    <input type="text" id="primaryMarketRegion" name="primaryMarketRegion" required placeholder="Example: Metro Vancouver, Brazil, South Korea">
+                                    <span class="error-msg" id="primaryMarketRegion-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="secondaryMarketRegions">Secondary market region(s)</label>
+                                    <input type="text" id="secondaryMarketRegions" name="secondaryMarketRegions" placeholder="Optional; separate multiple regions with commas">
+                                    <span class="error-msg" id="secondaryMarketRegions-error"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-grid-3">
+                                <div class="form-group">
+                                    <label for="country">Country <span class="required-mark">*</span></label>
+                                    <select id="country" name="country" required>
+                                        <option value="">Select Country</option>
+                                    </select>
+                                    <span class="error-msg" id="country-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="provinceState">Province / State</label>
+                                    <input type="text" id="provinceState" name="provinceState" autocomplete="address-level1">
+                                    <span class="error-msg" id="provinceState-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="city">City <span class="required-mark">*</span></label>
+                                    <input type="text" id="city" name="city" autocomplete="address-level2" required>
+                                    <span class="error-msg" id="city-error"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-grid-2">
+                                <div class="form-group">
+                                    <label for="postalCode">Postal code</label>
+                                    <input type="text" id="postalCode" name="postalCode" autocomplete="postal-code">
+                                    <span class="error-msg" id="postalCode-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="streetAddress">Street address</label>
+                                    <input type="text" id="streetAddress" name="streetAddress" autocomplete="street-address">
+                                    <span class="error-msg" id="streetAddress-error"></span>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="agency-form-section">
+                            <div class="program-section-head">
+                                <h2 class="form-section-title">4. Programs of Interest</h2>
+                                <span id="programs-counter" class="program-counter" aria-live="polite">0/3 selected</span>
+                            </div>
+                            <fieldset class="form-group" data-field-group="programsOfInterest" aria-describedby="programsOfInterest-error">
+                                <legend>Top 3 programs of interest</legend>
+                                <div class="program-check-grid">
+                                    <label class="program-check"><input type="checkbox" name="programsOfInterest" value="French Test Preparation (TCF & TEF)"> <span>French Test Preparation (TCF &amp; TEF)</span></label>
+                                    <label class="program-check"><input type="checkbox" name="programsOfInterest" value="French as a Second Language (FSL)"> <span>French as a Second Language (FSL)</span></label>
+                                    <label class="program-check"><input type="checkbox" name="programsOfInterest" value="Global Management in Hospitality Diploma"> <span>Global Management in Hospitality Diploma</span></label>
+                                    <label class="program-check"><input type="checkbox" name="programsOfInterest" value="Hospitality Operations Diploma"> <span>Hospitality Operations Diploma</span></label>
+                                    <label class="program-check"><input type="checkbox" name="programsOfInterest" value="International Esports Management Diploma"> <span>International Esports Management Diploma</span></label>
+                                    <label class="program-check"><input type="checkbox" name="programsOfInterest" value="Next-Gen Applied AI Mastery"> <span>Next-Gen Applied AI Mastery</span></label>
+                                    <label class="program-check"><input type="checkbox" name="programsOfInterest" value="Video Content Creation and Social Media Management"> <span>Video Content Creation and Social Media Management</span></label>
+                                </div>
+                                <span class="error-msg" id="programsOfInterest-error"></span>
+                            </fieldset>
+                        </section>
+
+                        <section class="agency-form-section">
+                            <h2 class="form-section-title">5. Background</h2>
+                            <div class="form-grid-2">
+                                <div class="form-group">
+                                    <label for="shortIntroduction">Short introduction / background</label>
+                                    <textarea id="shortIntroduction" name="shortIntroduction" rows="4" placeholder="Tell us about your recruitment experience and student communities."></textarea>
+                                    <span class="error-msg" id="shortIntroduction-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="howDidYouHearAboutMcc">How did you hear about MCC?</label>
+                                    <textarea id="howDidYouHearAboutMcc" name="howDidYouHearAboutMcc" rows="4"></textarea>
+                                    <span class="error-msg" id="howDidYouHearAboutMcc-error"></span>
+                                </div>
+                            </div>
+                            <div class="form-grid-2">
+                                <div class="form-group">
+                                    <label for="estimatedStudentReferralVolume">Estimated student referral volume</label>
+                                    <input type="text" id="estimatedStudentReferralVolume" name="estimatedStudentReferralVolume" placeholder="Example: 5-10 students per year">
+                                    <span class="error-msg" id="estimatedStudentReferralVolume-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="preferredContactChannel">Preferred contact channel</label>
+                                    <select id="preferredContactChannel" name="preferredContactChannel">
+                                        <option value="">Choose an option</option>
+                                        <option value="Email">Email</option>
+                                        <option value="Phone">Phone</option>
+                                        <option value="WhatsApp">WhatsApp</option>
+                                        <option value="WeChat">WeChat</option>
+                                        <option value="Video call">Video call</option>
+                                    </select>
+                                    <span class="error-msg" id="preferredContactChannel-error"></span>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="agency-form-section">
+                            <h2 class="form-section-title">6. Required Document</h2>
+                            <p id="agency-document-instruction" class="section-copy agency-document-copy">Upload your company registration document as a PDF, JPEG, or PNG file. Maximum file size is 15 MB.</p>
+                            <div class="document-upload-grid">
+                                <div class="form-group" data-agency-only>
+                                    <label for="companyRegistrationDocument">Company registration document <span class="required-mark">*</span></label>
+                                    <input type="file" id="companyRegistrationDocument" name="companyRegistrationDocument" accept="application/pdf,image/jpeg,image/png">
+                                    <small class="field-hint">Required for Domestic Agency and International Agency.</small>
+                                    <span class="error-msg" id="companyRegistrationDocument-error"></span>
+                                </div>
+                                <div class="form-group" data-personal-only>
+                                    <label for="governmentIdDocument">Government ID document <span class="required-mark">*</span></label>
+                                    <input type="file" id="governmentIdDocument" name="governmentIdDocument" accept="application/pdf,image/jpeg,image/png">
+                                    <small class="field-hint">Required for Personal / Individual Agent.</small>
+                                    <span class="error-msg" id="governmentIdDocument-error"></span>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="agency-form-section">
+                            <h2 class="form-section-title">7. Consent and Privacy</h2>
+                            <div class="agency-consent-stack">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="consentConfirmed" name="consentConfirmed">
+                                    <label for="consentConfirmed">I confirm that the information provided is accurate and that MCC may contact me about this agency application. <span class="required-mark">*</span></label>
+                                </div>
+                                <span class="error-msg" id="consentConfirmed-error"></span>
+
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="privacyConfirmed" name="privacyConfirmed">
+                                    <label for="privacyConfirmed">I understand that this application will be submitted to the MCC Portal for review and handled according to MCC's privacy practices. <span class="required-mark">*</span></label>
+                                </div>
+                                <span class="error-msg" id="privacyConfirmed-error"></span>
+                            </div>
+
+                            <div id="agency-submit-error" class="agency-general-error" role="alert" hidden></div>
+
+                            <div class="agency-submit-row">
+                                <button type="submit" class="btn-solid-gold">Submit Application</button>
+                                <p>Do not close this page while your document is uploading.</p>
+                            </div>
+                        </section>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact" class="site-footer">
+        <div class="footer-grid reveal">
+            <div class="footer-brand">
+                <a href="index.html" class="footer-brand-logo"><span class="mcc-logo large"><img src="assets/mcc-logo-outlined.png" alt="Metropolitan Community College logo"></span><span class="logo-text footer-logo-text"><span class="logo-line logo-line-1">Metropolitan</span><span class="logo-line logo-line-2">Community</span><span class="logo-line logo-line-3">College</span></span></a>
+            </div>
+            <div class="footer-links">
+                <h4 data-i18n="common.footer_quick_links">Quick Links</h4>
+                <ul>
+                    <li><a href="admissions.html" data-i18n="common.nav_admissions">Admissions</a></li>
+                    <li><a href="international-students.html" data-i18n="common.nav_international">International Students</a></li>
+                    <li><a href="career-services.html" data-i18n="common.nav_career_services">Career Services</a></li>
+                    <li><a href="alumni.html" data-i18n="common.nav_alumni">Alumni</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4 data-i18n="common.footer_explore">Explore MCC</h4>
+                <ul>
+                    <li><a href="programs.html" data-i18n="common.nav_programs">Programs</a></li>
+                    <li><a href="about.html" data-i18n="common.footer_about_mcc">About MCC</a></li>
+                    <li><a href="newsletter.html" data-i18n="common.footer_news_newsletter">News & Newsletter</a></li>
+                    <li><a href="contact.html" data-i18n="common.footer_contact_us_link">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4 data-i18n="common.footer_contact_heading">Contact Us</h4>
+                <p><i class="fas fa-map-marker-alt"></i> <span data-i18n="common.footer_address_line">322 Water St #100, Vancouver, BC, V6B 1B6, Canada</span></p>
+                <p><i class="fas fa-phone"></i> 604-300-3123</p>
+                <p><i class="fas fa-envelope"></i> admin@metropolitancollege.ca</p>
+                <p><i class="fas fa-clock"></i> <span data-i18n="common.footer_hours">Monday - Friday, 9:00 AM - 5:00 PM</span></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-i18n="common.footer_copyright">&copy; 2026 Metropolitan Community College. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="translations.js"></script>
+    <script src="country-options.js" defer></script>
+    <script src="agency-application.js" defer></script>
+    <script src="script.js"></script>
+</body>
+</html>
