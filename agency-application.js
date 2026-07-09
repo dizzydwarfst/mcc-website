@@ -37,6 +37,8 @@
     mainContactPhone: 'Main contact person phone number',
     secondaryContactEmail: 'Secondary contact email address',
     secondaryContactPhone: 'Secondary contact phone number',
+    gstNumber: 'GST Number',
+    sinNumber: 'SIN Number',
     natureOfBusinessOther: 'Other nature of business',
     preferredContactChannelOther: 'Other communication channel',
     howDidYouHearAboutMccOther: 'Other source',
@@ -315,6 +317,8 @@
 
     appendIfValue(data, 'natureOfBusiness', natureOfBusiness);
     appendIfValue(data, 'numberOfEmployees', value(form, 'numberOfEmployees'));
+    appendIfValue(data, 'gstNumber', value(form, 'gstNumber'));
+    appendIfValue(data, 'sinNumber', value(form, 'sinNumber'));
     appendIfValue(data, 'studentsSentToCanadaLast12Months', value(form, 'studentsSentToCanadaLast12Months'));
     appendIfValue(data, 'anticipatedMccStudentsNext12Months', value(form, 'anticipatedMccStudentsNext12Months'));
     appendRepeated(data, 'studentSourceCountries', sourceCountries);
@@ -400,6 +404,8 @@
     addSection(sections, 'Agency business information', [
       ['Nature of business', natureOfBusiness],
       ['Number of employees', value(form, 'numberOfEmployees')],
+      ['GST Number', value(form, 'gstNumber')],
+      ['SIN Number', value(form, 'sinNumber')],
       ['Students sent to Canada in past 12 months', value(form, 'studentsSentToCanadaLast12Months')],
       ['Anticipated MCC students in next 12 months', value(form, 'anticipatedMccStudentsNext12Months')],
       ['Top student source countries', sourceCountries.join(', ')],
