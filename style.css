@@ -4517,6 +4517,33 @@ textarea {
     line-height: 1.3;
 }
 
+.agency-inline-action-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.btn-small-agency {
+    padding: 0.65rem 1.1rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+}
+
+.agency-secondary-panel {
+    display: grid;
+    gap: 1.1rem;
+    padding: 1.1rem;
+    border: 1px solid rgba(6, 43, 26, 0.12);
+    border-radius: 14px;
+    background: #f7faf8;
+}
+
+.agency-secondary-panel[hidden],
+.conditional-other-field[hidden] {
+    display: none;
+}
+
 .agency-type-fieldset,
 .agency-form fieldset.form-group {
     border: 0;
@@ -4538,7 +4565,8 @@ textarea {
 }
 
 .agency-type-card,
-.agency-form .program-check {
+.agency-form .program-check,
+.agency-form .agency-choice {
     display: flex;
     align-items: flex-start;
     gap: 0.75rem;
@@ -4554,20 +4582,23 @@ textarea {
 }
 
 .agency-type-card:hover,
-.agency-form .program-check:hover {
+.agency-form .program-check:hover,
+.agency-form .agency-choice:hover {
     border-color: #98a8a0;
     transform: translateY(-1px);
 }
 
 .agency-type-card:has(input:checked),
-.agency-form .program-check:has(input:checked) {
+.agency-form .program-check:has(input:checked),
+.agency-form .agency-choice:has(input:checked) {
     border-color: var(--accent-gold);
     background: rgba(212, 175, 55, 0.06);
     box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.16);
 }
 
 .agency-type-card input,
-.agency-form .program-check input {
+.agency-form .program-check input,
+.agency-form .agency-choice input {
     width: auto;
     flex: 0 0 auto;
     margin-top: 0.18rem;
@@ -4618,7 +4649,14 @@ textarea {
     gap: 0.75rem;
 }
 
-.agency-form .program-check {
+.agency-choice-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+}
+
+.agency-form .program-check,
+.agency-form .agency-choice {
     font-weight: 600;
 }
 
@@ -4718,7 +4756,8 @@ textarea {
 }
 
 @media (max-width: 700px) {
-    .program-check-grid {
+    .program-check-grid,
+    .agency-choice-grid {
         grid-template-columns: 1fr;
     }
 

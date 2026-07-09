@@ -110,7 +110,7 @@
                     </div>
                     <div class="page-highlight-card">
                         <strong>Before you begin</strong>
-                        <p>Have your legal details, market region, contact information, and any supporting documents ready. MCC will review the application details in the Portal.</p>
+                        <p>Have your company contact information, business profile, student market details, and any supporting documents ready. MCC will review the application details in the Portal.</p>
                     </div>
                 </div>
                 <div class="page-hero-media">
@@ -127,16 +127,16 @@
                     <p>Your application is reviewed in the MCC Portal. The marketing website does not store agency applications.</p>
                     <div class="sidebar-stack">
                         <div class="sidebar-panel">
-                            <strong>Applicant profile</strong>
-                            <p>Legal name, market region, primary contact, and optional secondary contact information.</p>
+                            <strong>Agency contact</strong>
+                            <p>Company identity, address, main contact, preferred communication channels, and optional secondary contact.</p>
                         </div>
                         <div class="sidebar-panel">
-                            <strong>Program focus</strong>
-                            <p>Choose up to three programs you expect to introduce to prospective students.</p>
+                            <strong>Business profile</strong>
+                            <p>Nature of business, employee range, student volume, source countries, education levels, and ranked program interest.</p>
                         </div>
                         <div class="sidebar-panel">
-                            <strong>Supporting documents</strong>
-                            <p>Upload registration or identity documents if they are already available.</p>
+                            <strong>Upload documents</strong>
+                            <p>Documents are optional at this step and can be reviewed later in the Portal.</p>
                         </div>
                     </div>
                 </aside>
@@ -151,108 +151,39 @@
 
                     <form id="agency-application-form" class="agency-form" novalidate>
                         <section class="agency-form-section">
-                            <h2 class="form-section-title">1. Identity and Contact</h2>
+                            <h2 class="form-section-title">1. Agency Contact Information</h2>
                             <div class="form-grid-2">
                                 <div class="form-group">
-                                    <label for="legalName">Legal name <span class="required-mark">*</span></label>
+                                    <label for="legalName">Company legal name <span class="required-mark">*</span></label>
                                     <input type="text" id="legalName" name="legalName" autocomplete="organization" required>
                                     <span class="error-msg" id="legalName-error"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="preferredName">Preferred/display name</label>
-                                    <input type="text" id="preferredName" name="preferredName">
+                                    <label for="preferredName">Company preferred/brand name</label>
+                                    <input type="text" id="preferredName" name="preferredName" autocomplete="organization">
                                     <span class="error-msg" id="preferredName-error"></span>
                                 </div>
                             </div>
 
                             <div class="form-grid-3">
                                 <div class="form-group">
-                                    <label for="mainContactName">Primary contact name <span class="required-mark">*</span></label>
-                                    <input type="text" id="mainContactName" name="mainContactName" autocomplete="name" required>
-                                    <span class="error-msg" id="mainContactName-error"></span>
+                                    <label for="companyPhone">Company phone number <span class="required-mark">*</span></label>
+                                    <input type="tel" id="companyPhone" name="companyPhone" autocomplete="tel" required>
+                                    <span class="error-msg" id="companyPhone-error"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="mainContactJobTitle">Primary contact job title</label>
-                                    <input type="text" id="mainContactJobTitle" name="mainContactJobTitle" autocomplete="organization-title">
-                                    <span class="error-msg" id="mainContactJobTitle-error"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="mainContactEmail">Primary contact email <span class="required-mark">*</span></label>
-                                    <input type="email" id="mainContactEmail" name="mainContactEmail" autocomplete="email" required>
-                                    <span class="error-msg" id="mainContactEmail-error"></span>
-                                </div>
-                            </div>
-
-                            <div class="form-grid-3">
-                                <div class="form-group">
-                                    <label for="mainContactPhone">Primary contact phone <span class="required-mark">*</span></label>
-                                    <input type="tel" id="mainContactPhone" name="mainContactPhone" autocomplete="tel" required>
-                                    <span class="error-msg" id="mainContactPhone-error"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="companyEmail">Organization email</label>
-                                    <input type="email" id="companyEmail" name="companyEmail" autocomplete="email">
+                                    <label for="companyEmail">Company email address <span class="required-mark">*</span></label>
+                                    <input type="email" id="companyEmail" name="companyEmail" autocomplete="email" required>
                                     <span class="error-msg" id="companyEmail-error"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="companyPhone">Organization phone</label>
-                                    <input type="tel" id="companyPhone" name="companyPhone" autocomplete="tel">
-                                    <span class="error-msg" id="companyPhone-error"></span>
+                                    <label for="companyWebsite">Company website</label>
+                                    <input type="url" id="companyWebsite" name="companyWebsite" autocomplete="url" placeholder="https://">
+                                    <span class="error-msg" id="companyWebsite-error"></span>
                                 </div>
                             </div>
 
-                            <h3 class="agency-subsection-title">Secondary contact <span class="optional-note">(optional)</span></h3>
-                            <div class="form-grid-2">
-                                <div class="form-group">
-                                    <label for="secondaryContactName">Secondary contact name</label>
-                                    <input type="text" id="secondaryContactName" name="secondaryContactName" autocomplete="name">
-                                    <span class="error-msg" id="secondaryContactName-error"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="secondaryContactJobTitle">Secondary contact job title</label>
-                                    <input type="text" id="secondaryContactJobTitle" name="secondaryContactJobTitle" autocomplete="organization-title">
-                                    <span class="error-msg" id="secondaryContactJobTitle-error"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="secondaryContactEmail">Secondary contact email</label>
-                                    <input type="email" id="secondaryContactEmail" name="secondaryContactEmail" autocomplete="email">
-                                    <span class="error-msg" id="secondaryContactEmail-error"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="secondaryContactPhone">Secondary contact phone</label>
-                                    <input type="tel" id="secondaryContactPhone" name="secondaryContactPhone" autocomplete="tel">
-                                    <span class="error-msg" id="secondaryContactPhone-error"></span>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="generalContactInfo">General contact info</label>
-                                <textarea id="generalContactInfo" name="generalContactInfo" rows="3" placeholder="Office hours, WhatsApp, WeChat, website, or other contact notes"></textarea>
-                                <span class="error-msg" id="generalContactInfo-error"></span>
-                            </div>
-                        </section>
-
-                        <section class="agency-form-section">
-                            <h2 class="form-section-title">2. Market and Location</h2>
-                            <div class="form-grid-2">
-                                <div class="form-group">
-                                    <label for="primaryMarketRegion">Primary market region <span class="required-mark">*</span></label>
-                                    <input type="text" id="primaryMarketRegion" name="primaryMarketRegion" required placeholder="Example: Metro Vancouver, Brazil, South Korea">
-                                    <span class="error-msg" id="primaryMarketRegion-error"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="secondaryMarketRegions">Secondary market region(s)</label>
-                                    <input type="text" id="secondaryMarketRegions" name="secondaryMarketRegions" placeholder="Optional; separate multiple regions with commas">
-                                    <span class="error-msg" id="secondaryMarketRegions-error"></span>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="streetAddress">Street address</label>
-                                <input type="text" id="streetAddress" name="streetAddress" autocomplete="street-address">
-                                <span class="error-msg" id="streetAddress-error"></span>
-                            </div>
-
+                            <h3 class="agency-subsection-title">Company Address</h3>
                             <div class="form-grid-3">
                                 <div class="form-group">
                                     <label for="country">Country <span class="required-mark">*</span></label>
@@ -273,84 +204,303 @@
                                 </div>
                             </div>
 
-                            <div class="form-grid-3">
+                            <div class="form-grid-2">
                                 <div class="form-group">
                                     <label for="postalCode">Postal code</label>
                                     <input type="text" id="postalCode" name="postalCode" autocomplete="postal-code">
                                     <span class="error-msg" id="postalCode-error"></span>
                                 </div>
+                                <div class="form-group">
+                                    <label for="streetAddress">Street address</label>
+                                    <input type="text" id="streetAddress" name="streetAddress" autocomplete="street-address">
+                                    <span class="error-msg" id="streetAddress-error"></span>
+                                </div>
+                            </div>
+
+                            <h3 class="agency-subsection-title">Main Contact Person</h3>
+                            <div class="form-grid-3">
+                                <div class="form-group">
+                                    <label for="mainContactName">Full name <span class="required-mark">*</span></label>
+                                    <input type="text" id="mainContactName" name="mainContactName" autocomplete="name" required>
+                                    <span class="error-msg" id="mainContactName-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="mainContactPreferredName">Preferred name</label>
+                                    <input type="text" id="mainContactPreferredName" name="mainContactPreferredName" autocomplete="given-name">
+                                    <span class="error-msg" id="mainContactPreferredName-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="mainContactJobTitle">Job title</label>
+                                    <input type="text" id="mainContactJobTitle" name="mainContactJobTitle" autocomplete="organization-title">
+                                    <span class="error-msg" id="mainContactJobTitle-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="mainContactPhone">Phone number <span class="required-mark">*</span></label>
+                                    <input type="tel" id="mainContactPhone" name="mainContactPhone" autocomplete="tel" required>
+                                    <span class="error-msg" id="mainContactPhone-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="mainContactEmail">Email address <span class="required-mark">*</span></label>
+                                    <input type="email" id="mainContactEmail" name="mainContactEmail" autocomplete="email" required>
+                                    <span class="error-msg" id="mainContactEmail-error"></span>
+                                </div>
+                            </div>
+
+                            <div class="agency-inline-action-row">
+                                <button type="button" class="btn-outline-gold btn-small-agency" data-secondary-contact-toggle aria-expanded="false" aria-controls="secondary-contact-panel">
+                                    <i class="fas fa-plus"></i> Add Secondary Contact Person
+                                </button>
+                            </div>
+
+                            <div id="secondary-contact-panel" class="agency-secondary-panel" hidden>
+                                <h3 class="agency-subsection-title">Secondary Contact Person <span class="optional-note">(optional)</span></h3>
+                                <div class="form-grid-3">
+                                    <div class="form-group">
+                                        <label for="secondaryContactName">Full name</label>
+                                        <input type="text" id="secondaryContactName" name="secondaryContactName" autocomplete="name" data-secondary-contact-field disabled>
+                                        <span class="error-msg" id="secondaryContactName-error"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="secondaryContactPreferredName">Preferred name</label>
+                                        <input type="text" id="secondaryContactPreferredName" name="secondaryContactPreferredName" autocomplete="given-name" data-secondary-contact-field disabled>
+                                        <span class="error-msg" id="secondaryContactPreferredName-error"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="secondaryContactJobTitle">Job title</label>
+                                        <input type="text" id="secondaryContactJobTitle" name="secondaryContactJobTitle" autocomplete="organization-title" data-secondary-contact-field disabled>
+                                        <span class="error-msg" id="secondaryContactJobTitle-error"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="secondaryContactPhone">Phone number</label>
+                                        <input type="tel" id="secondaryContactPhone" name="secondaryContactPhone" autocomplete="tel" data-secondary-contact-field disabled>
+                                        <span class="error-msg" id="secondaryContactPhone-error"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="secondaryContactEmail">Email address</label>
+                                        <input type="email" id="secondaryContactEmail" name="secondaryContactEmail" autocomplete="email" data-secondary-contact-field disabled>
+                                        <span class="error-msg" id="secondaryContactEmail-error"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <fieldset class="form-group" data-field-group="preferredContactChannels" aria-describedby="preferredContactChannels-error">
+                                <legend>Preferred Channel of Communication</legend>
+                                <div class="agency-choice-grid">
+                                    <label class="agency-choice"><input type="checkbox" name="preferredContactChannels" value="Email"> <span>Email</span></label>
+                                    <label class="agency-choice"><input type="checkbox" name="preferredContactChannels" value="Phone"> <span>Phone</span></label>
+                                    <label class="agency-choice"><input type="checkbox" name="preferredContactChannels" value="WhatsApp"> <span>WhatsApp</span></label>
+                                    <label class="agency-choice"><input type="checkbox" name="preferredContactChannels" value="WeChat"> <span>WeChat</span></label>
+                                    <label class="agency-choice"><input type="checkbox" name="preferredContactChannels" value="Line"> <span>Line</span></label>
+                                    <label class="agency-choice"><input type="checkbox" name="preferredContactChannels" value="Social Media"> <span>Social Media</span></label>
+                                    <label class="agency-choice"><input type="checkbox" name="preferredContactChannels" value="Video Call"> <span>Video Call</span></label>
+                                    <label class="agency-choice"><input type="checkbox" name="preferredContactChannels" value="Other" data-other-toggle="preferredContactChannelOther"> <span>Other</span></label>
+                                </div>
+                                <span class="error-msg" id="preferredContactChannels-error"></span>
+                            </fieldset>
+                            <div class="form-group conditional-other-field" data-other-field="preferredContactChannelOther" hidden>
+                                <label for="preferredContactChannelOther">Other communication channel</label>
+                                <input type="text" id="preferredContactChannelOther" name="preferredContactChannelOther" disabled>
+                                <span class="error-msg" id="preferredContactChannelOther-error"></span>
                             </div>
                         </section>
 
                         <section class="agency-form-section">
-                            <div class="program-section-head">
-                                <h2 class="form-section-title">3. Programs of Interest</h2>
-                                <span id="programs-counter" class="program-counter" aria-live="polite">0/3 selected</span>
+                            <h2 class="form-section-title">2. Agency Business Information</h2>
+                            <div class="form-grid-2">
+                                <div class="form-group">
+                                    <label for="natureOfBusiness">Nature of business</label>
+                                    <select id="natureOfBusiness" name="natureOfBusiness" data-other-select="natureOfBusinessOther">
+                                        <option value="">Choose an option</option>
+                                        <option value="Immigration Consultancy">Immigration Consultancy</option>
+                                        <option value="Student Service Provider">Student Service Provider</option>
+                                        <option value="Training School">Training School</option>
+                                        <option value="Other">Other (Please specify)</option>
+                                    </select>
+                                    <span class="error-msg" id="natureOfBusiness-error"></span>
+                                </div>
+                                <div class="form-group conditional-other-field" data-other-field="natureOfBusinessOther" hidden>
+                                    <label for="natureOfBusinessOther">Other nature of business</label>
+                                    <input type="text" id="natureOfBusinessOther" name="natureOfBusinessOther" disabled>
+                                    <span class="error-msg" id="natureOfBusinessOther-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="numberOfEmployees">Number of Employees</label>
+                                    <select id="numberOfEmployees" name="numberOfEmployees">
+                                        <option value="">Choose an option</option>
+                                        <option value="0-3">0-3</option>
+                                        <option value="4-10">4-10</option>
+                                        <option value="10+">10+</option>
+                                    </select>
+                                    <span class="error-msg" id="numberOfEmployees-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="studentsSentToCanadaLast12Months">Number of students sent to Canada in the past 12 months</label>
+                                    <input type="text" id="studentsSentToCanadaLast12Months" name="studentsSentToCanadaLast12Months" inputmode="numeric">
+                                    <span class="error-msg" id="studentsSentToCanadaLast12Months-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="anticipatedMccStudentsNext12Months">Number of students anticipated for MCC in the next 12 months</label>
+                                    <input type="text" id="anticipatedMccStudentsNext12Months" name="anticipatedMccStudentsNext12Months" inputmode="numeric">
+                                    <span class="error-msg" id="anticipatedMccStudentsNext12Months-error"></span>
+                                </div>
                             </div>
+
+                            <fieldset class="form-group" data-field-group="studentSourceCountries">
+                                <legend>Top 3 countries your students come from</legend>
+                                <div class="form-grid-3">
+                                    <div class="form-group">
+                                        <label for="studentSourceCountry1">Country 1</label>
+                                        <select id="studentSourceCountry1" name="studentSourceCountries" data-country-rank>
+                                            <option value="">Select Country</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="studentSourceCountry2">Country 2</label>
+                                        <select id="studentSourceCountry2" name="studentSourceCountries" data-country-rank>
+                                            <option value="">Select Country</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="studentSourceCountry3">Country 3</label>
+                                        <select id="studentSourceCountry3" name="studentSourceCountries" data-country-rank>
+                                            <option value="">Select Country</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <span class="error-msg" id="studentSourceCountries-error"></span>
+                            </fieldset>
+
+                            <fieldset class="form-group" data-field-group="targetEducationLevels">
+                                <legend>Top 3 target education levels your students seek</legend>
+                                <div class="form-grid-3">
+                                    <div class="form-group">
+                                        <label for="targetEducationLevel1">Level 1</label>
+                                        <select id="targetEducationLevel1" name="targetEducationLevels">
+                                            <option value="">Choose an option</option>
+                                            <option value="High School">High School</option>
+                                            <option value="College Diploma">College Diploma</option>
+                                            <option value="University Degree">University Degree</option>
+                                            <option value="Language Training">Language Training</option>
+                                            <option value="Micro-credential">Micro-credential</option>
+                                            <option value="Trades Certificate">Trades Certificate</option>
+                                            <option value="Personal Skill Development">Personal Skill Development</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="targetEducationLevel2">Level 2</label>
+                                        <select id="targetEducationLevel2" name="targetEducationLevels">
+                                            <option value="">Choose an option</option>
+                                            <option value="High School">High School</option>
+                                            <option value="College Diploma">College Diploma</option>
+                                            <option value="University Degree">University Degree</option>
+                                            <option value="Language Training">Language Training</option>
+                                            <option value="Micro-credential">Micro-credential</option>
+                                            <option value="Trades Certificate">Trades Certificate</option>
+                                            <option value="Personal Skill Development">Personal Skill Development</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="targetEducationLevel3">Level 3</label>
+                                        <select id="targetEducationLevel3" name="targetEducationLevels">
+                                            <option value="">Choose an option</option>
+                                            <option value="High School">High School</option>
+                                            <option value="College Diploma">College Diploma</option>
+                                            <option value="University Degree">University Degree</option>
+                                            <option value="Language Training">Language Training</option>
+                                            <option value="Micro-credential">Micro-credential</option>
+                                            <option value="Trades Certificate">Trades Certificate</option>
+                                            <option value="Personal Skill Development">Personal Skill Development</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <span class="error-msg" id="targetEducationLevels-error"></span>
+                            </fieldset>
+
                             <fieldset class="form-group" data-field-group="programsOfInterest" aria-describedby="programsOfInterest-error">
                                 <legend>Top 3 programs of interest</legend>
-                                <div class="program-check-grid">
-                                    <label class="program-check"><input type="checkbox" name="programsOfInterest" value="French Test Preparation (TCF & TEF)"> <span>French Test Preparation (TCF &amp; TEF)</span></label>
-                                    <label class="program-check"><input type="checkbox" name="programsOfInterest" value="French as a Second Language (FSL)"> <span>French as a Second Language (FSL)</span></label>
-                                    <label class="program-check"><input type="checkbox" name="programsOfInterest" value="Global Management in Hospitality Diploma"> <span>Global Management in Hospitality Diploma</span></label>
-                                    <label class="program-check"><input type="checkbox" name="programsOfInterest" value="Hospitality Operations Diploma"> <span>Hospitality Operations Diploma</span></label>
-                                    <label class="program-check"><input type="checkbox" name="programsOfInterest" value="International Esports Management Diploma"> <span>International Esports Management Diploma</span></label>
-                                    <label class="program-check"><input type="checkbox" name="programsOfInterest" value="Next-Gen Applied AI Mastery"> <span>Next-Gen Applied AI Mastery</span></label>
-                                    <label class="program-check"><input type="checkbox" name="programsOfInterest" value="Video Content Creation and Social Media Management"> <span>Video Content Creation and Social Media Management</span></label>
+                                <div class="form-grid-3">
+                                    <div class="form-group">
+                                        <label for="programInterest1">Program 1</label>
+                                        <select id="programInterest1" name="programsOfInterest">
+                                            <option value="">Choose a program</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="programInterest2">Program 2</label>
+                                        <select id="programInterest2" name="programsOfInterest">
+                                            <option value="">Choose a program</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="programInterest3">Program 3</label>
+                                        <select id="programInterest3" name="programsOfInterest">
+                                            <option value="">Choose a program</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <span class="error-msg" id="programsOfInterest-error"></span>
                             </fieldset>
-                        </section>
 
-                        <section class="agency-form-section">
-                            <h2 class="form-section-title">4. Background</h2>
+                            <fieldset class="form-group" data-field-group="promotionalChannels">
+                                <legend>Promotional channel(s) used in the past 12 months</legend>
+                                <div class="agency-choice-grid">
+                                    <label class="agency-choice"><input type="checkbox" name="promotionalChannels" value="Paid Online Advertisement"> <span>Paid Online Advertisement</span></label>
+                                    <label class="agency-choice"><input type="checkbox" name="promotionalChannels" value="Education/Career Fair"> <span>Education/Career Fair</span></label>
+                                    <label class="agency-choice"><input type="checkbox" name="promotionalChannels" value="Referral"> <span>Referral</span></label>
+                                    <label class="agency-choice"><input type="checkbox" name="promotionalChannels" value="Social Media Marketing"> <span>Social Media Marketing</span></label>
+                                    <label class="agency-choice"><input type="checkbox" name="promotionalChannels" value="Newspaper/Magazine"> <span>Newspaper/Magazine</span></label>
+                                    <label class="agency-choice"><input type="checkbox" name="promotionalChannels" value="Radio/TV"> <span>Radio/TV</span></label>
+                                    <label class="agency-choice"><input type="checkbox" name="promotionalChannels" value="Social Events"> <span>Social Events</span></label>
+                                </div>
+                                <span class="error-msg" id="promotionalChannels-error"></span>
+                            </fieldset>
+
                             <div class="form-grid-2">
                                 <div class="form-group">
-                                    <label for="shortIntroduction">Short introduction / background</label>
-                                    <textarea id="shortIntroduction" name="shortIntroduction" rows="4" placeholder="Tell us about your recruitment experience and student communities."></textarea>
-                                    <span class="error-msg" id="shortIntroduction-error"></span>
-                                </div>
-                                <div class="form-group">
                                     <label for="howDidYouHearAboutMcc">How did you hear about MCC?</label>
-                                    <textarea id="howDidYouHearAboutMcc" name="howDidYouHearAboutMcc" rows="4"></textarea>
+                                    <select id="howDidYouHearAboutMcc" name="howDidYouHearAboutMcc" data-other-select="howDidYouHearAboutMccOther">
+                                        <option value="">Choose an option</option>
+                                        <option value="Online Advertisement">Online Advertisement</option>
+                                        <option value="Social Media">Social Media</option>
+                                        <option value="Referral">Referral</option>
+                                        <option value="Website">Website</option>
+                                        <option value="Google">Google</option>
+                                        <option value="Approached by MCC Staff">Approached by MCC Staff</option>
+                                        <option value="Education/Career Fair">Education/Career Fair</option>
+                                        <option value="Social Events">Social Events</option>
+                                        <option value="Other">Other</option>
+                                    </select>
                                     <span class="error-msg" id="howDidYouHearAboutMcc-error"></span>
                                 </div>
-                                <div class="form-group">
-                                    <label for="preferredContactChannel">Preferred contact channel</label>
-                                    <select id="preferredContactChannel" name="preferredContactChannel">
-                                        <option value="">Choose an option</option>
-                                        <option value="Email">Email</option>
-                                        <option value="Phone">Phone</option>
-                                        <option value="WhatsApp">WhatsApp</option>
-                                        <option value="WeChat">WeChat</option>
-                                        <option value="Video call">Video call</option>
-                                    </select>
-                                    <span class="error-msg" id="preferredContactChannel-error"></span>
+                                <div class="form-group conditional-other-field" data-other-field="howDidYouHearAboutMccOther" hidden>
+                                    <label for="howDidYouHearAboutMccOther">Other source</label>
+                                    <input type="text" id="howDidYouHearAboutMccOther" name="howDidYouHearAboutMccOther" disabled>
+                                    <span class="error-msg" id="howDidYouHearAboutMccOther-error"></span>
                                 </div>
                             </div>
                         </section>
 
                         <section class="agency-form-section">
-                            <h2 class="form-section-title">5. Supporting Documents</h2>
+                            <h2 class="form-section-title">3. Upload Documents</h2>
                             <p id="agency-document-instruction" class="section-copy agency-document-copy">Documents are optional at this step. Upload PDF, JPEG, or PNG files only. Maximum file size is 15 MB per file.</p>
                             <div class="document-upload-grid">
                                 <div class="form-group">
                                     <label for="companyRegistrationDocument">Company registration document</label>
                                     <input type="file" id="companyRegistrationDocument" name="companyRegistrationDocument" accept="application/pdf,image/jpeg,image/png">
-                                    <small class="field-hint">Upload if available.</small>
+                                    <small class="field-hint">Required for all domestic/international businesses.</small>
                                     <span class="error-msg" id="companyRegistrationDocument-error"></span>
                                 </div>
                                 <div class="form-group">
                                     <label for="governmentIdDocument">Government ID document</label>
                                     <input type="file" id="governmentIdDocument" name="governmentIdDocument" accept="application/pdf,image/jpeg,image/png">
-                                    <small class="field-hint">Upload if available.</small>
+                                    <small class="field-hint">Required for all personal/individual agents.</small>
                                     <span class="error-msg" id="governmentIdDocument-error"></span>
                                 </div>
                             </div>
                         </section>
 
                         <section class="agency-form-section">
-                            <h2 class="form-section-title">6. Consent and Privacy</h2>
+                            <h2 class="form-section-title">4. Consent and Privacy</h2>
                             <div class="agency-consent-stack">
                                 <div class="checkbox-group">
                                     <input type="checkbox" id="consentConfirmed" name="consentConfirmed">

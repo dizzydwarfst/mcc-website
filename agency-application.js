@@ -3,6 +3,7 @@
   const LOCAL_PORTAL_API_BASE_URL = 'http://localhost:8000';
   const MAX_FILE_BYTES = 15 * 1024 * 1024;
   const PROGRAM_LIMIT = 3;
+  const OTHER_VALUE = 'Other';
   const ALLOWED_FILE_TYPES = ['application/pdf', 'image/jpeg', 'image/png'];
   const ALLOWED_FILE_EXTENSIONS = ['pdf', 'jpg', 'jpeg', 'png'];
 
@@ -16,21 +17,33 @@
     'Video Content Creation and Social Media Management',
   ];
 
+  const GROUP_FIELDS = [
+    'preferredContactChannels',
+    'studentSourceCountries',
+    'targetEducationLevels',
+    'programsOfInterest',
+    'promotionalChannels',
+  ];
+
   const FIELD_LABELS = {
-    legalName: 'Legal name',
-    primaryMarketRegion: 'Primary market region',
+    legalName: 'Company legal name',
+    companyPhone: 'Company phone number',
+    companyEmail: 'Company email address',
+    companyWebsite: 'Company website',
     country: 'Country',
     city: 'City',
-    mainContactName: 'Primary contact name',
-    mainContactEmail: 'Primary contact email',
-    mainContactPhone: 'Primary contact phone',
-    secondaryContactEmail: 'Secondary contact email',
-    secondaryContactPhone: 'Secondary contact phone',
+    mainContactName: 'Main contact person full name',
+    mainContactEmail: 'Main contact person email address',
+    mainContactPhone: 'Main contact person phone number',
+    secondaryContactEmail: 'Secondary contact email address',
+    secondaryContactPhone: 'Secondary contact phone number',
+    natureOfBusinessOther: 'Other nature of business',
+    preferredContactChannelOther: 'Other communication channel',
+    howDidYouHearAboutMccOther: 'Other source',
     companyRegistrationDocument: 'Company registration document',
     governmentIdDocument: 'Government ID document',
     consentConfirmed: 'Consent confirmation',
     privacyConfirmed: 'Privacy confirmation',
-    programsOfInterest: 'Programs of interest',
   };
 
   const ready = (fn) => (document.readyState !== 'loading')
@@ -44,26 +57,19 @@
   });
 
   function initializeAgencyApplication(form) {
-    const programInputs = Array.from(form.querySelectorAll('input[name="programsOfInterest"]'));
-
-    programInputs.forEach((input) => {
-      input.addEventListener('change', () => handleProgramChange(form, input));
-    });
+    populateProgramSelects(form);
+    populateCountryRankSelects(form);
+    setupSecondaryContact(form);
+    setupConditionalOtherFields(form);
 
     form.querySelectorAll('input, select, textarea').forEach((control) => {
       control.addEventListener('input', () => clearFieldError(form, control.name || control.id));
-      control.addEventListener('change', () => {
-        const field = control.name || control.id;
-        if (field === 'programsOfInterest') return;
-        clearFieldError(form, field);
-      });
+      control.addEventListener('change', () => clearFieldError(form, control.name || control.id));
     });
-
-    updateProgramCounter(form);
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
-      hideGeneralMessage(form);
+      hideGeneralMessage();
 
       const errors = validate(form);
       if (errors.length) {
@@ -75,23 +81,74 @@
     });
   }
 
-  function handleProgramChange(form, changedInput) {
-    const selected = getSelectedPrograms(form);
-    if (selected.length > PROGRAM_LIMIT) {
-      changedInput.checked = false;
-      setFieldError(form, {
-        field: 'programsOfInterest',
-        message: `Choose no more than ${PROGRAM_LIMIT} programs.`,
-      });
-    } else {
-      clearFieldError(form, 'programsOfInterest');
-    }
-    updateProgramCounter(form);
+  function populateProgramSelects(form) {
+    form.querySelectorAll('select[name="programsOfInterest"]').forEach((select) => {
+      if (select.options.length > 1) return;
+      PROGRAMS.forEach((program) => select.appendChild(option(program, program)));
+    });
   }
 
-  function updateProgramCounter(form) {
-    const counter = document.getElementById('programs-counter');
-    if (counter) counter.textContent = `${getSelectedPrograms(form).length}/${PROGRAM_LIMIT} selected`;
+  function populateCountryRankSelects(form) {
+    const country = fieldControl(form, 'country');
+    const countryRankSelects = Array.from(form.querySelectorAll('select[data-country-rank]'));
+    if (!country || !country.options || country.options.length <= 1 || !countryRankSelects.length) return;
+
+    countryRankSelects.forEach((select) => {
+      const previous = select.value;
+      select.textContent = '';
+      Array.from(country.options).forEach((countryOption, index) => {
+        const opt = option(countryOption.value, index === 0 ? 'Select Country' : countryOption.textContent);
+        select.appendChild(opt);
+      });
+      if (previous && hasOption(select, previous)) select.value = previous;
+    });
+  }
+
+  function setupSecondaryContact(form) {
+    const button = form.querySelector('[data-secondary-contact-toggle]');
+    const panel = document.getElementById('secondary-contact-panel');
+    if (!button || !panel) return;
+
+    const fields = Array.from(panel.querySelectorAll('[data-secondary-contact-field]'));
+    const setVisible = (visible) => {
+      panel.hidden = !visible;
+      button.setAttribute('aria-expanded', visible ? 'true' : 'false');
+      button.innerHTML = visible
+        ? '<i class="fas fa-minus"></i> Remove Secondary Contact Person'
+        : '<i class="fas fa-plus"></i> Add Secondary Contact Person';
+
+      fields.forEach((field) => {
+        field.disabled = !visible;
+        if (!visible) clearFieldValue(form, field.name || field.id);
+      });
+    };
+
+    setVisible(false);
+    button.addEventListener('click', () => setVisible(panel.hidden));
+  }
+
+  function setupConditionalOtherFields(form) {
+    form.querySelectorAll('[data-other-select]').forEach((select) => {
+      const update = () => setOtherFieldVisible(form, select.dataset.otherSelect, select.value === OTHER_VALUE);
+      select.addEventListener('change', update);
+      update();
+    });
+
+    form.querySelectorAll('[data-other-toggle]').forEach((checkboxInput) => {
+      const update = () => setOtherFieldVisible(form, checkboxInput.dataset.otherToggle, checkboxInput.checked);
+      checkboxInput.addEventListener('change', update);
+      update();
+    });
+  }
+
+  function setOtherFieldVisible(form, field, visible) {
+    const group = form.querySelector(`[data-other-field="${cssEscape(field)}"]`);
+    const control = fieldControl(form, field);
+    if (group) group.hidden = !visible;
+    if (control) {
+      control.disabled = !visible;
+      if (!visible) clearFieldValue(form, field);
+    }
   }
 
   function validate(form) {
@@ -100,7 +157,8 @@
 
     [
       'legalName',
-      'primaryMarketRegion',
+      'companyPhone',
+      'companyEmail',
       'country',
       'city',
       'mainContactName',
@@ -108,24 +166,28 @@
       'mainContactPhone',
     ].forEach((field) => requireValue(form, field, errors));
 
-    const email = value(form, 'mainContactEmail');
-    if (email && !isValidEmail(email)) {
-      errors.push({ field: 'mainContactEmail', message: 'Enter a valid email address.' });
+    validateEmailField(form, 'companyEmail', errors);
+    validateEmailField(form, 'mainContactEmail', errors);
+    validateEmailField(form, 'secondaryContactEmail', errors);
+    validatePhoneField(form, 'companyPhone', errors);
+    validatePhoneField(form, 'mainContactPhone', errors);
+    validatePhoneField(form, 'secondaryContactPhone', errors);
+
+    const website = value(form, 'companyWebsite');
+    if (website && !isValidUrl(website)) {
+      errors.push({ field: 'companyWebsite', message: 'Enter a valid website URL starting with http:// or https://.' });
     }
 
-    const phone = value(form, 'mainContactPhone');
-    if (phone && !isReasonablePhone(phone)) {
-      errors.push({ field: 'mainContactPhone', message: 'Enter a valid phone number.' });
+    if (value(form, 'natureOfBusiness') === OTHER_VALUE) {
+      requireValue(form, 'natureOfBusinessOther', errors);
     }
 
-    const secondaryEmail = value(form, 'secondaryContactEmail');
-    if (secondaryEmail && !isValidEmail(secondaryEmail)) {
-      errors.push({ field: 'secondaryContactEmail', message: 'Enter a valid secondary contact email address.' });
+    if (getCheckedValues(form, 'preferredContactChannels').includes(OTHER_VALUE)) {
+      requireValue(form, 'preferredContactChannelOther', errors);
     }
 
-    const secondaryPhone = value(form, 'secondaryContactPhone');
-    if (secondaryPhone && !isReasonablePhone(secondaryPhone)) {
-      errors.push({ field: 'secondaryContactPhone', message: 'Enter a valid secondary contact phone number.' });
+    if (value(form, 'howDidYouHearAboutMcc') === OTHER_VALUE) {
+      requireValue(form, 'howDidYouHearAboutMccOther', errors);
     }
 
     const programs = getSelectedPrograms(form);
@@ -150,6 +212,20 @@
   function requireValue(form, field, errors) {
     if (!value(form, field)) {
       errors.push({ field, message: `${FIELD_LABELS[field] || field} is required.` });
+    }
+  }
+
+  function validateEmailField(form, field, errors) {
+    const email = value(form, field);
+    if (email && !isValidEmail(email)) {
+      errors.push({ field, message: `Enter a valid ${FIELD_LABELS[field] || 'email address'}.` });
+    }
+  }
+
+  function validatePhoneField(form, field, errors) {
+    const phone = value(form, field);
+    if (phone && !isReasonablePhone(phone)) {
+      errors.push({ field, message: `Enter a valid ${FIELD_LABELS[field] || 'phone number'}.` });
     }
   }
 
@@ -204,30 +280,64 @@
 
   function buildFormData(form) {
     const data = new FormData();
+    const preferredChannels = expandOtherValueList(
+      getCheckedValues(form, 'preferredContactChannels'),
+      value(form, 'preferredContactChannelOther')
+    );
+    const promotionalChannels = getCheckedValues(form, 'promotionalChannels');
+    const sourceCountries = getMultiControlValues(form, 'studentSourceCountries');
+    const educationLevels = getMultiControlValues(form, 'targetEducationLevels');
+    const programs = getSelectedPrograms(form);
+    const natureOfBusiness = formatOtherValue(value(form, 'natureOfBusiness'), value(form, 'natureOfBusinessOther'));
+    const heardAboutMcc = formatOtherValue(value(form, 'howDidYouHearAboutMcc'), value(form, 'howDidYouHearAboutMccOther'));
 
     appendRequired(data, 'legalName', value(form, 'legalName'));
     appendIfValue(data, 'preferredName', value(form, 'preferredName'));
-    appendRequired(data, 'primaryMarketRegion', value(form, 'primaryMarketRegion'));
-    appendMultiValue(data, 'secondaryMarketRegions', value(form, 'secondaryMarketRegions'));
-    appendIfValue(data, 'streetAddress', value(form, 'streetAddress'));
+    appendRequired(data, 'companyPhone', value(form, 'companyPhone'));
+    appendRequired(data, 'companyEmail', value(form, 'companyEmail'));
+    appendIfValue(data, 'companyWebsite', value(form, 'companyWebsite'));
+
     appendRequired(data, 'country', value(form, 'country'));
     appendIfValue(data, 'provinceState', value(form, 'provinceState'));
     appendRequired(data, 'city', value(form, 'city'));
     appendIfValue(data, 'postalCode', value(form, 'postalCode'));
-    appendRequired(data, 'mainContactName', value(form, 'mainContactName'));
-    appendRequired(data, 'mainContactEmail', value(form, 'mainContactEmail'));
-    appendRequired(data, 'mainContactPhone', value(form, 'mainContactPhone'));
-    appendIfValue(data, 'mainContactJobTitle', value(form, 'mainContactJobTitle'));
-    appendIfValue(data, 'companyEmail', value(form, 'companyEmail'));
-    appendIfValue(data, 'companyPhone', value(form, 'companyPhone'));
-    appendIfValue(data, 'generalContactInfo', buildGeneralContactInfo(form));
-    appendIfValue(data, 'shortIntroduction', value(form, 'shortIntroduction'));
-    appendIfValue(data, 'howDidYouHearAboutMcc', value(form, 'howDidYouHearAboutMcc'));
-    appendIfValue(data, 'preferredContactChannel', value(form, 'preferredContactChannel'));
+    appendIfValue(data, 'streetAddress', value(form, 'streetAddress'));
 
-    getSelectedPrograms(form).slice(0, PROGRAM_LIMIT).forEach((program) => {
-      data.append('programsOfInterest', program);
-    });
+    appendRequired(data, 'mainContactName', value(form, 'mainContactName'));
+    appendIfValue(data, 'mainContactPreferredName', value(form, 'mainContactPreferredName'));
+    appendIfValue(data, 'mainContactJobTitle', value(form, 'mainContactJobTitle'));
+    appendRequired(data, 'mainContactPhone', value(form, 'mainContactPhone'));
+    appendRequired(data, 'mainContactEmail', value(form, 'mainContactEmail'));
+
+    appendSecondaryContact(data, form);
+    appendIfValue(data, 'preferredContactChannel', preferredChannels.join(', '));
+    appendRepeated(data, 'preferredContactChannels', preferredChannels);
+
+    appendIfValue(data, 'natureOfBusiness', natureOfBusiness);
+    appendIfValue(data, 'numberOfEmployees', value(form, 'numberOfEmployees'));
+    appendIfValue(data, 'studentsSentToCanadaLast12Months', value(form, 'studentsSentToCanadaLast12Months'));
+    appendIfValue(data, 'anticipatedMccStudentsNext12Months', value(form, 'anticipatedMccStudentsNext12Months'));
+    appendRepeated(data, 'studentSourceCountries', sourceCountries);
+    appendRankedValues(data, 'studentSourceCountry', sourceCountries);
+    appendRepeated(data, 'targetEducationLevels', educationLevels);
+    appendRankedValues(data, 'targetEducationLevel', educationLevels);
+    appendRepeated(data, 'programsOfInterest', programs);
+    appendRankedValues(data, 'programInterest', programs);
+    appendRepeated(data, 'promotionalChannels', promotionalChannels);
+    appendIfValue(data, 'howDidYouHearAboutMcc', heardAboutMcc);
+
+    appendRequired(data, 'primaryMarketRegion', sourceCountries[0] || value(form, 'country'));
+    sourceCountries.slice(1).forEach((country) => data.append('secondaryMarketRegions', country));
+    appendIfValue(data, 'generalContactInfo', buildGeneralContactInfo({
+      form,
+      preferredChannels,
+      promotionalChannels,
+      sourceCountries,
+      educationLevels,
+      programs,
+      natureOfBusiness,
+      heardAboutMcc,
+    }));
 
     appendFileIfValue(data, 'companyRegistrationDocument', fileValue(form, 'companyRegistrationDocument'));
     appendFileIfValue(data, 'governmentIdDocument', fileValue(form, 'governmentIdDocument'));
@@ -236,6 +346,16 @@
     data.append('privacyConfirmed', checkbox(form, 'privacyConfirmed') ? 'true' : 'false');
 
     return data;
+  }
+
+  function appendSecondaryContact(data, form) {
+    [
+      'secondaryContactName',
+      'secondaryContactPreferredName',
+      'secondaryContactJobTitle',
+      'secondaryContactPhone',
+      'secondaryContactEmail',
+    ].forEach((field) => appendIfValue(data, field, value(form, field)));
   }
 
   function appendRequired(data, name, rawValue) {
@@ -251,30 +371,62 @@
     if (file) data.append(name, file);
   }
 
-  function appendMultiValue(data, name, rawValue) {
-    splitMultiValue(rawValue).forEach((entry) => data.append(name, entry));
+  function appendRepeated(data, name, values) {
+    values.filter(Boolean).forEach((entry) => data.append(name, entry));
   }
 
-  function buildGeneralContactInfo(form) {
-    const notes = value(form, 'generalContactInfo');
-    const secondaryParts = [
-      ['Name', value(form, 'secondaryContactName')],
+  function appendRankedValues(data, baseName, values) {
+    values.slice(0, PROGRAM_LIMIT).forEach((entry, index) => {
+      appendIfValue(data, `${baseName}${index + 1}`, entry);
+    });
+  }
+
+  function buildGeneralContactInfo(context) {
+    const { form, preferredChannels, promotionalChannels, sourceCountries, educationLevels, programs, natureOfBusiness, heardAboutMcc } = context;
+    const sections = [];
+
+    addSection(sections, 'Secondary contact person', [
+      ['Full name', value(form, 'secondaryContactName')],
+      ['Preferred name', value(form, 'secondaryContactPreferredName')],
       ['Job title', value(form, 'secondaryContactJobTitle')],
-      ['Email', value(form, 'secondaryContactEmail')],
       ['Phone', value(form, 'secondaryContactPhone')],
-    ].filter(([, fieldValue]) => fieldValue);
+      ['Email', value(form, 'secondaryContactEmail')],
+    ]);
 
-    const secondaryBlock = secondaryParts.length
-      ? `Secondary contact: ${secondaryParts.map(([label, fieldValue]) => `${label}: ${fieldValue}`).join('; ')}`
-      : '';
+    addSection(sections, 'Communication preferences', [
+      ['Preferred channels', preferredChannels.join(', ')],
+    ]);
 
-    return [notes, secondaryBlock].filter(Boolean).join('\n\n');
+    addSection(sections, 'Agency business information', [
+      ['Nature of business', natureOfBusiness],
+      ['Number of employees', value(form, 'numberOfEmployees')],
+      ['Students sent to Canada in past 12 months', value(form, 'studentsSentToCanadaLast12Months')],
+      ['Anticipated MCC students in next 12 months', value(form, 'anticipatedMccStudentsNext12Months')],
+      ['Top student source countries', sourceCountries.join(', ')],
+      ['Target education levels', educationLevels.join(', ')],
+      ['Ranked programs of interest', programs.join(', ')],
+      ['Promotional channels used', promotionalChannels.join(', ')],
+      ['How they heard about MCC', heardAboutMcc],
+    ]);
+
+    return sections.join('\n\n');
   }
 
-  function splitMultiValue(rawValue) {
-    return String(rawValue || '')
-      .split(/[\n,]+/)
-      .map((entry) => entry.trim())
+  function addSection(sections, title, rows) {
+    const parts = rows
+      .filter(([, fieldValue]) => fieldValue)
+      .map(([label, fieldValue]) => `${label}: ${fieldValue}`);
+    if (parts.length) sections.push(`${title}\n${parts.join('\n')}`);
+  }
+
+  function formatOtherValue(baseValue, otherValue) {
+    if (baseValue !== OTHER_VALUE) return baseValue;
+    return otherValue ? `${OTHER_VALUE}: ${otherValue}` : OTHER_VALUE;
+  }
+
+  function expandOtherValueList(values, otherValue) {
+    return values
+      .map((entry) => (entry === OTHER_VALUE ? formatOtherValue(entry, otherValue) : entry))
       .filter(Boolean);
   }
 
@@ -321,7 +473,7 @@
   }
 
   function clearAllErrors(form) {
-    hideGeneralMessage(form);
+    hideGeneralMessage();
     form.querySelectorAll('.input-error').forEach((control) => {
       control.classList.remove('input-error');
       control.removeAttribute('aria-invalid');
@@ -331,6 +483,14 @@
       slot.textContent = '';
       slot.style.display = '';
     });
+  }
+
+  function clearFieldValue(form, field) {
+    const control = fieldControl(form, field);
+    if (!control) return;
+    if (control.type === 'checkbox' || control.type === 'radio') control.checked = false;
+    else control.value = '';
+    clearFieldError(form, field);
   }
 
   function showGeneralError(form, message) {
@@ -417,9 +577,20 @@
   }
 
   function getSelectedPrograms(form) {
-    return Array.from(form.querySelectorAll('input[name="programsOfInterest"]:checked'))
+    return getMultiControlValues(form, 'programsOfInterest')
+      .filter((entry) => PROGRAMS.includes(entry));
+  }
+
+  function getMultiControlValues(form, name) {
+    return Array.from(form.querySelectorAll(`[name="${cssEscape(name)}"]`))
+      .map((control) => String(control.value || '').trim())
+      .filter(Boolean);
+  }
+
+  function getCheckedValues(form, name) {
+    return Array.from(form.querySelectorAll(`input[name="${cssEscape(name)}"]:checked`))
       .map((input) => input.value)
-      .filter((value) => PROGRAMS.includes(value));
+      .filter(Boolean);
   }
 
   function fieldControl(form, field) {
@@ -428,9 +599,9 @@
   }
 
   function errorGroup(form, field) {
-    if (field === 'programsOfInterest') return form.querySelector('[data-field-group="programsOfInterest"]');
+    if (GROUP_FIELDS.includes(field)) return form.querySelector(`[data-field-group="${cssEscape(field)}"]`);
     const control = fieldControl(form, field);
-    return control ? control.closest('.form-group, .checkbox-group') : null;
+    return control ? control.closest('.form-group, .checkbox-group, .agency-choice, fieldset') : null;
   }
 
   function errorSlot(form, field) {
@@ -452,6 +623,17 @@
     return control && control.files ? control.files[0] : null;
   }
 
+  function option(value, label) {
+    const opt = document.createElement('option');
+    opt.value = value;
+    opt.textContent = label;
+    return opt;
+  }
+
+  function hasOption(select, value) {
+    return Array.from(select.options).some((opt) => opt.value === value);
+  }
+
   function isValidEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
@@ -459,6 +641,15 @@
   function isReasonablePhone(phone) {
     const digits = phone.replace(/\D/g, '');
     return digits.length >= 7 && digits.length <= 20;
+  }
+
+  function isValidUrl(url) {
+    try {
+      const parsed = new URL(url);
+      return ['http:', 'https:'].includes(parsed.protocol);
+    } catch (_) {
+      return false;
+    }
   }
 
   function isAllowedFile(file) {
