@@ -4509,6 +4509,14 @@ textarea {
     margin-bottom: 0;
 }
 
+.agency-subsection-title {
+    margin: 0.35rem 0 -0.25rem;
+    color: var(--deep-green-dark);
+    font-size: 1rem;
+    font-weight: 800;
+    line-height: 1.3;
+}
+
 .agency-type-fieldset,
 .agency-form fieldset.form-group {
     border: 0;

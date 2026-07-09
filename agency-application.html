@@ -110,7 +110,7 @@
                     </div>
                     <div class="page-highlight-card">
                         <strong>Before you begin</strong>
-                        <p>Have your legal details, market region, contact information, and required document ready. Company agencies need a registration document; individual agents need government ID.</p>
+                        <p>Have your legal details, market region, contact information, and any supporting documents ready. MCC will review the application details in the Portal.</p>
                     </div>
                 </div>
                 <div class="page-hero-media">
@@ -127,16 +127,16 @@
                     <p>Your application is reviewed in the MCC Portal. The marketing website does not store agency applications.</p>
                     <div class="sidebar-stack">
                         <div class="sidebar-panel">
-                            <strong>Agency profile</strong>
-                            <p>Agency type, legal name, market region, and contact information.</p>
+                            <strong>Applicant profile</strong>
+                            <p>Legal name, market region, primary contact, and optional secondary contact information.</p>
                         </div>
                         <div class="sidebar-panel">
                             <strong>Program focus</strong>
                             <p>Choose up to three programs you expect to introduce to prospective students.</p>
                         </div>
                         <div class="sidebar-panel">
-                            <strong>Required document</strong>
-                            <p>Upload company registration for agencies or government ID for individual agents.</p>
+                            <strong>Supporting documents</strong>
+                            <p>Upload registration or identity documents if they are already available.</p>
                         </div>
                     </div>
                 </aside>
@@ -151,46 +151,15 @@
 
                     <form id="agency-application-form" class="agency-form" novalidate>
                         <section class="agency-form-section">
-                            <h2 class="form-section-title">1. Agency Type</h2>
-                            <fieldset class="agency-type-fieldset" data-field-group="agencyType" aria-describedby="agencyType-error">
-                                <legend class="sr-only">Agency type</legend>
-                                <div class="agency-type-grid">
-                                    <label class="agency-type-card">
-                                        <input type="radio" name="agencyType" value="Domestic Agency" checked>
-                                        <span>
-                                            <strong>Domestic Agency</strong>
-                                            <small>Registered agency operating primarily in Canada.</small>
-                                        </span>
-                                    </label>
-                                    <label class="agency-type-card">
-                                        <input type="radio" name="agencyType" value="International Agency">
-                                        <span>
-                                            <strong>International Agency</strong>
-                                            <small>Registered agency operating outside Canada.</small>
-                                        </span>
-                                    </label>
-                                    <label class="agency-type-card">
-                                        <input type="radio" name="agencyType" value="Personal / Individual Agent">
-                                        <span>
-                                            <strong>Personal / Individual Agent</strong>
-                                            <small>Independent agent applying as an individual.</small>
-                                        </span>
-                                    </label>
-                                </div>
-                                <span class="error-msg" id="agencyType-error"></span>
-                            </fieldset>
-                        </section>
-
-                        <section class="agency-form-section">
-                            <h2 class="form-section-title">2. Identity and Contact</h2>
+                            <h2 class="form-section-title">1. Identity and Contact</h2>
                             <div class="form-grid-2">
                                 <div class="form-group">
-                                    <label for="legalName"><span id="legalNameText">Company legal name</span> <span class="required-mark">*</span></label>
+                                    <label for="legalName">Legal name <span class="required-mark">*</span></label>
                                     <input type="text" id="legalName" name="legalName" autocomplete="organization" required>
                                     <span class="error-msg" id="legalName-error"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="preferredName"><span id="preferredNameText">Preferred/display name</span></label>
+                                    <label for="preferredName">Preferred/display name</label>
                                     <input type="text" id="preferredName" name="preferredName">
                                     <span class="error-msg" id="preferredName-error"></span>
                                 </div>
@@ -198,17 +167,17 @@
 
                             <div class="form-grid-3">
                                 <div class="form-group">
-                                    <label for="mainContactName"><span id="mainContactNameText">Main contact name</span> <span class="required-mark">*</span></label>
+                                    <label for="mainContactName">Primary contact name <span class="required-mark">*</span></label>
                                     <input type="text" id="mainContactName" name="mainContactName" autocomplete="name" required>
                                     <span class="error-msg" id="mainContactName-error"></span>
                                 </div>
-                                <div class="form-group" data-agency-only>
-                                    <label for="mainContactJobTitle">Main contact job title</label>
+                                <div class="form-group">
+                                    <label for="mainContactJobTitle">Primary contact job title</label>
                                     <input type="text" id="mainContactJobTitle" name="mainContactJobTitle" autocomplete="organization-title">
                                     <span class="error-msg" id="mainContactJobTitle-error"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="mainContactEmail"><span id="mainContactEmailText">Main contact email</span> <span class="required-mark">*</span></label>
+                                    <label for="mainContactEmail">Primary contact email <span class="required-mark">*</span></label>
                                     <input type="email" id="mainContactEmail" name="mainContactEmail" autocomplete="email" required>
                                     <span class="error-msg" id="mainContactEmail-error"></span>
                                 </div>
@@ -216,27 +185,44 @@
 
                             <div class="form-grid-3">
                                 <div class="form-group">
-                                    <label for="mainContactPhone"><span id="mainContactPhoneText">Main contact phone</span> <span class="required-mark">*</span></label>
+                                    <label for="mainContactPhone">Primary contact phone <span class="required-mark">*</span></label>
                                     <input type="tel" id="mainContactPhone" name="mainContactPhone" autocomplete="tel" required>
                                     <span class="error-msg" id="mainContactPhone-error"></span>
                                 </div>
-                                <div class="form-group" data-agency-only>
-                                    <label for="companyEmail">Company email</label>
+                                <div class="form-group">
+                                    <label for="companyEmail">Organization email</label>
                                     <input type="email" id="companyEmail" name="companyEmail" autocomplete="email">
                                     <span class="error-msg" id="companyEmail-error"></span>
                                 </div>
-                                <div class="form-group" data-agency-only>
-                                    <label for="companyPhone">Company phone</label>
+                                <div class="form-group">
+                                    <label for="companyPhone">Organization phone</label>
                                     <input type="tel" id="companyPhone" name="companyPhone" autocomplete="tel">
                                     <span class="error-msg" id="companyPhone-error"></span>
                                 </div>
                             </div>
 
-                            <div class="form-group" data-personal-only>
-                                <label for="sin">SIN <span class="optional-note">(optional / if applicable)</span></label>
-                                <input type="text" id="sin" name="sin" inputmode="numeric" autocomplete="off" maxlength="20">
-                                <small class="field-hint">Only enter this if MCC has requested it for your individual agent application.</small>
-                                <span class="error-msg" id="sin-error"></span>
+                            <h3 class="agency-subsection-title">Secondary contact <span class="optional-note">(optional)</span></h3>
+                            <div class="form-grid-2">
+                                <div class="form-group">
+                                    <label for="secondaryContactName">Secondary contact name</label>
+                                    <input type="text" id="secondaryContactName" name="secondaryContactName" autocomplete="name">
+                                    <span class="error-msg" id="secondaryContactName-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="secondaryContactJobTitle">Secondary contact job title</label>
+                                    <input type="text" id="secondaryContactJobTitle" name="secondaryContactJobTitle" autocomplete="organization-title">
+                                    <span class="error-msg" id="secondaryContactJobTitle-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="secondaryContactEmail">Secondary contact email</label>
+                                    <input type="email" id="secondaryContactEmail" name="secondaryContactEmail" autocomplete="email">
+                                    <span class="error-msg" id="secondaryContactEmail-error"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="secondaryContactPhone">Secondary contact phone</label>
+                                    <input type="tel" id="secondaryContactPhone" name="secondaryContactPhone" autocomplete="tel">
+                                    <span class="error-msg" id="secondaryContactPhone-error"></span>
+                                </div>
                             </div>
 
                             <div class="form-group">
@@ -247,7 +233,7 @@
                         </section>
 
                         <section class="agency-form-section">
-                            <h2 class="form-section-title">3. Market and Location</h2>
+                            <h2 class="form-section-title">2. Market and Location</h2>
                             <div class="form-grid-2">
                                 <div class="form-group">
                                     <label for="primaryMarketRegion">Primary market region <span class="required-mark">*</span></label>
@@ -259,6 +245,12 @@
                                     <input type="text" id="secondaryMarketRegions" name="secondaryMarketRegions" placeholder="Optional; separate multiple regions with commas">
                                     <span class="error-msg" id="secondaryMarketRegions-error"></span>
                                 </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="streetAddress">Street address</label>
+                                <input type="text" id="streetAddress" name="streetAddress" autocomplete="street-address">
+                                <span class="error-msg" id="streetAddress-error"></span>
                             </div>
 
                             <div class="form-grid-3">
@@ -281,23 +273,18 @@
                                 </div>
                             </div>
 
-                            <div class="form-grid-2">
+                            <div class="form-grid-3">
                                 <div class="form-group">
                                     <label for="postalCode">Postal code</label>
                                     <input type="text" id="postalCode" name="postalCode" autocomplete="postal-code">
                                     <span class="error-msg" id="postalCode-error"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="streetAddress">Street address</label>
-                                    <input type="text" id="streetAddress" name="streetAddress" autocomplete="street-address">
-                                    <span class="error-msg" id="streetAddress-error"></span>
                                 </div>
                             </div>
                         </section>
 
                         <section class="agency-form-section">
                             <div class="program-section-head">
-                                <h2 class="form-section-title">4. Programs of Interest</h2>
+                                <h2 class="form-section-title">3. Programs of Interest</h2>
                                 <span id="programs-counter" class="program-counter" aria-live="polite">0/3 selected</span>
                             </div>
                             <fieldset class="form-group" data-field-group="programsOfInterest" aria-describedby="programsOfInterest-error">
@@ -316,7 +303,7 @@
                         </section>
 
                         <section class="agency-form-section">
-                            <h2 class="form-section-title">5. Background</h2>
+                            <h2 class="form-section-title">4. Background</h2>
                             <div class="form-grid-2">
                                 <div class="form-group">
                                     <label for="shortIntroduction">Short introduction / background</label>
@@ -327,13 +314,6 @@
                                     <label for="howDidYouHearAboutMcc">How did you hear about MCC?</label>
                                     <textarea id="howDidYouHearAboutMcc" name="howDidYouHearAboutMcc" rows="4"></textarea>
                                     <span class="error-msg" id="howDidYouHearAboutMcc-error"></span>
-                                </div>
-                            </div>
-                            <div class="form-grid-2">
-                                <div class="form-group">
-                                    <label for="estimatedStudentReferralVolume">Estimated student referral volume</label>
-                                    <input type="text" id="estimatedStudentReferralVolume" name="estimatedStudentReferralVolume" placeholder="Example: 5-10 students per year">
-                                    <span class="error-msg" id="estimatedStudentReferralVolume-error"></span>
                                 </div>
                                 <div class="form-group">
                                     <label for="preferredContactChannel">Preferred contact channel</label>
@@ -351,26 +331,26 @@
                         </section>
 
                         <section class="agency-form-section">
-                            <h2 class="form-section-title">6. Required Document</h2>
-                            <p id="agency-document-instruction" class="section-copy agency-document-copy">Upload your company registration document as a PDF, JPEG, or PNG file. Maximum file size is 15 MB.</p>
+                            <h2 class="form-section-title">5. Supporting Documents</h2>
+                            <p id="agency-document-instruction" class="section-copy agency-document-copy">Documents are optional at this step. Upload PDF, JPEG, or PNG files only. Maximum file size is 15 MB per file.</p>
                             <div class="document-upload-grid">
-                                <div class="form-group" data-agency-only>
-                                    <label for="companyRegistrationDocument">Company registration document <span class="required-mark">*</span></label>
+                                <div class="form-group">
+                                    <label for="companyRegistrationDocument">Company registration document</label>
                                     <input type="file" id="companyRegistrationDocument" name="companyRegistrationDocument" accept="application/pdf,image/jpeg,image/png">
-                                    <small class="field-hint">Required for Domestic Agency and International Agency.</small>
+                                    <small class="field-hint">Upload if available.</small>
                                     <span class="error-msg" id="companyRegistrationDocument-error"></span>
                                 </div>
-                                <div class="form-group" data-personal-only>
-                                    <label for="governmentIdDocument">Government ID document <span class="required-mark">*</span></label>
+                                <div class="form-group">
+                                    <label for="governmentIdDocument">Government ID document</label>
                                     <input type="file" id="governmentIdDocument" name="governmentIdDocument" accept="application/pdf,image/jpeg,image/png">
-                                    <small class="field-hint">Required for Personal / Individual Agent.</small>
+                                    <small class="field-hint">Upload if available.</small>
                                     <span class="error-msg" id="governmentIdDocument-error"></span>
                                 </div>
                             </div>
                         </section>
 
                         <section class="agency-form-section">
-                            <h2 class="form-section-title">7. Consent and Privacy</h2>
+                            <h2 class="form-section-title">6. Consent and Privacy</h2>
                             <div class="agency-consent-stack">
                                 <div class="checkbox-group">
                                     <input type="checkbox" id="consentConfirmed" name="consentConfirmed">

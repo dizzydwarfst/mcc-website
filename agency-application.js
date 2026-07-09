@@ -3,8 +3,6 @@
   const LOCAL_PORTAL_API_BASE_URL = 'http://localhost:8000';
   const MAX_FILE_BYTES = 15 * 1024 * 1024;
   const PROGRAM_LIMIT = 3;
-  const AGENCY_TYPES = ['Domestic Agency', 'International Agency', 'Personal / Individual Agent'];
-  const COMPANY_AGENCY_TYPES = ['Domestic Agency', 'International Agency'];
   const ALLOWED_FILE_TYPES = ['application/pdf', 'image/jpeg', 'image/png'];
   const ALLOWED_FILE_EXTENSIONS = ['pdf', 'jpg', 'jpeg', 'png'];
 
@@ -19,14 +17,15 @@
   ];
 
   const FIELD_LABELS = {
-    agencyType: 'Agency type',
     legalName: 'Legal name',
     primaryMarketRegion: 'Primary market region',
     country: 'Country',
     city: 'City',
-    mainContactName: 'Main contact name',
-    mainContactEmail: 'Main contact email',
-    mainContactPhone: 'Main contact phone',
+    mainContactName: 'Primary contact name',
+    mainContactEmail: 'Primary contact email',
+    mainContactPhone: 'Primary contact phone',
+    secondaryContactEmail: 'Secondary contact email',
+    secondaryContactPhone: 'Secondary contact phone',
     companyRegistrationDocument: 'Company registration document',
     governmentIdDocument: 'Government ID document',
     consentConfirmed: 'Consent confirmation',
@@ -45,15 +44,7 @@
   });
 
   function initializeAgencyApplication(form) {
-    const agencyTypeInputs = Array.from(form.querySelectorAll('input[name="agencyType"]'));
     const programInputs = Array.from(form.querySelectorAll('input[name="programsOfInterest"]'));
-
-    agencyTypeInputs.forEach((input) => {
-      input.addEventListener('change', () => {
-        syncAgencyType(form);
-        clearFieldError(form, 'agencyType');
-      });
-    });
 
     programInputs.forEach((input) => {
       input.addEventListener('change', () => handleProgramChange(form, input));
@@ -63,12 +54,11 @@
       control.addEventListener('input', () => clearFieldError(form, control.name || control.id));
       control.addEventListener('change', () => {
         const field = control.name || control.id;
-        if (field === 'agencyType' || field === 'programsOfInterest') return;
+        if (field === 'programsOfInterest') return;
         clearFieldError(form, field);
       });
     });
 
-    syncAgencyType(form);
     updateProgramCounter(form);
 
     form.addEventListener('submit', async (event) => {
@@ -83,51 +73,6 @@
 
       await submitApplication(form);
     });
-  }
-
-  function syncAgencyType(form) {
-    const agencyType = getAgencyType(form);
-    const isPersonal = agencyType === 'Personal / Individual Agent';
-    const isCompany = COMPANY_AGENCY_TYPES.includes(agencyType);
-
-    form.querySelectorAll('[data-agency-only]').forEach((el) => setConditionalVisible(el, isCompany));
-    form.querySelectorAll('[data-personal-only]').forEach((el) => setConditionalVisible(el, isPersonal));
-
-    setLabelText('legalNameText', isPersonal ? 'Full legal name' : 'Company legal name');
-    setLabelText('preferredNameText', isPersonal ? 'Preferred name' : 'Preferred/display name');
-    setLabelText('mainContactNameText', isPersonal ? 'Name' : 'Main contact name');
-    setLabelText('mainContactEmailText', isPersonal ? 'Email' : 'Main contact email');
-    setLabelText('mainContactPhoneText', isPersonal ? 'Phone' : 'Main contact phone');
-
-    const docInstruction = document.getElementById('agency-document-instruction');
-    if (docInstruction) {
-      docInstruction.textContent = isPersonal
-        ? 'Upload a government ID document as a PDF, JPEG, or PNG file. Maximum file size is 15 MB.'
-        : 'Upload your company registration document as a PDF, JPEG, or PNG file. Maximum file size is 15 MB.';
-    }
-
-    if (!isCompany) clearFieldValue(form, 'companyRegistrationDocument');
-    if (!isPersonal) {
-      clearFieldValue(form, 'governmentIdDocument');
-      clearFieldValue(form, 'sin');
-    }
-  }
-
-  function setConditionalVisible(el, visible) {
-    el.hidden = !visible;
-    el.querySelectorAll('input, select, textarea').forEach((control) => {
-      control.disabled = !visible;
-      if (!visible) {
-        control.removeAttribute('aria-invalid');
-        control.classList.remove('input-error');
-      }
-    });
-    if (!visible) el.classList.remove('has-error');
-  }
-
-  function setLabelText(id, value) {
-    const el = document.getElementById(id);
-    if (el) el.textContent = value;
   }
 
   function handleProgramChange(form, changedInput) {
@@ -152,13 +97,6 @@
   function validate(form) {
     clearAllErrors(form);
     const errors = [];
-    const agencyType = getAgencyType(form);
-    const isCompany = COMPANY_AGENCY_TYPES.includes(agencyType);
-    const isPersonal = agencyType === 'Personal / Individual Agent';
-
-    if (!AGENCY_TYPES.includes(agencyType)) {
-      errors.push({ field: 'agencyType', message: 'Choose an agency type.' });
-    }
 
     [
       'legalName',
@@ -180,18 +118,23 @@
       errors.push({ field: 'mainContactPhone', message: 'Enter a valid phone number.' });
     }
 
+    const secondaryEmail = value(form, 'secondaryContactEmail');
+    if (secondaryEmail && !isValidEmail(secondaryEmail)) {
+      errors.push({ field: 'secondaryContactEmail', message: 'Enter a valid secondary contact email address.' });
+    }
+
+    const secondaryPhone = value(form, 'secondaryContactPhone');
+    if (secondaryPhone && !isReasonablePhone(secondaryPhone)) {
+      errors.push({ field: 'secondaryContactPhone', message: 'Enter a valid secondary contact phone number.' });
+    }
+
     const programs = getSelectedPrograms(form);
     if (programs.length > PROGRAM_LIMIT) {
       errors.push({ field: 'programsOfInterest', message: `Choose no more than ${PROGRAM_LIMIT} programs.` });
     }
 
-    if (isCompany) {
-      validateFileField(form, 'companyRegistrationDocument', true, errors);
-    }
-
-    if (isPersonal) {
-      validateFileField(form, 'governmentIdDocument', true, errors);
-    }
+    validateFileField(form, 'companyRegistrationDocument', false, errors);
+    validateFileField(form, 'governmentIdDocument', false, errors);
 
     if (!checkbox(form, 'consentConfirmed')) {
       errors.push({ field: 'consentConfirmed', message: 'Confirm that MCC may review and contact you about this application.' });
@@ -260,45 +203,34 @@
   }
 
   function buildFormData(form) {
-    const agencyType = getAgencyType(form);
-    const isCompany = COMPANY_AGENCY_TYPES.includes(agencyType);
-    const isPersonal = agencyType === 'Personal / Individual Agent';
     const data = new FormData();
 
-    appendRequired(data, 'agencyType', agencyType);
     appendRequired(data, 'legalName', value(form, 'legalName'));
     appendIfValue(data, 'preferredName', value(form, 'preferredName'));
     appendRequired(data, 'primaryMarketRegion', value(form, 'primaryMarketRegion'));
     appendMultiValue(data, 'secondaryMarketRegions', value(form, 'secondaryMarketRegions'));
+    appendIfValue(data, 'streetAddress', value(form, 'streetAddress'));
     appendRequired(data, 'country', value(form, 'country'));
     appendIfValue(data, 'provinceState', value(form, 'provinceState'));
     appendRequired(data, 'city', value(form, 'city'));
     appendIfValue(data, 'postalCode', value(form, 'postalCode'));
-    appendIfValue(data, 'streetAddress', value(form, 'streetAddress'));
     appendRequired(data, 'mainContactName', value(form, 'mainContactName'));
     appendRequired(data, 'mainContactEmail', value(form, 'mainContactEmail'));
     appendRequired(data, 'mainContactPhone', value(form, 'mainContactPhone'));
-    appendIfValue(data, 'generalContactInfo', value(form, 'generalContactInfo'));
+    appendIfValue(data, 'mainContactJobTitle', value(form, 'mainContactJobTitle'));
+    appendIfValue(data, 'companyEmail', value(form, 'companyEmail'));
+    appendIfValue(data, 'companyPhone', value(form, 'companyPhone'));
+    appendIfValue(data, 'generalContactInfo', buildGeneralContactInfo(form));
     appendIfValue(data, 'shortIntroduction', value(form, 'shortIntroduction'));
     appendIfValue(data, 'howDidYouHearAboutMcc', value(form, 'howDidYouHearAboutMcc'));
-    appendIfValue(data, 'estimatedStudentReferralVolume', value(form, 'estimatedStudentReferralVolume'));
     appendIfValue(data, 'preferredContactChannel', value(form, 'preferredContactChannel'));
 
     getSelectedPrograms(form).slice(0, PROGRAM_LIMIT).forEach((program) => {
       data.append('programsOfInterest', program);
     });
 
-    if (isCompany) {
-      appendIfValue(data, 'mainContactJobTitle', value(form, 'mainContactJobTitle'));
-      appendIfValue(data, 'companyEmail', value(form, 'companyEmail'));
-      appendIfValue(data, 'companyPhone', value(form, 'companyPhone'));
-      data.append('companyRegistrationDocument', fileValue(form, 'companyRegistrationDocument'));
-    }
-
-    if (isPersonal) {
-      data.append('governmentIdDocument', fileValue(form, 'governmentIdDocument'));
-      appendIfValue(data, 'sin', value(form, 'sin'));
-    }
+    appendFileIfValue(data, 'companyRegistrationDocument', fileValue(form, 'companyRegistrationDocument'));
+    appendFileIfValue(data, 'governmentIdDocument', fileValue(form, 'governmentIdDocument'));
 
     data.append('consentConfirmed', checkbox(form, 'consentConfirmed') ? 'true' : 'false');
     data.append('privacyConfirmed', checkbox(form, 'privacyConfirmed') ? 'true' : 'false');
@@ -315,8 +247,28 @@
     if (cleanValue) data.append(name, cleanValue);
   }
 
+  function appendFileIfValue(data, name, file) {
+    if (file) data.append(name, file);
+  }
+
   function appendMultiValue(data, name, rawValue) {
     splitMultiValue(rawValue).forEach((entry) => data.append(name, entry));
+  }
+
+  function buildGeneralContactInfo(form) {
+    const notes = value(form, 'generalContactInfo');
+    const secondaryParts = [
+      ['Name', value(form, 'secondaryContactName')],
+      ['Job title', value(form, 'secondaryContactJobTitle')],
+      ['Email', value(form, 'secondaryContactEmail')],
+      ['Phone', value(form, 'secondaryContactPhone')],
+    ].filter(([, fieldValue]) => fieldValue);
+
+    const secondaryBlock = secondaryParts.length
+      ? `Secondary contact: ${secondaryParts.map(([label, fieldValue]) => `${label}: ${fieldValue}`).join('; ')}`
+      : '';
+
+    return [notes, secondaryBlock].filter(Boolean).join('\n\n');
   }
 
   function splitMultiValue(rawValue) {
@@ -464,11 +416,6 @@
       : PRODUCTION_PORTAL_API_BASE_URL;
   }
 
-  function getAgencyType(form) {
-    const checked = form.querySelector('input[name="agencyType"]:checked');
-    return checked ? checked.value : '';
-  }
-
   function getSelectedPrograms(form) {
     return Array.from(form.querySelectorAll('input[name="programsOfInterest"]:checked'))
       .map((input) => input.value)
@@ -481,10 +428,9 @@
   }
 
   function errorGroup(form, field) {
-    if (field === 'agencyType') return form.querySelector('[data-field-group="agencyType"]');
     if (field === 'programsOfInterest') return form.querySelector('[data-field-group="programsOfInterest"]');
     const control = fieldControl(form, field);
-    return control ? control.closest('.form-group, .checkbox-group, .agency-type-fieldset') : null;
+    return control ? control.closest('.form-group, .checkbox-group') : null;
   }
 
   function errorSlot(form, field) {
@@ -504,14 +450,6 @@
   function fileValue(form, field) {
     const control = fieldControl(form, field);
     return control && control.files ? control.files[0] : null;
-  }
-
-  function clearFieldValue(form, field) {
-    const control = fieldControl(form, field);
-    if (!control) return;
-    if (control.type === 'checkbox' || control.type === 'radio') control.checked = false;
-    else control.value = '';
-    clearFieldError(form, field);
   }
 
   function isValidEmail(email) {
