@@ -132,11 +132,11 @@
                         </div>
                         <div class="sidebar-panel">
                             <strong>Business profile</strong>
-                            <p>Nature of business, employee range, student volume, source countries, education levels, and ranked program interest.</p>
+                            <p>Nature of business, student volume, market regions, education levels, and ranked program interest.</p>
                         </div>
                         <div class="sidebar-panel">
                             <strong>Upload documents</strong>
-                            <p>Documents are optional at this step and can be reviewed later in the Portal.</p>
+                            <p>A supporting document is required so MCC can review the application in the Portal.</p>
                         </div>
                     </div>
                 </aside>
@@ -152,66 +152,39 @@
                     <form id="agency-application-form" class="agency-form" novalidate>
                         <section class="agency-form-section">
                             <h2 class="form-section-title">1. Agency Contact Information</h2>
-                            <fieldset class="agency-type-fieldset" data-field-group="agencyType" aria-describedby="agencyType-error">
-                                <legend>Agency type <span class="required-mark">*</span></legend>
-                                <div class="agency-type-grid">
-                                    <label class="agency-type-card">
-                                        <input type="radio" name="agencyType" value="Domestic Agency" required>
-                                        <span>
-                                            <strong>Domestic Agency</strong>
-                                            <small>Canadian registered business or agency.</small>
-                                        </span>
-                                    </label>
-                                    <label class="agency-type-card">
-                                        <input type="radio" name="agencyType" value="International Agency" required>
-                                        <span>
-                                            <strong>International Agency</strong>
-                                            <small>Registered business or agency outside Canada.</small>
-                                        </span>
-                                    </label>
-                                    <label class="agency-type-card">
-                                        <input type="radio" name="agencyType" value="Personal / Individual Agent" required>
-                                        <span>
-                                            <strong>Personal / Individual Agent</strong>
-                                            <small>Individual representative applying independently.</small>
-                                        </span>
-                                    </label>
-                                </div>
-                                <span class="error-msg" id="agencyType-error"></span>
-                            </fieldset>
-
                             <div class="form-grid-2">
                                 <div class="form-group">
-                                    <label for="legalName">Company legal name <span class="required-mark">*</span></label>
+                                    <label for="legalName">Legal name <span class="required-mark">*</span></label>
                                     <input type="text" id="legalName" name="legalName" autocomplete="organization" required>
                                     <span class="error-msg" id="legalName-error"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="preferredName">Company preferred/brand name</label>
+                                    <label for="preferredName">Preferred / business name</label>
                                     <input type="text" id="preferredName" name="preferredName" autocomplete="organization">
                                     <span class="error-msg" id="preferredName-error"></span>
                                 </div>
                             </div>
 
-                            <div class="form-grid-3">
+                            <div class="form-grid-2">
                                 <div class="form-group">
-                                    <label for="companyPhone">Company phone number <span class="required-mark">*</span></label>
-                                    <input type="tel" id="companyPhone" name="companyPhone" autocomplete="tel" required>
+                                    <label for="companyPhone">Company / organization phone</label>
+                                    <input type="tel" id="companyPhone" name="companyPhone" autocomplete="tel">
                                     <span class="error-msg" id="companyPhone-error"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="companyEmail">Company email address <span class="required-mark">*</span></label>
-                                    <input type="email" id="companyEmail" name="companyEmail" autocomplete="email" required>
+                                    <label for="companyEmail">Company / organization email</label>
+                                    <input type="email" id="companyEmail" name="companyEmail" autocomplete="email">
                                     <span class="error-msg" id="companyEmail-error"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="companyWebsite">Company website</label>
-                                    <input type="text" id="companyWebsite" name="companyWebsite" autocomplete="url" inputmode="url" autocapitalize="none" placeholder="example.com">
-                                    <span class="error-msg" id="companyWebsite-error"></span>
                                 </div>
                             </div>
 
-                            <h3 class="agency-subsection-title">Company Address</h3>
+                            <div class="form-group">
+                                <label for="generalContactInfo">General contact info</label>
+                                <textarea id="generalContactInfo" name="generalContactInfo" rows="3"></textarea>
+                                <span class="error-msg" id="generalContactInfo-error"></span>
+                            </div>
+
+                            <h3 class="agency-subsection-title">Address</h3>
                             <div class="form-grid-3">
                                 <div class="form-group">
                                     <label for="country">Country <span class="required-mark">*</span></label>
@@ -248,7 +221,7 @@
                             <h3 class="agency-subsection-title">Main Contact Person</h3>
                             <div class="form-grid-3">
                                 <div class="form-group">
-                                    <label for="mainContactName">Full name <span class="required-mark">*</span></label>
+                                    <label for="mainContactName">Main contact name <span class="required-mark">*</span></label>
                                     <input type="text" id="mainContactName" name="mainContactName" autocomplete="name" required>
                                     <span class="error-msg" id="mainContactName-error"></span>
                                 </div>
@@ -258,17 +231,17 @@
                                     <span class="error-msg" id="mainContactPreferredName-error"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="mainContactJobTitle">Job title</label>
+                                    <label for="mainContactJobTitle">Main contact job title</label>
                                     <input type="text" id="mainContactJobTitle" name="mainContactJobTitle" autocomplete="organization-title">
                                     <span class="error-msg" id="mainContactJobTitle-error"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="mainContactPhone">Phone number <span class="required-mark">*</span></label>
+                                    <label for="mainContactPhone">Main contact phone <span class="required-mark">*</span></label>
                                     <input type="tel" id="mainContactPhone" name="mainContactPhone" autocomplete="tel" required>
                                     <span class="error-msg" id="mainContactPhone-error"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="mainContactEmail">Email address <span class="required-mark">*</span></label>
+                                    <label for="mainContactEmail">Main contact email <span class="required-mark">*</span></label>
                                     <input type="email" id="mainContactEmail" name="mainContactEmail" autocomplete="email" required>
                                     <span class="error-msg" id="mainContactEmail-error"></span>
                                 </div>
@@ -312,7 +285,7 @@
                             </div>
 
                             <fieldset class="form-group" data-field-group="preferredContactChannels" aria-describedby="preferredContactChannels-error">
-                                <legend>Preferred Channel of Communication</legend>
+                                <legend>Preferred contact channel</legend>
                                 <div class="agency-choice-grid">
                                     <label class="agency-choice"><input type="checkbox" name="preferredContactChannels" value="Email"> <span>Email</span></label>
                                     <label class="agency-choice"><input type="checkbox" name="preferredContactChannels" value="Phone"> <span>Phone</span></label>
@@ -368,47 +341,47 @@
                                     <span class="error-msg" id="gstNumber-error"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="sinNumber">SIN Number <span class="optional-note">(if applicable)</span></label>
-                                    <input type="text" id="sinNumber" name="sinNumber" inputmode="numeric" autocomplete="off" maxlength="20">
-                                    <small class="field-hint">For personal/individual agents, if applicable.</small>
-                                    <span class="error-msg" id="sinNumber-error"></span>
-                                </div>
-                                <div class="form-group">
                                     <label for="studentsSentToCanadaLast12Months">Number of students sent to Canada in the past 12 months</label>
                                     <input type="text" id="studentsSentToCanadaLast12Months" name="studentsSentToCanadaLast12Months" inputmode="numeric">
                                     <span class="error-msg" id="studentsSentToCanadaLast12Months-error"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="anticipatedMccStudentsNext12Months">Number of students anticipated for MCC in the next 12 months</label>
+                                    <label for="anticipatedMccStudentsNext12Months">Estimated student referral volume</label>
                                     <input type="text" id="anticipatedMccStudentsNext12Months" name="anticipatedMccStudentsNext12Months" inputmode="numeric">
                                     <span class="error-msg" id="anticipatedMccStudentsNext12Months-error"></span>
                                 </div>
                             </div>
 
-                            <fieldset class="form-group" data-field-group="studentSourceCountries">
-                                <legend>Top 3 countries your students come from</legend>
+                            <fieldset class="form-group" data-field-group="primaryMarketRegion">
+                                <legend>Market regions</legend>
                                 <div class="form-grid-3">
                                     <div class="form-group">
-                                        <label for="studentSourceCountry1">Country 1</label>
-                                        <select id="studentSourceCountry1" name="studentSourceCountries" data-country-rank>
+                                        <label for="primaryMarketRegion">Primary market region <span class="required-mark">*</span></label>
+                                        <select id="primaryMarketRegion" name="primaryMarketRegion" data-country-rank required>
                                             <option value="">Select Country</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="studentSourceCountry2">Country 2</label>
-                                        <select id="studentSourceCountry2" name="studentSourceCountries" data-country-rank>
+                                        <label for="secondaryMarketRegion1">Secondary market region(s)</label>
+                                        <select id="secondaryMarketRegion1" name="secondaryMarketRegions" data-country-rank>
                                             <option value="">Select Country</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="studentSourceCountry3">Country 3</label>
-                                        <select id="studentSourceCountry3" name="studentSourceCountries" data-country-rank>
+                                        <label for="secondaryMarketRegion2">Secondary market region(s)</label>
+                                        <select id="secondaryMarketRegion2" name="secondaryMarketRegions" data-country-rank>
                                             <option value="">Select Country</option>
                                         </select>
                                     </div>
                                 </div>
-                                <span class="error-msg" id="studentSourceCountries-error"></span>
+                                <span class="error-msg" id="primaryMarketRegion-error"></span>
                             </fieldset>
+
+                            <div class="form-group">
+                                <label for="shortIntroduction">Short introduction / background</label>
+                                <textarea id="shortIntroduction" name="shortIntroduction" rows="4"></textarea>
+                                <span class="error-msg" id="shortIntroduction-error"></span>
+                            </div>
 
                             <fieldset class="form-group" data-field-group="targetEducationLevels">
                                 <legend>Top 3 target education levels your students seek</legend>
@@ -522,19 +495,13 @@
 
                         <section class="agency-form-section">
                             <h2 class="form-section-title">3. Upload Documents</h2>
-                            <p id="agency-document-instruction" class="section-copy agency-document-copy">Domestic and international agencies must upload a company registration document. Personal / individual agents must upload a government ID document. Upload PDF, JPEG, or PNG files only. Maximum file size is 15 MB per file.</p>
+                            <p id="agency-document-instruction" class="section-copy agency-document-copy">Please upload a business registration document, government ID, or another relevant document for MCC to review.</p>
                             <div class="document-upload-grid">
                                 <div class="form-group">
-                                    <label for="companyRegistrationDocument">Company registration document</label>
-                                    <input type="file" id="companyRegistrationDocument" name="companyRegistrationDocument" accept="application/pdf,image/jpeg,image/png">
-                                    <small class="field-hint">Required for all domestic/international businesses.</small>
-                                    <span class="error-msg" id="companyRegistrationDocument-error"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="governmentIdDocument">Government ID document</label>
-                                    <input type="file" id="governmentIdDocument" name="governmentIdDocument" accept="application/pdf,image/jpeg,image/png">
-                                    <small class="field-hint">Required for all personal/individual agents.</small>
-                                    <span class="error-msg" id="governmentIdDocument-error"></span>
+                                    <label for="supportingDocument">Supporting document <span class="required-mark">*</span></label>
+                                    <input type="file" id="supportingDocument" name="supportingDocument" accept="application/pdf,image/jpeg,image/png" required>
+                                    <small class="field-hint">PDF, JPEG, or PNG. Maximum file size is 15 MB.</small>
+                                    <span class="error-msg" id="supportingDocument-error"></span>
                                 </div>
                             </div>
                         </section>

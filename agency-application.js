@@ -4,12 +4,6 @@
   const MAX_FILE_BYTES = 15 * 1024 * 1024;
   const PROGRAM_LIMIT = 3;
   const OTHER_VALUE = 'Other';
-  const PERSONAL_AGENCY_TYPE = 'Personal / Individual Agent';
-  const AGENCY_TYPES = [
-    'Domestic Agency',
-    'International Agency',
-    PERSONAL_AGENCY_TYPE,
-  ];
   const ALLOWED_FILE_TYPES = ['application/pdf', 'image/jpeg', 'image/png'];
   const ALLOWED_FILE_EXTENSIONS = ['pdf', 'jpg', 'jpeg', 'png'];
 
@@ -24,34 +18,30 @@
   ];
 
   const GROUP_FIELDS = [
-    'agencyType',
+    'primaryMarketRegion',
     'preferredContactChannels',
-    'studentSourceCountries',
     'targetEducationLevels',
     'programsOfInterest',
     'promotionalChannels',
   ];
 
   const FIELD_LABELS = {
-    agencyType: 'Agency type',
-    legalName: 'Company legal name',
-    companyPhone: 'Company phone number',
-    companyEmail: 'Company email address',
-    companyWebsite: 'Company website',
+    legalName: 'Legal name',
+    companyPhone: 'Company / organization phone',
+    companyEmail: 'Company / organization email',
     country: 'Country',
     city: 'City',
-    mainContactName: 'Main contact person full name',
-    mainContactEmail: 'Main contact person email address',
-    mainContactPhone: 'Main contact person phone number',
+    primaryMarketRegion: 'Primary market region',
+    mainContactName: 'Main contact name',
+    mainContactEmail: 'Main contact email',
+    mainContactPhone: 'Main contact phone',
     secondaryContactEmail: 'Secondary contact email address',
     secondaryContactPhone: 'Secondary contact phone number',
     gstNumber: 'GST Number',
-    sinNumber: 'SIN Number',
     natureOfBusinessOther: 'Other nature of business',
     preferredContactChannelOther: 'Other communication channel',
     howDidYouHearAboutMccOther: 'Other source',
-    companyRegistrationDocument: 'Company registration document',
-    governmentIdDocument: 'Government ID document',
+    supportingDocument: 'Supporting document',
     consentConfirmed: 'Consent confirmation',
     privacyConfirmed: 'Privacy confirmation',
   };
@@ -71,7 +61,6 @@
     populateCountryRankSelects(form);
     setupSecondaryContact(form);
     setupConditionalOtherFields(form);
-    setupAgencyTypeDocuments(form);
 
     form.querySelectorAll('input, select, textarea').forEach((control) => {
       control.addEventListener('input', () => clearFieldError(form, control.name || control.id));
@@ -152,36 +141,6 @@
     });
   }
 
-  function setupAgencyTypeDocuments(form) {
-    const companyDocument = fieldControl(form, 'companyRegistrationDocument');
-    const governmentDocument = fieldControl(form, 'governmentIdDocument');
-    const instruction = document.getElementById('agency-document-instruction');
-
-    const update = () => {
-      const agencyType = selectedAgencyType(form);
-      const companyRequired = isCompanyAgencyType(agencyType);
-      const governmentRequired = agencyType === PERSONAL_AGENCY_TYPE;
-
-      if (companyDocument) companyDocument.required = companyRequired;
-      if (governmentDocument) governmentDocument.required = governmentRequired;
-
-      if (instruction) {
-        if (companyRequired) {
-          instruction.textContent = 'Company registration document is required for domestic and international agencies. Upload PDF, JPEG, or PNG files only. Maximum file size is 15 MB per file.';
-        } else if (governmentRequired) {
-          instruction.textContent = 'Government ID document is required for personal / individual agents. Upload PDF, JPEG, or PNG files only. Maximum file size is 15 MB per file.';
-        } else {
-          instruction.textContent = 'Choose an agency type to see which document is required. Upload PDF, JPEG, or PNG files only. Maximum file size is 15 MB per file.';
-        }
-      }
-    };
-
-    form.querySelectorAll('input[name="agencyType"]').forEach((input) => {
-      input.addEventListener('change', update);
-    });
-    update();
-  }
-
   function setOtherFieldVisible(form, field, visible) {
     const group = form.querySelector(`[data-other-field="${cssEscape(field)}"]`);
     const control = fieldControl(form, field);
@@ -195,23 +154,16 @@
   function validate(form) {
     clearAllErrors(form);
     const errors = [];
-    const agencyType = selectedAgencyType(form);
 
     [
-      'agencyType',
       'legalName',
-      'companyPhone',
-      'companyEmail',
       'country',
       'city',
+      'primaryMarketRegion',
       'mainContactName',
       'mainContactEmail',
       'mainContactPhone',
     ].forEach((field) => requireValue(form, field, errors));
-
-    if (agencyType && !AGENCY_TYPES.includes(agencyType)) {
-      errors.push({ field: 'agencyType', message: 'Choose Domestic Agency, International Agency, or Personal / Individual Agent.' });
-    }
 
     validateEmailField(form, 'companyEmail', errors);
     validateEmailField(form, 'mainContactEmail', errors);
@@ -219,11 +171,6 @@
     validatePhoneField(form, 'companyPhone', errors);
     validatePhoneField(form, 'mainContactPhone', errors);
     validatePhoneField(form, 'secondaryContactPhone', errors);
-
-    const website = value(form, 'companyWebsite');
-    if (website && !isValidWebsite(website)) {
-      errors.push({ field: 'companyWebsite', message: 'Enter a valid website, such as example.com or https://example.com.' });
-    }
 
     if (value(form, 'natureOfBusiness') === OTHER_VALUE) {
       requireValue(form, 'natureOfBusinessOther', errors);
@@ -242,8 +189,7 @@
       errors.push({ field: 'programsOfInterest', message: `Choose no more than ${PROGRAM_LIMIT} programs.` });
     }
 
-    validateFileField(form, 'companyRegistrationDocument', isCompanyAgencyType(agencyType), errors);
-    validateFileField(form, 'governmentIdDocument', agencyType === PERSONAL_AGENCY_TYPE, errors);
+    validateFileField(form, 'supportingDocument', true, errors);
 
     if (!checkbox(form, 'consentConfirmed')) {
       errors.push({ field: 'consentConfirmed', message: 'Confirm that MCC may review and contact you about this application.' });
@@ -331,22 +277,32 @@
 
   function buildFormData(form) {
     const data = new FormData();
-    const agencyType = selectedAgencyType(form);
     const preferredChannels = expandOtherValueList(
       getCheckedValues(form, 'preferredContactChannels'),
       value(form, 'preferredContactChannelOther')
     );
     const promotionalChannels = getCheckedValues(form, 'promotionalChannels');
-    const sourceCountries = getMultiControlValues(form, 'studentSourceCountries');
+    const secondaryMarketRegions = getMultiControlValues(form, 'secondaryMarketRegions');
     const educationLevels = getMultiControlValues(form, 'targetEducationLevels');
     const programs = getSelectedPrograms(form);
     const natureOfBusiness = formatOtherValue(value(form, 'natureOfBusiness'), value(form, 'natureOfBusinessOther'));
     const heardAboutMcc = formatOtherValue(value(form, 'howDidYouHearAboutMcc'), value(form, 'howDidYouHearAboutMccOther'));
-    const primaryMarketRegion = sourceCountries[0] || value(form, 'country');
+    const generalContactInfo = combineTextBlocks([
+      value(form, 'generalContactInfo'),
+      buildGeneralContactInfo({
+        form,
+        preferredChannels,
+        promotionalChannels,
+        secondaryMarketRegions,
+        educationLevels,
+        programs,
+        natureOfBusiness,
+        heardAboutMcc,
+      }),
+    ]);
 
-    appendRequired(data, 'agencyType', agencyType);
     appendRequired(data, 'legalName', value(form, 'legalName'));
-    appendRequired(data, 'primaryMarketRegion', primaryMarketRegion);
+    appendRequired(data, 'primaryMarketRegion', value(form, 'primaryMarketRegion'));
 
     appendRequired(data, 'country', value(form, 'country'));
     appendRequired(data, 'city', value(form, 'city'));
@@ -357,7 +313,7 @@
     data.append('privacyConfirmed', checkbox(form, 'privacyConfirmed') ? 'true' : 'false');
 
     appendIfValue(data, 'preferredName', value(form, 'preferredName'));
-    sourceCountries.slice(1, PROGRAM_LIMIT).forEach((country) => data.append('secondaryMarketRegions', country));
+    secondaryMarketRegions.slice(0, 2).forEach((region) => data.append('secondaryMarketRegions', region));
     programs.slice(0, PROGRAM_LIMIT).forEach((program) => {
       data.append('programsOfInterest', program);
     });
@@ -365,32 +321,15 @@
     appendIfValue(data, 'postalCode', value(form, 'postalCode'));
     appendIfValue(data, 'streetAddress', value(form, 'streetAddress'));
     appendIfValue(data, 'mainContactJobTitle', value(form, 'mainContactJobTitle'));
-    appendRequired(data, 'companyEmail', value(form, 'companyEmail'));
-    appendRequired(data, 'companyPhone', value(form, 'companyPhone'));
+    appendIfValue(data, 'companyEmail', value(form, 'companyEmail'));
+    appendIfValue(data, 'companyPhone', value(form, 'companyPhone'));
+    appendIfValue(data, 'generalContactInfo', generalContactInfo);
+    appendIfValue(data, 'shortIntroduction', value(form, 'shortIntroduction'));
 
     appendIfValue(data, 'estimatedStudentReferralVolume', value(form, 'anticipatedMccStudentsNext12Months'));
     appendIfValue(data, 'preferredContactChannel', preferredChannels.join(', '));
     appendIfValue(data, 'howDidYouHearAboutMcc', heardAboutMcc);
-
-    appendIfValue(data, 'generalContactInfo', buildGeneralContactInfo({
-      form,
-      preferredChannels,
-      promotionalChannels,
-      sourceCountries,
-      educationLevels,
-      programs,
-      natureOfBusiness,
-      heardAboutMcc,
-    }));
-
-    if (isCompanyAgencyType(agencyType)) {
-      appendFileIfValue(data, 'companyRegistrationDocument', fileValue(form, 'companyRegistrationDocument'));
-    }
-
-    if (agencyType === PERSONAL_AGENCY_TYPE) {
-      appendFileIfValue(data, 'governmentIdDocument', fileValue(form, 'governmentIdDocument'));
-      appendIfValue(data, 'sin', value(form, 'sinNumber'));
-    }
+    appendFileIfValue(data, 'supportingDocument', fileValue(form, 'supportingDocument'));
 
     return data;
   }
@@ -409,7 +348,7 @@
   }
 
   function buildGeneralContactInfo(context) {
-    const { form, preferredChannels, promotionalChannels, sourceCountries, educationLevels, programs, natureOfBusiness, heardAboutMcc } = context;
+    const { form, preferredChannels, promotionalChannels, secondaryMarketRegions, educationLevels, programs, natureOfBusiness, heardAboutMcc } = context;
     const sections = [];
 
     addSection(sections, 'Secondary contact person', [
@@ -425,13 +364,12 @@
     ]);
 
     addSection(sections, 'Agency business information', [
-      ['Company website', normalizeWebsite(value(form, 'companyWebsite'))],
       ['Nature of business', natureOfBusiness],
       ['Number of employees', value(form, 'numberOfEmployees')],
       ['GST Number', value(form, 'gstNumber')],
       ['Students sent to Canada in past 12 months', value(form, 'studentsSentToCanadaLast12Months')],
       ['Anticipated MCC students in next 12 months', value(form, 'anticipatedMccStudentsNext12Months')],
-      ['Top student source countries', sourceCountries.join(', ')],
+      ['Secondary market regions', secondaryMarketRegions.join(', ')],
       ['Target education levels', educationLevels.join(', ')],
       ['Ranked programs of interest', programs.join(', ')],
       ['Promotional channels used', promotionalChannels.join(', ')],
@@ -439,6 +377,13 @@
     ]);
 
     return sections.join('\n\n');
+  }
+
+  function combineTextBlocks(blocks) {
+    return blocks
+      .map((block) => String(block || '').trim())
+      .filter(Boolean)
+      .join('\n\n');
   }
 
   function addSection(sections, title, rows) {
@@ -619,15 +564,6 @@
       .filter((entry) => PROGRAMS.includes(entry));
   }
 
-  function selectedAgencyType(form) {
-    const checked = form.querySelector('input[name="agencyType"]:checked');
-    return checked ? String(checked.value || '').trim() : '';
-  }
-
-  function isCompanyAgencyType(agencyType) {
-    return agencyType === 'Domestic Agency' || agencyType === 'International Agency';
-  }
-
   function getMultiControlValues(form, name) {
     return Array.from(form.querySelectorAll(`[name="${cssEscape(name)}"]`))
       .map((control) => String(control.value || '').trim())
@@ -658,7 +594,6 @@
   function value(form, field) {
     const control = fieldControl(form, field);
     if (!control) return '';
-    if (control.type === 'radio') return selectedAgencyType(form);
     return String(control.value || '').trim();
   }
 
@@ -690,25 +625,6 @@
   function isReasonablePhone(phone) {
     const digits = phone.replace(/\D/g, '');
     return digits.length >= 7 && digits.length <= 20;
-  }
-
-  function isValidWebsite(url) {
-    try {
-      const parsed = new URL(hasProtocol(url) ? url : `https://${url}`);
-      return ['http:', 'https:'].includes(parsed.protocol);
-    } catch (_) {
-      return false;
-    }
-  }
-
-  function normalizeWebsite(url) {
-    const cleanValue = String(url || '').trim();
-    if (!cleanValue || !isValidWebsite(cleanValue)) return '';
-    return hasProtocol(cleanValue) ? cleanValue : `https://${cleanValue}`;
-  }
-
-  function hasProtocol(url) {
-    return /^https?:\/\//i.test(String(url || '').trim());
   }
 
   function isAllowedFile(file) {
