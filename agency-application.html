@@ -152,6 +152,34 @@
                     <form id="agency-application-form" class="agency-form" novalidate>
                         <section class="agency-form-section">
                             <h2 class="form-section-title">1. Agency Contact Information</h2>
+                            <fieldset class="agency-type-fieldset" data-field-group="agencyType" aria-describedby="agencyType-error">
+                                <legend>Agency type <span class="required-mark">*</span></legend>
+                                <div class="agency-type-grid">
+                                    <label class="agency-type-card">
+                                        <input type="radio" name="agencyType" value="Domestic Agency" required>
+                                        <span>
+                                            <strong>Domestic Agency</strong>
+                                            <small>Canadian registered business or agency.</small>
+                                        </span>
+                                    </label>
+                                    <label class="agency-type-card">
+                                        <input type="radio" name="agencyType" value="International Agency" required>
+                                        <span>
+                                            <strong>International Agency</strong>
+                                            <small>Registered business or agency outside Canada.</small>
+                                        </span>
+                                    </label>
+                                    <label class="agency-type-card">
+                                        <input type="radio" name="agencyType" value="Personal / Individual Agent" required>
+                                        <span>
+                                            <strong>Personal / Individual Agent</strong>
+                                            <small>Individual representative applying independently.</small>
+                                        </span>
+                                    </label>
+                                </div>
+                                <span class="error-msg" id="agencyType-error"></span>
+                            </fieldset>
+
                             <div class="form-grid-2">
                                 <div class="form-group">
                                     <label for="legalName">Company legal name <span class="required-mark">*</span></label>
@@ -178,7 +206,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="companyWebsite">Company website</label>
-                                    <input type="url" id="companyWebsite" name="companyWebsite" autocomplete="url" placeholder="https://">
+                                    <input type="text" id="companyWebsite" name="companyWebsite" autocomplete="url" inputmode="url" autocapitalize="none" placeholder="example.com">
                                     <span class="error-msg" id="companyWebsite-error"></span>
                                 </div>
                             </div>
@@ -494,7 +522,7 @@
 
                         <section class="agency-form-section">
                             <h2 class="form-section-title">3. Upload Documents</h2>
-                            <p id="agency-document-instruction" class="section-copy agency-document-copy">Documents are optional at this step. Upload PDF, JPEG, or PNG files only. Maximum file size is 15 MB per file.</p>
+                            <p id="agency-document-instruction" class="section-copy agency-document-copy">Domestic and international agencies must upload a company registration document. Personal / individual agents must upload a government ID document. Upload PDF, JPEG, or PNG files only. Maximum file size is 15 MB per file.</p>
                             <div class="document-upload-grid">
                                 <div class="form-group">
                                     <label for="companyRegistrationDocument">Company registration document</label>

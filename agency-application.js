@@ -4,6 +4,12 @@
   const MAX_FILE_BYTES = 15 * 1024 * 1024;
   const PROGRAM_LIMIT = 3;
   const OTHER_VALUE = 'Other';
+  const PERSONAL_AGENCY_TYPE = 'Personal / Individual Agent';
+  const AGENCY_TYPES = [
+    'Domestic Agency',
+    'International Agency',
+    PERSONAL_AGENCY_TYPE,
+  ];
   const ALLOWED_FILE_TYPES = ['application/pdf', 'image/jpeg', 'image/png'];
   const ALLOWED_FILE_EXTENSIONS = ['pdf', 'jpg', 'jpeg', 'png'];
 
@@ -18,6 +24,7 @@
   ];
 
   const GROUP_FIELDS = [
+    'agencyType',
     'preferredContactChannels',
     'studentSourceCountries',
     'targetEducationLevels',
@@ -26,6 +33,7 @@
   ];
 
   const FIELD_LABELS = {
+    agencyType: 'Agency type',
     legalName: 'Company legal name',
     companyPhone: 'Company phone number',
     companyEmail: 'Company email address',
@@ -63,6 +71,7 @@
     populateCountryRankSelects(form);
     setupSecondaryContact(form);
     setupConditionalOtherFields(form);
+    setupAgencyTypeDocuments(form);
 
     form.querySelectorAll('input, select, textarea').forEach((control) => {
       control.addEventListener('input', () => clearFieldError(form, control.name || control.id));
@@ -143,6 +152,36 @@
     });
   }
 
+  function setupAgencyTypeDocuments(form) {
+    const companyDocument = fieldControl(form, 'companyRegistrationDocument');
+    const governmentDocument = fieldControl(form, 'governmentIdDocument');
+    const instruction = document.getElementById('agency-document-instruction');
+
+    const update = () => {
+      const agencyType = selectedAgencyType(form);
+      const companyRequired = isCompanyAgencyType(agencyType);
+      const governmentRequired = agencyType === PERSONAL_AGENCY_TYPE;
+
+      if (companyDocument) companyDocument.required = companyRequired;
+      if (governmentDocument) governmentDocument.required = governmentRequired;
+
+      if (instruction) {
+        if (companyRequired) {
+          instruction.textContent = 'Company registration document is required for domestic and international agencies. Upload PDF, JPEG, or PNG files only. Maximum file size is 15 MB per file.';
+        } else if (governmentRequired) {
+          instruction.textContent = 'Government ID document is required for personal / individual agents. Upload PDF, JPEG, or PNG files only. Maximum file size is 15 MB per file.';
+        } else {
+          instruction.textContent = 'Choose an agency type to see which document is required. Upload PDF, JPEG, or PNG files only. Maximum file size is 15 MB per file.';
+        }
+      }
+    };
+
+    form.querySelectorAll('input[name="agencyType"]').forEach((input) => {
+      input.addEventListener('change', update);
+    });
+    update();
+  }
+
   function setOtherFieldVisible(form, field, visible) {
     const group = form.querySelector(`[data-other-field="${cssEscape(field)}"]`);
     const control = fieldControl(form, field);
@@ -156,8 +195,10 @@
   function validate(form) {
     clearAllErrors(form);
     const errors = [];
+    const agencyType = selectedAgencyType(form);
 
     [
+      'agencyType',
       'legalName',
       'companyPhone',
       'companyEmail',
@@ -168,6 +209,10 @@
       'mainContactPhone',
     ].forEach((field) => requireValue(form, field, errors));
 
+    if (agencyType && !AGENCY_TYPES.includes(agencyType)) {
+      errors.push({ field: 'agencyType', message: 'Choose Domestic Agency, International Agency, or Personal / Individual Agent.' });
+    }
+
     validateEmailField(form, 'companyEmail', errors);
     validateEmailField(form, 'mainContactEmail', errors);
     validateEmailField(form, 'secondaryContactEmail', errors);
@@ -176,8 +221,8 @@
     validatePhoneField(form, 'secondaryContactPhone', errors);
 
     const website = value(form, 'companyWebsite');
-    if (website && !isValidUrl(website)) {
-      errors.push({ field: 'companyWebsite', message: 'Enter a valid website URL starting with http:// or https://.' });
+    if (website && !isValidWebsite(website)) {
+      errors.push({ field: 'companyWebsite', message: 'Enter a valid website, such as example.com or https://example.com.' });
     }
 
     if (value(form, 'natureOfBusiness') === OTHER_VALUE) {
@@ -197,8 +242,8 @@
       errors.push({ field: 'programsOfInterest', message: `Choose no more than ${PROGRAM_LIMIT} programs.` });
     }
 
-    validateFileField(form, 'companyRegistrationDocument', false, errors);
-    validateFileField(form, 'governmentIdDocument', false, errors);
+    validateFileField(form, 'companyRegistrationDocument', isCompanyAgencyType(agencyType), errors);
+    validateFileField(form, 'governmentIdDocument', agencyType === PERSONAL_AGENCY_TYPE, errors);
 
     if (!checkbox(form, 'consentConfirmed')) {
       errors.push({ field: 'consentConfirmed', message: 'Confirm that MCC may review and contact you about this application.' });
@@ -262,19 +307,23 @@
         method: 'POST',
         body: formData,
       });
+      const text = await response.text();
+      const responseBody = parseResponseBody(text);
 
       if (!response.ok) {
-        const message = await responseMessage(response);
-        throw new Error(message);
+        console.error('Agency application submission failed:', {
+          status: response.status,
+          errorBody: responseBody,
+        });
+        throw new Error(submissionErrorMessage(responseBody));
       }
 
-      let result = {};
-      try { result = await response.json(); } catch (_) { /* Empty success body is acceptable. */ }
+      const result = responseBody && typeof responseBody === 'object' ? responseBody : {};
       showSuccess(form, result);
     } catch (error) {
       showGeneralError(
         form,
-        sanitizeSensitiveText((error && error.message) || 'We could not submit your application. Please try again.')
+        (error && error.message) || 'We could not submit your application. Please try again.'
       );
       setSubmitting(button, false, originalButtonHtml);
     }
@@ -282,6 +331,7 @@
 
   function buildFormData(form) {
     const data = new FormData();
+    const agencyType = selectedAgencyType(form);
     const preferredChannels = expandOtherValueList(
       getCheckedValues(form, 'preferredContactChannels'),
       value(form, 'preferredContactChannelOther')
@@ -292,46 +342,36 @@
     const programs = getSelectedPrograms(form);
     const natureOfBusiness = formatOtherValue(value(form, 'natureOfBusiness'), value(form, 'natureOfBusinessOther'));
     const heardAboutMcc = formatOtherValue(value(form, 'howDidYouHearAboutMcc'), value(form, 'howDidYouHearAboutMccOther'));
+    const primaryMarketRegion = sourceCountries[0] || value(form, 'country');
 
+    appendRequired(data, 'agencyType', agencyType);
     appendRequired(data, 'legalName', value(form, 'legalName'));
-    appendIfValue(data, 'preferredName', value(form, 'preferredName'));
-    appendRequired(data, 'companyPhone', value(form, 'companyPhone'));
-    appendRequired(data, 'companyEmail', value(form, 'companyEmail'));
-    appendIfValue(data, 'companyWebsite', value(form, 'companyWebsite'));
+    appendRequired(data, 'primaryMarketRegion', primaryMarketRegion);
 
     appendRequired(data, 'country', value(form, 'country'));
-    appendIfValue(data, 'provinceState', value(form, 'provinceState'));
     appendRequired(data, 'city', value(form, 'city'));
+    appendRequired(data, 'mainContactName', value(form, 'mainContactName'));
+    appendRequired(data, 'mainContactEmail', value(form, 'mainContactEmail'));
+    appendRequired(data, 'mainContactPhone', value(form, 'mainContactPhone'));
+    data.append('consentConfirmed', checkbox(form, 'consentConfirmed') ? 'true' : 'false');
+    data.append('privacyConfirmed', checkbox(form, 'privacyConfirmed') ? 'true' : 'false');
+
+    appendIfValue(data, 'preferredName', value(form, 'preferredName'));
+    sourceCountries.slice(1, PROGRAM_LIMIT).forEach((country) => data.append('secondaryMarketRegions', country));
+    programs.slice(0, PROGRAM_LIMIT).forEach((program) => {
+      data.append('programsOfInterest', program);
+    });
+    appendIfValue(data, 'provinceState', value(form, 'provinceState'));
     appendIfValue(data, 'postalCode', value(form, 'postalCode'));
     appendIfValue(data, 'streetAddress', value(form, 'streetAddress'));
-
-    appendRequired(data, 'mainContactName', value(form, 'mainContactName'));
-    appendIfValue(data, 'mainContactPreferredName', value(form, 'mainContactPreferredName'));
     appendIfValue(data, 'mainContactJobTitle', value(form, 'mainContactJobTitle'));
-    appendRequired(data, 'mainContactPhone', value(form, 'mainContactPhone'));
-    appendRequired(data, 'mainContactEmail', value(form, 'mainContactEmail'));
+    appendRequired(data, 'companyEmail', value(form, 'companyEmail'));
+    appendRequired(data, 'companyPhone', value(form, 'companyPhone'));
 
-    appendSecondaryContact(data, form);
+    appendIfValue(data, 'estimatedStudentReferralVolume', value(form, 'anticipatedMccStudentsNext12Months'));
     appendIfValue(data, 'preferredContactChannel', preferredChannels.join(', '));
-    appendRepeated(data, 'preferredContactChannels', preferredChannels);
-
-    appendIfValue(data, 'natureOfBusiness', natureOfBusiness);
-    appendIfValue(data, 'numberOfEmployees', value(form, 'numberOfEmployees'));
-    appendIfValue(data, 'gstNumber', value(form, 'gstNumber'));
-    appendIfValue(data, 'sinNumber', value(form, 'sinNumber'));
-    appendIfValue(data, 'studentsSentToCanadaLast12Months', value(form, 'studentsSentToCanadaLast12Months'));
-    appendIfValue(data, 'anticipatedMccStudentsNext12Months', value(form, 'anticipatedMccStudentsNext12Months'));
-    appendRepeated(data, 'studentSourceCountries', sourceCountries);
-    appendRankedValues(data, 'studentSourceCountry', sourceCountries);
-    appendRepeated(data, 'targetEducationLevels', educationLevels);
-    appendRankedValues(data, 'targetEducationLevel', educationLevels);
-    appendRepeated(data, 'programsOfInterest', programs);
-    appendRankedValues(data, 'programInterest', programs);
-    appendRepeated(data, 'promotionalChannels', promotionalChannels);
     appendIfValue(data, 'howDidYouHearAboutMcc', heardAboutMcc);
 
-    appendRequired(data, 'primaryMarketRegion', sourceCountries[0] || value(form, 'country'));
-    sourceCountries.slice(1).forEach((country) => data.append('secondaryMarketRegions', country));
     appendIfValue(data, 'generalContactInfo', buildGeneralContactInfo({
       form,
       preferredChannels,
@@ -343,23 +383,16 @@
       heardAboutMcc,
     }));
 
-    appendFileIfValue(data, 'companyRegistrationDocument', fileValue(form, 'companyRegistrationDocument'));
-    appendFileIfValue(data, 'governmentIdDocument', fileValue(form, 'governmentIdDocument'));
+    if (isCompanyAgencyType(agencyType)) {
+      appendFileIfValue(data, 'companyRegistrationDocument', fileValue(form, 'companyRegistrationDocument'));
+    }
 
-    data.append('consentConfirmed', checkbox(form, 'consentConfirmed') ? 'true' : 'false');
-    data.append('privacyConfirmed', checkbox(form, 'privacyConfirmed') ? 'true' : 'false');
+    if (agencyType === PERSONAL_AGENCY_TYPE) {
+      appendFileIfValue(data, 'governmentIdDocument', fileValue(form, 'governmentIdDocument'));
+      appendIfValue(data, 'sin', value(form, 'sinNumber'));
+    }
 
     return data;
-  }
-
-  function appendSecondaryContact(data, form) {
-    [
-      'secondaryContactName',
-      'secondaryContactPreferredName',
-      'secondaryContactJobTitle',
-      'secondaryContactPhone',
-      'secondaryContactEmail',
-    ].forEach((field) => appendIfValue(data, field, value(form, field)));
   }
 
   function appendRequired(data, name, rawValue) {
@@ -373,16 +406,6 @@
 
   function appendFileIfValue(data, name, file) {
     if (file) data.append(name, file);
-  }
-
-  function appendRepeated(data, name, values) {
-    values.filter(Boolean).forEach((entry) => data.append(name, entry));
-  }
-
-  function appendRankedValues(data, baseName, values) {
-    values.slice(0, PROGRAM_LIMIT).forEach((entry, index) => {
-      appendIfValue(data, `${baseName}${index + 1}`, entry);
-    });
   }
 
   function buildGeneralContactInfo(context) {
@@ -402,10 +425,10 @@
     ]);
 
     addSection(sections, 'Agency business information', [
+      ['Company website', normalizeWebsite(value(form, 'companyWebsite'))],
       ['Nature of business', natureOfBusiness],
       ['Number of employees', value(form, 'numberOfEmployees')],
       ['GST Number', value(form, 'gstNumber')],
-      ['SIN Number', value(form, 'sinNumber')],
       ['Students sent to Canada in past 12 months', value(form, 'studentsSentToCanadaLast12Months')],
       ['Anticipated MCC students in next 12 months', value(form, 'anticipatedMccStudentsNext12Months')],
       ['Top student source countries', sourceCountries.join(', ')],
@@ -554,19 +577,28 @@
     });
   }
 
-  async function responseMessage(response) {
-    const fallback = `Submission failed (HTTP ${response.status}). Please review your information and try again.`;
-    const text = await response.text();
-    if (!text) return fallback;
+  function parseResponseBody(text) {
+    if (!text) return '';
     try {
-      const json = JSON.parse(text);
-      if (typeof json.detail === 'string') return sanitizeSensitiveText(json.detail);
-      if (typeof json.error === 'string') return sanitizeSensitiveText(json.error);
-      if (typeof json.message === 'string') return sanitizeSensitiveText(json.message);
+      return JSON.parse(text);
     } catch (_) {
-      return sanitizeSensitiveText(text);
+      return text;
     }
-    return fallback;
+  }
+
+  function submissionErrorMessage(errorBody) {
+    if (typeof errorBody === 'string') return errorBody || 'Agency application submission failed';
+    if (!errorBody) return 'Agency application submission failed';
+
+    const detail = errorBody.detail || errorBody.message || errorBody.error;
+    if (typeof detail === 'string') return detail;
+    if (detail) return JSON.stringify(detail);
+
+    try {
+      return JSON.stringify(errorBody);
+    } catch (_) {
+      return 'Agency application submission failed';
+    }
   }
 
   function portalApiBaseUrl() {
@@ -585,6 +617,15 @@
   function getSelectedPrograms(form) {
     return getMultiControlValues(form, 'programsOfInterest')
       .filter((entry) => PROGRAMS.includes(entry));
+  }
+
+  function selectedAgencyType(form) {
+    const checked = form.querySelector('input[name="agencyType"]:checked');
+    return checked ? String(checked.value || '').trim() : '';
+  }
+
+  function isCompanyAgencyType(agencyType) {
+    return agencyType === 'Domestic Agency' || agencyType === 'International Agency';
   }
 
   function getMultiControlValues(form, name) {
@@ -616,7 +657,9 @@
 
   function value(form, field) {
     const control = fieldControl(form, field);
-    return control ? String(control.value || '').trim() : '';
+    if (!control) return '';
+    if (control.type === 'radio') return selectedAgencyType(form);
+    return String(control.value || '').trim();
   }
 
   function checkbox(form, field) {
@@ -649,25 +692,28 @@
     return digits.length >= 7 && digits.length <= 20;
   }
 
-  function isValidUrl(url) {
+  function isValidWebsite(url) {
     try {
-      const parsed = new URL(url);
+      const parsed = new URL(hasProtocol(url) ? url : `https://${url}`);
       return ['http:', 'https:'].includes(parsed.protocol);
     } catch (_) {
       return false;
     }
   }
 
+  function normalizeWebsite(url) {
+    const cleanValue = String(url || '').trim();
+    if (!cleanValue || !isValidWebsite(cleanValue)) return '';
+    return hasProtocol(cleanValue) ? cleanValue : `https://${cleanValue}`;
+  }
+
+  function hasProtocol(url) {
+    return /^https?:\/\//i.test(String(url || '').trim());
+  }
+
   function isAllowedFile(file) {
     const extension = file.name.split('.').pop().toLowerCase();
     return ALLOWED_FILE_TYPES.includes(file.type) || ALLOWED_FILE_EXTENSIONS.includes(extension);
-  }
-
-  function sanitizeSensitiveText(value) {
-    if (typeof value !== 'string') return value;
-    return value
-      .replace(/((?:sin|social insurance number)\s*[:=]\s*)["']?[\d -]{3,}["']?/gi, '$1[redacted]')
-      .replace(/\b\d{3}[- ]?\d{3}[- ]?\d{3}\b/g, '[redacted SIN]');
   }
 
   function cssEscape(value) {
