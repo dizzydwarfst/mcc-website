@@ -142,14 +142,14 @@
                 </aside>
 
                 <div class="application-main-shell agency-form-shell reveal">
-                    <div id="agency-application-success" class="agency-success" role="status" hidden>
+                    <div id="agency-application-success" class="agency-success" role="status" aria-live="polite" tabindex="-1" hidden>
                         <i class="fas fa-check-circle success-icon"></i>
                         <h2>Application Submitted</h2>
                         <p>Thank you. Your agency application has been submitted successfully. MCC will review your application and contact you soon.</p>
                         <p id="agency-application-reference" class="agency-reference" hidden></p>
                     </div>
 
-                    <form id="agency-application-form" class="agency-form" novalidate>
+                    <form id="agency-application-form" class="agency-form" method="post" novalidate>
                         <section class="agency-form-section">
                             <h2 class="form-section-title">1. Agency Contact Information</h2>
                             <div class="form-grid-2">

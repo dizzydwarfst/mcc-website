@@ -35,7 +35,7 @@
         setBtn('<i class="fas fa-spinner fa-spin"></i> Submitting…');
 
         const formType = form.dataset.formType;
-        const { fields, files } = collectFormData(form);
+        const fields = collectFormData(form);
 
         const submitResult = await postJSON({
           action: 'submit-data',
@@ -43,37 +43,13 @@
           data: fields,
         });
 
-        if (!submitResult.ok) {
-          throw new Error(submitResult.error || 'Server rejected the submission.');
-        }
-
-        for (let i = 0; i < files.length; i++) {
-          const { fieldName, file } = files[i];
-          setBtn(`<i class="fas fa-upload"></i> Uploading ${i + 1}/${files.length}…`);
-
-          const base64 = await fileToBase64(file);
-          const uploadResult = await postJSON({
-            action: 'upload-file',
-            folderId: submitResult.folderId,
-            fieldName: fieldName,
-            filename: file.name,
-            mimeType: file.type,
-            fileData: base64,
-          });
-
-          if (!uploadResult.ok) {
-            console.warn(`Failed to upload ${file.name}:`, uploadResult.error);
-          }
-        }
-
         handleSuccess(form, submitResult);
 
-      } catch (err) {
-        console.error('MCC form submission failed:', err);
+      } catch {
+        console.error('MCC form submission failed.');
         alert(
           'Sorry, there was a problem submitting your form.\n' +
-          'Please try again, or contact admissions@metropolitancollege.ca.\n\n' +
-          'Error details: ' + err.message
+          'Please try again, or contact admissions@metropolitancollege.ca.'
         );
         setBtn(originalHTML, false);
       }
@@ -82,20 +58,12 @@
 
   function collectFormData(form) {
     const fields = {};
-    const files = [];
     const radioGroups = new Set();
 
     Array.from(form.elements).forEach((el) => {
       if (!el.name) return;
       if (el.type === 'file') {
-        if (el.files && el.files.length > 0) {
-          Array.from(el.files).forEach((file) => {
-            files.push({ fieldName: el.name, file: file });
-          });
-          fields[el.name] = `[${el.files.length} file(s) uploaded]`;
-        } else {
-          fields[el.name] = '';
-        }
+        return;
       } else if (el.type === 'checkbox') {
         fields[el.name] = el.checked ? 'Yes' : 'No';
       } else if (el.type === 'radio') {
@@ -110,20 +78,7 @@
       }
     });
 
-    return { fields, files };
-  }
-
-  function fileToBase64(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        const result = reader.result;
-        const comma = result.indexOf(',');
-        resolve(comma >= 0 ? result.slice(comma + 1) : result);
-      };
-      reader.onerror = () => reject(new Error('Failed to read file: ' + file.name));
-      reader.readAsDataURL(file);
-    });
+    return fields;
   }
 
   async function postJSON(payload) {
@@ -134,7 +89,10 @@
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify(payload),
     });
-    return await res.json();
+    if (!res.ok) throw new Error(`Submission failed (HTTP ${res.status}).`);
+    const result = await res.json();
+    if (!result || result.ok !== true) throw new Error('The submission was rejected.');
+    return result;
   }
 
   function handleSuccess(form, result) {
@@ -146,13 +104,38 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
-    form.innerHTML = `
-      <div style="text-align:center;padding:3rem 1rem;">
-        <i class="fas fa-check-circle" style="font-size:3rem;color:#D4AF37;margin-bottom:1rem;"></i>
-        <h3 style="color:#0F3D2E;margin-bottom:0.5rem;">Thank you!</h3>
-        <p style="color:#555;">Your submission has been received. We'll be in touch.</p>
-        ${result.applicationId ? `<p style="color:#888;font-size:0.9rem;margin-top:1rem;">Reference: ${result.applicationId}</p>` : ''}
-      </div>
-    `;
+    const success = document.createElement('div');
+    success.setAttribute('role', 'status');
+    success.setAttribute('aria-live', 'polite');
+    success.tabIndex = -1;
+    success.style.cssText = 'text-align:center;padding:3rem 1rem;';
+
+    const icon = document.createElement('i');
+    icon.className = 'fas fa-check-circle';
+    icon.setAttribute('aria-hidden', 'true');
+    icon.style.cssText = 'font-size:3rem;color:#D4AF37;margin-bottom:1rem;';
+
+    const title = document.createElement('h3');
+    title.style.cssText = 'color:#0F3D2E;margin-bottom:0.5rem;';
+    title.textContent = 'Thank you!';
+
+    const message = document.createElement('p');
+    message.style.color = '#555';
+    message.textContent = "Your submission has been received. We'll be in touch.";
+
+    success.append(icon, title, message);
+
+    const applicationId = result && ['string', 'number'].includes(typeof result.applicationId)
+      ? String(result.applicationId)
+      : '';
+    if (applicationId) {
+      const reference = document.createElement('p');
+      reference.style.cssText = 'color:#888;font-size:0.9rem;margin-top:1rem;';
+      reference.textContent = `Reference: ${applicationId}`;
+      success.appendChild(reference);
+    }
+
+    form.replaceChildren(success);
+    success.focus();
   }
 })();

@@ -221,8 +221,20 @@
   }
 
   function syncProgramSelection(programName, preserveSelection) {
+    syncFrenchProgramNote(programName);
     syncSemesterSelect(programName, preserveSelection);
     syncProgramOptions(programName, preserveSelection);
+  }
+
+  function syncFrenchProgramNote(programName) {
+    const note = document.getElementById('french-standard-note');
+    if (!note) return;
+
+    const normalizedName = String(programName || '').trim().toLowerCase();
+    note.hidden = !(
+      normalizedName.includes('french as a second language') ||
+      normalizedName.includes('french language program')
+    );
   }
 
   function syncSemesterSelect(programName, preserveSelection) {
@@ -667,13 +679,33 @@
       const body = await readResponseBody(presignRes);
       throw new Error(responseMessage(presignRes.status, body, 'Could not prepare upload'));
     }
-    const { url, method, headers, max_bytes, key } = await presignRes.json();
+    const uploadGrant = await presignRes.json();
+    const { url, method, headers, max_bytes, key } = uploadGrant || {};
+
+    let uploadUrl;
+    try {
+      uploadUrl = new URL(url);
+    } catch (_) {
+      throw new Error('The server returned an invalid upload destination.');
+    }
+    if (uploadUrl.protocol !== 'https:') {
+      throw new Error('The server returned an insecure upload destination.');
+    }
+    if (String(method || '').toUpperCase() !== 'PUT') {
+      throw new Error('The server returned an unsupported upload method.');
+    }
+    if (typeof key !== 'string' || !key.trim()) {
+      throw new Error('The server did not return a valid document key.');
+    }
+    if (!headers || typeof headers !== 'object' || Array.isArray(headers)) {
+      throw new Error('The server returned invalid upload headers.');
+    }
 
     if (max_bytes && file.size > max_bytes) throw new Error('File exceeds the server limit.');
 
     // 2) Raw PUT straight to R2 — body is the File itself, signed headers verbatim.
     //    Do NOT use FormData/JSON and do NOT override Content-Type, or the signature breaks.
-    const putRes = await fetch(url, { method, headers, body: file });
+    const putRes = await fetch(uploadUrl.href, { method: 'PUT', headers, body: file });
     if (!putRes.ok) throw new Error(`Upload failed (HTTP ${putRes.status}).`);
 
     // 3) documents[] entry — EXACTLY these 5 keys (extra="forbid").
@@ -1109,6 +1141,7 @@
   function handleSuccess(applicationId) {
     const successEl = document.getElementById('wizard-success');
     const wizardEl = document.getElementById('wizard-container');
+    const form = document.getElementById('wizard-form');
     if (applicationId) {
       const p = document.querySelector('#wizard-success p');
       if (p) {
@@ -1119,8 +1152,10 @@
       }
     }
     if (successEl && wizardEl) {
+      if (form) form.reset();
       wizardEl.style.display = 'none';
       successEl.style.display = 'block';
+      successEl.focus();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }

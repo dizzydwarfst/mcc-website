@@ -181,7 +181,7 @@
                             </div>
                         </div>
 
-                        <form id="wizard-form" novalidate>
+                        <form id="wizard-form" method="post" novalidate>
 
                             <!-- Honeypot: hidden anti-spam field. Real users never see or fill it;
                                  bots that auto-complete every input trip it and are silently rejected. -->
@@ -426,6 +426,10 @@
                                             <option value="French as a Second Language (FSL)">French as a Second Language (FSL)</option>
                                             <option value="French Test Preparation (TCF &amp; TEF)">French Test Preparation (TCF &amp; TEF)</option>
                                         </select>
+                                        <div class="program-selection-note" id="french-standard-note" role="note" hidden>
+                                            <i class="fas fa-info-circle" aria-hidden="true"></i>
+                                            <span data-i18n-html="apply.s3_french_standard_note"><strong>NCLC 5 (18 Weeks)</strong> is included in the standard option.</span>
+                                        </div>
                                         <span class="error-msg">Please choose a program</span>
                                     </div>
                                 </div>
@@ -545,7 +549,7 @@
                         </form>
                     </div>
 
-                    <div class="wizard-container success-state" id="wizard-success" style="display: none;">
+                    <div class="wizard-container success-state" id="wizard-success" role="status" aria-live="polite" tabindex="-1" style="display: none;">
                         <i class="fas fa-check-circle success-icon"></i>
                         <h2 style="color: var(--deep-green); font-size: 2.2rem; margin-bottom: 1rem;" data-i18n="apply.success_title">Application Received</h2>
                         <p style="color: #666; font-size: 1.1rem; max-width: 500px; margin: 0 auto 3rem;" data-i18n="apply.success_p">Thank you for your application. We'll contact you by email within two business days.</p>

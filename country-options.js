@@ -279,7 +279,7 @@
     const cacheKey = `${locale}:${code}`;
     if (displayNameCache.has(cacheKey)) return displayNameCache.get(cacheKey);
 
-    let name = code === 'XK' ? (locale === 'fr' ? 'Kosovo' : 'Kosovo') : code;
+    let name = code === 'XK' ? 'Kosovo' : code;
     try {
       if (typeof Intl !== 'undefined' && Intl.DisplayNames) {
         name = new Intl.DisplayNames([locale], { type: 'region' }).of(code) || name;
@@ -399,5 +399,15 @@
     if (phoneCode) populatePhoneCodeSelect(phoneCode);
   }
 
-  ready(populateApplicationCountryControls);
+  ready(() => {
+    populateApplicationCountryControls();
+    if (!document.body || typeof MutationObserver === 'undefined') return;
+
+    const observer = new MutationObserver((mutations) => {
+      if (mutations.some((mutation) => mutation.attributeName === 'data-lang')) {
+        populateApplicationCountryControls();
+      }
+    });
+    observer.observe(document.body, { attributes: true, attributeFilter: ['data-lang'] });
+  });
 })();

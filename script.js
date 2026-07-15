@@ -86,10 +86,7 @@ function currentTypewriterLang() {
 
 function type() {
     const el = document.querySelector('.typewriter');
-    if (!el) {
-        setTimeout(type, 500);
-        return;
-    }
+    if (!el) return;
 
     const list = TYPEWRITER_WORDS[currentTypewriterLang()] || TYPEWRITER_WORDS.en;
     const currentWord = list[wordIndex % list.length];
@@ -118,59 +115,7 @@ function type() {
     setTimeout(type, typeSpeed);
 }
 
-setTimeout(type, 2000);
-
-// ==========================================
-// Hero Card Carousel Auto-Animation
-// ==========================================
-document.addEventListener('DOMContentLoaded', () => {
-    const carousel = document.getElementById('heroCarousel');
-    if (!carousel) return;
-
-    const cards = carousel.querySelectorAll('.carousel-card');
-    if (cards.length === 0) return;
-
-    const positionClasses = ['card-pos-1', 'card-pos-2', 'card-pos-3', 'card-pos-4', 'card-pos-5'];
-    
-    // Track current order: index i holds which card element is at position i
-    // Initial: card 0 at pos 0, card 1 at pos 1, etc.
-    let order = Array.from({ length: cards.length }, (_, i) => i);
-
-    let isHovering = false;
-    let animationInterval;
-
-    function updatePositions() {
-        order.forEach((cardIdx, posIdx) => {
-            const card = cards[cardIdx];
-            // Remove all position classes
-            positionClasses.forEach(cls => card.classList.remove(cls));
-            // Assign new position
-            card.classList.add(positionClasses[posIdx]);
-        });
-    }
-
-    function rotateCards() {
-        if (isHovering) return;
-        // Front card (pos 3, index 2) goes to back (pos 1, index 0)
-        // Shift all positions: each card moves one position toward the front
-        // The card at pos-5 wraps to pos-1
-        const last = order.pop();
-        order.unshift(last);
-        updatePositions();
-    }
-
-    // Auto-rotate every 3 seconds
-    animationInterval = setInterval(rotateCards, 3000);
-
-    // Pause animation on hover
-    carousel.addEventListener('mouseenter', () => {
-        isHovering = true;
-    });
-
-    carousel.addEventListener('mouseleave', () => {
-        isHovering = false;
-    });
-});
+if (document.querySelector('.typewriter')) setTimeout(type, 2000);
 
 // Hamburger Menu Toggle
 document.addEventListener('DOMContentLoaded', () => {
@@ -317,7 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================
     // Portal Login Modal Logic
     // ==========================================
-    const portalTriggers = document.querySelectorAll('.btn-top-portal, .campus-portals .btn-outline-gold');
+    const portalTriggers = document.querySelectorAll('.btn-top-portal');
 
     if (portalTriggers.length > 0) {
         const portalModal = document.createElement('div');
@@ -332,50 +277,38 @@ document.addEventListener('DOMContentLoaded', () => {
                     <h2 id="portal-modal-title">MCC Portal Login</h2>
                     <p>Sign in to the MCC Portal. Choose your role to continue to the secure portal sign-in.</p>
                     <div class="portal-switcher" role="tablist" aria-label="Portal selection">
-                        <button type="button" class="portal-tab active" data-portal="student" role="tab" aria-selected="true">Student</button>
-                        <button type="button" class="portal-tab" data-portal="teacher" role="tab" aria-selected="false">Teacher</button>
-                        <button type="button" class="portal-tab" data-portal="admin" role="tab" aria-selected="false">Admin</button>
+                        <button type="button" id="portal-tab-student" class="portal-tab active" data-portal="student" role="tab" aria-selected="true" aria-controls="portal-panel-student" tabindex="0">Student</button>
+                        <button type="button" id="portal-tab-teacher" class="portal-tab" data-portal="teacher" role="tab" aria-selected="false" aria-controls="portal-panel-teacher" tabindex="-1">Teacher</button>
+                        <button type="button" id="portal-tab-admin" class="portal-tab" data-portal="admin" role="tab" aria-selected="false" aria-controls="portal-panel-admin" tabindex="-1">Admin</button>
                     </div>
                 </div>
                 <div class="portal-modal-body">
-                    <section class="portal-panel active" data-portal-panel="student">
+                    <section id="portal-panel-student" class="portal-panel active" data-portal-panel="student" role="tabpanel" aria-labelledby="portal-tab-student">
                         <span class="portal-panel-label">Student Access</span>
                         <h3>Student sign-in</h3>
-                        <p>Enter your email to continue to the secure portal sign-in.</p>
-                        <form class="portal-login-form" data-portal-form="student">
-                            <label>
-                                Email
-                                <input type="email" name="student-email" placeholder="student@example.com" autocomplete="email" required>
-                            </label>
-                            <button type="submit" class="btn-solid-gold">Continue</button>
+                        <p>Continue to the secure portal to enter your sign-in details.</p>
+                        <form class="portal-login-form" action="https://portal.metropolitancollege.ca/login" method="get">
+                            <input type="hidden" name="role" value="student">
+                            <button type="submit" class="btn-solid-gold">Continue to secure sign-in</button>
                         </form>
-                        <div class="portal-feedback" aria-live="polite"></div>
                     </section>
-                    <section class="portal-panel" data-portal-panel="teacher">
+                    <section id="portal-panel-teacher" class="portal-panel" data-portal-panel="teacher" role="tabpanel" aria-labelledby="portal-tab-teacher" hidden>
                         <span class="portal-panel-label">Teacher Access</span>
                         <h3>Teacher sign-in</h3>
-                        <p>Enter your email to continue to the secure portal sign-in.</p>
-                        <form class="portal-login-form" data-portal-form="teacher">
-                            <label>
-                                Email
-                                <input type="email" name="teacher-email" placeholder="teacher@example.com" autocomplete="email" required>
-                            </label>
-                            <button type="submit" class="btn-solid-gold">Continue</button>
+                        <p>Continue to the secure portal to enter your sign-in details.</p>
+                        <form class="portal-login-form" action="https://portal.metropolitancollege.ca/login" method="get">
+                            <input type="hidden" name="role" value="teacher">
+                            <button type="submit" class="btn-solid-gold">Continue to secure sign-in</button>
                         </form>
-                        <div class="portal-feedback" aria-live="polite"></div>
                     </section>
-                    <section class="portal-panel" data-portal-panel="admin">
+                    <section id="portal-panel-admin" class="portal-panel" data-portal-panel="admin" role="tabpanel" aria-labelledby="portal-tab-admin" hidden>
                         <span class="portal-panel-label">Admin Access</span>
                         <h3>Admin sign-in</h3>
-                        <p>Enter your email to continue to the secure portal sign-in.</p>
-                        <form class="portal-login-form" data-portal-form="admin">
-                            <label>
-                                Email
-                                <input type="email" name="admin-email" placeholder="admin@example.com" autocomplete="email" required>
-                            </label>
-                            <button type="submit" class="btn-solid-gold">Continue</button>
+                        <p>Continue to the secure portal to enter your sign-in details.</p>
+                        <form class="portal-login-form" action="https://portal.metropolitancollege.ca/login" method="get">
+                            <input type="hidden" name="role" value="admin">
+                            <button type="submit" class="btn-solid-gold">Continue to secure sign-in</button>
                         </form>
-                        <div class="portal-feedback" aria-live="polite"></div>
                     </section>
                 </div>
             </div>
@@ -384,18 +317,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const portalTabs = portalModal.querySelectorAll('.portal-tab');
         const portalPanels = portalModal.querySelectorAll('.portal-panel');
-        const portalForms = portalModal.querySelectorAll('.portal-login-form');
         const portalCloseBtn = portalModal.querySelector('.portal-modal-close');
+        let portalReturnFocus = null;
 
-        const portalLoginUrl = 'https://portal.metropolitancollege.ca/login';
         const validPortalRoles = ['student', 'teacher', 'admin'];
         const normalizePortalRole = (portalType) => {
             if (validPortalRoles.includes(portalType)) return portalType;
             if (portalType === 'staff' || portalType === 'crm') return 'admin';
             return 'student';
         };
-
-        const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
         const setActivePortal = (portalType) => {
             const activePortalType = normalizePortalRole(portalType);
@@ -404,34 +334,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 const isActive = tab.getAttribute('data-portal') === activePortalType;
                 tab.classList.toggle('active', isActive);
                 tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+                tab.tabIndex = isActive ? 0 : -1;
             });
 
             portalPanels.forEach(panel => {
                 const isActive = panel.getAttribute('data-portal-panel') === activePortalType;
                 panel.classList.toggle('active', isActive);
+                panel.hidden = !isActive;
             });
 
             return activePortalType;
         };
 
-        const openPortalModal = (portalType) => {
+        const openPortalModal = (portalType, trigger) => {
             const activePortalType = setActivePortal(portalType);
-            portalForms.forEach(form => form.reset());
-            portalModal.querySelectorAll('.portal-login-form input').forEach(input => {
-                input.classList.remove('error-state');
-                input.removeAttribute('aria-invalid');
-            });
-            portalModal.querySelectorAll('.portal-feedback').forEach(feedback => {
-                feedback.textContent = '';
-                feedback.classList.remove('active', 'error');
-            });
+            portalReturnFocus = trigger || document.activeElement;
             portalModal.classList.add('active');
             portalModal.setAttribute('aria-hidden', 'false');
             document.body.classList.add('portal-modal-open');
 
-            const firstInput = portalModal.querySelector(`.portal-panel[data-portal-panel="${activePortalType}"] input`);
-            if (firstInput) {
-                firstInput.focus();
+            const continueButton = portalModal.querySelector(`.portal-panel[data-portal-panel="${activePortalType}"] button`);
+            if (continueButton) {
+                continueButton.focus();
             }
         };
 
@@ -439,6 +363,10 @@ document.addEventListener('DOMContentLoaded', () => {
             portalModal.classList.remove('active');
             portalModal.setAttribute('aria-hidden', 'true');
             document.body.classList.remove('portal-modal-open');
+            if (portalReturnFocus && typeof portalReturnFocus.focus === 'function') {
+                portalReturnFocus.focus();
+            }
+            portalReturnFocus = null;
         };
 
         portalTriggers.forEach(trigger => {
@@ -452,45 +380,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
             trigger.addEventListener('click', (e) => {
                 e.preventDefault();
-                openPortalModal(portalType);
+                openPortalModal(portalType, trigger);
             });
         });
 
-        portalTabs.forEach(tab => {
+        portalTabs.forEach((tab, index) => {
             tab.addEventListener('click', () => {
                 setActivePortal(tab.getAttribute('data-portal'));
             });
-        });
-
-        portalForms.forEach(form => {
-            form.addEventListener('submit', (e) => {
+            tab.addEventListener('keydown', (e) => {
+                const tabs = Array.from(portalTabs);
+                let nextIndex = null;
+                if (e.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
+                if (e.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
+                if (e.key === 'Home') nextIndex = 0;
+                if (e.key === 'End') nextIndex = tabs.length - 1;
+                if (nextIndex === null) return;
                 e.preventDefault();
-
-                const portalType = normalizePortalRole(form.getAttribute('data-portal-form'));
-                const feedback = form.parentElement.querySelector('.portal-feedback');
-                const emailInput = form.querySelector('input[type="email"]');
-                const email = emailInput ? emailInput.value.trim() : '';
-
-                if (!isValidEmail(email)) {
-                    if (emailInput) {
-                        emailInput.classList.add('error-state');
-                        emailInput.setAttribute('aria-invalid', 'true');
-                        emailInput.focus();
-                    }
-                    feedback.textContent = 'Enter a valid email address to continue.';
-                    feedback.classList.add('active', 'error');
-                    return;
-                }
-
-                if (emailInput) {
-                    emailInput.classList.remove('error-state');
-                    emailInput.removeAttribute('aria-invalid');
-                }
-
-                const portalUrl = new URL(portalLoginUrl);
-                portalUrl.searchParams.set('email', email);
-                portalUrl.searchParams.set('role', portalType);
-                window.location.href = portalUrl.toString();
+                const nextTab = tabs[nextIndex];
+                setActivePortal(nextTab.getAttribute('data-portal'));
+                nextTab.focus();
             });
         });
 
@@ -503,36 +412,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && portalModal.classList.contains('active')) {
+            if (!portalModal.classList.contains('active')) return;
+            if (e.key === 'Escape') {
                 closePortalModal();
+                return;
             }
-        });
-    }
+            if (e.key !== 'Tab') return;
 
-    // ==========================================
-    // Contact Form (client-side preview submit)
-    // ==========================================
-    const contactForm = document.getElementById('contact-form');
-    const contactSuccess = document.getElementById('contact-success');
-    if (contactForm && contactSuccess) {
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            contactForm.style.display = 'none';
-            contactSuccess.style.display = 'block';
-        });
-    }
+            const focusable = Array.from(portalModal.querySelectorAll(
+                'button:not([disabled]), a[href], input:not([type="hidden"]):not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+            )).filter((element) => !element.hidden && element.offsetParent !== null);
+            if (focusable.length === 0) return;
 
-    // ==========================================
-    // Newsletter Subscribe Bar (client-side preview submit)
-    // ==========================================
-    const subscribeForm = document.getElementById('newsletter-subscribe');
-    if (subscribeForm) {
-        subscribeForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const feedback = subscribeForm.querySelector('.subscribe-feedback');
-            const emailInput = subscribeForm.querySelector('input[type="email"]');
-            if (feedback) feedback.style.display = 'block';
-            if (emailInput) emailInput.value = '';
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+            if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+            }
         });
     }
 
@@ -597,19 +497,48 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function markInvalid(input, invalid) {
             input.classList.toggle('input-error', invalid);
+            if (invalid) input.setAttribute('aria-invalid', 'true');
+            else input.removeAttribute('aria-invalid');
+
+            const group = input.closest('.form-group, .checkbox-group');
+            if (group) group.classList.toggle('has-error', invalid);
+
+            let error = input.id ? document.getElementById(`${input.id}-error`) : null;
+            if (!error && group) error = group.querySelector('.error-msg');
+            if (!error && group && group.nextElementSibling?.classList.contains('error-msg')) {
+                error = group.nextElementSibling;
+            }
+            if (!error) return;
+
+            if (!error.id && (input.id || input.name)) {
+                error.id = `${input.id || input.name}-step-error`;
+            }
+            if (error.id) {
+                const describedBy = new Set((input.getAttribute('aria-describedby') || '').split(/\s+/).filter(Boolean));
+                if (invalid) describedBy.add(error.id);
+                else describedBy.delete(error.id);
+                if (describedBy.size) input.setAttribute('aria-describedby', Array.from(describedBy).join(' '));
+                else input.removeAttribute('aria-describedby');
+            }
+            if (invalid) {
+                error.style.display = 'block';
+                error.dataset.wizardVisible = 'true';
+            } else if (error.dataset.wizardVisible === 'true') {
+                error.style.display = '';
+                delete error.dataset.wizardVisible;
+            }
         }
 
         function validateStep() {
             const currentStepEl = wizardForm.querySelector(`.form-step[data-step="${currentStep}"]`);
-            currentStepEl.querySelectorAll('.input-error').forEach(el => el.classList.remove('input-error'));
-            currentStepEl.querySelectorAll('.has-error').forEach(el => el.classList.remove('has-error'));
+            currentStepEl.querySelectorAll('input, select, textarea').forEach(input => markInvalid(input, false));
 
             let isValid = true;
 
             // Standard required inputs/selects/textareas
             currentStepEl.querySelectorAll('input[required], select[required], textarea[required]').forEach(input => {
                 if (input.type === 'radio') return; // handled in groups below
-                if (!fieldFilled(input)) {
+                if (!fieldFilled(input) || !input.checkValidity()) {
                     isValid = false;
                     markInvalid(input, true);
                 }
@@ -623,8 +552,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const checked = currentStepEl.querySelector(`input[name="${radio.name}"]:checked`);
                 if (!checked) {
                     isValid = false;
-                    const parentGroup = radio.closest('.form-group');
-                    if (parentGroup) parentGroup.classList.add('has-error');
+                    currentStepEl.querySelectorAll(`input[name="${radio.name}"]`).forEach(input => markInvalid(input, true));
                 }
             });
 
@@ -633,7 +561,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const usingAgency = wizardForm.querySelector('input[name="using_agency"]:checked');
                 if (usingAgency && usingAgency.value === 'yes') {
                     currentStepEl.querySelectorAll('[data-agency-required]').forEach(input => {
-                        if (!fieldFilled(input)) {
+                        if (!fieldFilled(input) || !input.checkValidity()) {
                             isValid = false;
                             markInvalid(input, true);
                         }
@@ -644,17 +572,16 @@ document.addEventListener('DOMContentLoaded', () => {
             // Step 4: terms checkbox lives outside the form-group structure; toggle its error msg
             if (currentStep === 4) {
                 const terms = currentStepEl.querySelector('#terms_agreement');
-                const termsErrorMsg = terms ? terms.closest('.checkbox-group').nextElementSibling : null;
                 if (terms && !terms.checked) {
                     isValid = false;
-                    if (termsErrorMsg && termsErrorMsg.classList.contains('error-msg')) {
-                        termsErrorMsg.style.display = 'block';
-                    }
-                } else if (termsErrorMsg && termsErrorMsg.classList.contains('error-msg')) {
-                    termsErrorMsg.style.display = '';
+                    markInvalid(terms, true);
                 }
             }
 
+            if (!isValid) {
+                const firstInvalid = currentStepEl.querySelector('[aria-invalid="true"]');
+                if (firstInvalid) firstInvalid.focus();
+            }
             return isValid;
         }
 
@@ -689,15 +616,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
             });
-        });
-
-        wizardForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            if (validateStep()) {
-                document.getElementById('wizard-container').style.display = 'none';
-                document.getElementById('wizard-success').style.display = 'block';
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
         });
 
         updateWizardUI();

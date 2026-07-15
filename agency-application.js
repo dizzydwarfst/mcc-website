@@ -278,11 +278,8 @@
       const responseBody = parseResponseBody(text);
 
       if (!response.ok) {
-        console.error('Agency application submission failed:', {
-          status: response.status,
-          errorBody: responseBody,
-        });
-        throw new Error(submissionErrorMessage(responseBody));
+        console.error(`Agency application submission failed (HTTP ${response.status}).`);
+        throw new Error(submissionErrorMessage(response.status));
       }
 
       const result = responseBody && typeof responseBody === 'object' ? responseBody : {};
@@ -461,11 +458,10 @@
     }
 
     success.hidden = false;
-    form.classList.add('is-submitted');
-    Array.from(form.elements).forEach((control) => {
-      if (control.type !== 'hidden') control.disabled = true;
-    });
+    form.reset();
+    form.hidden = true;
     success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    success.focus();
   }
 
   function setSubmitting(button, isSubmitting, originalButtonHtml) {
@@ -500,26 +496,17 @@
     }
   }
 
-  function submissionErrorMessage(errorBody) {
-    if (typeof errorBody === 'string') return errorBody || 'Agency application submission failed';
-    if (!errorBody) return 'Agency application submission failed';
-
-    const detail = errorBody.detail || errorBody.message || errorBody.error;
-    if (typeof detail === 'string') return detail;
-    if (detail) return JSON.stringify(detail);
-
-    try {
-      return JSON.stringify(errorBody);
-    } catch (_) {
-      return 'Agency application submission failed';
+  function submissionErrorMessage(status) {
+    if (status === 413) return 'One or more files are too large. Please choose smaller files and try again.';
+    if (status === 429) return 'Too many attempts. Please wait a few minutes and try again.';
+    if (status === 400 || status === 422) {
+      return 'The server could not accept the application. Please review the highlighted fields and try again.';
     }
+    return 'We could not submit your application. Please try again or contact MCC for help.';
   }
 
   function portalApiBaseUrl() {
-    const configured = window.NEXT_PUBLIC_PORTAL_API_BASE_URL ||
-      window.MCC_PORTAL_API_BASE_URL ||
-      defaultPortalApiBaseUrl();
-    return String(configured).replace(/\/+$/, '');
+    return defaultPortalApiBaseUrl();
   }
 
   function defaultPortalApiBaseUrl() {
@@ -637,7 +624,9 @@
 
   function isAllowedFile(file) {
     const extension = file.name.split('.').pop().toLowerCase();
-    return ALLOWED_FILE_TYPES.includes(file.type) || ALLOWED_FILE_EXTENSIONS.includes(extension);
+    const hasAllowedExtension = ALLOWED_FILE_EXTENSIONS.includes(extension);
+    const hasAllowedType = !file.type || ALLOWED_FILE_TYPES.includes(file.type);
+    return hasAllowedExtension && hasAllowedType;
   }
 
   function cssEscape(value) {

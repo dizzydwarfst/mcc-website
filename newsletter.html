@@ -137,10 +137,10 @@
                         <span class="section-kicker">Why this archive matters</span>
                         <h2 class="section-title" style="margin-bottom:1rem;">Future students should be able to see what is actually happening at MCC</h2>
                         <p class="section-copy">This page helps turn the newsletter into a stronger recruitment and community tool by surfacing real movement: launches, support initiatives, deadlines, and stories from across the college.</p>
-                        <form id="newsletter-subscribe" data-form-type="newsletter" class="subscribe-bar">
-                            <input type="email" name="email" placeholder="Enter your email address..." required>
+                        <form id="newsletter-subscribe" data-form-type="newsletter" class="subscribe-bar" method="post">
+                            <label class="sr-only" for="newsletter-email">Email address</label>
+                            <input type="email" id="newsletter-email" name="email" placeholder="Enter your email address..." required>
                             <button type="submit" class="btn-solid-gold">Subscribe</button>
-                            <span class="subscribe-feedback" aria-live="polite" style="display:none; margin-top:0.75rem; color:var(--accent-teal); font-weight:600;">Subscribed successfully!</span>
                         </form>
                     </div>
                 </article>

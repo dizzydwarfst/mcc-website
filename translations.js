@@ -891,9 +891,6 @@ window.MCC_TRANSLATIONS = {
         f_topic_other: { en: "Other", fr: "Autre" },
         f_message: { en: "Message", fr: "Message" },
         f_send: { en: "Send Message", fr: "Envoyer le message" },
-        f_success_title: { en: "Message sent", fr: "Message envoyé" },
-        f_success_p: { en: "We will get back to you shortly.", fr: "Nous vous répondrons rapidement." },
-
         visit_title: { en: "Visit our campus", fr: "Visitez notre campus" },
         visit_note: { en: "MCC is located in Vancouver's Gastown area. Appointments are recommended for admissions or advising visits so the right team member is available for you.", fr: "MCC est situé dans le quartier Gastown de Vancouver. Les rendez-vous sont recommandés pour les visites liées aux admissions ou aux conseils afin que la bonne personne soit disponible pour vous." },
         visit_btn: { en: "Get Directions", fr: "Obtenir l'itinéraire" },
@@ -996,6 +993,7 @@ window.MCC_TRANSLATIONS = {
         // Step 3
         s3_title: { en: "Step 3 — Program of Choice", fr: "Étape 3 — Programme choisi" },
         s3_program: { en: "What program are you applying for?", fr: "À quel programme postulez-vous ?" },
+        s3_french_standard_note: { en: "<strong>NCLC 5 (18 Weeks)</strong> is included in the standard option.", fr: "Le <strong>NCLC 5 (18 semaines)</strong> est inclus dans l'option standard." },
         s3_choose: { en: "Choose an option", fr: "Choisir une option" },
         s3_start_date: { en: "Intake Date", fr: "Date d'admission" },
         s3_semester: { en: "Intake Date", fr: "Date d'admission" },
@@ -1026,8 +1024,8 @@ window.MCC_TRANSLATIONS = {
         s4_signature_ph: { en: "Type your full legal name as your signature", fr: "Saisissez votre nom légal complet en guise de signature" },
         s4_signature_help: { en: "Typing your full legal name above acts as your electronic signature.", fr: "Saisir votre nom légal complet ci-dessus tient lieu de signature électronique." },
         s4_decl_html: {
-            en: "<strong>Declaration &amp; Consent:</strong> By signing this application form, I agree on all policies, terms and conditions. <a href=\"policies.html\" target=\"_blank\" style=\"color:var(--accent-gold);text-decoration:underline;\">View standard policies, terms and conditions.</a>",
-            fr: "<strong>Déclaration et consentement :</strong> En signant ce formulaire, j'accepte l'ensemble des politiques, modalités et conditions. <a href=\"policies.html\" target=\"_blank\" style=\"color:var(--accent-gold);text-decoration:underline;\">Voir les politiques, modalités et conditions standards.</a>"
+            en: "<strong>Declaration &amp; Consent:</strong> By signing this application form, I agree on all policies, terms and conditions. <a href=\"policies.html\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color:var(--accent-gold);text-decoration:underline;\">View standard policies, terms and conditions.</a>",
+            fr: "<strong>Déclaration et consentement :</strong> En signant ce formulaire, j'accepte l'ensemble des politiques, modalités et conditions. <a href=\"policies.html\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color:var(--accent-gold);text-decoration:underline;\">Voir les politiques, modalités et conditions standards.</a>"
         },
         s4_submit: { en: "Submit Application", fr: "Soumettre la candidature" },
 
