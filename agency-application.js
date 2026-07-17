@@ -7,6 +7,34 @@
   const ALLOWED_FILE_TYPES = ['application/pdf', 'image/jpeg', 'image/png'];
   const ALLOWED_FILE_EXTENSIONS = ['pdf', 'jpg', 'jpeg', 'png'];
 
+  const CANADIAN_PROVINCES = [
+    'Alberta',
+    'British Columbia',
+    'Manitoba',
+    'New Brunswick',
+    'Newfoundland and Labrador',
+    'Northwest Territories',
+    'Nova Scotia',
+    'Nunavut',
+    'Ontario',
+    'Prince Edward Island',
+    'Quebec',
+    'Saskatchewan',
+    'Yukon',
+  ];
+
+  const US_STATES = [
+    'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut',
+    'Delaware', 'District of Columbia', 'Florida', 'Georgia', 'Hawaii', 'Idaho',
+    'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine',
+    'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri',
+    'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico',
+    'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon',
+    'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee',
+    'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin',
+    'Wyoming',
+  ];
+
   const PROGRAMS = [
     'French Test Preparation (TCF & TEF)',
     'French as a Second Language (FSL)',
@@ -62,6 +90,7 @@
   function initializeAgencyApplication(form) {
     populateProgramSelects(form);
     populateCountryRankSelects(form);
+    setupProvinceStateControl(form);
     setupSecondaryContact(form);
     setupConditionalOtherFields(form);
 
@@ -110,6 +139,42 @@
       });
       if (previous && hasOption(select, previous)) select.value = previous;
     });
+  }
+
+  function setupProvinceStateControl(form) {
+    const country = fieldControl(form, 'country');
+    if (!country) return;
+
+    const update = () => {
+      const current = fieldControl(form, 'provinceState');
+      if (!current) return;
+
+      const options = country.value === 'Canada'
+        ? CANADIAN_PROVINCES
+        : country.value === 'United States'
+          ? US_STATES
+          : null;
+
+      const replacement = document.createElement(options ? 'select' : 'input');
+      replacement.id = 'provinceState';
+      replacement.name = 'provinceState';
+      replacement.autocomplete = 'address-level1';
+
+      if (options) {
+        replacement.appendChild(option('', country.value === 'Canada' ? 'Select Province' : 'Select State'));
+        options.forEach((region) => replacement.appendChild(option(region, region)));
+      } else {
+        replacement.type = 'text';
+      }
+
+      current.replaceWith(replacement);
+      clearFieldError(form, 'provinceState');
+      replacement.addEventListener('input', () => clearFieldError(form, 'provinceState'));
+      replacement.addEventListener('change', () => clearFieldError(form, 'provinceState'));
+    };
+
+    country.addEventListener('change', update);
+    update();
   }
 
   function setupSecondaryContact(form) {
