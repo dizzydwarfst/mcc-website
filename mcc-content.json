@@ -16,7 +16,7 @@
     "copyright": "© Copyright 2002-2025 Metropolitan Community College",
     "designations": [
       {
-        "name": "Private Training Institutions Branch (PTIB)",
+        "name": "Private Training Institutions Regulatory Unit (PTIRU)",
         "issuer": "Ministry of Post-Secondary Education and Future Skills, British Columbia",
         "status": "Registered and Designated"
       },
@@ -161,7 +161,7 @@
       "title": "Metropolitan Community College | English as a Second Language (ESL) | MCC | Esports Program | Vancouver",
       "h1": "Welcome to Metropolitan Community College",
       "secondaryHeadings": ["INSPIRING", "Develop passion for Learning", "Latest News", "Featured Programs", "Affiliation & Accreditation"],
-      "hero": "We are pleased to welcome students, visitors and faculty members to Metropolitan Community College. Metropolitan Community College is fully registered and designated by the Private Training Institutions Branch (PTIB) of the Ministry of Post-Secondary Education and Future Skills in British Columbia.",
+      "hero": "We are pleased to welcome students, visitors and faculty members to Metropolitan Community College. Metropolitan Community College is fully registered and designated by the Private Training Institutions Regulatory Unit (PTIRU) of the Ministry of Post-Secondary Education and Future Skills in British Columbia.",
       "latestNews": "Metropolitan Community College welcomes all visitors to our campus. Our website is currently under development for updates of new upcoming programs. This will not affect regular usage of the website. For appointments, please leave a message on our website or inform us by email at info@metropolitancollege.ca or by filling in the Contact Form. For program-related information, please refer to our Programs page. For all applications, please refer to our Admissions page.",
       "featuredPrograms": [
         { "name": "CELPIP Test Preparation", "blurb": "Our CELPIP Test Preparation course is a 3-week intense course. We guarantee at least 1 CLB level improvement for all of our students. *some conditions may apply." },
@@ -751,7 +751,7 @@
     "phone": "+1.604.300.3123",
     "email": "info@metropolitancollege.ca",
     "copyright": "© Copyright 2002-2025 Metropolitan Community College",
-    "accreditationLogos": ["PTIB Designated", "BC EQA", "EduCanada"]
+    "accreditationLogos": ["PTIRU Designated", "BC EQA", "EduCanada"]
   },
 
   "seoNotes": {
