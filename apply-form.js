@@ -75,7 +75,7 @@
   const DOC_FIELDS = [
     { docType: 'passport',        label: 'Passport or Primary ID',             inputId: 'doc-passport',         required: true },
     { docType: 'study_permit',    label: 'Study Permit / Work Permit / Visa', inputId: 'doc-study-permit',     required: false },
-    { docType: 'transcripts',     label: 'Academic Records',                  inputId: 'doc-transcripts',      required: true },
+    { docType: 'transcripts',     label: 'Academic Records',                  inputId: 'doc-transcripts',      required: false },
     { docType: 'english_results', label: 'Language Test Results',             inputId: 'doc-english-results',  required: false },
     { docType: 'photo',           label: 'Digital photo',        inputId: 'doc-photo',            required: false, allowedTypes: ['image/jpeg', 'image/png'], typeMessage: 'Must be a JPG or PNG.' },
   ];

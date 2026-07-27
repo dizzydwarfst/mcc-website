@@ -1011,7 +1011,7 @@ window.MCC_TRANSLATIONS = {
 
         // Step 4
         s4_title: { en: "Step 4 — Upload Documents", fr: "Étape 4 — Téléverser les documents" },
-        s4_intro: { en: "Passport or primary ID and academic records are required. Upload your permit or visa document and language test results too if you have them. PDF or image files, max 15 MB each.", fr: "La pièce d'identité principale et les dossiers scolaires sont obligatoires. Téléversez aussi votre permis ou visa et vos résultats de test de langue si vous les avez. Fichiers PDF ou image, max. 15 Mo chacun." },
+        s4_intro: { en: "Passport or primary ID is required. Upload your academic records, permit or visa document, and language test results too if you have them. PDF or image files, max 15 MB each.", fr: "La pièce d'identité principale est obligatoire. Téléversez aussi vos dossiers scolaires, votre permis ou visa et vos résultats de test de langue si vous les avez. Fichiers PDF ou image, max. 15 Mo chacun." },
         s4_passport: { en: "Passport or Primary ID", fr: "Passeport ou pièce d'identité principale" },
         s4_study_permit: { en: "Study Permit / Work Permit / Visa", fr: "Permis d'études / Permis de travail / Visa" },
         s4_transcripts: { en: "Academic Records", fr: "Dossiers scolaires" },
