@@ -854,11 +854,23 @@ window.MCC_TRANSLATIONS = {
         credentials_dli_title: { en: "International student readiness", fr: "Préparation pour les étudiants internationaux" },
         credentials_dli_p: { en: "MCC also maintains clear admissions, document, and student-support processes for international learners planning their studies in Vancouver.", fr: "MCC maintient également des processus clairs d'admission, de documents et de soutien aux étudiants pour les apprenants internationaux qui planifient leurs études à Vancouver." },
 
-        campus_kicker: { en: "Our Campus", fr: "Notre campus" },
-        campus_title: { en: "A downtown Vancouver learning environment with city access built in", fr: "Un environnement d'apprentissage au centre-ville de Vancouver, ouvert sur la ville" },
-        campus_p: { en: "Located at 322 Water St #100, Vancouver, BC, V6B 1B6, Canada, MCC places students close to transit, culture, and the pace of city life. The campus setting supports both local and international students who want a connected Vancouver experience.", fr: "Situé au 322 Water St #100, Vancouver, C.-B., V6B 1B6, Canada, MCC place les étudiants à proximité des transports, de la culture et du rythme de la ville. Le campus convient autant aux étudiants locaux qu'internationaux qui souhaitent une expérience de Vancouver bien connectée." },
+        campus_kicker: { en: "Downtown Vancouver", fr: "Centre-ville de Vancouver" },
+        campus_title: { en: "The MCC Campus", fr: "Le campus de MCC" },
+        campus_p1: { en: "Our Main Campus is located at 100 - 322 Water Street, Vancouver, BC, Canada. Conveniently situated in the heart of Vancouver, it is close to public transportation services.", fr: "Notre campus principal est situé au 100 - 322 Water Street, Vancouver, C.-B., Canada. Idéalement situé au coeur de Vancouver, il se trouve à proximité des services de transport en commun." },
+        campus_p2: { en: "Our Main Campus contains over 4,200 sq. ft. and includes four classrooms, one seminar room, one computer lab, two offices, and a large student lounge with a kitchen. In-person teaching is delivered at our Main Campus, together with distance education. We occasionally organize campus tours for visitors and prospective students; everyone is welcome!", fr: "Notre campus principal occupe plus de 4 200 pi² et comprend quatre salles de classe, une salle de séminaire, un laboratoire informatique, deux bureaux et un grand salon étudiant avec cuisine. L'enseignement en personne y est offert, tout comme l'enseignement à distance. Nous organisons occasionnellement des visites du campus pour les visiteurs et les futurs étudiants; tout le monde est bienvenu!" },
+        campus_p3: { en: "If you are interested in visiting our campus, feel free to drop us a line. We will be glad to welcome you!", fr: "Si vous souhaitez visiter notre campus, n'hésitez pas à nous contacter. Nous serons heureux de vous accueillir!" },
         campus_btn_contact: { en: "Contact MCC", fr: "Contacter MCC" },
-        campus_btn_programs: { en: "Explore Programs", fr: "Explorer les programmes" }
+        campus_btn_programs: { en: "Explore Programs", fr: "Explorer les programmes" },
+
+        leadership_kicker: { en: "Our People", fr: "Notre équipe" },
+        leadership_title: { en: "Meet Our Leadership Team", fr: "Rencontrez notre équipe de direction" },
+        leadership_intro: { en: "Meet the people who guide MCC's academic programs, student experience, and college operations.", fr: "Découvrez les personnes qui dirigent les programmes, l'expérience étudiante et les activités du collège." },
+        leadership_photo_placeholder: { en: "Photo coming soon", fr: "Photo à venir" },
+        leadership_harman_title: { en: "Executive Director, Registrar", fr: "Directeur général, registraire" },
+        leadership_kris_title: { en: "Senior Educational Administrator, SEA", fr: "Administrateur principal de l'enseignement, SEA" },
+        leadership_dogukan_title: { en: "Associate Director, Academic", fr: "Direction associée, affaires académiques" },
+        leadership_jody_title: { en: "Associate Director, Marketing", fr: "Direction associée, marketing" },
+        leadership_ana_title: { en: "Program Head", fr: "Responsable de programme" }
     },
 
     contact: {
