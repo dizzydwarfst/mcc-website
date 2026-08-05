@@ -415,7 +415,8 @@
       "officialResources": [
         { "title": "Tenant Rights", "url": "https://www2.gov.bc.ca/gov/content/housing-tenancy/residential-tenancies/during-a-tenancy/tenant-rights" },
         { "title": "Residential Tenancy Act", "url": "https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/02078_01" },
-        { "title": "Tenancy Agreements", "url": "https://www2.gov.bc.ca/gov/content/housing-tenancy/residential-tenancies/starting-a-tenancy/tenancy-agreements" }
+        { "title": "Tenancy Agreements", "url": "https://www2.gov.bc.ca/gov/content/housing-tenancy/residential-tenancies/starting-a-tenancy/tenancy-agreements" },
+        { "title": "Residential Tenancy Agreement (RTB-1)", "url": "https://www2.gov.bc.ca/assets/gov/housing-and-tenancy/residential-tenancies/forms/rtb1.pdf" }
       ]
     },
 

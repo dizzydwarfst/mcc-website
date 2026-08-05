@@ -6486,6 +6486,34 @@ font[style*="background-color"] { background: transparent !important; }
     line-height: 1.7;
 }
 
+.housing-lease-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    width: fit-content;
+    margin-top: 0.35rem;
+    padding: 0.8rem 1.05rem;
+    border: 1px solid var(--accent-gold);
+    border-radius: 999px;
+    color: var(--deep-green-dark);
+    background: var(--accent-gold);
+    font-size: 0.9rem;
+    font-weight: 800;
+    line-height: 1.35;
+    text-decoration: none;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.housing-lease-action:hover {
+    transform: translateY(-2px);
+    background: #e4c34f;
+}
+
+.housing-lease-action .fa-arrow-up-right-from-square {
+    font-size: 0.72em;
+}
+
 .housing-resources-section {
     background: #ffffff;
 }
@@ -6642,6 +6670,10 @@ font[style*="background-color"] { background: transparent !important; }
         padding: 1.5rem 0 0;
         border-top: 1px solid rgba(255, 255, 255, 0.18);
         border-left: 0;
+    }
+
+    .housing-lease-action {
+        width: 100%;
     }
 }
 
