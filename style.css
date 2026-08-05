@@ -6707,3 +6707,69 @@ font[style*="background-color"] { background: transparent !important; }
         min-height: 205px;
     }
 }
+
+/* ===========================================================
+   PROGRAM PGWP ELIGIBILITY NOTICE
+   =========================================================== */
+.program-pgwp-notice-section {
+    position: relative;
+    z-index: 3;
+    padding: 0 5%;
+    background: #ffffff;
+}
+
+.program-pgwp-notice {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 1rem;
+    max-width: 980px;
+    margin: -1.6rem auto 0;
+    padding: 1.15rem 1.35rem;
+    border: 1px solid rgba(212, 175, 55, 0.46);
+    border-left: 5px solid var(--accent-gold);
+    border-radius: 16px;
+    color: var(--deep-green-dark);
+    background: #fffdf5;
+    box-shadow: 0 14px 36px rgba(8, 22, 18, 0.1);
+}
+
+.program-pgwp-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    color: var(--deep-green);
+    background: rgba(212, 175, 55, 0.22);
+    font-size: 1.05rem;
+}
+
+.program-pgwp-notice strong {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: var(--deep-green-dark);
+    font-size: 1rem;
+}
+
+.program-pgwp-notice p {
+    margin: 0;
+    color: #43584f;
+    font-size: 0.94rem;
+    line-height: 1.55;
+}
+
+.program-pgwp-notice a {
+    color: var(--accent-teal);
+    font-weight: 700;
+    text-underline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+    .program-pgwp-notice {
+        grid-template-columns: minmax(0, 1fr);
+        margin-top: -1rem;
+        padding: 1.1rem;
+    }
+}
