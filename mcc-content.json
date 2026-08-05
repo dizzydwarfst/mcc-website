@@ -209,18 +209,32 @@
       "slug": "/policies",
       "title": "Policies",
       "list": [
-        "Respectful and Fair Treatment of Students – Non-discrimination Policy",
-        "Safety Policy",
+        "Student Statement of Rights",
+        "Respectful and Fair Treatment of Students – Non-Discrimination Policy",
+        "Harassment and Anti-Racism Policy",
         "Sexual Misconduct Policy",
         "Student Attendance Policy",
         "Student Dismissal Policy",
-        "Dispute Resolution Policy",
-        "Student Statement of Rights",
-        "Privacy Policy",
-        "Refund Policy",
+        "Grade Appeal Policy",
+        "Language Proficiency Assessment Policy",
+        "Tuition Refund Policy",
+        "Confidential Information and Privacy Policy",
         "Critical Incident and Crisis Management Policy"
       ],
-      "format": "Linked PDF documents — full text resides in the PDFs."
+      "documents": [
+        { "title": "Student Statement of Rights", "url": "/assets/policies/student-statement-of-rights.pdf" },
+        { "title": "Respectful and Fair Treatment of Students – Non-Discrimination Policy", "url": "/assets/policies/respectful-fair-treatment-non-discrimination-policy.pdf" },
+        { "title": "Harassment and Anti-Racism Policy", "url": "/assets/policies/anti-racism-harassment-policy.pdf" },
+        { "title": "Sexual Misconduct Policy", "url": "/assets/policies/sexual-misconduct-policy.pdf" },
+        { "title": "Student Attendance Policy", "url": "/assets/policies/student-attendance-policy.pdf" },
+        { "title": "Student Dismissal Policy", "url": "/assets/policies/student-dismissal-policy.pdf" },
+        { "title": "Grade Appeal Policy", "url": "/assets/policies/grade-appeal-policy.pdf" },
+        { "title": "Language Proficiency Assessment Policy", "url": "/assets/policies/language-proficiency-assessment-policy.pdf" },
+        { "title": "Tuition Refund Policy", "url": "/assets/policies/tuition-refund-policy.pdf" },
+        { "title": "Confidential Information and Privacy Policy", "url": "/assets/policies/confidential-information-privacy-policy.pdf" },
+        { "title": "Critical Incident and Crisis Management Policy", "url": "/assets/policies/critical-incident-crisis-management-policy.pdf" }
+      ],
+      "format": "Directly linked PDF documents — full text resides in the PDFs."
     },
 
     "programsOverview": {
