@@ -399,18 +399,23 @@
     "housingAndAccommodations": {
       "slug": "/housing-and-accommodations",
       "title": "Housing & Accommodations",
-      "intro": "Although on-campus housing is not available, there are various housing options for students to consider. MCC offers free assistance through admin@metropolitancollege.ca.",
+      "intro": "Although on-campus housing is not available, students can consider homestay, third-party student residences, and apartment rentals. MCC provides free housing assistance to prospective and current students through the front reception and admin@metropolitancollege.ca.",
       "options": [
         { "type": "Homestay", "description": "Affordable housing and meal package with the opportunity to learn Canadian culture through screened host families. Pricing varies." },
-        { "type": "Student Residences", "description": "Modern, fully furnished accommodations operated by third-party providers (e.g. GEC).", "partner": "GEC Living — https://gecliving.com/" },
+        { "type": "Student Residences", "description": "Modern, fully furnished accommodations operated by third-party providers such as GEC.", "partner": "https://gecliving.com/" },
         { "type": "Apartment Rental", "description": "Direct rental options. The college usually does not encourage new students to rent an apartment directly." }
       ],
       "tenantResources": [
-        "Before you Rent",
-        "Living with Others",
-        "Protect your Belongings",
-        "Conflict in the Home",
-        "Preparing to Move-Out"
+        { "title": "Before You Rent", "url": "/assets/housing/before-you-rent.pdf" },
+        { "title": "Living with Others", "url": "/assets/housing/living-with-others.pdf" },
+        { "title": "Protect Your Belongings", "url": "/assets/housing/protect-your-belongings.pdf" },
+        { "title": "Conflict in the Home", "url": "/assets/housing/conflict-in-the-home.pdf" },
+        { "title": "Preparing to Move-Out", "url": "/assets/housing/preparing-to-move-out.pdf" }
+      ],
+      "officialResources": [
+        { "title": "Tenant Rights", "url": "https://www2.gov.bc.ca/gov/content/housing-tenancy/residential-tenancies/during-a-tenancy/tenant-rights" },
+        { "title": "Residential Tenancy Act", "url": "https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/02078_01" },
+        { "title": "Tenancy Agreements", "url": "https://www2.gov.bc.ca/gov/content/housing-tenancy/residential-tenancies/starting-a-tenancy/tenancy-agreements" }
       ]
     },
 
