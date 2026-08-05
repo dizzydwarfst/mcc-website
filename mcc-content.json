@@ -402,7 +402,7 @@
       "intro": "Although on-campus housing is not available, students can consider homestay, third-party student residences, and apartment rentals. MCC provides free housing assistance to prospective and current students through the front reception and admin@metropolitancollege.ca.",
       "options": [
         { "type": "Homestay", "description": "Affordable housing and meal package with the opportunity to learn Canadian culture through screened host families. Pricing varies." },
-        { "type": "Student Residences", "description": "Modern, fully furnished accommodations operated by third-party providers such as GEC.", "partner": "https://gecliving.com/" },
+        { "type": "Student Residences", "description": "Modern, fully furnished accommodations operated by third-party providers." },
         { "type": "Apartment Rental", "description": "Direct rental options. The college usually does not encourage new students to rent an apartment directly." }
       ],
       "tenantResources": [
