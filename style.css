@@ -6760,12 +6760,6 @@ font[style*="background-color"] { background: transparent !important; }
     line-height: 1.55;
 }
 
-.program-pgwp-notice a {
-    color: var(--accent-teal);
-    font-weight: 700;
-    text-underline-offset: 3px;
-}
-
 @media (max-width: 640px) {
     .program-pgwp-notice {
         grid-template-columns: minmax(0, 1fr);
