@@ -865,7 +865,7 @@ window.MCC_TRANSLATIONS = {
         leadership_kicker: { en: "Our People", fr: "Notre équipe" },
         leadership_title: { en: "Meet Our Leadership Team", fr: "Rencontrez notre équipe de direction" },
         leadership_intro: { en: "Meet the people who guide MCC's academic programs, student experience, and college operations.", fr: "Découvrez les personnes qui dirigent les programmes, l'expérience étudiante et les activités du collège." },
-        leadership_harman_title: { en: "Executive Director, Registrar", fr: "Directeur général, registraire" },
+        leadership_harman_title: { en: "Campus Director", fr: "Directeur du campus" },
         leadership_kris_title: { en: "Senior Educational Administrator, SEA", fr: "Administrateur principal de l'enseignement, SEA" },
         leadership_dogukan_title: { en: "Associate Director, Academic", fr: "Direction associée, affaires académiques" },
         leadership_jody_title: { en: "Associate Director, Marketing", fr: "Direction associée, marketing" },

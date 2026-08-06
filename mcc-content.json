@@ -66,7 +66,7 @@
   },
 
   "leadership": [
-    { "name": "Harman Li", "title": "Executive Director, Registrar" },
+    { "name": "Harman Li", "title": "Campus Director" },
     { "name": "Kris Kubinski", "title": "Senior Educational Administrator, SEA" },
     { "name": "Dogukan Kasoglu", "title": "Associate Director, Academic" },
     { "name": "Jody He", "title": "Associate Director, Marketing" },
@@ -219,6 +219,7 @@
         "Language Proficiency Assessment Policy",
         "Tuition Refund Policy",
         "Confidential Information and Privacy Policy",
+        "Campus Safety Policy",
         "Critical Incident and Crisis Management Policy"
       ],
       "documents": [
@@ -232,6 +233,7 @@
         { "title": "Language Proficiency Assessment Policy", "url": "/assets/policies/language-proficiency-assessment-policy.pdf" },
         { "title": "Tuition Refund Policy", "url": "/assets/policies/tuition-refund-policy.pdf" },
         { "title": "Confidential Information and Privacy Policy", "url": "/assets/policies/confidential-information-privacy-policy.pdf" },
+        { "title": "Campus Safety Policy", "url": "/assets/policies/campus-safety-policy.pdf" },
         { "title": "Critical Incident and Crisis Management Policy", "url": "/assets/policies/critical-incident-crisis-management-policy.pdf" }
       ],
       "format": "Directly linked PDF documents — full text resides in the PDFs."

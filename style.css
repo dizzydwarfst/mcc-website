@@ -5614,6 +5614,10 @@ textarea {
 }
 
 /* ---------- Program testimonials ---------- */
+.program-reviews-hidden {
+    display: none;
+}
+
 .testimonial-marquee {
     position: relative;
     width: 100%;
