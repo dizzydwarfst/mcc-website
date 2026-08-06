@@ -55,8 +55,6 @@ window.MCC_TRANSLATIONS = {
         nav_living_vancouver: { en: "Living in Vancouver", fr: "Vivre à Vancouver" },
         nav_community: { en: "Community Integration", fr: "Intégration communautaire" },
 
-        nav_newsletter: { en: "Newsletter", fr: "Bulletin" },
-
         // Common buttons / labels
         btn_apply_now: { en: "Apply Now", fr: "Postuler maintenant" },
         btn_learn_more: { en: "Learn more", fr: "En savoir plus" },
@@ -70,7 +68,6 @@ window.MCC_TRANSLATIONS = {
         footer_quick_links: { en: "Quick Links", fr: "Liens rapides" },
         footer_explore: { en: "Explore MCC", fr: "Explorer MCC" },
         footer_contact_heading: { en: "Contact Us", fr: "Nous contacter" },
-        footer_news_newsletter: { en: "News & Newsletter", fr: "Actualités et bulletin" },
         footer_address: { en: "322 Water St #100, Vancouver, BC, V6B 1B6, Canada", fr: "322 Water St #100, Vancouver, C.-B., V6B 1B6, Canada" },
         footer_hours: { en: "Monday - Friday, 9:00 AM - 5:00 PM", fr: "Du lundi au vendredi, de 9 h à 17 h" },
         footer_copyright: { en: "© 2026 Metropolitan Community College. All rights reserved.", fr: "© 2026 Metropolitan Community College. Tous droits réservés." },
@@ -211,17 +208,10 @@ window.MCC_TRANSLATIONS = {
         j4_p: { en: "Submit your application through a guided step-by-step form and know what happens next.", fr: "Envoyez votre candidature via un formulaire guidé en étapes et sachez ce qui suit." },
         j4_link: { en: "Apply now", fr: "Postuler maintenant" },
 
-        // Community / News
-        com_kicker: { en: "Community and News", fr: "Communauté et actualités" },
-        com_title: { en: "A homepage with more life, more activity, and more reasons to explore", fr: "Une page d'accueil plus vivante, plus active, et qui donne envie d'explorer" },
-        com_copy: { en: "Instead of short generic blocks, the homepage now pulls students into what is happening at MCC: events, newsletters, and practical next steps.", fr: "À la place de blocs génériques, la page d'accueil plonge maintenant les étudiants dans la vie de MCC : événements, bulletins et prochaines étapes concrètes." },
-        com1_kicker: { en: "Latest Newsletter", fr: "Dernier bulletin" },
-        com1_title: { en: "Read the latest MCC updates, events, and student milestones", fr: "Lisez les dernières actualités MCC, événements et étapes marquantes étudiantes" },
-        com1_p: { en: "The newsletter archive is one of the fastest ways for future students to see what campus life, deadlines, and program momentum actually look like here.", fr: "Les archives du bulletin sont l'un des moyens les plus rapides pour les futurs étudiants de voir à quoi ressemblent vraiment la vie de campus, les échéances et la dynamique des programmes." },
-        com1_t1: { en: "Events and deadlines", fr: "Événements et échéances" },
-        com1_t2: { en: "Program launches", fr: "Lancements de programmes" },
-        com1_t3: { en: "Student stories", fr: "Témoignages étudiants" },
-        com1_link: { en: "Visit the archive", fr: "Visiter les archives" },
+        // Support and outcomes
+        com_kicker: { en: "Support and Outcomes", fr: "Soutien et résultats" },
+        com_title: { en: "Practical guidance and stronger student connections", fr: "Des conseils pratiques et des liens étudiants plus solides" },
+        com_copy: { en: "Explore direct support, alumni stories, and practical next steps for moving forward with confidence.", fr: "Découvrez le soutien direct, les témoignages d'anciens et les prochaines étapes concrètes pour avancer avec confiance." },
         com2_kicker: { en: "Direct Guidance", fr: "Accompagnement direct" },
         com2_title: { en: "Need direct guidance from admissions and student support?", fr: "Besoin d'un accompagnement direct des admissions et du soutien étudiant ?" },
         com2_p: { en: "Students can connect with MCC for practical help around documents, deadlines, program fit, and next-step planning without the usual confusion.", fr: "Les étudiants peuvent contacter MCC pour une aide concrète sur les documents, les échéances, le bon programme et les prochaines étapes — sans la confusion habituelle." },
@@ -865,7 +855,7 @@ window.MCC_TRANSLATIONS = {
         leadership_kicker: { en: "Our People", fr: "Notre équipe" },
         leadership_title: { en: "Meet Our Leadership Team", fr: "Rencontrez notre équipe de direction" },
         leadership_intro: { en: "Meet the people who guide MCC's academic programs, student experience, and college operations.", fr: "Découvrez les personnes qui dirigent les programmes, l'expérience étudiante et les activités du collège." },
-        leadership_harman_title: { en: "Campus Director", fr: "Directeur du campus" },
+        leadership_harman_title: { en: "College Director", fr: "Directeur du collège" },
         leadership_kris_title: { en: "Senior Educational Administrator, SEA", fr: "Administrateur principal de l'enseignement, SEA" },
         leadership_dogukan_title: { en: "Associate Director, Academic", fr: "Direction associée, affaires académiques" },
         leadership_jody_title: { en: "Associate Director, Marketing", fr: "Direction associée, marketing" },
