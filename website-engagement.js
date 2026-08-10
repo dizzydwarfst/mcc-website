@@ -12,6 +12,7 @@
     const API_BASE = String(window.MCC_ENGAGEMENT_API_BASE || DEFAULT_API_BASE).replace(/\/$/, '');
     const CHAT_STORAGE_KEY = 'mcc_website_chat_session_v1';
     const CHAT_POLL_MS = 7000;
+    const AVAILABILITY_POLL_MS = 15000;
     const REQUEST_TIMEOUT_MS = 15000;
 
     const EVENT = {
@@ -64,8 +65,10 @@
             chat_launcher: 'Ask a Question',
             chat_title: 'Message MCC',
             chat_online: 'Staff are online',
-            chat_offline: 'Staff are away · replies are saved',
-            chat_intro: 'Tell us who you are and briefly how we can help. You can continue the conversation right here.',
+            chat_online_one: '1 staff member online',
+            chat_online_many: '{count} staff members online',
+            chat_offline: "Staff are away · we'll reply by email",
+            chat_intro: 'Ask a common website question for a quick answer. If you need more help, a staff member can join. You may close this chat or leave the page—we have your email and will follow up.',
             chat_name: 'Your name',
             chat_email: 'Your email',
             chat_message: 'Brief message',
@@ -75,11 +78,12 @@
             chat_send_placeholder: 'Write a message…',
             chat_send: 'Send',
             chat_empty: 'Your conversation will appear here.',
+            chat_followup_note: 'Our website assistant answers common questions. Ask to speak with staff anytime. You may close this chat or leave the page—we will follow up by email.',
             chat_connect_error: 'We could not connect to chat. Please try again or email admin@metropolitancollege.ca.',
             chat_send_error: 'Your message could not be sent. Please try again.',
             chat_session_expired: 'Please enter your details again to start a new conversation.',
             sender_staff: 'MCC staff',
-            sender_automatic: 'MCC information',
+            sender_automatic: 'MCC website assistant',
             sender_you: 'You',
         },
         fr: {
@@ -124,8 +128,10 @@
             chat_launcher: 'Poser une question',
             chat_title: 'Écrire à MCC',
             chat_online: "L'équipe est en ligne",
-            chat_offline: "L'équipe est absente · les messages sont enregistrés",
-            chat_intro: 'Présentez-vous et expliquez brièvement comment nous pouvons vous aider. Vous pourrez poursuivre la conversation ici.',
+            chat_online_one: "1 membre de l'équipe en ligne",
+            chat_online_many: "{count} membres de l'équipe en ligne",
+            chat_offline: "L'équipe est absente · réponse par courriel",
+            chat_intro: "Posez une question courante sur le site pour obtenir une réponse rapide. Si vous avez besoin d'aide, un membre de l'équipe peut intervenir. Vous pouvez fermer cette fenêtre ou quitter la page—nous avons votre courriel et assurerons le suivi.",
             chat_name: 'Votre nom',
             chat_email: 'Votre courriel',
             chat_message: 'Bref message',
@@ -135,11 +141,12 @@
             chat_send_placeholder: 'Écrire un message…',
             chat_send: 'Envoyer',
             chat_empty: 'Votre conversation apparaîtra ici.',
+            chat_followup_note: "Notre assistant du site répond aux questions courantes. Demandez à parler à l'équipe en tout temps. Vous pouvez fermer cette fenêtre ou quitter la page—nous vous répondrons par courriel.",
             chat_connect_error: "Impossible de se connecter. Réessayez ou écrivez à admin@metropolitancollege.ca.",
             chat_send_error: "Votre message n'a pas pu être envoyé. Veuillez réessayer.",
             chat_session_expired: 'Veuillez saisir de nouveau vos coordonnées pour commencer une conversation.',
             sender_staff: 'Équipe MCC',
-            sender_automatic: 'Information MCC',
+            sender_automatic: 'Assistant du site MCC',
             sender_you: 'Vous',
         },
     };
@@ -588,6 +595,7 @@
                         <div class="website-chat-messages" data-chat-messages role="log" aria-live="polite" aria-relevant="additions text">
                             <p class="website-chat-empty" data-copy="chat_empty">Your conversation will appear here.</p>
                         </div>
+                        <p class="website-chat-followup" data-copy="chat_followup_note">Our website assistant answers common questions. Ask to speak with staff anytime. You may close this chat or leave the page—we will follow up by email.</p>
                         <form class="website-chat-composer" data-chat-composer>
                             <label class="sr-only" for="website-chat-message" data-copy="chat_message">Brief message</label>
                             <textarea id="website-chat-message" name="text" rows="2" maxlength="2000" data-copy-placeholder="chat_send_placeholder" placeholder="Write a message…" required></textarea>
@@ -616,8 +624,10 @@
         let session = readChatSession();
         let panelOpen = false;
         let polling = null;
+        let availabilityPolling = null;
         let loadingMessages = false;
         let staffOnline = false;
+        let onlineStaffCount = null;
 
         function visitorHeaders() {
             return session?.visitorToken ? { 'X-Visitor-Token': session.visitorToken } : {};
@@ -634,20 +644,44 @@
             conversationView.hidden = false;
         }
 
-        function setAvailability(online) {
-            staffOnline = Boolean(online);
+        function setAvailability(payload) {
+            const countValue = payload && typeof payload === 'object'
+                ? payload.online_staff_count ?? payload.active_staff_count ?? payload.staff_count ?? payload.online_count
+                : null;
+            const parsedCount = Number(countValue);
+            onlineStaffCount = countValue !== null && countValue !== undefined && countValue !== ''
+                && Number.isInteger(parsedCount) && parsedCount >= 0
+                ? parsedCount
+                : null;
+            staffOnline = typeof payload === 'boolean'
+                ? payload
+                : onlineStaffCount > 0 || payload?.online === true || payload?.staff_online === true;
             availability.classList.toggle('is-online', staffOnline);
-            availabilityCopy.setAttribute('data-copy', staffOnline ? 'chat_online' : 'chat_offline');
-            availabilityCopy.textContent = copy(staffOnline ? 'chat_online' : 'chat_offline');
+            let copyKey = staffOnline ? 'chat_online' : 'chat_offline';
+            if (staffOnline && onlineStaffCount === 1) copyKey = 'chat_online_one';
+            if (staffOnline && onlineStaffCount > 1) copyKey = 'chat_online_many';
+            availabilityCopy.setAttribute('data-copy', copyKey);
+            availabilityCopy.textContent = copy(copyKey).replace('{count}', String(onlineStaffCount ?? ''));
         }
 
         async function loadAvailability() {
             try {
                 const payload = await apiRequest('/public/website-chat/availability');
-                setAvailability(payload?.online === true || payload?.staff_online === true);
+                setAvailability(payload);
             } catch (_) {
                 setAvailability(false);
             }
+        }
+
+        function stopAvailabilityPolling() {
+            if (availabilityPolling) window.clearInterval(availabilityPolling);
+            availabilityPolling = null;
+        }
+
+        function startAvailabilityPolling() {
+            stopAvailabilityPolling();
+            if (!panelOpen) return;
+            availabilityPolling = window.setInterval(loadAvailability, AVAILABILITY_POLL_MS);
         }
 
         function senderLabel(type) {
@@ -734,6 +768,7 @@
             launcher.setAttribute('aria-expanded', 'true');
             window.requestAnimationFrame(() => panel.classList.add('active'));
             loadAvailability();
+            startAvailabilityPolling();
             if (session) {
                 showConversation();
                 loadMessages();
@@ -750,6 +785,7 @@
             panel.classList.remove('active');
             launcher.setAttribute('aria-expanded', 'false');
             stopPolling();
+            stopAvailabilityPolling();
             window.setTimeout(() => { panel.hidden = true; }, 160);
             launcher.focus();
         }
@@ -845,7 +881,7 @@
             close: closeChat,
             translate: () => {
                 applyInterfaceCopy(root);
-                setAvailability(staffOnline);
+                setAvailability({ online: staffOnline, online_staff_count: onlineStaffCount });
                 if (session) loadMessages({ quiet: true });
             },
         };
