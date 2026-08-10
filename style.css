@@ -7093,6 +7093,12 @@ body.engagement-modal-open {
     overflow: hidden;
 }
 
+.engagement-overlay[hidden],
+.engagement-agency-layer[hidden],
+.website-chat-panel[hidden] {
+    display: none !important;
+}
+
 .engagement-overlay,
 .engagement-agency-layer {
     position: fixed;
@@ -7106,12 +7112,16 @@ body.engagement-modal-open {
     background: rgba(3, 20, 12, 0.76);
     backdrop-filter: blur(9px);
     opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
     transition: opacity 0.18s ease;
 }
 
 .engagement-overlay.active,
 .engagement-agency-layer.active {
     opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
 }
 
 .engagement-dialog {
