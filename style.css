@@ -7555,6 +7555,15 @@ body.engagement-modal-open {
     background: rgba(212, 175, 55, 0.1);
 }
 
+.website-chat-followup button.is-complete,
+.website-chat-followup button.is-complete:disabled {
+    border-color: rgba(43, 122, 106, 0.28);
+    background: rgba(43, 122, 106, 0.1);
+    color: #176b5a;
+    cursor: default;
+    opacity: 1;
+}
+
 .website-chat-empty {
     padding: 2rem 0.5rem;
     color: #6b7c75;

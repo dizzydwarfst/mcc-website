@@ -80,6 +80,9 @@
             chat_empty: 'Your conversation will appear here.',
             chat_followup_note: 'Our website assistant answers common questions. Ask to speak with staff anytime. You may close this chat or leave the page—we will follow up by email.',
             chat_escalate: 'Connect with Staff',
+            chat_escalating: 'Requesting staff…',
+            chat_escalated: 'Staff requested',
+            chat_escalated_note: 'Your request was sent. A staff member will join this conversation or follow up by email.',
             chat_escalation_message: 'I would like to speak with a staff member.',
             chat_connect_error: 'We could not connect to chat. Please try again or email admin@metropolitancollege.ca.',
             chat_send_error: 'Your message could not be sent. Please try again.',
@@ -145,6 +148,9 @@
             chat_empty: 'Votre conversation apparaîtra ici.',
             chat_followup_note: "Notre assistant du site répond aux questions courantes. Demandez à parler à l'équipe en tout temps. Vous pouvez fermer cette fenêtre ou quitter la page—nous vous répondrons par courriel.",
             chat_escalate: "Parler à l'équipe",
+            chat_escalating: "Demande en cours…",
+            chat_escalated: "Équipe demandée",
+            chat_escalated_note: "Votre demande a été envoyée. Un membre de l'équipe rejoindra cette conversation ou vous répondra par courriel.",
             chat_escalation_message: "Je souhaite parler à un membre de l'équipe.",
             chat_connect_error: "Impossible de se connecter. Réessayez ou écrivez à admin@metropolitancollege.ca.",
             chat_send_error: "Votre message n'a pas pu être envoyé. Veuillez réessayer.",
@@ -630,6 +636,9 @@
         const messagesRoot = root.querySelector('[data-chat-messages]');
         const composer = root.querySelector('[data-chat-composer]');
         const escalateButton = root.querySelector('[data-chat-escalate]');
+        const escalateButtonCopy = escalateButton.querySelector('[data-copy]');
+        const escalateIcon = escalateButton.querySelector('i');
+        const followupCopy = root.querySelector('.website-chat-followup [data-copy]');
         const startError = root.querySelector('[data-chat-start-error]');
         const sendError = root.querySelector('[data-chat-send-error]');
         let session = readChatSession();
@@ -639,6 +648,8 @@
         let loadingMessages = false;
         let staffOnline = false;
         let onlineStaffCount = null;
+        let escalationRequested = false;
+        let escalationSending = false;
 
         function visitorHeaders() {
             return session?.visitorToken ? { 'X-Visitor-Token': session.visitorToken } : {};
@@ -653,6 +664,36 @@
         function showConversation() {
             preform.hidden = true;
             conversationView.hidden = false;
+        }
+
+        function isEscalationRequest(text) {
+            const normalized = String(text || '').trim().toLocaleLowerCase();
+            return normalized === COPY.en.chat_escalation_message.toLocaleLowerCase()
+                || normalized === COPY.fr.chat_escalation_message.toLocaleLowerCase();
+        }
+
+        function syncEscalationUI() {
+            let buttonCopyKey = 'chat_escalate';
+            if (escalationSending) buttonCopyKey = 'chat_escalating';
+            if (escalationRequested) buttonCopyKey = 'chat_escalated';
+            escalateButton.disabled = escalationSending || escalationRequested;
+            escalateButton.classList.toggle('is-complete', escalationRequested);
+            escalateButtonCopy.setAttribute('data-copy', buttonCopyKey);
+            escalateButtonCopy.textContent = copy(buttonCopyKey);
+            escalateIcon.className = escalationRequested ? 'fas fa-check' : 'fas fa-headset';
+            const noteCopyKey = escalationRequested ? 'chat_escalated_note' : 'chat_followup_note';
+            followupCopy.setAttribute('data-copy', noteCopyKey);
+            followupCopy.textContent = copy(noteCopyKey);
+        }
+
+        function applyConversationState(payload) {
+            if (!payload || typeof payload !== 'object') return;
+            const status = payload.status || payload.conversation_status || payload.conversation?.status;
+            if (payload.needs_staff === true || status === 'needs_staff') {
+                escalationRequested = true;
+                escalationSending = false;
+                syncEscalationUI();
+            }
         }
 
         function setAvailability(payload) {
@@ -703,6 +744,12 @@
 
         function renderMessages(messages) {
             const list = Array.isArray(messages) ? messages : [];
+            if (list.some((message) => message?.sender_type === 'visitor'
+                && isEscalationRequest(message?.text || message?.message))) {
+                escalationRequested = true;
+                escalationSending = false;
+                syncEscalationUI();
+            }
             messagesRoot.replaceChildren();
             if (!list.length) {
                 const empty = document.createElement('p');
@@ -736,6 +783,9 @@
         function expireSession() {
             session = null;
             writeChatSession(null);
+            escalationRequested = false;
+            escalationSending = false;
+            syncEscalationUI();
             renderMessages([]);
             showPreform(copy('chat_session_expired'));
             stopPolling();
@@ -749,6 +799,7 @@
                     `/public/website-chat/conversations/${encodeURIComponent(session.conversationId)}/messages`,
                     { headers: visitorHeaders() },
                 );
+                applyConversationState(payload);
                 renderMessages(Array.isArray(payload) ? payload : payload?.messages || []);
             } catch (error) {
                 if (error?.status === 401 || error?.status === 403 || error?.status === 404) {
@@ -838,6 +889,11 @@
                 session = { conversationId, visitorToken };
                 writeChatSession(session);
                 showConversation();
+                applyConversationState(payload);
+                if (isEscalationRequest(data.get('initial_message'))) {
+                    escalationRequested = true;
+                    syncEscalationUI();
+                }
                 if (Array.isArray(payload?.messages)) renderMessages(payload.messages);
                 await loadMessages({ quiet: true });
                 startPolling();
@@ -857,10 +913,15 @@
             if (!session || !composer.reportValidity()) return;
             const text = composer.elements.text.value.trim();
             if (!text) return;
+            const escalationMessage = isEscalationRequest(text);
             const sendButton = composer.querySelector('[type="submit"]');
             sendButton.disabled = true;
+            if (escalationMessage) {
+                escalationSending = true;
+                syncEscalationUI();
+            }
             try {
-                await apiRequest(
+                const payload = await apiRequest(
                     `/public/website-chat/conversations/${encodeURIComponent(session.conversationId)}/messages`,
                     {
                         method: 'POST',
@@ -868,6 +929,8 @@
                         body: JSON.stringify({ text }),
                     },
                 );
+                applyConversationState(payload);
+                if (escalationMessage) escalationRequested = true;
                 composer.reset();
                 await loadMessages({ quiet: true });
                 composer.elements.text?.focus();
@@ -879,12 +942,17 @@
                     sendError.textContent = copy('chat_send_error');
                 }
             } finally {
+                if (escalationMessage) {
+                    escalationSending = false;
+                    syncEscalationUI();
+                }
                 sendButton.disabled = false;
             }
         });
 
         escalateButton.addEventListener('click', () => {
-            if (!session || composer.querySelector('[type="submit"]').disabled) return;
+            if (!session || escalationSending || escalationRequested
+                || composer.querySelector('[type="submit"]').disabled) return;
             composer.elements.text.value = copy('chat_escalation_message');
             composer.requestSubmit();
         });
@@ -899,6 +967,7 @@
             translate: () => {
                 applyInterfaceCopy(root);
                 setAvailability({ online: staffOnline, online_staff_count: onlineStaffCount });
+                syncEscalationUI();
                 if (session) loadMessages({ quiet: true });
             },
         };
