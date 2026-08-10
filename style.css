@@ -7516,6 +7516,10 @@ body.engagement-modal-open {
 }
 
 .website-chat-followup {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.65rem;
     flex: 0 0 auto;
     padding: 0.65rem 0.85rem;
     border-top: 1px solid rgba(6, 43, 26, 0.08);
@@ -7523,6 +7527,32 @@ body.engagement-modal-open {
     color: #52675f;
     font-size: 0.72rem;
     line-height: 1.4;
+}
+
+.website-chat-followup p {
+    flex: 1 1 auto;
+}
+
+.website-chat-followup button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    flex: 0 0 auto;
+    min-height: 34px;
+    padding: 0.45rem 0.65rem;
+    border: 1px solid rgba(6, 43, 26, 0.16);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--deep-green);
+    font-size: 0.72rem;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.website-chat-followup button:hover {
+    border-color: var(--accent-gold);
+    background: rgba(212, 175, 55, 0.1);
 }
 
 .website-chat-empty {
@@ -7708,6 +7738,11 @@ body.engagement-modal-open {
         width: calc(100vw - 1.5rem);
         height: min(640px, calc(100vh - 5.8rem));
         border-radius: 18px;
+    }
+
+    .website-chat-followup {
+        align-items: stretch;
+        flex-direction: column;
     }
 }
 

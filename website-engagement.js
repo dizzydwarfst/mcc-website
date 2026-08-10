@@ -79,6 +79,8 @@
             chat_send: 'Send',
             chat_empty: 'Your conversation will appear here.',
             chat_followup_note: 'Our website assistant answers common questions. Ask to speak with staff anytime. You may close this chat or leave the page—we will follow up by email.',
+            chat_escalate: 'Connect with Staff',
+            chat_escalation_message: 'I would like to speak with a staff member.',
             chat_connect_error: 'We could not connect to chat. Please try again or email admin@metropolitancollege.ca.',
             chat_send_error: 'Your message could not be sent. Please try again.',
             chat_session_expired: 'Please enter your details again to start a new conversation.',
@@ -142,6 +144,8 @@
             chat_send: 'Envoyer',
             chat_empty: 'Votre conversation apparaîtra ici.',
             chat_followup_note: "Notre assistant du site répond aux questions courantes. Demandez à parler à l'équipe en tout temps. Vous pouvez fermer cette fenêtre ou quitter la page—nous vous répondrons par courriel.",
+            chat_escalate: "Parler à l'équipe",
+            chat_escalation_message: "Je souhaite parler à un membre de l'équipe.",
             chat_connect_error: "Impossible de se connecter. Réessayez ou écrivez à admin@metropolitancollege.ca.",
             chat_send_error: "Votre message n'a pas pu être envoyé. Veuillez réessayer.",
             chat_session_expired: 'Veuillez saisir de nouveau vos coordonnées pour commencer une conversation.',
@@ -595,7 +599,13 @@
                         <div class="website-chat-messages" data-chat-messages role="log" aria-live="polite" aria-relevant="additions text">
                             <p class="website-chat-empty" data-copy="chat_empty">Your conversation will appear here.</p>
                         </div>
-                        <p class="website-chat-followup" data-copy="chat_followup_note">Our website assistant answers common questions. Ask to speak with staff anytime. You may close this chat or leave the page—we will follow up by email.</p>
+                        <div class="website-chat-followup">
+                            <p data-copy="chat_followup_note">Our website assistant answers common questions. Ask to speak with staff anytime. You may close this chat or leave the page—we will follow up by email.</p>
+                            <button type="button" data-chat-escalate>
+                                <i class="fas fa-headset" aria-hidden="true"></i>
+                                <span data-copy="chat_escalate">Connect with Staff</span>
+                            </button>
+                        </div>
                         <form class="website-chat-composer" data-chat-composer>
                             <label class="sr-only" for="website-chat-message" data-copy="chat_message">Brief message</label>
                             <textarea id="website-chat-message" name="text" rows="2" maxlength="2000" data-copy-placeholder="chat_send_placeholder" placeholder="Write a message…" required></textarea>
@@ -619,6 +629,7 @@
         const conversationView = root.querySelector('[data-chat-conversation]');
         const messagesRoot = root.querySelector('[data-chat-messages]');
         const composer = root.querySelector('[data-chat-composer]');
+        const escalateButton = root.querySelector('[data-chat-escalate]');
         const startError = root.querySelector('[data-chat-start-error]');
         const sendError = root.querySelector('[data-chat-send-error]');
         let session = readChatSession();
@@ -870,6 +881,12 @@
             } finally {
                 sendButton.disabled = false;
             }
+        });
+
+        escalateButton.addEventListener('click', () => {
+            if (!session || composer.querySelector('[type="submit"]').disabled) return;
+            composer.elements.text.value = copy('chat_escalation_message');
+            composer.requestSubmit();
         });
 
         showPreform();
