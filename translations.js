@@ -123,18 +123,21 @@ window.MCC_TRANSLATIONS = {
         proof_p_countries: { en: "A global student community studying in downtown Vancouver.", fr: "Une communauté étudiante internationale qui étudie au centre-ville de Vancouver." },
         proof_p_intake: { en: "Applications are now open for students ready to plan their next step.", fr: "Les candidatures sont ouvertes pour les étudiants prêts à préparer la suite." },
 
-        // Spotlight (Open House)
-        spot_kicker: { en: "Featured Event", fr: "Événement à la une" },
-        spot_title: { en: "Admissions Open House for Fall 2026", fr: "Journée portes ouvertes des admissions — automne 2026" },
+        // Spotlight (FSL trial session)
+        spot_kicker: { en: "Free FSL Event", fr: "Événement FLS gratuit" },
+        spot_title: { en: "FSL Info & Trial Session", fr: "Séance d'information et cours d'essai FLS" },
         spot_copy: {
-            en: "Meet advisors, compare programs, review requirements, and understand your next steps before you apply. This is the fastest way to move from interest to a confident decision.",
-            fr: "Rencontrez les conseillers, comparez les programmes, vérifiez les conditions et comprenez vos prochaines étapes avant de postuler. C'est la voie la plus rapide pour passer de la curiosité à une décision éclairée."
+            en: "Join us September 1 from 5:00–6:00 PM, online or in person. Meet the team, ask questions, and experience a free French trial class.",
+            fr: "Rejoignez-nous le 1er septembre de 17 h à 18 h, en ligne ou en personne. Rencontrez l'équipe, posez vos questions et participez gratuitement à un cours d'essai de français."
         },
-        spot_tag1: { en: "Program advising", fr: "Conseils sur les programmes" },
-        spot_tag2: { en: "International guidance", fr: "Accompagnement international" },
-        spot_tag3: { en: "Application planning", fr: "Préparation à la candidature" },
-        spot_btn_start: { en: "Start Your Application", fr: "Commencer votre candidature" },
-        spot_btn_explore: { en: "Explore Admissions", fr: "Explorer les admissions" },
+        spot_schedule_intro: { en: "Introduction & Q&A", fr: "Présentation et questions-réponses" },
+        spot_schedule_trial: { en: "Free trial class", fr: "Cours d'essai gratuit" },
+        spot_tag1: { en: "September 1, 2026", fr: "1er septembre 2026" },
+        spot_tag2: { en: "Online or in person", fr: "En ligne ou en personne" },
+        spot_tag3: { en: "Free registration", fr: "Inscription gratuite" },
+        spot_btn_start: { en: "Sign Up for Free", fr: "S'inscrire gratuitement" },
+        spot_btn_explore: { en: "Explore the Program", fr: "Explorer le programme" },
+        spot_btn_question: { en: "Ask a Question", fr: "Poser une question" },
 
         // Pathways
         pathways_kicker: { en: "Programs and Pathways", fr: "Programmes et parcours" },

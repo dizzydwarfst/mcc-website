@@ -761,3 +761,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 })();
+
+// Load the public FSL signup and website-message tools once for every page that
+// already includes this shared script. Keeping the feature in its own file
+// avoids duplicating markup and behaviour across the static HTML pages.
+(function loadWebsiteEngagement() {
+    if (document.querySelector('script[data-mcc-website-engagement]')) return;
+    const sharedScript = document.currentScript;
+    const featureScript = document.createElement('script');
+    featureScript.src = new URL('website-engagement.js', sharedScript?.src || window.location.href).href;
+    featureScript.dataset.mccWebsiteEngagement = 'true';
+    document.head.appendChild(featureScript);
+})();
