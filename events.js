@@ -13,6 +13,12 @@
     const API_BASE = String(window.MCC_EVENTS_API_BASE || window.MCC_ENGAGEMENT_API_BASE || DEFAULT_API_BASE).replace(/\/$/, '');
     const REQUEST_TIMEOUT_MS = 15000;
     const EVENT_PATH_PREFIX = '/events/';
+    const EVENT_SHORT_PATHS = Object.freeze({
+        'fsl-info-trial-session-september-2026': '/trial-FSL',
+    });
+    const EVENT_PATH_ALIASES = Object.freeze(Object.fromEntries(
+        Object.entries(EVENT_SHORT_PATHS).map(([slug, path]) => [path, slug]),
+    ));
     const APPROVED_PRIVACY_POLICY_URL = '/assets/policies/confidential-information-privacy-policy.pdf';
 
     const FALLBACK_EVENT = {
@@ -343,6 +349,7 @@
         const querySlug = new URLSearchParams(window.location.search).get('slug');
         if (querySlug) return querySlug;
         const path = window.location.pathname.replace(/\/$/, '');
+        if (EVENT_PATH_ALIASES[path]) return EVENT_PATH_ALIASES[path];
         const marker = path.lastIndexOf(EVENT_PATH_PREFIX);
         return marker >= 0 ? decodeURIComponent(path.slice(marker + EVENT_PATH_PREFIX.length)) : '';
     }
@@ -383,7 +390,13 @@
     }
 
     function eventHref(event) {
-        return `${EVENT_PATH_PREFIX}${encodeURIComponent(event.slug)}`;
+        return EVENT_SHORT_PATHS[event.slug] || `${EVENT_PATH_PREFIX}${encodeURIComponent(event.slug)}`;
+    }
+
+    function eventPublicUrl(event) {
+        const shortPath = EVENT_SHORT_PATHS[event.slug];
+        if (shortPath) return new URL(shortPath, window.location.origin).href;
+        return safeUrl(event.social?.share_url || event.seo?.canonical_url, `${window.location.origin}${eventHref(event)}`);
     }
 
     function eventCard(event, compact = false) {
@@ -651,7 +664,7 @@
     }
 
     function setupSharing(event) {
-        const canonicalUrl = safeUrl(event.social?.share_url || event.seo?.canonical_url, `${window.location.origin}${eventHref(event)}`);
+        const canonicalUrl = eventPublicUrl(event);
         const shareTitle = event.social?.title || event.title;
         const shareSummary = event.social?.summary || event.summary;
         const encodedUrl = encodeURIComponent(canonicalUrl);
@@ -793,7 +806,7 @@
     function setPageMeta(event) {
         const seo = event.seo || {};
         const social = event.social || {};
-        const canonicalUrl = social.share_url || seo.canonical_url || `${window.location.origin}${eventHref(event)}`;
+        const canonicalUrl = eventPublicUrl(event);
         const socialImage = social.image?.url || seo.og_image?.url || '';
         document.title = seo.title || `${event.title} | Metropolitan Community College`;
         const values = {

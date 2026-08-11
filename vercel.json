@@ -11,9 +11,18 @@
       "source": "/programs-french-tef",
       "destination": "/programs-french-tcf",
       "permanent": true
+    },
+    {
+      "source": "/events/fsl-info-trial-session-september-2026",
+      "destination": "/trial-FSL",
+      "permanent": true
     }
   ],
   "rewrites": [
+    {
+      "source": "/trial-FSL",
+      "destination": "/event?slug=fsl-info-trial-session-september-2026"
+    },
     {
       "source": "/events/:slug",
       "destination": "/event?slug=:slug"
