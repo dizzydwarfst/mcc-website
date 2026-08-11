@@ -144,42 +144,35 @@
             </div>
         </section>
 
-        <section class="section-shell">
-            <div class="section-surface">
-                <article class="spotlight-card reveal">
-                    <div class="spotlight-media">
-                        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=80" alt="Students and an advisor at an information session">
-                    </div>
-                    <div class="spotlight-content">
-                        <span class="section-kicker" data-i18n="home.spot_kicker">Free FSL Event</span>
-                        <h2 class="section-title" style="margin-bottom:1rem;" data-i18n="home.spot_title">FSL Info &amp; Trial Session</h2>
-                        <p class="section-copy" data-i18n="home.spot_copy">Join us September 1 from 5:00–6:00 PM, online or in person. Meet the team, ask questions, and experience a free French trial class.</p>
-                        <div class="fsl-event-schedule" aria-label="Trial session schedule">
-                            <div>
-                                <span class="fsl-event-time">5:00–5:30</span>
-                                <span data-i18n="home.spot_schedule_intro">Introduction &amp; Q&amp;A</span>
-                            </div>
-                            <div>
-                                <span class="fsl-event-time">5:30–6:00</span>
-                                <span data-i18n="home.spot_schedule_trial">Free trial class</span>
-                            </div>
+        <section class="section-shell home-events-section" id="upcoming-events">
+            <div class="section-intro reveal">
+                <span class="section-kicker">Upcoming at MCC</span>
+                <h2 class="section-title center">Meet us, ask questions, and try the learning</h2>
+                <p class="section-copy">Explore our upcoming information sessions, trial classes, workshops, and community events. When more events are published in the MCC Portal, they will appear here automatically.</p>
+            </div>
+            <div class="home-events-grid" data-events-home aria-busy="true">
+                <article class="event-card is-featured">
+                    <a class="event-card-media" href="/events/fsl-info-trial-session-september-2026" aria-label="View FSL Info &amp; Trial Session">
+                        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=80" alt="Students participating in an instructor-led information session">
+                        <span class="event-card-date"><strong>1</strong>Sep</span>
+                    </a>
+                    <div class="event-card-content">
+                        <span class="section-kicker">Free FSL Event</span>
+                        <h3><a href="/events/fsl-info-trial-session-september-2026">FSL Info &amp; Trial Session</a></h3>
+                        <p>Meet the team, ask questions, and experience MCC's communication-first French instruction in a free one-hour session.</p>
+                        <div class="event-card-meta">
+                            <span><i class="fa-regular fa-calendar" aria-hidden="true"></i>Tuesday, September 1, 2026</span>
+                            <span><i class="fa-regular fa-clock" aria-hidden="true"></i>5:00–6:00 PM</span>
+                            <span><i class="fa-solid fa-location-dot" aria-hidden="true"></i>Online or in person</span>
                         </div>
-                        <div class="tag-row">
-                            <span data-i18n="home.spot_tag1">September 1, 2026</span>
-                            <span data-i18n="home.spot_tag2">Online or in person</span>
-                            <span data-i18n="home.spot_tag3">Free registration</span>
-                        </div>
-                        <div class="hero-action-row fsl-event-actions">
-                            <a href="contact.html" class="btn-solid-gold" data-fsl-signup-open data-i18n="home.spot_btn_start">Sign Up for Free</a>
-                            <a href="programs-french-language.html" class="btn-outline-gold" data-i18n="home.spot_btn_explore">Explore the Program</a>
-                            <button type="button" class="btn-text-question" data-website-chat-open>
-                                <i class="fas fa-message" aria-hidden="true"></i>
-                                <span data-i18n="home.spot_btn_question">Ask a Question</span>
-                            </button>
+                        <div class="event-card-actions">
+                            <a class="btn-solid-gold" href="/events/fsl-info-trial-session-september-2026">View Event Details</a>
+                            <a class="subtle-link" href="/events/fsl-info-trial-session-september-2026">Event details <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </article>
             </div>
+            <div class="home-events-all"><a href="/events" class="btn-outline-gold">View All Events <i class="fas fa-arrow-right" aria-hidden="true"></i></a></div>
         </section>
 
         <section class="section-shell" style="background:#ffffff;">
@@ -412,5 +405,6 @@
 
     <script src="translations.js"></script>
     <script src="script.js"></script>
+    <script src="events.js"></script>
 </body>
 </html>

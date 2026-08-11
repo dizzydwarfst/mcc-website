@@ -64,6 +64,36 @@
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December',
   ];
+  const CANADIAN_PROVINCES = [
+    ['AB', 'Alberta'],
+    ['BC', 'British Columbia'],
+    ['MB', 'Manitoba'],
+    ['NB', 'New Brunswick'],
+    ['NL', 'Newfoundland and Labrador'],
+    ['NS', 'Nova Scotia'],
+    ['NT', 'Northwest Territories'],
+    ['NU', 'Nunavut'],
+    ['ON', 'Ontario'],
+    ['PE', 'Prince Edward Island'],
+    ['QC', 'Quebec'],
+    ['SK', 'Saskatchewan'],
+    ['YT', 'Yukon'],
+  ];
+  const US_STATES = [
+    ['AL', 'Alabama'], ['AK', 'Alaska'], ['AZ', 'Arizona'], ['AR', 'Arkansas'],
+    ['CA', 'California'], ['CO', 'Colorado'], ['CT', 'Connecticut'], ['DE', 'Delaware'],
+    ['DC', 'District of Columbia'], ['FL', 'Florida'], ['GA', 'Georgia'], ['HI', 'Hawaii'],
+    ['ID', 'Idaho'], ['IL', 'Illinois'], ['IN', 'Indiana'], ['IA', 'Iowa'],
+    ['KS', 'Kansas'], ['KY', 'Kentucky'], ['LA', 'Louisiana'], ['ME', 'Maine'],
+    ['MD', 'Maryland'], ['MA', 'Massachusetts'], ['MI', 'Michigan'], ['MN', 'Minnesota'],
+    ['MS', 'Mississippi'], ['MO', 'Missouri'], ['MT', 'Montana'], ['NE', 'Nebraska'],
+    ['NV', 'Nevada'], ['NH', 'New Hampshire'], ['NJ', 'New Jersey'], ['NM', 'New Mexico'],
+    ['NY', 'New York'], ['NC', 'North Carolina'], ['ND', 'North Dakota'], ['OH', 'Ohio'],
+    ['OK', 'Oklahoma'], ['OR', 'Oregon'], ['PA', 'Pennsylvania'], ['RI', 'Rhode Island'],
+    ['SC', 'South Carolina'], ['SD', 'South Dakota'], ['TN', 'Tennessee'], ['TX', 'Texas'],
+    ['UT', 'Utah'], ['VT', 'Vermont'], ['VA', 'Virginia'], ['WA', 'Washington'],
+    ['WV', 'West Virginia'], ['WI', 'Wisconsin'], ['WY', 'Wyoming'],
+  ];
   let programsByName = new Map();
   let semesterPlaceholderTemplate = null;
 
@@ -160,10 +190,58 @@
 
   ready(() => {
     const form = document.getElementById('wizard-form');
-    if (form) attach(form);
+    if (form) {
+      setupProvinceStateControl(form);
+      attach(form);
+    }
     initializeProgramControls();
     loadLivePrograms();
   });
+
+  function setupProvinceStateControl(form) {
+    const country = document.getElementById('country');
+    if (!country) return;
+
+    const update = () => {
+      const current = document.getElementById('province');
+      if (!current) return;
+
+      const currentValue = current.value;
+      const regions = country.value === 'Canada'
+        ? CANADIAN_PROVINCES
+        : ['USA', 'United States'].includes(country.value)
+          ? US_STATES
+          : null;
+      const replacement = document.createElement(regions ? 'select' : 'input');
+      replacement.id = 'province';
+      replacement.name = 'province';
+      replacement.required = current.required;
+      replacement.autocomplete = 'address-level1';
+
+      if (regions) {
+        appendOption(replacement, '', country.value === 'Canada' ? 'Select Province' : 'Select State');
+        regions.forEach(([code, name]) => appendOption(replacement, code, `${code} — ${name}`));
+        replacement.value = normalizeRegionValue(currentValue, regions);
+      } else {
+        replacement.type = 'text';
+        replacement.value = currentValue;
+      }
+
+      current.replaceWith(replacement);
+    };
+
+    country.addEventListener('change', update);
+    update();
+  }
+
+  function normalizeRegionValue(rawValue, regions) {
+    const value = String(rawValue || '').trim();
+    const normalized = value.toLowerCase();
+    const match = regions.find(([code, name]) => (
+      code.toLowerCase() === normalized || name.toLowerCase() === normalized
+    ));
+    return match ? match[0] : '';
+  }
 
   // ── Live program list ──
   // Swap the hardcoded <option>s for the portal's live, active-only programs so

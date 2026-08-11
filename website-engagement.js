@@ -854,8 +854,12 @@
 
         launcher.addEventListener('click', () => (panelOpen ? closeChat() : openChat()));
         closeButton.addEventListener('click', closeChat);
-        document.querySelectorAll('[data-website-chat-open]').forEach((trigger) => {
-            trigger.addEventListener('click', openChat);
+        // Event pages are populated from the portal after DOMContentLoaded, so
+        // use one delegated listener for both static and dynamically-rendered
+        // "Ask a Question" buttons.
+        document.addEventListener('click', (event) => {
+            const trigger = event.target.closest('[data-website-chat-open]');
+            if (trigger && !trigger.closest('.website-chat')) openChat(event);
         });
         panel.addEventListener('keydown', (event) => {
             if (event.key === 'Escape') {

@@ -8,31 +8,35 @@
   const ALLOWED_FILE_EXTENSIONS = ['pdf', 'jpg', 'jpeg', 'png'];
 
   const CANADIAN_PROVINCES = [
-    'Alberta',
-    'British Columbia',
-    'Manitoba',
-    'New Brunswick',
-    'Newfoundland and Labrador',
-    'Northwest Territories',
-    'Nova Scotia',
-    'Nunavut',
-    'Ontario',
-    'Prince Edward Island',
-    'Quebec',
-    'Saskatchewan',
-    'Yukon',
+    ['AB', 'Alberta'],
+    ['BC', 'British Columbia'],
+    ['MB', 'Manitoba'],
+    ['NB', 'New Brunswick'],
+    ['NL', 'Newfoundland and Labrador'],
+    ['NS', 'Nova Scotia'],
+    ['NT', 'Northwest Territories'],
+    ['NU', 'Nunavut'],
+    ['ON', 'Ontario'],
+    ['PE', 'Prince Edward Island'],
+    ['QC', 'Quebec'],
+    ['SK', 'Saskatchewan'],
+    ['YT', 'Yukon'],
   ];
 
   const US_STATES = [
-    'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut',
-    'Delaware', 'District of Columbia', 'Florida', 'Georgia', 'Hawaii', 'Idaho',
-    'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine',
-    'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri',
-    'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico',
-    'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon',
-    'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee',
-    'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin',
-    'Wyoming',
+    ['AL', 'Alabama'], ['AK', 'Alaska'], ['AZ', 'Arizona'], ['AR', 'Arkansas'],
+    ['CA', 'California'], ['CO', 'Colorado'], ['CT', 'Connecticut'], ['DE', 'Delaware'],
+    ['DC', 'District of Columbia'], ['FL', 'Florida'], ['GA', 'Georgia'], ['HI', 'Hawaii'],
+    ['ID', 'Idaho'], ['IL', 'Illinois'], ['IN', 'Indiana'], ['IA', 'Iowa'],
+    ['KS', 'Kansas'], ['KY', 'Kentucky'], ['LA', 'Louisiana'], ['ME', 'Maine'],
+    ['MD', 'Maryland'], ['MA', 'Massachusetts'], ['MI', 'Michigan'], ['MN', 'Minnesota'],
+    ['MS', 'Mississippi'], ['MO', 'Missouri'], ['MT', 'Montana'], ['NE', 'Nebraska'],
+    ['NV', 'Nevada'], ['NH', 'New Hampshire'], ['NJ', 'New Jersey'], ['NM', 'New Mexico'],
+    ['NY', 'New York'], ['NC', 'North Carolina'], ['ND', 'North Dakota'], ['OH', 'Ohio'],
+    ['OK', 'Oklahoma'], ['OR', 'Oregon'], ['PA', 'Pennsylvania'], ['RI', 'Rhode Island'],
+    ['SC', 'South Carolina'], ['SD', 'South Dakota'], ['TN', 'Tennessee'], ['TX', 'Texas'],
+    ['UT', 'Utah'], ['VT', 'Vermont'], ['VA', 'Virginia'], ['WA', 'Washington'],
+    ['WV', 'West Virginia'], ['WI', 'Wisconsin'], ['WY', 'Wyoming'],
   ];
 
   const PROGRAMS = [
@@ -148,6 +152,7 @@
     const update = () => {
       const current = fieldControl(form, 'provinceState');
       if (!current) return;
+      const currentValue = current.value;
 
       const options = country.value === 'Canada'
         ? CANADIAN_PROVINCES
@@ -162,9 +167,11 @@
 
       if (options) {
         replacement.appendChild(option('', country.value === 'Canada' ? 'Select Province' : 'Select State'));
-        options.forEach((region) => replacement.appendChild(option(region, region)));
+        options.forEach(([code, name]) => replacement.appendChild(option(code, `${code} — ${name}`)));
+        replacement.value = normalizeRegionValue(currentValue, options);
       } else {
         replacement.type = 'text';
+        replacement.value = currentValue;
       }
 
       current.replaceWith(replacement);
@@ -175,6 +182,15 @@
 
     country.addEventListener('change', update);
     update();
+  }
+
+  function normalizeRegionValue(rawValue, regions) {
+    const value = String(rawValue || '').trim();
+    const normalized = value.toLowerCase();
+    const match = regions.find(([code, name]) => (
+      code.toLowerCase() === normalized || name.toLowerCase() === normalized
+    ));
+    return match ? match[0] : '';
   }
 
   function setupSecondaryContact(form) {

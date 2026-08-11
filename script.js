@@ -762,6 +762,50 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 })();
 
+// Keep Events and the public legal documents discoverable across the static
+// site without duplicating the same edit through every historical HTML page.
+(function addEventsAndLegalNavigation() {
+    function cleanPath(value) {
+        try { return new URL(value, window.location.href).pathname.replace(/\/$/, '') || '/'; }
+        catch (_) { return ''; }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.main-nav').forEach((navigation) => {
+            const alreadyHasEvents = [...navigation.querySelectorAll('a[href]')]
+                .some((link) => cleanPath(link.getAttribute('href')) === '/events');
+            if (alreadyHasEvents) return;
+
+            const link = document.createElement('a');
+            link.href = '/events';
+            link.className = 'nav-direct-link';
+            link.textContent = 'Events';
+            if (window.location.pathname === '/events' || window.location.pathname.startsWith('/events/')) {
+                link.setAttribute('aria-current', 'page');
+            }
+            const studentLife = [...navigation.children].find((item) => {
+                const anchor = item.matches?.('a') ? item : item.querySelector?.('a[href]');
+                return cleanPath(anchor?.getAttribute('href')) === '/student-life';
+            });
+            navigation.insertBefore(link, studentLife || null);
+        });
+
+        document.querySelectorAll('.footer-bottom').forEach((footerBottom) => {
+            if (footerBottom.querySelector('.footer-legal-links')) return;
+            const links = document.createElement('nav');
+            links.className = 'footer-legal-links';
+            links.setAttribute('aria-label', 'Legal information');
+            links.innerHTML = `
+                <a href="/legal?type=privacy">Privacy</a>
+                <a href="/legal?type=terms">Website Terms</a>
+                <a href="/legal?type=event_terms">Event Terms</a>
+                <a href="/policies">College Policies</a>
+            `;
+            footerBottom.appendChild(links);
+        });
+    });
+})();
+
 // Load the public FSL signup and website-message tools once for every page that
 // already includes this shared script. Keeping the feature in its own file
 // avoids duplicating markup and behaviour across the static HTML pages.
