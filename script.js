@@ -772,22 +772,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.main-nav').forEach((navigation) => {
-            const alreadyHasEvents = [...navigation.querySelectorAll('a[href]')]
-                .some((link) => cleanPath(link.getAttribute('href')) === '/events');
-            if (alreadyHasEvents) return;
-
-            const link = document.createElement('a');
-            link.href = '/events';
-            link.className = 'nav-direct-link';
-            link.textContent = 'Events';
+            let link = [...navigation.querySelectorAll('a[href]')]
+                .find((candidate) => cleanPath(candidate.getAttribute('href')) === '/events');
+            if (!link) {
+                link = document.createElement('a');
+                link.href = '/events';
+                link.className = 'nav-direct-link';
+                link.textContent = 'Events';
+            }
             if (window.location.pathname === '/events' || window.location.pathname.startsWith('/events/')) {
                 link.setAttribute('aria-current', 'page');
             }
-            const studentLife = [...navigation.children].find((item) => {
-                const anchor = item.matches?.('a') ? item : item.querySelector?.('a[href]');
-                return cleanPath(anchor?.getAttribute('href')) === '/student-life';
-            });
-            navigation.insertBefore(link, studentLife || null);
+            const navigationItem = link.parentElement === navigation ? link : link.closest('.nav-dropdown') || link;
+            navigation.appendChild(navigationItem);
         });
 
         document.querySelectorAll('.footer-bottom').forEach((footerBottom) => {
