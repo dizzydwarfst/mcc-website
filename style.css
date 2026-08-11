@@ -8435,6 +8435,10 @@ body.engagement-modal-open {
     transition: transform 0.35s ease;
 }
 
+.event-brochure-preview [hidden] {
+    display: none !important;
+}
+
 .event-brochure-preview:hover img {
     transform: scale(1.025);
 }
@@ -9015,6 +9019,34 @@ body.engagement-modal-open {
     border-bottom: 1px solid rgba(6, 43, 26, 0.1);
     color: #4e675c;
     font-size: 1.08rem;
+}
+
+.legal-primary-resource {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    margin: 1.5rem 0 2rem;
+    padding: 1rem 1.15rem;
+    border: 1px solid rgba(213, 166, 34, 0.45);
+    border-radius: 16px;
+    background: rgba(213, 166, 34, 0.08);
+    color: var(--primary-green);
+    text-decoration: none;
+}
+
+.legal-primary-resource > i:first-child {
+    color: #b42318;
+    font-size: 1.35rem;
+}
+
+.legal-primary-resource span {
+    display: grid;
+    gap: 0.2rem;
+    flex: 1;
+}
+
+.legal-primary-resource small {
+    color: var(--muted-text);
 }
 
 .legal-document-body {

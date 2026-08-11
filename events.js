@@ -13,6 +13,7 @@
     const API_BASE = String(window.MCC_EVENTS_API_BASE || window.MCC_ENGAGEMENT_API_BASE || DEFAULT_API_BASE).replace(/\/$/, '');
     const REQUEST_TIMEOUT_MS = 15000;
     const EVENT_PATH_PREFIX = '/events/';
+    const APPROVED_PRIVACY_POLICY_URL = '/assets/policies/confidential-information-privacy-policy.pdf';
 
     const FALLBACK_EVENT = {
         id: 'fsl-trial-2026-09-01',
@@ -86,7 +87,7 @@
                 <p>Authorized MCC staff and service providers supporting MCC systems may process information only for their assigned purposes. Records are retained according to applicable legal, regulatory, operational, and security requirements.</p>
                 <h2>Your choices</h2>
                 <p>You may ask about or request correction of your personal information and may withdraw optional marketing or future promotional-use consent, subject to legal and operational limits. Withdrawing consent does not affect uses that occurred before withdrawal.</p>
-                <p><a href="/assets/policies/confidential-information-privacy-policy.pdf" target="_blank" rel="noopener">Open MCC's Confidential Information and Privacy Policy (PDF)</a>.</p>
+                <p><a href="${APPROVED_PRIVACY_POLICY_URL}" target="_blank" rel="noopener">Open MCC's Confidential Information and Privacy Policy (PDF)</a>.</p>
             `,
         },
         terms: {
@@ -463,7 +464,7 @@
     }
 
     function acknowledgementResources(field) {
-        if (field === 'privacy_accepted') return `<a href="${policyHref('privacy')}" target="_blank" rel="noopener">Read Privacy Policy</a>`;
+        if (field === 'privacy_accepted') return `<a href="${APPROVED_PRIVACY_POLICY_URL}" target="_blank" rel="noopener">Privacy Policy PDF</a> <span aria-hidden="true">·</span> <a href="${policyHref('privacy')}" target="_blank" rel="noopener">Website privacy notice</a>`;
         if (field === 'terms_accepted') return `<a href="${policyHref('terms')}" target="_blank" rel="noopener">Website Terms</a> <span aria-hidden="true">·</span> <a href="${policyHref('event_terms')}" target="_blank" rel="noopener">Event Terms</a>`;
         if (field === 'media_notice_acknowledged') return `<a href="${policyHref('media_release')}" target="_blank" rel="noopener">Read Media Release</a>`;
         return '';
@@ -544,7 +545,7 @@
         const contentType = String(brochure.content_type || brochure.file_type || '').toLowerCase();
         const previewValue = brochure.thumbnail_url || brochure.preview_url || (contentType.startsWith('image/') ? brochure.url || brochure.asset_url : '');
         if (previewValue) {
-            return `<img src="${escapeHtml(safeUrl(previewValue))}" alt="${escapeHtml(brochure.title || 'Event brochure')}">`;
+            return `<img src="${escapeHtml(safeUrl(previewValue))}" alt="${escapeHtml(brochure.title || 'Event brochure')}" data-brochure-preview-image><span class="event-brochure-file-preview" data-brochure-preview-fallback hidden><i class="fas fa-image" aria-hidden="true"></i><strong>IMAGE</strong><small>Open brochure</small></span>`;
         }
         const label = contentType.includes('pdf') ? 'PDF' : 'FILE';
         return `<span class="event-brochure-file-preview"><i class="fas fa-file-pdf" aria-hidden="true"></i><strong>${label}</strong><small>Open brochure</small></span>`;
@@ -876,6 +877,7 @@
             const consentForm = event.consent_form || policies.__consentForm || FALLBACK_CONSENT_FORM;
             root.innerHTML = detailTemplate(event, consentForm);
             root.removeAttribute('aria-busy');
+            setupBrochurePreviewFallbacks(root);
             setPageMeta(event);
             setupSharing(event);
             setupRegistration(event, consentForm);
@@ -885,9 +887,34 @@
         }
     }
 
+    function setupBrochurePreviewFallbacks(root) {
+        root.querySelectorAll('[data-brochure-preview-image]').forEach((image) => {
+            image.addEventListener('error', () => {
+                image.hidden = true;
+                const fallback = image.nextElementSibling;
+                if (fallback?.matches('[data-brochure-preview-fallback]')) fallback.hidden = false;
+            }, { once: true });
+        });
+    }
+
     function sanitizePolicyHtml(value) {
         const template = document.createElement('template');
         template.innerHTML = String(value || '');
+        [...template.content.childNodes].forEach((node) => {
+            if (node.nodeType !== 3) return;
+            const headings = String(node.textContent || '').split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
+            if (!headings.length) {
+                node.remove();
+                return;
+            }
+            const fragment = document.createDocumentFragment();
+            headings.forEach((heading) => {
+                const element = document.createElement('h2');
+                element.textContent = heading;
+                fragment.appendChild(element);
+            });
+            node.replaceWith(fragment);
+        });
         template.content.querySelectorAll('script, style, iframe, object, embed, form, input, button').forEach((node) => node.remove());
         template.content.querySelectorAll('*').forEach((node) => {
             [...node.attributes].forEach((attribute) => {
@@ -912,6 +939,12 @@
         const policyBody = policy.is_published
             ? sanitizePolicyHtml(policy.content_html || policy.body || policy.html_body || policy.content || '<p>This published policy has no website content.</p>')
             : '<div class="legal-unavailable"><i class="fas fa-clock" aria-hidden="true"></i><div><strong>This document has not been published yet.</strong><p>MCC is completing its legal review. Contact the college if you need the current applicable information before submitting a form.</p></div></div>';
+        const primaryPrivacyResource = type === 'privacy' ? `
+            <a class="legal-primary-resource" href="${APPROVED_PRIVACY_POLICY_URL}" target="_blank" rel="noopener">
+                <i class="fas fa-file-pdf" aria-hidden="true"></i>
+                <span><strong>Confidential Information and Privacy Policy</strong><small>Open the approved MCC policy PDF</small></span>
+                <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+            </a>` : '';
         root.innerHTML = `
             <article class="legal-document">
                 <a href="/policies" class="event-back-link"><i class="fas fa-arrow-left" aria-hidden="true"></i> All policies</a>
@@ -919,6 +952,7 @@
                 <h1>${escapeHtml(policy.title)}</h1>
                 <div class="legal-document-meta">${policy.is_published ? `<span>Version ${escapeHtml(policy.version || 'Current')}</span><span>Effective ${escapeHtml(policy.effective_date || 'as published')}</span>` : '<span>Pending legal review</span>'}</div>
                 <p class="legal-document-summary">${escapeHtml(policy.summary || '')}</p>
+                ${primaryPrivacyResource}
                 <div class="legal-document-body">${policyBody}</div>
                 <aside><strong>Questions about this document?</strong><p>Contact MCC at <a href="mailto:admin@metropolitancollege.ca">admin@metropolitancollege.ca</a> or 604-300-3123.</p></aside>
             </article>`;
