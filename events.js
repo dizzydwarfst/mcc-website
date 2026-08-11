@@ -474,23 +474,7 @@
         const form = definition && typeof definition === 'object' ? definition : FALLBACK_CONSENT_FORM;
         const acknowledgements = Array.isArray(form.acknowledgements) ? form.acknowledgements : [];
         const choices = Array.isArray(form.choices) ? form.choices : [];
-        const minor = form.minor || FALLBACK_CONSENT_FORM.minor;
         return `
-            <fieldset class="event-choice-group event-minor-choice">
-                <legend>Participant age <strong>Required—choose one</strong></legend>
-                <p>Participants under ${escapeHtml(minor.age_threshold || 19)} require a parent or legal guardian declaration.</p>
-                <label><input type="radio" name="is_minor" value="false" required><span>The participant is ${escapeHtml(minor.age_threshold || 19)} or older.</span></label>
-                <label><input type="radio" name="is_minor" value="true" required><span>The participant is under ${escapeHtml(minor.age_threshold || 19)}.</span></label>
-            </fieldset>
-            <div class="event-guardian-fields" data-guardian-fields hidden>
-                <h3>Parent or legal guardian</h3>
-                <div class="event-form-grid">
-                    <label>Guardian name<input type="text" name="guardian_name" maxlength="120" autocomplete="name"></label>
-                    <label>Guardian email<input type="email" name="guardian_email" maxlength="254" autocomplete="email"></label>
-                    <label>Relationship to participant<input type="text" name="guardian_relationship" maxlength="80" placeholder="For example: parent"></label>
-                </div>
-                <label class="event-check"><input type="checkbox" name="guardian_declaration_accepted"><span>${escapeHtml(minor.declaration || FALLBACK_CONSENT_FORM.minor.declaration)}</span></label>
-            </div>
             <div class="event-legal-box">
                 <h3>Privacy and registration terms</h3>
                 ${acknowledgements.map((item) => `
@@ -507,7 +491,7 @@
                     ${(Array.isArray(choice.options) ? choice.options : []).map((option) => `
                         <label><input type="radio" name="${escapeHtml(choice.field)}" value="${escapeHtml(option.value)}"${choice.required ? ' required' : ''}><span>${escapeHtml(option.label)}</span></label>
                     `).join('')}
-                    ${choice.field === 'marketing_choice' ? `<p><a href="${policyHref('marketing_consent')}" target="_blank" rel="noopener">How MCC handles marketing choices</a></p>` : ''}
+                    ${choice.field === 'marketing_choice' ? `<p class="event-choice-resource"><a href="${policyHref('marketing_consent')}" target="_blank" rel="noopener">How MCC handles marketing choices</a></p>` : ''}
                 </fieldset>
             `).join('')}
             <p class="event-operational-notice"><i class="fas fa-circle-info" aria-hidden="true"></i>${escapeHtml(form.operational_contact_notice || FALLBACK_CONSENT_FORM.operational_contact_notice)}</p>
@@ -648,7 +632,7 @@
                             <label>Phone number <input type="tel" name="phone_number" autocomplete="tel" maxlength="50" required></label>
                             <label>How would you like to attend?<select name="attendance_preference" required><option value="">Choose one</option>${attendanceOptionsTemplate(event)}</select></label>
                             <label>How did you hear about us?<select name="how_did_you_hear_about_us" required><option value="">Choose one</option><option value="google_search">Google or another search engine</option><option value="instagram">Instagram</option><option value="facebook">Facebook</option><option value="tiktok">TikTok</option><option value="friend_family">Friend or family</option><option value="agency">Agency</option><option value="other">Other</option></select></label>
-                            <label class="event-agency-field" hidden>Which agency?<input type="text" name="agency_name" maxlength="200" autocomplete="organization"></label>
+                            <label class="event-agency-field" data-agency-field hidden>Agency name<input type="text" name="agency_name" maxlength="200" autocomplete="organization" placeholder="Enter the agency name"></label>
                         </div>
                         ${consentFormTemplate(consentForm)}
                         <label class="event-honeypot" aria-hidden="true">Company website<input type="text" name="company_website" tabindex="-1" autocomplete="off"></label>
@@ -729,38 +713,26 @@
         if (!form) return;
         const definition = consentForm && typeof consentForm === 'object' ? consentForm : FALLBACK_CONSENT_FORM;
         const referral = form.elements.how_did_you_hear_about_us;
-        const agencyField = form.querySelector('.event-agency-field');
+        const agencyField = form.querySelector('[data-agency-field]');
         const agencyInput = form.elements.agency_name;
-        const guardianFields = form.querySelector('[data-guardian-fields]');
-        const guardianInputs = ['guardian_name', 'guardian_email', 'guardian_relationship']
-            .map((name) => form.elements[name]).filter(Boolean);
-        const guardianDeclaration = form.elements.guardian_declaration_accepted;
         const status = form.querySelector('[data-event-form-status]');
         const submit = form.querySelector('[type="submit"]');
         const success = document.querySelector('[data-event-registration-success]');
 
         function syncAgency() {
             const visible = referral.value === 'agency';
-            agencyField.hidden = !visible;
-            agencyInput.required = visible;
-            if (!visible) agencyInput.value = '';
-        }
-        referral.addEventListener('change', syncAgency);
-        syncAgency();
-
-        function syncGuardian() {
-            const selected = form.querySelector('input[name="is_minor"]:checked');
-            const isMinor = selected?.value === 'true';
-            guardianFields.hidden = !isMinor;
-            guardianInputs.forEach((input) => { input.required = isMinor; });
-            if (guardianDeclaration) guardianDeclaration.required = isMinor;
-            if (!isMinor) {
-                guardianInputs.forEach((input) => { input.value = ''; });
-                if (guardianDeclaration) guardianDeclaration.checked = false;
+            if (agencyField) {
+                agencyField.hidden = !visible;
+                agencyField.setAttribute('aria-hidden', String(!visible));
+            }
+            if (agencyInput) {
+                agencyInput.required = visible;
+                if (!visible) agencyInput.value = '';
             }
         }
-        form.querySelectorAll('input[name="is_minor"]').forEach((input) => input.addEventListener('change', syncGuardian));
-        syncGuardian();
+        referral.addEventListener('change', syncAgency);
+        referral.addEventListener('input', syncAgency);
+        syncAgency();
 
         form.addEventListener('submit', async (submitEvent) => {
             submitEvent.preventDefault();
@@ -768,7 +740,6 @@
             status.classList.remove('is-error', 'is-success');
             if (!form.reportValidity()) return;
             const data = new FormData(form);
-            const isMinor = data.get('is_minor') === 'true';
             const consent = {};
             (definition.acknowledgements || []).forEach((item) => {
                 consent[item.field] = data.get(item.field) === 'on';
@@ -776,12 +747,6 @@
             (definition.choices || []).forEach((choice) => {
                 consent[choice.field] = String(data.get(choice.field) || '');
             });
-            if (isMinor) {
-                consent.guardian_name = String(data.get('guardian_name') || '').trim();
-                consent.guardian_email = String(data.get('guardian_email') || '').trim();
-                consent.guardian_relationship = String(data.get('guardian_relationship') || '').trim();
-                consent.guardian_declaration_accepted = data.get('guardian_declaration_accepted') === 'on';
-            }
             const payload = {
                 first_name: String(data.get('first_name') || '').trim(),
                 last_name: String(data.get('last_name') || '').trim(),
@@ -793,7 +758,6 @@
                 locale: locale(),
                 source_page: window.location.href.slice(0, 500),
                 ...utmValues(),
-                is_minor: isMinor,
                 consent,
                 company_website: String(data.get('company_website') || ''),
             };

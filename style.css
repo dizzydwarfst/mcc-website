@@ -8660,6 +8660,7 @@ body.engagement-modal-open {
 }
 
 .event-registration-card {
+    min-width: 0;
     padding: clamp(1.5rem, 3vw, 2.6rem);
     border: 1px solid rgba(6, 43, 26, 0.09);
     border-radius: 26px;
@@ -8675,10 +8676,15 @@ body.engagement-modal-open {
 
 .event-form-grid label {
     display: grid;
+    min-width: 0;
     gap: 0.4rem;
     color: var(--deep-green);
     font-size: 0.9rem;
     font-weight: 700;
+}
+
+.event-form-grid [hidden] {
+    display: none !important;
 }
 
 .event-form-grid input,
@@ -8706,11 +8712,22 @@ body.engagement-modal-open {
 
 .event-legal-box,
 .event-choice-group {
+    min-width: 0;
     margin-top: 1.3rem;
     padding: 1.25rem;
     border: 1px solid rgba(6, 43, 26, 0.11);
     border-radius: 16px;
     background: #f8faf9;
+}
+
+.event-legal-box {
+    display: grid;
+    gap: 0.9rem;
+}
+
+.event-choice-group {
+    display: grid;
+    gap: 0.75rem;
 }
 
 .event-guardian-fields {
@@ -8737,16 +8754,36 @@ body.engagement-modal-open {
     font-weight: 800;
 }
 
+.event-legal-box h3 {
+    margin: 0;
+}
+
+.event-choice-group legend {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    max-width: 100%;
+    padding: 0 0.2rem;
+}
+
 .event-check,
 .event-choice-group label {
     display: grid;
     grid-template-columns: 20px minmax(0, 1fr);
     align-items: start;
     gap: 0.7rem;
-    margin-top: 0.85rem;
+    margin: 0;
     color: #425b50;
     font-size: 0.9rem;
     cursor: pointer;
+}
+
+.event-check > span,
+.event-choice-group label > span {
+    min-width: 0;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
 }
 
 .event-check input,
@@ -8768,12 +8805,12 @@ body.engagement-modal-open {
     display: inline-flex;
     flex-wrap: wrap;
     gap: 0.35rem;
-    margin-left: 0.2rem;
+    margin-left: 0.25rem;
     font-size: 0.8rem;
 }
 
 .event-choice-group legend strong {
-    margin-left: 0.35rem;
+    margin-left: 0;
     color: #a46f00;
     font-size: 0.72rem;
     letter-spacing: 0.04em;
@@ -8781,9 +8818,13 @@ body.engagement-modal-open {
 }
 
 .event-choice-group > p {
-    margin-top: 0.3rem;
+    margin: 0;
     color: #6b7d75;
     font-size: 0.8rem;
+}
+
+.event-choice-group > .event-choice-resource {
+    padding-left: 2.2rem;
 }
 
 .event-operational-notice {
