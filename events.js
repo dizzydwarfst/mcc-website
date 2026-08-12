@@ -567,6 +567,9 @@
     function courseCardTemplate(event) {
         const details = event.course_details || {};
         const programUrl = eventProgramUrl(event);
+        const location = isFslTrialEvent(event)
+            ? '322 Water St #100, Vancouver, BC, V6B 1B6'
+            : event.location_summary;
         if (details.title || details.start_date || details.schedule || details.delivery) {
             return `
                 <aside class="event-course-card">
@@ -578,7 +581,7 @@
         return `
             <aside class="event-course-card">
                 <span class="section-kicker">Event at a glance</span><h3>${escapeHtml(attendanceLabel(event))}</h3>
-                <dl><div><dt>Date</dt><dd>${escapeHtml(formatDate(event))}</dd></div><div><dt>Time</dt><dd>${escapeHtml(withPst(formatTimeRange(event)))}</dd></div>${event.location_summary ? `<div><dt>Location</dt><dd>${escapeHtml(event.location_summary)}</dd></div>` : ''}</dl>
+                <dl><div><dt>Date</dt><dd>${escapeHtml(formatDate(event))}</dd></div><div><dt>Time</dt><dd>${escapeHtml(withPst(formatTimeRange(event)))}</dd></div>${location ? `<div><dt>Location</dt><dd>${escapeHtml(location)}</dd></div>` : ''}</dl>
                 ${event.contact_email ? `<a href="mailto:${escapeHtml(event.contact_email)}" class="subtle-link">Contact the event team <i class="fas fa-arrow-right" aria-hidden="true"></i></a>` : ''}
             </aside>`;
     }
