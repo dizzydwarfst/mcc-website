@@ -7176,6 +7176,11 @@ body.engagement-modal-open {
     gap: 1rem;
 }
 
+.engagement-referral-detail:not([hidden]) {
+    display: grid;
+    grid-column: 1 / -1;
+}
+
 .engagement-signup-form label,
 .engagement-agency-dialog label,
 .website-chat-preform label {
@@ -8750,7 +8755,8 @@ body.engagement-modal-open {
     box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.18);
 }
 
-.event-agency-field:not([hidden]) {
+.event-agency-field:not([hidden]),
+.event-referral-detail-field:not([hidden]) {
     display: grid;
     grid-column: 1 / -1;
 }

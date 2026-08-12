@@ -36,7 +36,6 @@
             attendance_placeholder: 'Choose an attendance option',
             online: 'Online',
             in_person: 'In person',
-            undecided: 'Not sure yet',
             heard: 'How did you hear about us?',
             heard_placeholder: 'Choose an option',
             google: 'Google or another search engine',
@@ -46,6 +45,8 @@
             friend: 'Friend or family',
             agency: 'Agency',
             other: 'Other',
+            other_source: 'Please tell us where you heard about MCC',
+            other_source_placeholder: 'Enter the source',
             agency_selected: 'Agency selected:',
             agency_edit: 'Change agency',
             consent: 'I agree that MCC may contact me about this session and the FSL program.',
@@ -104,7 +105,6 @@
             attendance_placeholder: 'Choisir un mode de participation',
             online: 'En ligne',
             in_person: 'En personne',
-            undecided: 'Je ne sais pas encore',
             heard: 'Comment avez-vous entendu parler de nous?',
             heard_placeholder: 'Choisir une option',
             google: 'Google ou un autre moteur de recherche',
@@ -114,6 +114,8 @@
             friend: 'Ami ou famille',
             agency: 'Agence',
             other: 'Autre',
+            other_source: 'Veuillez préciser comment vous avez entendu parler de MCC',
+            other_source_placeholder: 'Saisir la source',
             agency_selected: 'Agence sélectionnée :',
             agency_edit: "Changer d'agence",
             consent: 'J’accepte que MCC me contacte au sujet de cette séance et du programme FLS.',
@@ -295,7 +297,6 @@
                                 <option value="" data-copy="attendance_placeholder">Choose an attendance option</option>
                                 <option value="online" data-copy="online">Online</option>
                                 <option value="in_person" data-copy="in_person">In person</option>
-                                <option value="undecided" data-copy="undecided">Not sure yet</option>
                             </select>
                         </label>
                         <label>
@@ -310,6 +311,10 @@
                                 <option value="agency" data-copy="agency">Agency</option>
                                 <option value="other" data-copy="other">Other</option>
                             </select>
+                        </label>
+                        <label class="engagement-referral-detail" data-referral-detail hidden>
+                            <span data-copy="other_source">Please tell us where you heard about MCC</span>
+                            <input type="text" name="how_did_you_hear_about_us_detail" maxlength="200" data-copy-placeholder="other_source_placeholder" placeholder="Enter the source">
                         </label>
                     </div>
                     <div class="engagement-agency-summary" data-agency-summary hidden>
@@ -358,6 +363,8 @@
         const status = overlay.querySelector('[data-signup-status]');
         const submit = form.querySelector('[type="submit"]');
         const heardSelect = form.elements.how_did_you_hear_about_us;
+        const referralDetailField = form.querySelector('[data-referral-detail]');
+        const referralDetailInput = form.elements.how_did_you_hear_about_us_detail;
         const agencyLayer = overlay.querySelector('[data-agency-layer]');
         const agencyDialog = overlay.querySelector('.engagement-agency-dialog');
         const agencyInput = overlay.querySelector('[data-agency-name]');
@@ -371,6 +378,14 @@
         function updateAgencySummary() {
             agencySummaryName.textContent = agencyName;
             agencySummary.hidden = !agencyName;
+        }
+
+        function syncReferralDetail() {
+            const visible = heardSelect.value === 'other';
+            referralDetailField.hidden = !visible;
+            referralDetailField.setAttribute('aria-hidden', String(!visible));
+            referralDetailInput.required = visible;
+            if (!visible) referralDetailInput.value = '';
         }
 
         function openAgencyDialog() {
@@ -431,6 +446,7 @@
             status.classList.remove('is-error');
             agencyName = '';
             updateAgencySummary();
+            syncReferralDetail();
         }
 
         signupTriggers.forEach((trigger) => trigger.addEventListener('click', openSignup));
@@ -452,7 +468,9 @@
                 agencyName = '';
                 updateAgencySummary();
             }
+            syncReferralDetail();
         });
+        syncReferralDetail();
         overlay.addEventListener('click', (event) => {
             if (event.target === overlay) closeSignup();
         });
@@ -492,7 +510,9 @@
                 email: String(data.get('email') || '').trim(),
                 phone_number: String(data.get('phone_number') || '').trim(),
                 attendance_preference: String(data.get('attendance_preference') || ''),
-                how_did_you_hear_about_us: String(data.get('how_did_you_hear_about_us') || ''),
+                how_did_you_hear_about_us: heardSelect.value === 'other'
+                    ? String(data.get('how_did_you_hear_about_us_detail') || '').trim()
+                    : String(data.get('how_did_you_hear_about_us') || ''),
                 agency_name: heardSelect.value === 'agency' ? agencyName : '',
                 source_page: sourcePage(),
                 consent_to_contact: data.get('consent_to_contact') === 'on',

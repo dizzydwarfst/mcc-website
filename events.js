@@ -508,7 +508,7 @@
         const choices = Array.isArray(form.choices) ? form.choices : [];
         return `
             <div class="event-legal-box">
-                <h3>Privacy and registration terms</h3>
+                <h3>Privacy and consent terms</h3>
                 ${acknowledgements.map((item) => `
                     <label class="event-check">
                         <input type="checkbox" name="${escapeHtml(item.field)}"${item.required ? ' required' : ''}>
@@ -535,7 +535,6 @@
         const options = [];
         if (modes.includes('online')) options.push('<option value="online">Online</option>');
         if (modes.includes('in_person') || modes.includes('in-person')) options.push('<option value="in_person">In person</option>');
-        if (options.length > 1) options.push('<option value="undecided">Not sure yet</option>');
         return options.join('') || '<option value="undecided">Contact MCC for attendance details</option>';
     }
 
@@ -592,7 +591,7 @@
                 </div>
                 <div class="event-detail-hero-media">
                     <img src="${escapeHtml(heroImage)}" alt="${escapeHtml(event.hero_alt || '')}">
-                    <div class="event-hero-badge"><strong>1 free hour</strong><span>Information, Q&A, and a trial class</span></div>
+                    <div class="event-hero-badge"><strong>1 Hour Trial Session - Obligation Free</strong><span>Including Program Information, Q&amp;A, Immersive Real Class Learning Experience.</span></div>
                 </div>
             </section>
 
@@ -661,6 +660,7 @@
                             <label>How would you like to attend?<select name="attendance_preference" required><option value="">Choose one</option>${attendanceOptionsTemplate(event)}</select></label>
                             <label>How did you hear about us?<select name="how_did_you_hear_about_us" required><option value="">Choose one</option><option value="google_search">Google or another search engine</option><option value="instagram">Instagram</option><option value="facebook">Facebook</option><option value="tiktok">TikTok</option><option value="friend_family">Friend or family</option><option value="agency">Agency</option><option value="other">Other</option></select></label>
                             <label class="event-agency-field" data-agency-field hidden>Agency name<input type="text" name="agency_name" maxlength="200" autocomplete="organization" placeholder="Enter the agency name"></label>
+                            <label class="event-referral-detail-field" data-referral-detail-field hidden>Please tell us where you heard about MCC<input type="text" name="how_did_you_hear_about_us_detail" maxlength="200" placeholder="Enter the source"></label>
                         </div>
                         ${consentFormTemplate(consentForm)}
                         <label class="event-honeypot" aria-hidden="true">Company website<input type="text" name="company_website" tabindex="-1" autocomplete="off"></label>
@@ -743,24 +743,35 @@
         const referral = form.elements.how_did_you_hear_about_us;
         const agencyField = form.querySelector('[data-agency-field]');
         const agencyInput = form.elements.agency_name;
+        const referralDetailField = form.querySelector('[data-referral-detail-field]');
+        const referralDetailInput = form.elements.how_did_you_hear_about_us_detail;
         const status = form.querySelector('[data-event-form-status]');
         const submit = form.querySelector('[type="submit"]');
         const success = document.querySelector('[data-event-registration-success]');
 
-        function syncAgency() {
-            const visible = referral.value === 'agency';
+        function syncReferralFields() {
+            const agencyVisible = referral.value === 'agency';
+            const detailVisible = referral.value === 'other';
             if (agencyField) {
-                agencyField.hidden = !visible;
-                agencyField.setAttribute('aria-hidden', String(!visible));
+                agencyField.hidden = !agencyVisible;
+                agencyField.setAttribute('aria-hidden', String(!agencyVisible));
             }
             if (agencyInput) {
-                agencyInput.required = visible;
-                if (!visible) agencyInput.value = '';
+                agencyInput.required = agencyVisible;
+                if (!agencyVisible) agencyInput.value = '';
+            }
+            if (referralDetailField) {
+                referralDetailField.hidden = !detailVisible;
+                referralDetailField.setAttribute('aria-hidden', String(!detailVisible));
+            }
+            if (referralDetailInput) {
+                referralDetailInput.required = detailVisible;
+                if (!detailVisible) referralDetailInput.value = '';
             }
         }
-        referral.addEventListener('change', syncAgency);
-        referral.addEventListener('input', syncAgency);
-        syncAgency();
+        referral.addEventListener('change', syncReferralFields);
+        referral.addEventListener('input', syncReferralFields);
+        syncReferralFields();
 
         form.addEventListener('submit', async (submitEvent) => {
             submitEvent.preventDefault();
@@ -781,7 +792,9 @@
                 email: String(data.get('email') || '').trim(),
                 phone_number: String(data.get('phone_number') || '').trim(),
                 attendance_preference: String(data.get('attendance_preference') || ''),
-                how_did_you_hear_about_us: String(data.get('how_did_you_hear_about_us') || ''),
+                how_did_you_hear_about_us: referral.value === 'other'
+                    ? String(data.get('how_did_you_hear_about_us_detail') || '').trim()
+                    : String(data.get('how_did_you_hear_about_us') || ''),
                 agency_name: referral.value === 'agency' ? String(data.get('agency_name') || '').trim() : '',
                 locale: locale(),
                 source_page: window.location.href.slice(0, 500),
