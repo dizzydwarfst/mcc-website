@@ -6001,9 +6001,9 @@ font[style*="background-color"] { background: transparent !important; }
 }
 
 /* ===========================================================
-   COMPLIANCE / PTIRU DISCLAIMER
+   FSL REGULATORY INFORMATION
    =========================================================== */
-.compliance-disclaimer {
+.regulatory-notice {
     max-width: 1000px;
     margin: 0 auto;
     padding: 1.1rem 1.5rem;
@@ -6018,24 +6018,12 @@ font[style*="background-color"] { background: transparent !important; }
     line-height: 1.65;
     color: var(--text-medium);
 }
-.compliance-disclaimer i {
+.regulatory-notice i {
     color: var(--accent-gold);
     font-size: 1rem;
     margin-top: 0.15rem;
     flex-shrink: 0;
 }
-.compliance-disclaimer strong {
-    color: var(--text-dark);
-}
-.compliance-disclaimer a {
-    color: var(--deep-green);
-    font-weight: 700;
-    text-decoration: underline;
-}
-.compliance-disclaimer a:hover {
-    color: var(--accent-teal);
-}
-
 /* ===========================================================
    ABOUT: MCC CAMPUS + LEADERSHIP
    =========================================================== */
@@ -8352,6 +8340,8 @@ body.engagement-modal-open {
 }
 
 .event-course-card {
+    align-self: start;
+    margin-top: -1px;
     padding: clamp(1.7rem, 3vw, 2.5rem);
     border-radius: 22px;
     background: #fff;
