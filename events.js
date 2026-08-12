@@ -418,7 +418,7 @@
         return safeUrl(event.program_url, '/programs');
     }
 
-    function eventCard(event, compact = false) {
+    function eventCard(event, compact = false, showProgramInfo = false) {
         const image = safeUrl(event.hero_image, FALLBACK_EVENT.hero_image);
         const registrationLabel = event.registration_open === false ? 'View Event' : (event.waitlist ? 'Join the Waitlist' : 'Sign Up for Free');
         return `
@@ -439,6 +439,7 @@
                     <div class="event-card-actions">
                         <a class="btn-solid-gold" href="${escapeHtml(eventHref(event))}${event.registration_open === false ? '' : '#register'}">${registrationLabel}</a>
                         <a class="btn-outline-gold" href="${escapeHtml(eventHref(event))}">Event Details</a>
+                        ${showProgramInfo && isFslTrialEvent(event) ? `<a class="btn-outline-gold" href="${escapeHtml(eventProgramUrl(event))}">Program Info</a>` : ''}
                     </div>
                 </div>
             </article>
@@ -456,7 +457,7 @@
         }
         if (listRoot) {
             listRoot.innerHTML = events.length
-                ? events.map((event) => eventCard(event)).join('')
+                ? events.map((event) => eventCard(event, false, true)).join('')
                 : '<div class="events-empty"><h2>No upcoming events</h2><p>New MCC events will appear here when registration opens.</p></div>';
             listRoot.removeAttribute('aria-busy');
         }
