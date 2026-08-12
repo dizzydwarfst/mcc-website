@@ -12,6 +12,8 @@
     --content-max-width: clamp(1200px, 78vw, 1600px);
     --narrow-max-width: clamp(760px, 44vw, 920px);
     --page-gutter: clamp(1.25rem, 3vw, 4.5rem);
+    --universal-cta-width: 260px;
+    --universal-cta-height: 56px;
 }
 
 html {
@@ -8555,8 +8557,9 @@ body.engagement-modal-open {
     margin-top: 2rem;
     padding: clamp(1.5rem, 3vw, 2.5rem);
     border-radius: 22px;
-    background: var(--deep-green);
-    color: #fff;
+    border: 1px solid rgba(6, 43, 26, 0.1);
+    background: #f7f9f8;
+    color: var(--deep-green);
 }
 
 .event-share-card h3 {
@@ -8565,7 +8568,7 @@ body.engagement-modal-open {
 }
 
 .event-share-card p {
-    color: rgba(255, 255, 255, 0.68);
+    color: #64786f;
 }
 
 .event-share-actions {
@@ -8585,10 +8588,10 @@ body.engagement-modal-open {
     justify-content: center;
     gap: 0.45rem;
     padding: 0.55rem 0.75rem;
-    border: 1px solid rgba(255, 255, 255, 0.22);
+    border: 1px solid rgba(6, 43, 26, 0.18);
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.08);
-    color: #fff;
+    background: #fff;
+    color: var(--deep-green);
     font-weight: 800;
     text-decoration: none;
     cursor: pointer;
@@ -9409,4 +9412,22 @@ body.engagement-modal-open {
     .event-brochure-preview img {
         transition: none;
     }
+}
+
+/* Keep primary marketing CTAs identical across the website. */
+.btn-solid-gold,
+.btn-outline-gold,
+.btn-glow-gold {
+    display: inline-flex !important;
+    width: var(--universal-cta-width) !important;
+    max-width: 100%;
+    height: var(--universal-cta-height) !important;
+    min-height: var(--universal-cta-height);
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0 1rem !important;
+    line-height: 1.15;
+    text-align: center;
+    vertical-align: middle;
 }

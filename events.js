@@ -611,7 +611,7 @@
                     <div class="hero-action-row">
                         <a class="btn-solid-gold" href="${event.registration_open === false ? '#overview' : '#register'}">${event.registration_open === false ? 'View Event Details' : (event.waitlist ? 'Join the Waitlist' : 'Reserve My Free Spot')}</a>
                         <a class="btn-outline-gold" href="#brochures">View Brochures</a>
-                        ${hasProgramPage ? `<a class="btn-outline-gold" href="${escapeHtml(programUrl)}">See the Program Page</a>` : ''}
+                        ${hasProgramPage ? `<a class="btn-outline-gold" href="${escapeHtml(programUrl)}">Program Info</a>` : ''}
                     </div>
                 </div>
                 <div class="event-detail-hero-media">
@@ -690,7 +690,7 @@
                         ${consentFormTemplate(consentForm, event)}
                         <label class="event-honeypot" aria-hidden="true">Company website<input type="text" name="company_website" tabindex="-1" autocomplete="off"></label>
                         <p class="event-form-status" data-event-form-status role="status" aria-live="polite"></p>
-                        <button class="btn-solid-gold event-register-submit" type="submit">Reserve My Free Spot</button>
+                        <button class="btn-solid-gold event-register-submit" type="submit">Reserve My Spot for Free</button>
                     </form>
                     ${event.registration_open === false ? `<div class="event-registration-success"><span><i class="fas fa-calendar-xmark" aria-hidden="true"></i></span><h3>Registration is closed</h3><p>${escapeHtml(event.registration_reason || 'This event is no longer accepting online registrations.')}</p><button type="button" class="btn-outline-gold" data-website-chat-open>Ask MCC</button></div>` : ''}
                     <div class="event-registration-success" data-event-registration-success hidden><span><i class="fas fa-check" aria-hidden="true"></i></span><h3>Your registration is saved</h3><p>Thank you. MCC will send event details and necessary updates to your email.</p><a class="btn-outline-gold" href="/events">Explore more events</a></div>
@@ -902,7 +902,7 @@
                 status.classList.add('is-error');
             } finally {
                 submit.disabled = false;
-                submit.textContent = 'Reserve My Free Spot';
+                submit.textContent = 'Reserve My Spot for Free';
             }
         });
     }
