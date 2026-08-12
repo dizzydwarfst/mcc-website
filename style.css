@@ -7811,6 +7811,10 @@ body.engagement-modal-open {
     --event-content-width: 1120px;
 }
 
+.event-detail-page {
+    padding-top: 205px;
+}
+
 .events-index-hero {
     padding: clamp(6rem, 10vw, 10rem) var(--page-gutter);
     background:
@@ -8122,6 +8126,7 @@ body.engagement-modal-open {
 
 .event-detail-hero-copy {
     display: flex;
+    min-width: 0;
     flex-direction: column;
     justify-content: center;
     padding: clamp(4.25rem, 8vw, 8.5rem) clamp(2rem, 6vw, 7rem);
@@ -8141,6 +8146,7 @@ body.engagement-modal-open {
 }
 
 .event-detail-hero h1 {
+    width: 100%;
     max-width: 880px;
     margin: 0.75rem 0 1.25rem;
     color: var(--deep-green);
@@ -8350,6 +8356,7 @@ body.engagement-modal-open {
     border-radius: 22px;
     background: #fff;
     color: var(--text-dark);
+    text-align: left;
 }
 
 .event-course-card h3 {
@@ -8660,7 +8667,7 @@ body.engagement-modal-open {
     display: grid;
     grid-template-columns: minmax(300px, 0.7fr) minmax(0, 1.3fr);
     gap: clamp(2rem, 6vw, 6rem);
-    padding: clamp(4rem, 8vw, 8rem) max(var(--page-gutter), calc((100vw - var(--event-content-width)) / 2));
+    padding: clamp(5rem, 9vw, 9rem) max(var(--page-gutter), calc((100vw - var(--content-max-width)) / 2));
     scroll-margin-top: 185px;
     background:
         radial-gradient(circle at 10% 10%, rgba(212, 175, 55, 0.17), transparent 32%),
@@ -8671,13 +8678,13 @@ body.engagement-modal-open {
     align-self: start;
     position: sticky;
     top: 245px;
-    text-align: center;
+    text-align: left;
 }
 
 .event-registration-intro h2 {
     margin: 0.55rem 0 0.85rem;
     color: var(--deep-green);
-    font-size: clamp(2.1rem, 3.3vw, 3.4rem);
+    font-size: clamp(2.2rem, 4vw, 4rem);
     letter-spacing: -0.04em;
 }
 
@@ -8698,7 +8705,7 @@ body.engagement-modal-open {
     display: flex;
     align-items: center;
     gap: 0.65rem;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .event-registration-summary i {

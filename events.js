@@ -406,6 +406,18 @@
         return safeUrl(event.social?.share_url || event.seo?.canonical_url, `${window.location.origin}${eventHref(event)}`);
     }
 
+    function isFslTrialEvent(event) {
+        const identity = `${event.slug || ''} ${event.event_id || ''} ${event.id || ''} ${event.title || ''}`.toLowerCase();
+        return identity.includes('fsl-info-trial')
+            || identity.includes('fsl-trial')
+            || identity.includes('fsl info & trial');
+    }
+
+    function eventProgramUrl(event) {
+        if (isFslTrialEvent(event)) return '/programs-french-language';
+        return safeUrl(event.program_url, '/programs');
+    }
+
     function eventCard(event, compact = false) {
         const image = safeUrl(event.hero_image, FALLBACK_EVENT.hero_image);
         const registrationLabel = event.registration_open === false ? 'View Event' : (event.waitlist ? 'Join the Waitlist' : 'Sign Up for Free');
@@ -529,12 +541,13 @@
 
     function courseCardTemplate(event) {
         const details = event.course_details || {};
+        const programUrl = eventProgramUrl(event);
         if (details.title || details.start_date || details.schedule || details.delivery) {
             return `
                 <aside class="event-course-card">
                     <span class="section-kicker">Continue learning</span><h3>${escapeHtml(details.title || 'Program details')}</h3>
                     <dl><div><dt>Course starts</dt><dd>${escapeHtml(details.start_date || 'Ask our team')}</dd></div><div><dt>Class schedule</dt><dd>${escapeHtml(details.schedule ? withPst(details.schedule) : 'Ask our team')}</dd></div><div><dt>Delivery</dt><dd>${escapeHtml(details.delivery || attendanceLabel(event))}</dd></div></dl>
-                    <a href="${escapeHtml(safeUrl(event.program_url, '/programs'))}" class="subtle-link">Explore the program <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                    <a href="${escapeHtml(programUrl)}" class="subtle-link">Explore the program <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                 </aside>`;
         }
         return `
@@ -557,6 +570,8 @@
 
     function detailTemplate(event, consentForm) {
         const heroImage = safeUrl(event.hero_image, FALLBACK_EVENT.hero_image);
+        const programUrl = eventProgramUrl(event);
+        const hasProgramPage = Boolean(event.program_url) || isFslTrialEvent(event);
         return `
             <section class="event-detail-hero">
                 <div class="event-detail-hero-copy">
@@ -572,7 +587,7 @@
                     <div class="hero-action-row">
                         <a class="btn-solid-gold" href="${event.registration_open === false ? '#overview' : '#register'}">${event.registration_open === false ? 'View Event Details' : (event.waitlist ? 'Join the Waitlist' : 'Reserve My Free Spot')}</a>
                         <a class="btn-outline-gold" href="#brochures">View Brochures</a>
-                        ${event.program_url ? `<a class="btn-outline-gold" href="${escapeHtml(safeUrl(event.program_url, '/programs'))}">See the Program Page</a>` : ''}
+                        ${hasProgramPage ? `<a class="btn-outline-gold" href="${escapeHtml(programUrl)}">See the Program Page</a>` : ''}
                     </div>
                 </div>
                 <div class="event-detail-hero-media">

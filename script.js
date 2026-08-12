@@ -766,7 +766,13 @@ document.addEventListener('DOMContentLoaded', () => {
 // static site without duplicating the same edit through every historical page.
 (function addSharedNavigation() {
     function cleanPath(value) {
-        try { return new URL(value, window.location.href).pathname.replace(/\/$/, '') || '/'; }
+        try {
+            const pathname = new URL(value, window.location.href).pathname
+                .replace(/\/index\.html$/i, '/')
+                .replace(/\.html$/i, '')
+                .replace(/\/$/, '');
+            return pathname || '/';
+        }
         catch (_) { return ''; }
     }
 
@@ -781,9 +787,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const fslLink = document.createElement('a');
                 fslLink.href = '/programs-french-language';
                 fslLink.setAttribute('data-i18n', 'common.nav_french_language');
-                fslLink.textContent = document.documentElement.lang === 'fr'
-                    ? 'Français langue seconde (FLS)'
-                    : 'French as a Second Language (FSL)';
+                const language = document.body.dataset.lang === 'fr' ? 'fr' : 'en';
+                const translation = window.MCC_TRANSLATIONS?.common?.nav_french_language;
+                fslLink.textContent = translation?.[language]
+                    || (language === 'fr' ? 'Français langue seconde (FLS)' : 'French as a Second Language (FSL)');
                 programsMenu.appendChild(fslLink);
             }
 
