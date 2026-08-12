@@ -8124,7 +8124,7 @@ body.engagement-modal-open {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: clamp(3rem, 7vw, 8rem) clamp(2rem, 6vw, 7rem);
+    padding: clamp(4.25rem, 8vw, 8.5rem) clamp(2rem, 6vw, 7rem);
     align-items: center;
     text-align: center;
 }
@@ -8146,7 +8146,7 @@ body.engagement-modal-open {
     color: var(--deep-green);
     font-size: clamp(2.5rem, 3vw, 3.8rem);
     letter-spacing: -0.055em;
-    line-height: 0.98;
+    line-height: 1.05;
 }
 
 .event-detail-hero-copy > p {
@@ -9315,7 +9315,7 @@ body.engagement-modal-open {
     }
 
     .event-detail-hero-copy {
-        padding: 3rem 1.25rem;
+        padding: 3.5rem 1.25rem;
     }
 
     .event-detail-hero h1 {
