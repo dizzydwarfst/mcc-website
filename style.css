@@ -6006,7 +6006,8 @@ font[style*="background-color"] { background: transparent !important; }
 /* ===========================================================
    FSL REGULATORY INFORMATION
    =========================================================== */
-.regulatory-notice {
+.regulatory-notice,
+.compliance-disclaimer {
     max-width: 1000px;
     margin: 0 auto;
     padding: 1.1rem 1.5rem;
@@ -6021,7 +6022,8 @@ font[style*="background-color"] { background: transparent !important; }
     line-height: 1.65;
     color: var(--text-medium);
 }
-.regulatory-notice i {
+.regulatory-notice i,
+.compliance-disclaimer i {
     color: var(--accent-gold);
     font-size: 1rem;
     margin-top: 0.15rem;
@@ -6665,61 +6667,74 @@ font[style*="background-color"] { background: transparent !important; }
 }
 
 /* ===========================================================
-   PROGRAM PGWP ELIGIBILITY NOTICE
+   PROGRAM DISCLAIMER NOTICES
+   Uses the compact FSL regulatory-notice design everywhere.
    =========================================================== */
 .program-pgwp-notice-section {
     position: relative;
     z-index: 3;
-    padding: 0 5%;
+    display: grid;
+    gap: 0.75rem;
+    padding: 2rem 5% 0;
     background: #ffffff;
 }
 
 .program-pgwp-notice {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    align-items: center;
-    gap: 1rem;
-    max-width: 980px;
-    margin: -1.6rem auto 0;
-    padding: 1.15rem 1.35rem;
-    border: 1px solid rgba(212, 175, 55, 0.46);
-    border-left: 5px solid var(--accent-gold);
-    border-radius: 16px;
-    color: var(--deep-green-dark);
-    background: #fffdf5;
-    box-shadow: 0 14px 36px rgba(8, 22, 18, 0.1);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 1.1rem 1.5rem;
+    border: 1px solid #e0e8e4;
+    border-left: 4px solid var(--accent-gold);
+    border-radius: 12px;
+    color: var(--text-medium);
+    background: #f4f7f5;
+    box-shadow: none;
+    font-size: 0.85rem;
+    line-height: 1.65;
 }
 
 .program-pgwp-icon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 42px;
-    height: 42px;
-    border-radius: 12px;
-    color: var(--deep-green);
-    background: rgba(212, 175, 55, 0.22);
-    font-size: 1.05rem;
+    flex: 0 0 auto;
+    margin-top: 0.15rem;
+    color: var(--accent-gold);
+    font-size: 1rem;
 }
 
 .program-pgwp-notice strong {
-    display: block;
-    margin-bottom: 0.25rem;
-    color: var(--deep-green-dark);
-    font-size: 1rem;
+    color: inherit;
+    font-size: inherit;
 }
 
 .program-pgwp-notice p {
     margin: 0;
-    color: #43584f;
-    font-size: 0.94rem;
-    line-height: 1.55;
+    color: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.program-pgwp-notice .program-disclaimer-single-line {
+    white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+    .program-pgwp-notice .program-disclaimer-single-line {
+        white-space: normal;
+    }
 }
 
 @media (max-width: 640px) {
+    .program-pgwp-notice-section {
+        padding: 1.25rem 1rem 0;
+    }
+
     .program-pgwp-notice {
-        grid-template-columns: minmax(0, 1fr);
-        margin-top: -1rem;
         padding: 1.1rem;
     }
 }
