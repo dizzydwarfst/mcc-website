@@ -389,6 +389,13 @@
         return 'In person';
     }
 
+    function withPst(value) {
+        const text = String(value || '').trim();
+        if (!text) return '';
+        const standardized = text.replace(/\b(?:PDT|PST|Pacific(?:\s+time)?)\b/gi, 'PST');
+        return /\bPST\b/i.test(standardized) ? standardized : `${standardized} PST`;
+    }
+
     function eventHref(event) {
         return EVENT_SHORT_PATHS[event.slug] || `${EVENT_PATH_PREFIX}${encodeURIComponent(event.slug)}`;
     }
@@ -414,12 +421,12 @@
                     <p>${escapeHtml(event.summary)}</p>
                     <div class="event-card-meta">
                         <span><i class="fa-regular fa-calendar" aria-hidden="true"></i>${escapeHtml(formatDate(event))}</span>
-                        <span><i class="fa-regular fa-clock" aria-hidden="true"></i>${escapeHtml(formatTimeRange(event))}</span>
+                        <span><i class="fa-regular fa-clock" aria-hidden="true"></i>${escapeHtml(withPst(formatTimeRange(event)))}</span>
                         <span><i class="fa-solid fa-location-dot" aria-hidden="true"></i>${escapeHtml(attendanceLabel(event))}</span>
                     </div>
                     <div class="event-card-actions">
                         <a class="btn-solid-gold" href="${escapeHtml(eventHref(event))}${event.registration_open === false ? '' : '#register'}">${registrationLabel}</a>
-                        <a class="subtle-link" href="${escapeHtml(eventHref(event))}">Event details <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                        <a class="btn-outline-gold" href="${escapeHtml(eventHref(event))}">Event Details</a>
                     </div>
                 </div>
             </article>
@@ -526,14 +533,14 @@
             return `
                 <aside class="event-course-card">
                     <span class="section-kicker">Continue learning</span><h3>${escapeHtml(details.title || 'Program details')}</h3>
-                    <dl><div><dt>Course starts</dt><dd>${escapeHtml(details.start_date || 'Ask our team')}</dd></div><div><dt>Class schedule</dt><dd>${escapeHtml(details.schedule || 'Ask our team')}</dd></div><div><dt>Delivery</dt><dd>${escapeHtml(details.delivery || attendanceLabel(event))}</dd></div></dl>
+                    <dl><div><dt>Course starts</dt><dd>${escapeHtml(details.start_date || 'Ask our team')}</dd></div><div><dt>Class schedule</dt><dd>${escapeHtml(details.schedule ? withPst(details.schedule) : 'Ask our team')}</dd></div><div><dt>Delivery</dt><dd>${escapeHtml(details.delivery || attendanceLabel(event))}</dd></div></dl>
                     <a href="${escapeHtml(safeUrl(event.program_url, '/programs'))}" class="subtle-link">Explore the program <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                 </aside>`;
         }
         return `
             <aside class="event-course-card">
                 <span class="section-kicker">Event at a glance</span><h3>${escapeHtml(attendanceLabel(event))}</h3>
-                <dl><div><dt>Date</dt><dd>${escapeHtml(formatDate(event))}</dd></div><div><dt>Time</dt><dd>${escapeHtml(formatTimeRange(event))} Pacific</dd></div>${event.location_summary ? `<div><dt>Location</dt><dd>${escapeHtml(event.location_summary)}</dd></div>` : ''}</dl>
+                <dl><div><dt>Date</dt><dd>${escapeHtml(formatDate(event))}</dd></div><div><dt>Time</dt><dd>${escapeHtml(withPst(formatTimeRange(event)))}</dd></div>${event.location_summary ? `<div><dt>Location</dt><dd>${escapeHtml(event.location_summary)}</dd></div>` : ''}</dl>
                 ${event.contact_email ? `<a href="mailto:${escapeHtml(event.contact_email)}" class="subtle-link">Contact the event team <i class="fas fa-arrow-right" aria-hidden="true"></i></a>` : ''}
             </aside>`;
     }
@@ -559,12 +566,13 @@
                     <p>${escapeHtml(event.summary)}</p>
                     <div class="event-hero-facts">
                         <span><i class="fa-regular fa-calendar" aria-hidden="true"></i><strong>${escapeHtml(formatDate(event))}</strong></span>
-                        <span><i class="fa-regular fa-clock" aria-hidden="true"></i><strong>${escapeHtml(formatTimeRange(event))}</strong> Pacific time</span>
+                        <span><i class="fa-regular fa-clock" aria-hidden="true"></i><strong>${escapeHtml(withPst(formatTimeRange(event)))}</strong></span>
                         <span><i class="fa-solid fa-location-dot" aria-hidden="true"></i><strong>${escapeHtml(attendanceLabel(event))}</strong></span>
                     </div>
                     <div class="hero-action-row">
                         <a class="btn-solid-gold" href="${event.registration_open === false ? '#overview' : '#register'}">${event.registration_open === false ? 'View Event Details' : (event.waitlist ? 'Join the Waitlist' : 'Reserve My Free Spot')}</a>
                         <a class="btn-outline-gold" href="#brochures">View Brochures</a>
+                        ${event.program_url ? `<a class="btn-outline-gold" href="${escapeHtml(safeUrl(event.program_url, '/programs'))}">See the Program Page</a>` : ''}
                     </div>
                 </div>
                 <div class="event-detail-hero-media">
@@ -574,7 +582,7 @@
             </section>
 
             <nav class="event-jump-nav" aria-label="Event page sections">
-                <a href="#overview">Overview</a><a href="#schedule">Schedule</a><a href="#process">How it works</a><a href="#brochures">Brochures</a><a href="#questions">FAQ</a><a href="#register">Register</a>
+                <a href="#overview">Overview</a><a href="#schedule">Schedule</a><a href="#brochures">Brochures</a><a href="#questions">FAQ</a><a href="#register">Register</a>
             </nav>
 
             <section class="event-section" id="overview">
@@ -590,18 +598,10 @@
                 <div class="event-section-heading"><span class="section-kicker">Your free hour</span><h2>A clear, useful introduction to MCC French</h2></div>
                 <div class="event-agenda-grid">
                     <div class="event-agenda-list">
-                        ${event.agenda.map((item, index) => `<article><span>${String(index + 1).padStart(2, '0')}</span><time>${escapeHtml(item.time || item.start_time)}</time><div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.body || item.text || item.description)}</p></div></article>`).join('')}
+                        ${event.agenda.map((item, index) => `<article><span>${String(index + 1).padStart(2, '0')}</span><time>${escapeHtml(withPst(item.time || item.start_time))}</time><div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.body || item.text || item.description)}</p></div></article>`).join('')}
                     </div>
                     ${courseCardTemplate(event)}
                 </div>
-            </section>
-
-            <section class="event-section" id="process">
-                <div class="event-section-heading"><span class="section-kicker">How it works</span><h2>From registration to your trial lesson</h2></div>
-                <ol class="event-process-grid">
-                    ${event.process.map((item, index) => `<li><span>${index + 1}</span><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.body || item.text || item.description)}</p></li>`).join('')}
-                </ol>
-                <div class="event-access-note"><i class="fas fa-shield-halved" aria-hidden="true"></i><div><strong>Private access details stay private</strong><p>The online live link and precise in-person instructions are sent to registered attendees instead of being published openly.</p></div></div>
             </section>
 
             <section class="event-section event-brochure-section" id="brochures">
@@ -635,7 +635,7 @@
             </section>
 
             <section class="event-registration-section" id="register">
-                <div class="event-registration-intro"><span class="section-kicker">Free registration</span><h2>Reserve your place</h2><p>Complete the form once. MCC will send the online link or in-person instructions before the session.</p><div class="event-registration-summary"><span><i class="fa-regular fa-calendar" aria-hidden="true"></i>${escapeHtml(formatDate(event))}</span><span><i class="fa-regular fa-clock" aria-hidden="true"></i>${escapeHtml(formatTimeRange(event))} Pacific</span><span><i class="fa-solid fa-location-dot" aria-hidden="true"></i>${escapeHtml(attendanceLabel(event))}</span></div><button type="button" class="btn-text-question" data-website-chat-open><i class="fas fa-message" aria-hidden="true"></i> Ask a Question</button></div>
+                <div class="event-registration-intro"><span class="section-kicker">Free registration</span><h2>Reserve your place</h2><p>Complete the form once. MCC will send the online link or in-person instructions before the session.</p><div class="event-registration-summary"><span><i class="fa-regular fa-calendar" aria-hidden="true"></i>${escapeHtml(formatDate(event))}</span><span><i class="fa-regular fa-clock" aria-hidden="true"></i>${escapeHtml(withPst(formatTimeRange(event)))}</span><span><i class="fa-solid fa-location-dot" aria-hidden="true"></i>${escapeHtml(attendanceLabel(event))}</span></div><button type="button" class="btn-text-question" data-website-chat-open><i class="fas fa-message" aria-hidden="true"></i> Ask a Question</button></div>
                 <div class="event-registration-card">
                     <form data-event-registration novalidate${event.registration_open === false ? ' hidden' : ''}>
                         <div class="event-form-grid">

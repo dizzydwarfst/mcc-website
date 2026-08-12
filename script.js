@@ -762,9 +762,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 })();
 
-// Keep Events and the public legal documents discoverable across the static
-// site without duplicating the same edit through every historical HTML page.
-(function addEventsAndLegalNavigation() {
+// Keep FSL, Events, and the public legal documents discoverable across the
+// static site without duplicating the same edit through every historical page.
+(function addSharedNavigation() {
     function cleanPath(value) {
         try { return new URL(value, window.location.href).pathname.replace(/\/$/, '') || '/'; }
         catch (_) { return ''; }
@@ -772,6 +772,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.main-nav').forEach((navigation) => {
+            const programsDropdown = [...navigation.querySelectorAll('.nav-dropdown')]
+                .find((dropdown) => [...dropdown.querySelectorAll(':scope > a[href]')]
+                    .some((candidate) => cleanPath(candidate.getAttribute('href')) === '/programs'));
+            const programsMenu = programsDropdown?.querySelector(':scope > .dropdown-content');
+            if (programsMenu && ![...programsMenu.querySelectorAll('a[href]')]
+                .some((candidate) => cleanPath(candidate.getAttribute('href')) === '/programs-french-language')) {
+                const fslLink = document.createElement('a');
+                fslLink.href = '/programs-french-language';
+                fslLink.setAttribute('data-i18n', 'common.nav_french_language');
+                fslLink.textContent = document.documentElement.lang === 'fr'
+                    ? 'Français langue seconde (FLS)'
+                    : 'French as a Second Language (FSL)';
+                programsMenu.appendChild(fslLink);
+            }
+
             let link = [...navigation.querySelectorAll('a[href]')]
                 .find((candidate) => cleanPath(candidate.getAttribute('href')) === '/events');
             if (!link) {

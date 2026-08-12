@@ -27,7 +27,7 @@
             close: 'Close',
             free_event: 'Free FSL Event',
             signup_title: 'Sign up for the FSL Info & Trial Session',
-            signup_intro: 'September 1, 2026 · 5:00–6:00 PM · Online or in person',
+            signup_intro: 'September 1, 2026 · 5:00–6:00 PM PST · Online or in person',
             first_name: 'First name',
             last_name: 'Last name',
             email: 'Email address',
@@ -95,7 +95,7 @@
             close: 'Fermer',
             free_event: 'Événement FLS gratuit',
             signup_title: "Inscrivez-vous à la séance d'information et au cours d'essai FLS",
-            signup_intro: '1er septembre 2026 · 17 h–18 h · En ligne ou en personne',
+            signup_intro: '1er septembre 2026 · 17 h–18 h PST · En ligne ou en personne',
             first_name: 'Prénom',
             last_name: 'Nom de famille',
             email: 'Adresse courriel',
@@ -269,7 +269,7 @@
                 <div class="engagement-dialog-header">
                     <span class="section-kicker" data-copy="free_event">Free FSL Event</span>
                     <h2 id="fsl-signup-title" data-copy="signup_title">Sign up for the FSL Info &amp; Trial Session</h2>
-                    <p id="fsl-signup-intro" data-copy="signup_intro">September 1, 2026 · 5:00–6:00 PM · Online or in person</p>
+                    <p id="fsl-signup-intro" data-copy="signup_intro">September 1, 2026 · 5:00–6:00 PM PST · Online or in person</p>
                 </div>
                 <form class="engagement-signup-form" novalidate>
                     <div class="engagement-form-grid">

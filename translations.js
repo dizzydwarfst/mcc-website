@@ -127,8 +127,8 @@ window.MCC_TRANSLATIONS = {
         spot_kicker: { en: "Free FSL Event", fr: "Événement FLS gratuit" },
         spot_title: { en: "FSL Info & Trial Session", fr: "Séance d'information et cours d'essai FLS" },
         spot_copy: {
-            en: "Join us September 1 from 5:00–6:00 PM, online or in person. Meet the team, ask questions, and experience a free French trial class.",
-            fr: "Rejoignez-nous le 1er septembre de 17 h à 18 h, en ligne ou en personne. Rencontrez l'équipe, posez vos questions et participez gratuitement à un cours d'essai de français."
+            en: "Join us September 1 from 5:00–6:00 PM PST, online or in person. Meet the team, ask questions, and experience a free French trial class.",
+            fr: "Rejoignez-nous le 1er septembre de 17 h à 18 h PST, en ligne ou en personne. Rencontrez l'équipe, posez vos questions et participez gratuitement à un cours d'essai de français."
         },
         spot_schedule_intro: { en: "Introduction & Q&A", fr: "Présentation et questions-réponses" },
         spot_schedule_trial: { en: "Free trial class", fr: "Cours d'essai gratuit" },
