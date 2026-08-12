@@ -90,7 +90,8 @@ h1, h2, h3, h4 {
     left: 0;
     width: 100%;
     background: var(--deep-green);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 2px solid rgba(212, 175, 55, 0.5);
+    box-shadow: 0 12px 28px rgba(2, 18, 10, 0.24);
     z-index: 1000;
     transition: all 0.3s ease;
     display: flex;
@@ -188,7 +189,8 @@ h1, h2, h3, h4 {
 }
 
 .solid-header.scrolled {
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border-bottom-color: rgba(212, 175, 55, 0.72);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.48);
 }
 
 .logo-container {
@@ -8086,7 +8088,7 @@ body.engagement-modal-open {
 
 .events-help-strip {
     width: min(calc(100% - var(--page-gutter) - var(--page-gutter)), var(--event-content-width));
-    margin: 0 auto clamp(4rem, 8vw, 8rem);
+    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -8097,6 +8099,10 @@ body.engagement-modal-open {
     background: var(--deep-green);
     color: #fff;
     text-align: center;
+}
+
+.events-page {
+    padding-bottom: clamp(4rem, 8vw, 8rem);
 }
 
 .events-help-strip h2 {
