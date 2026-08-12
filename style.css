@@ -8341,7 +8341,7 @@ body.engagement-modal-open {
 
 .event-course-card {
     align-self: start;
-    margin-top: -1px;
+    margin-top: -14px;
     padding: clamp(1.7rem, 3vw, 2.5rem);
     border-radius: 22px;
     background: #fff;
@@ -9265,6 +9265,10 @@ body.engagement-modal-open {
     .event-agenda-grid,
     .legal-page-layout {
         grid-template-columns: minmax(0, 1fr);
+    }
+
+    .event-course-card {
+        margin-top: 0;
     }
 
     .event-card.is-featured .event-card-media,
