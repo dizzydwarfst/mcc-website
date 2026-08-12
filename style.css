@@ -7807,6 +7807,7 @@ body.engagement-modal-open {
     --event-content-width: 1120px;
 }
 
+.events-page,
 .event-detail-page {
     padding-top: 205px;
 }
