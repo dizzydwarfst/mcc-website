@@ -14,13 +14,11 @@
     --page-gutter: clamp(1.25rem, 3vw, 4.5rem);
     --universal-cta-width: 260px;
     --universal-cta-height: 56px;
-    --header-page-gap: 16px;
-    --header-page-gap-color: #f4f7f5;
 }
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: calc(205px + var(--header-page-gap));
+    scroll-padding-top: 205px;
 }
 
 * {
@@ -93,23 +91,11 @@ h1, h2, h3, h4 {
     width: 100%;
     background: var(--deep-green);
     border-bottom: 0;
-    box-shadow: none;
+    box-shadow: 0 10px 24px rgba(1, 15, 8, 0.24);
     z-index: 1000;
     transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
-}
-
-.solid-header::after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    height: var(--header-page-gap);
-    background: var(--header-page-gap-color);
-    box-shadow: 0 5px 12px rgba(2, 18, 10, 0.1);
-    pointer-events: none;
 }
 
 .header-top {
@@ -203,7 +189,7 @@ h1, h2, h3, h4 {
 }
 
 .solid-header.scrolled {
-    box-shadow: none;
+    box-shadow: 0 14px 32px rgba(1, 15, 8, 0.38);
 }
 
 .logo-container {
