@@ -6673,16 +6673,12 @@ font[style*="background-color"] { background: transparent !important; }
 .program-pgwp-notice-section {
     position: relative;
     z-index: 3;
-    display: grid;
-    gap: 0.75rem;
-    padding: 2rem 5% 0;
-    background: #ffffff;
+    padding: 2rem 5%;
+    background: #f4f7f5;
 }
 
 .program-pgwp-notice {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.85rem;
+    display: grid;
     width: 100%;
     max-width: 1000px;
     margin: 0 auto;
@@ -6695,6 +6691,19 @@ font[style*="background-color"] { background: transparent !important; }
     box-shadow: none;
     font-size: 0.85rem;
     line-height: 1.65;
+}
+
+.program-disclaimer-row {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+    gap: 0.85rem;
+}
+
+.program-disclaimer-row + .program-disclaimer-row {
+    margin-top: 0.9rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid #d9e2de;
 }
 
 .program-pgwp-icon {
@@ -6731,7 +6740,7 @@ font[style*="background-color"] { background: transparent !important; }
 
 @media (max-width: 640px) {
     .program-pgwp-notice-section {
-        padding: 1.25rem 1rem 0;
+        padding: 1.25rem 1rem;
     }
 
     .program-pgwp-notice {
