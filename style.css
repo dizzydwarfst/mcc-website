@@ -8776,6 +8776,46 @@ body.engagement-modal-open {
     gap: 0.9rem;
 }
 
+.event-fsl-consent-box {
+    gap: 0.55rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.event-fsl-consent-box.has-errors {
+    border-color: rgba(168, 47, 47, 0.72);
+    box-shadow: 0 0 0 3px rgba(168, 47, 47, 0.08);
+}
+
+.event-consent-term {
+    padding: 0.72rem 0.75rem;
+    border: 1px solid transparent;
+    border-radius: 11px;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.event-consent-term.is-invalid {
+    border-color: rgba(168, 47, 47, 0.72);
+    background: #fff5f5;
+    color: #842525;
+}
+
+.event-consent-term.is-invalid input {
+    outline: 2px solid rgba(168, 47, 47, 0.34);
+    outline-offset: 2px;
+}
+
+.event-term-error {
+    display: block;
+    margin-top: 0.35rem;
+    color: #a82f2f;
+    font-size: 0.8rem;
+    font-weight: 800;
+}
+
+.event-term-error[hidden] {
+    display: none;
+}
+
 .event-choice-group {
     display: grid;
     gap: 0.85rem;

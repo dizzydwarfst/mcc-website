@@ -502,7 +502,32 @@
         return '';
     }
 
-    function consentFormTemplate(definition) {
+    function fslConsentFormTemplate() {
+        return `
+            <div class="event-legal-box event-fsl-consent-box" data-fsl-consent-box>
+                <h3>Privacy and consent terms</h3>
+                <label class="event-check event-consent-term" data-consent-term>
+                    <input type="checkbox" name="privacy_accepted" required data-required-consent aria-describedby="privacy-accepted-error">
+                    <span>I have read and agree to the Privacy Policy. <span class="event-policy-links">${acknowledgementResources('privacy_accepted')}</span><small class="event-term-error" id="privacy-accepted-error" data-consent-error hidden>Please agree to this term.</small></span>
+                </label>
+                <label class="event-check event-consent-term" data-consent-term>
+                    <input type="checkbox" name="terms_accepted" required data-required-consent aria-describedby="terms-accepted-error">
+                    <span>I have read and agree to the Terms and Conditions and Event Terms. <span class="event-policy-links">${acknowledgementResources('terms_accepted')}</span><small class="event-term-error" id="terms-accepted-error" data-consent-error hidden>Please agree to this term.</small></span>
+                </label>
+                <label class="event-check event-consent-term" data-consent-term>
+                    <input type="checkbox" name="fsl_media_consent" required data-required-consent aria-describedby="fsl-media-consent-error">
+                    <span>I understand and agree that photography and video recording may take place during this session, and I consent to MCC using photographs or video containing my image or voice for educational, promotional and marketing purposes. <span class="event-policy-links">${acknowledgementResources('media_notice_acknowledged')}</span><small class="event-term-error" id="fsl-media-consent-error" data-consent-error hidden>Please agree to this term.</small></span>
+                </label>
+                <label class="event-check event-consent-term">
+                    <input type="checkbox" name="fsl_marketing_consent">
+                    <span>I understand and agree to receive information from MCC about events, programs and promotions.</span>
+                </label>
+            </div>
+        `;
+    }
+
+    function consentFormTemplate(definition, event) {
+        if (isFslTrialEvent(event)) return fslConsentFormTemplate();
         const form = definition && typeof definition === 'object' ? definition : FALLBACK_CONSENT_FORM;
         const acknowledgements = Array.isArray(form.acknowledgements) ? form.acknowledgements : [];
         const choices = Array.isArray(form.choices) ? form.choices : [];
@@ -662,7 +687,7 @@
                             <label class="event-agency-field" data-agency-field hidden>Agency name<input type="text" name="agency_name" maxlength="200" autocomplete="organization" placeholder="Enter the agency name"></label>
                             <label class="event-referral-detail-field" data-referral-detail-field hidden>Please tell us where you heard about MCC<input type="text" name="how_did_you_hear_about_us_detail" maxlength="200" placeholder="Enter the source"></label>
                         </div>
-                        ${consentFormTemplate(consentForm)}
+                        ${consentFormTemplate(consentForm, event)}
                         <label class="event-honeypot" aria-hidden="true">Company website<input type="text" name="company_website" tabindex="-1" autocomplete="off"></label>
                         <p class="event-form-status" data-event-form-status role="status" aria-live="polite"></p>
                         <button class="btn-solid-gold event-register-submit" type="submit">Reserve My Free Spot</button>
@@ -671,10 +696,12 @@
                     <div class="event-registration-success" data-event-registration-success hidden><span><i class="fas fa-check" aria-hidden="true"></i></span><h3>Your registration is saved</h3><p>Thank you. MCC will send event details and necessary updates to your email.</p><a class="btn-outline-gold" href="/events">Explore more events</a></div>
                 </div>
             </section>
-            <aside class="event-recording-disclaimer">
-                <i class="fas fa-camera" aria-hidden="true"></i>
-                <div><strong>Photography and video notice</strong><p>Photography and video may take place during this session. MCC uses identifiable images for educational or promotional purposes according to the media choice recorded during registration. If you select no, tell the event team when you arrive so they can provide the no-photo process; online participants may keep their camera off.</p></div>
-            </aside>
+            ${isFslTrialEvent(event) ? '' : `
+                <aside class="event-recording-disclaimer">
+                    <i class="fas fa-camera" aria-hidden="true"></i>
+                    <div><strong>Photography and video notice</strong><p>Photography and video may take place during this session. MCC uses identifiable images for educational or promotional purposes according to the media choice recorded during registration. If you select no, tell the event team when you arrive so they can provide the no-photo process; online participants may keep their camera off.</p></div>
+                </aside>
+            `}
         `;
     }
 
@@ -748,6 +775,44 @@
         const status = form.querySelector('[data-event-form-status]');
         const submit = form.querySelector('[type="submit"]');
         const success = document.querySelector('[data-event-registration-success]');
+        const fslConsentBox = form.querySelector('[data-fsl-consent-box]');
+        const requiredConsentInputs = [...form.querySelectorAll('[data-required-consent]')];
+        const consentValidationMessage = 'Please agree to each required term before submitting.';
+
+        function setConsentTermValidity(input, valid) {
+            const term = input.closest('[data-consent-term]');
+            const error = term?.querySelector('[data-consent-error]');
+            term?.classList.toggle('is-invalid', !valid);
+            input.setAttribute('aria-invalid', String(!valid));
+            if (error) error.hidden = valid;
+        }
+
+        function validateRequiredConsents() {
+            let valid = true;
+            requiredConsentInputs.forEach((input) => {
+                const accepted = input.checked;
+                setConsentTermValidity(input, accepted);
+                if (!accepted) valid = false;
+            });
+            fslConsentBox?.classList.toggle('has-errors', !valid);
+            if (!valid) {
+                status.textContent = consentValidationMessage;
+                status.classList.add('is-error');
+            }
+            return valid;
+        }
+
+        requiredConsentInputs.forEach((input) => {
+            input.addEventListener('change', () => {
+                setConsentTermValidity(input, input.checked);
+                const allAccepted = requiredConsentInputs.every((requiredInput) => requiredInput.checked);
+                fslConsentBox?.classList.toggle('has-errors', !allAccepted);
+                if (allAccepted && status.textContent === consentValidationMessage) {
+                    status.textContent = '';
+                    status.classList.remove('is-error');
+                }
+            });
+        });
 
         function syncReferralFields() {
             const agencyVisible = referral.value === 'agency';
@@ -777,15 +842,26 @@
             submitEvent.preventDefault();
             status.textContent = '';
             status.classList.remove('is-error', 'is-success');
+            const requiredConsentsAccepted = validateRequiredConsents();
             if (!form.reportValidity()) return;
+            if (!requiredConsentsAccepted) return;
             const data = new FormData(form);
             const consent = {};
-            (definition.acknowledgements || []).forEach((item) => {
-                consent[item.field] = data.get(item.field) === 'on';
-            });
-            (definition.choices || []).forEach((choice) => {
-                consent[choice.field] = String(data.get(choice.field) || '');
-            });
+            if (isFslTrialEvent(event)) {
+                const mediaConsentAccepted = data.get('fsl_media_consent') === 'on';
+                consent.privacy_accepted = data.get('privacy_accepted') === 'on';
+                consent.terms_accepted = data.get('terms_accepted') === 'on';
+                consent.media_notice_acknowledged = mediaConsentAccepted;
+                consent.media_choice = mediaConsentAccepted ? 'consent' : 'no_consent';
+                consent.marketing_choice = data.get('fsl_marketing_consent') === 'on' ? 'consent' : 'no_consent';
+            } else {
+                (definition.acknowledgements || []).forEach((item) => {
+                    consent[item.field] = data.get(item.field) === 'on';
+                });
+                (definition.choices || []).forEach((choice) => {
+                    consent[choice.field] = String(data.get(choice.field) || '');
+                });
+            }
             const payload = {
                 first_name: String(data.get('first_name') || '').trim(),
                 last_name: String(data.get('last_name') || '').trim(),
