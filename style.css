@@ -3413,20 +3413,11 @@ textarea {
 .program-intake-name-content {
     display: flex;
     align-items: flex-start;
-    gap: 0.65rem;
 }
 
 .program-intake-name-content strong {
     color: var(--text-dark);
     font-size: 0.95rem;
-}
-
-.program-intake-plus {
-    flex: 0 0 auto;
-    color: var(--accent-gold);
-    font-size: 1.15rem;
-    font-weight: 800;
-    line-height: 1.2;
 }
 
 .program-intake-table td.is-tbd {

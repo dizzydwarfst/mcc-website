@@ -159,9 +159,6 @@
             const item = el('tr');
             const intake = tableCell(labels.intake, '', 'program-intake-name');
             const intakeContent = el('div', 'program-intake-name-content');
-            const plus = el('span', 'program-intake-plus', '+');
-            plus.setAttribute('aria-hidden', 'true');
-            intakeContent.appendChild(plus);
             intakeContent.appendChild(el('strong', '', programName));
             intake.appendChild(intakeContent);
             item.appendChild(intake);
