@@ -14,6 +14,8 @@
             format: 'Format',
             formatValue: 'Online, In-Person, Hybrid',
             nextStart: 'Next Start Date',
+            action: 'Apply',
+            enroll: 'Enroll Now',
             start: 'Start',
             end: 'End',
             tbd: 'TBD'
@@ -28,6 +30,8 @@
             format: 'Format',
             formatValue: 'En ligne, en personne, hybride',
             nextStart: 'Prochaine date de d\u00e9but',
+            action: 'Inscription',
+            enroll: "S'inscrire",
             start: 'D\u00e9but',
             end: 'Fin',
             tbd: '\u00c0 confirmer'
@@ -143,7 +147,7 @@
         const table = el('table', 'program-intake-table');
         const head = el('thead');
         const headRow = el('tr');
-        [labels.intake, labels.schedule, labels.format, labels.nextStart, labels.end].forEach(label => {
+        [labels.intake, labels.schedule, labels.format, labels.nextStart, labels.end, labels.action].forEach(label => {
             headRow.appendChild(el('th', '', label));
         });
         head.appendChild(headRow);
@@ -165,6 +169,11 @@
             item.appendChild(tableCell(labels.format, labels.formatValue));
             item.appendChild(tableCell(labels.nextStart, formatDate(row.start, lang, 'long')));
             item.appendChild(tableCell(labels.end, row.end ? formatDate(row.end, lang, 'long') : labels.tbd, row.end ? '' : 'is-tbd'));
+            const action = tableCell(labels.action, '', 'program-intake-action');
+            const enroll = el('a', 'program-intake-enroll', labels.enroll);
+            enroll.href = '/apply-for-admissions';
+            action.appendChild(enroll);
+            item.appendChild(action);
             body.appendChild(item);
         });
         table.appendChild(body);
