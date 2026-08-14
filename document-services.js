@@ -128,6 +128,6 @@
     }
 
     ready(() => {
-        document.querySelectorAll('[data-document-services-home]').forEach(loadCatalogue);
+        document.querySelectorAll('[data-document-services-catalogue]').forEach(loadCatalogue);
     });
 })();
