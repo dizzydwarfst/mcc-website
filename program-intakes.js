@@ -45,9 +45,13 @@
         return document.body && document.body.getAttribute('data-lang') === 'fr' ? 'fr' : 'en';
     }
 
-    function cleanDate(value) {
+    function cleanText(value) {
         if (typeof value !== 'string') return '';
         return value.trim();
+    }
+
+    function cleanDate(value) {
+        return cleanText(value);
     }
 
     function parseIsoLocal(value) {
@@ -98,7 +102,10 @@
                 if (!row || typeof row !== 'object') return null;
                 return {
                     start: cleanDate(row.start),
-                    end: cleanDate(row.end)
+                    end: cleanDate(row.end),
+                    enrollmentOpen: row.enrollment_open,
+                    enrollmentStatus: cleanText(row.enrollment_status).toLowerCase(),
+                    enrollmentLabel: cleanText(row.enrollment_label)
                 };
             })
             .filter(row => row && row.start)
@@ -129,6 +136,26 @@
         const cell = el('td', className || '', value);
         cell.setAttribute('data-label', label);
         return cell;
+    }
+
+    // Staff set the state in the portal; never derive it from the dates.
+    function isEnrollmentOpen(row) {
+        if (row.enrollmentOpen === true) return true;
+        if (row.enrollmentOpen === false) return false;
+        if (row.enrollmentStatus) return row.enrollmentStatus === 'open';
+        return true;
+    }
+
+    function actionContent(row, labels) {
+        if (isEnrollmentOpen(row)) {
+            const enroll = el('a', 'program-intake-enroll', row.enrollmentLabel || labels.enroll);
+            enroll.href = '/apply-for-admissions';
+            return enroll;
+        }
+
+        const status = el('span', 'program-intake-status', row.enrollmentLabel || '—');
+        if (row.enrollmentStatus) status.setAttribute('data-enrollment-status', row.enrollmentStatus);
+        return status;
     }
 
     function renderFslSchedule(section, surface, program, intakes, labels, lang) {
@@ -167,9 +194,7 @@
             item.appendChild(tableCell(labels.nextStart, formatDate(row.start, lang, 'long')));
             item.appendChild(tableCell(labels.end, row.end ? formatDate(row.end, lang, 'long') : labels.tbd, row.end ? '' : 'is-tbd'));
             const action = tableCell(labels.action, '', 'program-intake-action');
-            const enroll = el('a', 'program-intake-enroll', labels.enroll);
-            enroll.href = '/apply-for-admissions';
-            action.appendChild(enroll);
+            action.appendChild(actionContent(row, labels));
             item.appendChild(action);
             body.appendChild(item);
         });

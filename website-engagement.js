@@ -8,8 +8,15 @@
 (function initWebsiteEngagement() {
     'use strict';
 
-    const DEFAULT_API_BASE = 'https://lms-system-backend-lake.vercel.app/api';
-    const API_BASE = String(window.MCC_ENGAGEMENT_API_BASE || DEFAULT_API_BASE).replace(/\/$/, '');
+    // The portal base URL, the request timeout, the field limits and the
+    // visitor-facing error wording all live in portal-api.js so this file and
+    // form-handler.js cannot drift apart on the contract.
+    const portalApi = window.MCCPortalApi;
+    if (!portalApi) {
+        console.error('[MCC engagement] portal-api.js did not load; engagement tools are disabled.');
+        return;
+    }
+
     const CHAT_STORAGE_KEY = 'mcc_website_chat_session_v1';
     const CHAT_POLL_MS = 7000;
     const AVAILABILITY_POLL_MS = 15000;
@@ -200,38 +207,11 @@
     }
 
     function sourcePage() {
-        return `${window.location.pathname || '/'}${window.location.search || ''}`.slice(0, 500);
+        return portalApi.sourcePage(window.location);
     }
 
-    function errorMessage(payload, fallback) {
-        if (typeof payload?.detail === 'string') return payload.detail;
-        if (typeof payload?.message === 'string') return payload.message;
-        return fallback;
-    }
-
-    async function apiRequest(path, options = {}) {
-        const controller = new AbortController();
-        const timeout = window.setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
-        const headers = { Accept: 'application/json', ...(options.headers || {}) };
-        if (options.body !== undefined) headers['Content-Type'] = 'application/json';
-
-        try {
-            const response = await fetch(`${API_BASE}${path}`, {
-                ...options,
-                headers,
-                signal: controller.signal,
-            });
-            const payload = await response.json().catch(() => ({}));
-            if (!response.ok) {
-                const error = new Error(errorMessage(payload, `Request failed (${response.status})`));
-                error.status = response.status;
-                error.payload = payload;
-                throw error;
-            }
-            return payload;
-        } finally {
-            window.clearTimeout(timeout);
-        }
+    function apiRequest(path, options = {}) {
+        return portalApi.request(path, { ...options, timeoutMs: REQUEST_TIMEOUT_MS }, window);
     }
 
     function focusableElements(container) {
@@ -277,11 +257,11 @@
                     <div class="engagement-form-grid">
                         <label>
                             <span data-copy="first_name">First name</span>
-                            <input type="text" name="first_name" autocomplete="given-name" maxlength="100" required>
+                            <input type="text" name="first_name" autocomplete="given-name" maxlength="80" required>
                         </label>
                         <label>
                             <span data-copy="last_name">Last name</span>
-                            <input type="text" name="last_name" autocomplete="family-name" maxlength="100" required>
+                            <input type="text" name="last_name" autocomplete="family-name" maxlength="80" required>
                         </label>
                         <label>
                             <span data-copy="email">Email address</span>
@@ -289,7 +269,7 @@
                         </label>
                         <label>
                             <span data-copy="phone">Phone number</span>
-                            <input type="tel" name="phone_number" autocomplete="tel" maxlength="50" required>
+                            <input type="tel" name="phone_number" autocomplete="tel" maxlength="40" required>
                         </label>
                         <label>
                             <span data-copy="attendance">How would you like to attend?</span>
@@ -362,6 +342,7 @@
         const success = overlay.querySelector('[data-signup-success]');
         const status = overlay.querySelector('[data-signup-status]');
         const submit = form.querySelector('[type="submit"]');
+        const consentInput = form.elements.consent_to_contact;
         const heardSelect = form.elements.how_did_you_hear_about_us;
         const referralDetailField = form.querySelector('[data-referral-detail]');
         const referralDetailInput = form.elements.how_did_you_hear_about_us_detail;
@@ -444,6 +425,7 @@
             success.hidden = true;
             status.textContent = '';
             status.classList.remove('is-error');
+            form.querySelectorAll('[aria-invalid]').forEach((field) => field.removeAttribute('aria-invalid'));
             agencyName = '';
             updateAgencySummary();
             syncReferralDetail();
@@ -470,6 +452,12 @@
             }
             syncReferralDetail();
         });
+        consentInput.addEventListener('change', () => {
+            if (!consentInput.checked) return;
+            consentInput.removeAttribute('aria-invalid');
+            status.textContent = '';
+            status.classList.remove('is-error');
+        });
         syncReferralDetail();
         overlay.addEventListener('click', (event) => {
             if (event.target === overlay) closeSignup();
@@ -494,6 +482,10 @@
 
         form.addEventListener('submit', async (event) => {
             event.preventDefault();
+            // The guard, not the disabled button, is what stops a duplicate
+            // registration: a disabled submit button still lets Enter in a text
+            // input fire this handler a second time.
+            if (submitting) return;
             status.textContent = '';
             status.classList.remove('is-error');
             if (!form.reportValidity()) return;
@@ -503,40 +495,56 @@
             }
 
             const data = new FormData(form);
-            const payload = {
+            const payload = portalApi.buildWebsiteSignup({
                 ...EVENT,
-                first_name: String(data.get('first_name') || '').trim(),
-                last_name: String(data.get('last_name') || '').trim(),
-                email: String(data.get('email') || '').trim(),
-                phone_number: String(data.get('phone_number') || '').trim(),
-                attendance_preference: String(data.get('attendance_preference') || ''),
+                first_name: data.get('first_name'),
+                last_name: data.get('last_name'),
+                email: data.get('email'),
+                phone_number: data.get('phone_number'),
+                attendance_preference: data.get('attendance_preference'),
                 how_did_you_hear_about_us: heardSelect.value === 'other'
-                    ? String(data.get('how_did_you_hear_about_us_detail') || '').trim()
-                    : String(data.get('how_did_you_hear_about_us') || ''),
+                    ? data.get('how_did_you_hear_about_us_detail')
+                    : data.get('how_did_you_hear_about_us'),
                 agency_name: heardSelect.value === 'agency' ? agencyName : '',
                 source_page: sourcePage(),
-                consent_to_contact: data.get('consent_to_contact') === 'on',
-                company_website: String(data.get('company_website') || ''),
-            };
+                // Read from the control itself rather than the FormData entry:
+                // an unchecked box contributes no entry at all, and the whole
+                // point of this field is that the backend must be told which of
+                // the two the visitor chose.
+                consent_to_contact: consentInput.checked,
+                company_website: data.get('company_website'),
+            });
+
+            // Positive consent is mandatory here — the portal rejects an
+            // explicit false as firmly as an omitted field — so the visitor is
+            // stopped with a reason rather than handed a 422.
+            const problems = portalApi.validateWebsiteSignup(payload, currentLanguage());
+            if (problems.length) {
+                status.textContent = problems[0].message;
+                status.classList.add('is-error');
+                const field = form.elements[problems[0].field];
+                field?.setAttribute?.('aria-invalid', 'true');
+                field?.focus?.();
+                return;
+            }
 
             submitting = true;
             submit.disabled = true;
+            submit.setAttribute('aria-busy', 'true');
             submit.textContent = copy('submitting_signup');
             try {
-                await apiRequest('/public/website-signups', {
-                    method: 'POST',
-                    body: JSON.stringify(payload),
-                });
+                await portalApi.submitWebsiteSignup(payload, window);
                 form.hidden = true;
                 success.hidden = false;
                 success.querySelector('button')?.focus();
             } catch (error) {
                 console.error('[MCC website signup]', error);
-                status.textContent = copy('signup_error');
+                status.textContent = portalApi.friendlyMessage(error, 'signup', currentLanguage());
                 status.classList.add('is-error');
             } finally {
                 submitting = false;
                 submit.disabled = false;
+                submit.removeAttribute('aria-busy');
                 submit.textContent = copy('submit_signup');
             }
         });
@@ -604,7 +612,7 @@
                         <p data-copy="chat_intro">Tell us who you are and briefly how we can help. You can continue the conversation right here.</p>
                         <label>
                             <span data-copy="chat_name">Your name</span>
-                            <input type="text" name="visitor_name" autocomplete="name" maxlength="150" required>
+                            <input type="text" name="visitor_name" autocomplete="name" maxlength="80" required>
                         </label>
                         <label>
                             <span data-copy="chat_email">Your email</span>
@@ -670,6 +678,8 @@
         let onlineStaffCount = null;
         let escalationRequested = false;
         let escalationSending = false;
+        let chatStarting = false;
+        let chatSending = false;
 
         function visitorHeaders() {
             return session?.visitorToken ? { 'X-Visitor-Token': session.visitorToken } : {};
@@ -890,11 +900,17 @@
 
         preform.addEventListener('submit', async (event) => {
             event.preventDefault();
+            // Same reason the signup form keeps a flag: Enter in a text input
+            // submits past a disabled button, and a second conversation would
+            // be a second inbox row for one visitor.
+            if (chatStarting) return;
             startError.textContent = '';
             if (!preform.reportValidity()) return;
             const data = new FormData(preform);
             const submitButton = preform.querySelector('[type="submit"]');
+            chatStarting = true;
             submitButton.disabled = true;
+            submitButton.setAttribute('aria-busy', 'true');
             submitButton.textContent = copy('chat_starting');
             try {
                 const payload = await apiRequest('/public/website-chat/conversations', {
@@ -924,21 +940,27 @@
                 composer.elements.text?.focus();
             } catch (error) {
                 console.error('[MCC website chat start]', error);
-                startError.textContent = copy('chat_connect_error');
+                startError.textContent = error?.status === 429
+                    ? portalApi.copy('rate_limited', currentLanguage())
+                    : copy('chat_connect_error');
             } finally {
+                chatStarting = false;
                 submitButton.disabled = false;
+                submitButton.removeAttribute('aria-busy');
                 submitButton.textContent = copy('chat_start');
             }
         });
 
         composer.addEventListener('submit', async (event) => {
             event.preventDefault();
+            if (chatSending) return;
             sendError.textContent = '';
             if (!session || !composer.reportValidity()) return;
             const text = composer.elements.text.value.trim();
             if (!text) return;
             const escalationMessage = isEscalationRequest(text);
             const sendButton = composer.querySelector('[type="submit"]');
+            chatSending = true;
             sendButton.disabled = true;
             if (escalationMessage) {
                 escalationSending = true;
@@ -963,9 +985,12 @@
                     expireSession();
                 } else {
                     console.error('[MCC website chat send]', error);
-                    sendError.textContent = copy('chat_send_error');
+                    sendError.textContent = error?.status === 429
+                        ? portalApi.copy('rate_limited', currentLanguage())
+                        : copy('chat_send_error');
                 }
             } finally {
+                chatSending = false;
                 if (escalationMessage) {
                     escalationSending = false;
                     syncEscalationUI();

@@ -97,6 +97,29 @@
   let programsByName = new Map();
   let semesterPlaceholderTemplate = null;
 
+  // ── French intake questions ──
+  // The tree the backend (backend/french_intake.py) relates these five answers
+  // by: a target level belongs to a test goal, and the test-result question only
+  // exists for somebody who already knows some French. A programme that does not
+  // ask these questions cannot carry their answers — the API 422s on an answer
+  // arriving for one — so switching programme clears the whole block.
+  const FRENCH_INTAKE_FIELDS = [
+    { id: 'french_goal', groupId: 'french-goal-group', label: 'Goal for learning French', message: 'Please choose your goal for learning French.' },
+    { id: 'french_target_level', groupId: 'french-target-level-group', type: 'radio', label: 'Target French level', message: 'Please choose your target level.' },
+    { id: 'french_current_level', groupId: 'french-current-level-group', label: 'Current French level', message: 'Please choose your current French level.' },
+    { id: 'french_test_proof', groupId: 'french-test-proof-group', type: 'radio', label: 'TCF or TEF result', message: 'Please tell us whether you have a TCF or TEF test result.' },
+    { id: 'french_placement_preference', groupId: 'french-placement-group', type: 'radio', label: 'Starting point', message: 'Please choose where you would like to start.' },
+  ];
+  // The goals that put the applicant in front of an examiner, and so the only
+  // ones a target level is a sensible thing to ask about.
+  const FRENCH_TEST_GOALS = ['tcf_test', 'tef_test'];
+  const FRENCH_NO_FRENCH = 'none';
+  const FRENCH_INTAKE_GROUP_ID = 'french-intake';
+  const FRENCH_RESULTS_GROUP_ID = 'french-results-group';
+  // The server's own default for a programme whose flag is not set (see
+  // _is_default_french_intake_program): the name decides.
+  const FRENCH_PROGRAM_NAME_RE = /\bfrench\b/i;
+
   // Document uploads. Values below MUST match the backend's DocTypeLiteral /
   // DocContentTypeLiteral (confirmed against the live lms-system backend).
   const ALLOWED_CONTENT_TYPES = ['application/pdf', 'image/jpeg', 'image/png'];
@@ -108,6 +131,19 @@
     { docType: 'transcripts',     label: 'Academic Records',                  inputId: 'doc-transcripts',      required: false },
     { docType: 'english_results', label: 'Language Test Results',             inputId: 'doc-english-results',  required: false },
     { docType: 'photo',           label: 'Digital photo',        inputId: 'doc-photo',            required: false, allowedTypes: ['image/jpeg', 'image/png'], typeMessage: 'Must be a JPG or PNG.' },
+    // The TCF/TEF result lives with the question it answers, on step 3. It is
+    // required exactly when the applicant says they hold one — the API rejects
+    // that answer without the document — and is never uploaded otherwise, so a
+    // file attached before the answer changed is not sent.
+    {
+      docType: 'french_results',
+      label: 'TCF or TEF test result',
+      inputId: 'doc-french-results',
+      required: false,
+      step: 3,
+      requiredWhen: frenchTestResultExpected,
+      activeWhen: frenchTestResultExpected,
+    },
   ];
 
   const FIELD_CONFIG = [
@@ -133,13 +169,26 @@
     { id: 'agency_company', label: 'Agency company name', step: 2, agencyOnly: true, optional: true },
     { id: 'agent_phone', label: 'Agent phone', step: 2, agencyOnly: true, message: 'Agent phone is required.' },
     { id: 'agent_email', label: 'Agent email', step: 2, agencyOnly: true, message: 'A valid agent email is required.' },
+    { id: 'heard_about_us', label: 'How you heard about us', step: 2, message: 'Please tell us how you heard about us.' },
+    { id: 'heard_about_us_detail', label: 'Where you heard about us', step: 2, optional: true },
     { id: 'program', label: 'Program', step: 3, message: 'Please choose a program.' },
     { id: 'semester', label: 'Intake date', step: 3, message: 'Please choose an intake date.' },
     { id: 'attendance_mode', name: 'attendance_mode', label: 'Attendance mode', step: 3, type: 'radio', groupId: 'attendance-mode-group', message: 'Please choose how you will attend classes.' },
     { id: 'pathway_interest', name: 'pathway_interest', label: 'Pathway interest', step: 3, type: 'radio', groupId: 'pathway-interest-group', message: 'Please answer the pathway question.' },
+    // Each French question is required only while its group is on screen, which
+    // is what `groupId` already means to validate().
+    ...FRENCH_INTAKE_FIELDS.map((field) => ({
+      id: field.id,
+      name: field.id,
+      label: field.label,
+      step: 3,
+      type: field.type,
+      groupId: field.groupId,
+      message: field.message,
+    })),
     { id: 'signature_name', label: 'Signature', step: 4, message: 'Please type your full legal name as your signature.' },
     { id: 'terms_agreement', label: 'Declaration and consent', step: 4, message: 'Please agree to the policies, terms and conditions before submitting.' },
-    ...DOC_FIELDS.map((f) => ({ id: f.inputId, label: f.label, step: 4 })),
+    ...DOC_FIELDS.map((f) => ({ id: f.inputId, label: f.label, step: f.step || 4 })),
   ];
 
   const FIELD_BY_ID = FIELD_CONFIG.reduce((acc, field) => {
@@ -174,11 +223,18 @@
     agent_phone: 'agent_phone',
     agent_email: 'agent_email',
     agency_notes: 'agency_notes',
+    heard_about_us: 'heard_about_us',
+    heard_about_us_detail: 'heard_about_us_detail',
     program: 'program',
     intended_semester: 'semester',
     attendance_mode: 'attendance_mode',
     pathway_interest: 'pathway_interest',
     university_pathway: 'pathway_interest',
+    french_goal: 'french_goal',
+    french_target_level: 'french_target_level',
+    french_current_level: 'french_current_level',
+    french_test_proof: 'french_test_proof',
+    french_placement_preference: 'french_placement_preference',
     signature_full_name: 'signature_name',
     agreed_to_policies: 'terms_agreement',
     documents: 'doc-passport',
@@ -294,6 +350,7 @@
     const placeholder = semesterSelect.querySelector('option[value=""]');
     semesterPlaceholderTemplate = placeholder ? placeholder.cloneNode(true) : null;
 
+    initializeFrenchIntake();
     syncProgramSelection(programSelect.value, true);
     programSelect.addEventListener('change', () => syncProgramSelection(programSelect.value));
   }
@@ -302,6 +359,7 @@
     syncFrenchProgramNote(programName);
     syncSemesterSelect(programName, preserveSelection);
     syncProgramOptions(programName, preserveSelection);
+    syncFrenchIntake(programName);
   }
 
   function syncFrenchProgramNote(programName) {
@@ -315,6 +373,109 @@
     );
   }
 
+  // ── French intake questions ──
+
+  function initializeFrenchIntake() {
+    const block = document.getElementById(FRENCH_INTAKE_GROUP_ID);
+    if (!block) return;
+    // One delegated listener: every control in the block is static markup, and
+    // answering any of them can change which question below it applies.
+    block.addEventListener('change', () => syncFrenchQuestionTree());
+  }
+
+  // Whether this programme asks the questions at all. An explicit flag always
+  // wins; a record that predates the flag falls back to the same name test the
+  // server uses, so the two always agree on what may be submitted. With no
+  // record at all (the live list was unavailable) the questions stay hidden and
+  // all five fields submit blank, which the API accepts.
+  function frenchQuestionsEnabled(programName) {
+    const program = programsByName.get(programName);
+    if (!program) return false;
+    if (typeof program.french_questions_enabled === 'boolean') {
+      return program.french_questions_enabled;
+    }
+    return FRENCH_PROGRAM_NAME_RE.test(String(program.name || programName || ''));
+  }
+
+  function syncFrenchIntake(programName) {
+    const block = document.getElementById(FRENCH_INTAKE_GROUP_ID);
+    if (!block) return;
+
+    const enabled = frenchQuestionsEnabled(programName);
+    block.style.display = enabled ? '' : 'none';
+    if (!enabled) {
+      // Hide and clear every question, so a programme that cannot carry these
+      // answers never submits one — and validate() sees no visible group.
+      FRENCH_INTAKE_FIELDS.forEach((field) => showFrenchGroup(field.groupId, false));
+      showFrenchGroup(FRENCH_RESULTS_GROUP_ID, false);
+      return;
+    }
+    syncFrenchQuestionTree();
+  }
+
+  // Each question appears once the answer above it is given, and losing its
+  // parent clears it — the applicant should never see a question that no longer
+  // applies, nor submit an answer to one.
+  function syncFrenchQuestionTree() {
+    showFrenchGroup('french-goal-group', true);
+
+    const goal = val('french_goal');
+    const asksTarget = FRENCH_TEST_GOALS.includes(goal);
+    showFrenchGroup('french-target-level-group', asksTarget);
+
+    const targetAnswered = !asksTarget || Boolean(radio('french_target_level'));
+    showFrenchGroup('french-current-level-group', Boolean(goal) && targetAnswered);
+
+    const currentLevel = val('french_current_level');
+    // A complete beginner has no result to hold and nothing to place: both
+    // questions below are skipped, not merely unanswered.
+    const asksProof = Boolean(currentLevel) && currentLevel !== FRENCH_NO_FRENCH;
+    showFrenchGroup('french-test-proof-group', asksProof);
+
+    const proof = asksProof ? radio('french_test_proof') : '';
+    showFrenchGroup(FRENCH_RESULTS_GROUP_ID, proof === 'yes');
+    showFrenchGroup('french-placement-group', proof === 'no');
+  }
+
+  // Visibility, `required` and clearing move together: the wizard's step check
+  // in script.js validates by the `required` attribute, and a hidden question
+  // holding a value would submit an answer nobody was asked for.
+  function showFrenchGroup(groupId, show) {
+    const group = document.getElementById(groupId);
+    if (!group) return;
+
+    group.style.display = show ? '' : 'none';
+    group.querySelectorAll('input, select').forEach((control) => {
+      control.required = show;
+      if (show) return;
+      if (control.type === 'radio' || control.type === 'checkbox') control.checked = false;
+      else control.value = '';
+    });
+  }
+
+  function frenchGroupVisible(groupId) {
+    return groupVisible(FRENCH_INTAKE_GROUP_ID) && groupVisible(groupId);
+  }
+
+  // "Yes, I have a TCF/TEF result" is a claim about a document, so the document
+  // is required — the API 422s on the answer without it.
+  function frenchTestResultExpected() {
+    return frenchGroupVisible(FRENCH_RESULTS_GROUP_ID);
+  }
+
+  // The five answers as the payload should carry them: a question that was not
+  // asked reads "", whatever a control still holds.
+  function frenchIntakeAnswers() {
+    const answers = {};
+    FRENCH_INTAKE_FIELDS.forEach((field) => {
+      const answered = frenchGroupVisible(field.groupId);
+      answers[field.id] = answered
+        ? (field.type === 'radio' ? radio(field.id) : val(field.id))
+        : '';
+    });
+    return answers;
+  }
+
   function syncSemesterSelect(programName, preserveSelection) {
     const semesterSelect = document.getElementById('semester');
     if (!semesterSelect) return;
@@ -323,10 +484,10 @@
     const semesters = program && Array.isArray(program.semesters)
       ? program.semesters
       : [];
-    populateSemesters(semesterSelect, programName, semesters, preserveSelection);
+    populateSemesters(semesterSelect, programName, semesters, preserveSelection, program?.intakes || []);
   }
 
-  function populateSemesters(select, programName, semesters, preserveSelection) {
+  function populateSemesters(select, programName, semesters, preserveSelection, intakes = []) {
     const previous = preserveSelection ? select.value : '';
     const placeholder = getSemesterPlaceholder();
     const hasProgram = Boolean(programName);
@@ -353,12 +514,23 @@
     if (configuredStartDates.length && placeholder) select.appendChild(placeholder);
     appendOption(select, ASAP_SEMESTER.value, ASAP_SEMESTER.label);
     configuredStartDates.forEach((startDate) => {
-      appendOption(select, startDate, formatStartDate(startDate));
+      const intake = intakes.find((row) => row.start === startDate);
+      // The API owns availability; dates alone cannot tell us whether staff
+      // are still accepting applicants. Keep unavailable dates visible.
+      const unavailable = Boolean(intake) && intake.enrollment_open !== true;
+      const label = unavailable
+        ? `${formatStartDate(startDate)} — ${intake.enrollment_label || 'Unavailable'}`
+        : formatStartDate(startDate);
+      const option = appendOption(select, startDate, label);
+      option.disabled = unavailable;
+      if (unavailable) option.style.color = '#767676';
     });
 
     select.disabled = false;
-    if (previous && Array.from(select.options).some((option) => option.value === previous)) {
+    if (previous && Array.from(select.options).some((option) => option.value === previous && !option.disabled)) {
       select.value = previous;
+    } else if (previous) {
+      select.value = '';
     }
   }
 
@@ -367,6 +539,7 @@
     option.value = value;
     option.textContent = label;
     select.appendChild(option);
+    return option;
   }
 
   // ISO dates must be split before formatting: new Date('YYYY-MM-DD') treats
@@ -634,7 +807,7 @@
 
       // Required documents must be attached before we upload or submit anything.
       const missingDocs = DOC_FIELDS.filter(
-        (f) => f.required && !document.getElementById(f.inputId)?.files?.[0]
+        (f) => isDocRequired(f) && !document.getElementById(f.inputId)?.files?.[0]
       );
       if (missingDocs.length) {
         showValidationErrors(
@@ -643,7 +816,7 @@
             field: f.inputId,
             label: f.label,
             message: `${f.label} is required.`,
-            step: 4,
+            step: f.step || 4,
           })),
           'Please attach the required documents before submitting.'
         );
@@ -727,6 +900,10 @@
     return radio('using_agency') === 'yes';
   }
 
+  function isDocRequired(field) {
+    return field.requiredWhen ? field.requiredWhen() : Boolean(field.required);
+  }
+
   // ── Document uploads ──
 
   function validateFile(file, field) {
@@ -801,6 +978,7 @@
   async function collectDocuments() {
     const documents = [];
     for (const f of DOC_FIELDS) {
+      if (f.activeWhen && !f.activeWhen()) continue; // question no longer asked
       const file = document.getElementById(f.inputId)?.files?.[0];
       if (!file) continue; // optional fields are skipped when empty
       const err = validateFile(file, f);
@@ -872,10 +1050,23 @@
       // non-empty agency fields when using_agency is false).
       using_agency: usingAgency,
 
+      // Naming an agency answers "how did you hear about us?" on the applicant's
+      // behalf, so the locked select and the payload both read "agency". The
+      // detail line only carries wording for "Other"; "" means "not asked".
+      heard_about_us: usingAgency ? 'agency' : val('heard_about_us'),
+      heard_about_us_detail: (!usingAgency && val('heard_about_us') === 'other')
+        ? val('heard_about_us_detail')
+        : '',
+
       // Step 3 — Program
       program: val('program'),
       intended_semester: val('semester'),
       selected_add_ons: getSelectedAddOns(),
+
+      // Step 3 — French intake. All five always travel: a question that was not
+      // asked sends "", and a programme that does not ask them sends five blanks
+      // (the API rejects an answer arriving for such a programme).
+      ...frenchIntakeAnswers(),
 
       // Step 4 — Declaration
       signature_full_name: val('signature_name'),
@@ -931,6 +1122,11 @@
 
       if (!val(field.id)) {
         errors.push(toFieldError(field));
+        continue;
+      }
+
+      if (field.id === 'semester' && control.selectedOptions[0]?.disabled) {
+        errors.push(toFieldError(field, 'This intake is unavailable. Please choose another intake date.'));
         continue;
       }
 

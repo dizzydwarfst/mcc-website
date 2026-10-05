@@ -7,6 +7,11 @@
     <meta name="description" content="MCC French programs in two clear categories: the French as a Second Language (FSL) fast-track program from beginner to advanced, plus optional TCF & TEF Canada test preparation to reach expert level.">
     <title>French Programs - Metropolitan Community College</title>
     <link rel="stylesheet" href="style.css">
+        <!-- Outfit carries the wordmark, whose line-by-line alignment depends on its
+         exact metrics; preconnecting shortens the window where a fallback face
+         renders instead. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
@@ -26,7 +31,7 @@
                 <div class="logo-container">
                     <a href="index.html" class="logo-link">
                         <span class="mcc-logo"><img src="assets/mcc-logo-outlined.png" alt="Metropolitan Community College logo"></span>
-                        <span class="logo-text"><span class="logo-line logo-line-1">Metropolitan</span><span class="logo-line logo-line-2">Community College</span></span>
+                        <span class="logo-text"><span class="logo-line logo-line-1">Metropolitan</span><span class="logo-line logo-line-2">Community</span><span class="logo-line logo-line-3">College</span></span>
                     </a>
                 </div>
                 <button class="mobile-menu-btn" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
@@ -89,7 +94,7 @@
                         </div>
                     </div>
                     <div class="nav-dropdown">
-                        <a href="student-life.html" class="nav-dropdown-toggle"><span data-i18n="common.nav_student_life">Student Life</span> <i class="fas fa-chevron-down nav-chevron"></i></a>
+                        <a href="student-life.html" class="nav-dropdown-toggle"><span data-i18n="common.nav_student_life">Student Support</span> <i class="fas fa-chevron-down nav-chevron"></i></a>
                         <div class="dropdown-content">
                             <a href="student-life.html" data-i18n="common.nav_student_life_hub">Student Life Hub</a>
                             <a href="academic-calendar.html" data-i18n="common.nav_academic_calendar">Academic Calendar</a>
@@ -101,6 +106,7 @@
                             <a href="arrival-in-canada.html" data-i18n="common.nav_arrival">Arrival in Canada</a>
                             <a href="living-in-vancouver.html" data-i18n="common.nav_living_vancouver">Living in Vancouver</a>
                             <a href="community-integration.html" data-i18n="common.nav_community">Community Integration</a>
+                            <a href="document-services.html" data-i18n="common.nav_order_document">Order Document</a>
                         </div>
                     </div>
                 </nav>
@@ -140,7 +146,7 @@
                 <article class="req-card reveal">
                     <i class="fas fa-id-card" style="font-size:1.5rem;color:var(--accent-gold);margin-bottom:0.75rem;display:block;"></i>
                     <h3 data-i18n="flang.why1_title">Express Entry Advantage</h3>
-                    <p data-i18n="frhub.why1_p_hub">Achieving NCLC 7 in French (TEF Canada B2) can add up to 50 CRS bonus points — a significant advantage in Canada's Express Entry immigration system.</p>
+                    <p data-i18n="frhub.why1_p_hub">Achieving NCLC 7 in French (TCF Canada or TEF Canada, B2) can add up to 50 CRS bonus points — a significant advantage in Canada's Express Entry immigration system.</p>
                 </article>
                 <article class="req-card accent-teal reveal" style="transition-delay:0.1s;">
                     <i class="fas fa-university" style="font-size:1.5rem;color:var(--accent-gold);margin-bottom:0.75rem;display:block;"></i>
@@ -185,7 +191,7 @@
 
                 <article class="exam-prep-card reveal" style="transition-delay:0.1s;display:flex;flex-direction:column;">
                     <span class="fld-addon-tag" style="margin-bottom:1rem;"><i class="fas fa-plus"></i> Add-on</span>
-                    <h3>Test Preparation (TCF &amp; TEF)</h3>
+                    <h3>French Test Preparation (TCF &amp; TEF)</h3>
                     <p class="exam-subtitle">An optional add-on for students who want to improve their French beyond the FSL program to expert level — CEFR&nbsp;B2 / NCLC&nbsp;7 — through targeted preparation for the official TCF Canada and TEF Canada exams.</p>
                     <ul class="checklist">
                         <li>Designed to reach CEFR B2 / NCLC 7</li>

@@ -328,20 +328,61 @@
         };
     }
 
+    /**
+     * Fields the portal may use to say which programs an event belongs to.
+     * `programs` is the contract; the rest are accepted so a portal that only
+     * tags events still lights up the program sections without a website change.
+     */
+    const PROGRAM_KEY_FIELDS = Object.freeze(['programs', 'program_slugs', 'program_slug', 'program_key', 'program', 'tags']);
+
+    function programKey(value) {
+        if (value && typeof value === 'object') return programKey(value.slug || value.key || value.id || value.name || '');
+        return String(value ?? '').trim().toLowerCase().replace(/[\s_]+/g, '-');
+    }
+
+    function eventProgramKeys(event) {
+        const keys = new Set();
+        PROGRAM_KEY_FIELDS.forEach((field) => {
+            const value = event?.[field];
+            (Array.isArray(value) ? value : [value]).forEach((entry) => {
+                const key = programKey(entry);
+                if (key) keys.add(key);
+            });
+        });
+        return keys;
+    }
+
+    function eventMatchesProgram(event, program) {
+        const wanted = programKey(program);
+        return wanted ? eventProgramKeys(event).has(wanted) : true;
+    }
+
+    function isUpcomingEvent(event) {
+        const start = new Date(event.start_at);
+        if (Number.isNaN(start.getTime())) return false;
+        const end = new Date(event.end_at);
+        const finish = Number.isNaN(end.getTime()) ? start : end;
+        return finish.getTime() >= Date.now();
+    }
+
     function listFromPayload(payload) {
         const records = Array.isArray(payload) ? payload : payload?.events || payload?.items || payload?.results || [];
         return records.map(normalizeEvent);
     }
 
-    async function loadEvents({ featured = false, limit = 24 } = {}) {
+    async function loadEvents({ featured = false, limit = 24, program = '' } = {}) {
         const query = new URLSearchParams({ status: 'published', upcoming: 'true', limit: String(limit), locale: locale() });
         if (featured) query.set('featured', 'true');
+        if (program) query.set('program', program);
         try {
-            const events = listFromPayload(await apiRequest(`/public/events?${query}`));
-            return events.length ? events : [normalizeEvent(FALLBACK_EVENT)];
+            // The portal silently ignores filters it has not implemented yet, so
+            // every list is re-filtered here: a past or unrelated event must never render.
+            return listFromPayload(await apiRequest(`/public/events?${query}`))
+                .filter(isUpcomingEvent)
+                .filter((event) => eventMatchesProgram(event, program));
         } catch (error) {
-            console.info('[MCC events] Portal event list is not available yet; using the local published event.', error);
-            return [normalizeEvent(FALLBACK_EVENT)];
+            console.info('[MCC events] Portal event list is not available.', error);
+            return [];
         }
     }
 
@@ -454,6 +495,8 @@
         if (homeRoot) {
             homeRoot.innerHTML = events.slice(0, 3).map((event) => eventCard(event, events.length === 1)).join('');
             homeRoot.removeAttribute('aria-busy');
+            const homeSection = homeRoot.closest('section');
+            if (homeSection) homeSection.hidden = !events.length;
         }
         if (listRoot) {
             listRoot.innerHTML = events.length
@@ -461,6 +504,122 @@
                 : '<div class="events-empty"><h2>No upcoming events</h2><p>New MCC events will appear here when registration opens.</p></div>';
             listRoot.removeAttribute('aria-busy');
         }
+    }
+
+    async function loadPinnedEvent(slug) {
+        try {
+            const payload = await apiRequest(`/public/events/${encodeURIComponent(slug)}?locale=${encodeURIComponent(locale())}`);
+            const event = normalizeEvent(payload?.event || payload);
+            return isUpcomingEvent(event) ? [event] : [];
+        } catch (error) {
+            console.info('[MCC events] Pinned program event is not available.', error);
+            return [];
+        }
+    }
+
+    function programEventAgenda(event) {
+        const agenda = (Array.isArray(event.agenda) ? event.agenda : []).slice(0, 4)
+            .map((item) => ({
+                time: withPst(item.time || item.when || ''),
+                datetime: item.start_at || item.datetime || '',
+                title: item.title || item.name || '',
+                text: item.text || item.description || '',
+            }))
+            .filter((item) => item.title || item.text);
+        if (!agenda.length) return '';
+        const items = agenda.map((item) => `
+                <div class="fsl-agenda-item">
+                    ${item.datetime
+                        ? `<time datetime="${escapeHtml(item.datetime)}">${escapeHtml(item.time)}</time>`
+                        : `<span class="fsl-agenda-time">${escapeHtml(item.time)}</span>`}
+                    <div>
+                        <strong>${escapeHtml(item.title)}</strong>
+                        ${item.text ? `<p>${escapeHtml(item.text)}</p>` : ''}
+                    </div>
+                </div>`).join('');
+        return `
+            <div class="fsl-trial-agenda" aria-label="Event agenda">
+                <span class="fsl-agenda-label">${escapeHtml(event.agenda_label || 'What to expect')}</span>
+                ${items}
+                <p class="fsl-trial-timezone">All times are in PST.</p>
+            </div>`;
+    }
+
+    function programEventActions(event, root) {
+        // These come from our own markup, never from the portal.
+        const secondaryHref = root.getAttribute('data-events-program-link') || '';
+        const secondaryLabel = root.getAttribute('data-events-program-label') || 'Explore the Program';
+        const registerLabel = event.registration_open === false ? 'View Event Details' : 'Sign Up for Free';
+        const registerHref = `${eventHref(event)}${event.registration_open === false ? '' : '#register'}`;
+        return `
+                    <div class="hero-action-row fsl-event-actions">
+                        <a href="${escapeHtml(registerHref)}" class="btn-solid-gold">${registerLabel}</a>
+                        ${secondaryHref ? `<a href="${escapeHtml(secondaryHref)}" class="btn-outline-gold">${escapeHtml(secondaryLabel)}</a>` : ''}
+                        ${root.hasAttribute('data-events-chat') ? `<button type="button" class="btn-text-question" data-website-chat-open>
+                            <i class="fas fa-message" aria-hidden="true"></i>
+                            <span>Ask a Question</span>
+                        </button>` : ''}
+                    </div>`;
+    }
+
+    function programEventCard(event, root, titleId) {
+        const agenda = programEventAgenda(event);
+        const meta = [
+            { icon: 'fa-calendar-day', text: formatDate(event) },
+            { icon: 'fa-clock', text: withPst(formatTimeRange(event)) },
+            { icon: 'fa-location-dot', text: attendanceLabel(event) },
+        ].filter((item) => item.text);
+        return `
+            <div class="fsl-trial-card${agenda ? '' : ' is-single'} reveal active">
+                <div class="fsl-trial-copy">
+                    <span class="section-kicker">${escapeHtml(event.eyebrow || 'MCC event')}</span>
+                    <h2 class="section-title" id="${escapeHtml(titleId)}">${escapeHtml(event.title)}</h2>
+                    <p>${escapeHtml(event.summary || event.description || '')}</p>
+                    ${meta.length ? `<div class="fsl-trial-meta" aria-label="Event details">
+                        ${meta.map((item) => `<span><i class="fas ${escapeHtml(item.icon)}" aria-hidden="true"></i> ${escapeHtml(item.text)}</span>`).join('')}
+                    </div>` : ''}
+                    ${programEventActions(event, root)}
+                </div>
+                ${agenda}
+            </div>`;
+    }
+
+    /**
+     * Renders portal events inside a program page.
+     *
+     *   data-events-program="fsl"      show upcoming events the portal tags for this program
+     *   data-events-slug="my-event"    pin one specific event instead (wins over the program)
+     *   data-events-limit="1"          how many to show (default 1, soonest first)
+     *   data-events-program-link       optional secondary button href
+     *   data-events-program-label      optional secondary button label
+     *   data-events-chat               render the "Ask a Question" button
+     *
+     * The section stays hidden until the portal returns a matching upcoming
+     * event, so a program page can never advertise an event that has passed.
+     */
+    async function renderProgramEvents() {
+        const roots = Array.from(document.querySelectorAll('[data-events-program], [data-events-slug]'));
+        if (!roots.length) return;
+        await Promise.all(roots.map(async (root, index) => {
+            const pinnedSlug = root.getAttribute('data-events-slug') || '';
+            const program = root.getAttribute('data-events-program') || '';
+            const limit = Math.max(1, Number(root.getAttribute('data-events-limit')) || 1);
+            const events = pinnedSlug
+                ? await loadPinnedEvent(pinnedSlug)
+                : (await loadEvents({ program, limit: Math.max(limit, 12) }))
+                    .sort((a, b) => new Date(a.start_at) - new Date(b.start_at))
+                    .slice(0, limit);
+            root.removeAttribute('aria-busy');
+            if (!events.length) {
+                root.innerHTML = '';
+                root.hidden = true;
+                return;
+            }
+            const titleId = `program-event-title-${index}`;
+            root.innerHTML = events.map((event, position) => programEventCard(event, root, `${titleId}-${position}`)).join('');
+            root.setAttribute('aria-labelledby', `${titleId}-0`);
+            root.hidden = false;
+        }));
     }
 
     function policyListFromPayload(payload) {
@@ -756,15 +915,31 @@
         return `/public/events/${encodeURIComponent(event.id)}/registrations`;
     }
 
-    function utmValues() {
+    const UTM_FIELDS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+    // Eight characters from A-Z and 2-9, minus the look-alikes I, L, O, 0 and 1.
+    const REFERRAL_CODE_PATTERN = /^[A-HJKMNP-Z2-9]{8}$/;
+
+    /**
+     * The agency referral code and campaign values for this registration.
+     *
+     * The shared site script captures these on arrival and keeps them for the
+     * session, because a visitor often browses away from the event page before
+     * registering. The current URL is only a fallback for when session storage
+     * is unavailable. An unknown or retired code is ignored by the portal, so
+     * sending one never puts the registration at risk.
+     */
+    function attributionValues() {
         const query = new URLSearchParams(window.location.search);
-        return {
-            utm_source: query.get('utm_source') || '',
-            utm_medium: query.get('utm_medium') || '',
-            utm_campaign: query.get('utm_campaign') || '',
-            utm_content: query.get('utm_content') || '',
-            utm_term: query.get('utm_term') || '',
-        };
+        const captured = window.MccAttribution || null;
+        const storedUtm = captured ? captured.utm() : {};
+        const values = {};
+        UTM_FIELDS.forEach((field) => {
+            values[field] = storedUtm[field] || String(query.get(field) || '').trim();
+        });
+        const fromUrl = String(query.get('ref') || '').trim().toUpperCase();
+        values.referral_code = (captured && captured.referralCode())
+            || (REFERRAL_CODE_PATTERN.test(fromUrl) ? fromUrl : '');
+        return values;
     }
 
     function setupRegistration(event, consentForm) {
@@ -878,7 +1053,7 @@
                 agency_name: referral.value === 'agency' ? String(data.get('agency_name') || '').trim() : '',
                 locale: locale(),
                 source_page: window.location.href.slice(0, 500),
-                ...utmValues(),
+                ...attributionValues(),
                 consent,
                 company_website: String(data.get('company_website') || ''),
             };
@@ -1047,6 +1222,7 @@
 
     ready(() => {
         renderEventLists();
+        renderProgramEvents();
         renderEventDetail();
         renderLegalDocument();
 
@@ -1056,6 +1232,7 @@
             if (nextLocale === renderedLocale) return;
             renderedLocale = nextLocale;
             renderEventLists();
+            renderProgramEvents();
             renderEventDetail();
             renderLegalDocument();
         });
