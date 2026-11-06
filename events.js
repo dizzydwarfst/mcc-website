@@ -394,11 +394,15 @@
         return 'In person';
     }
 
-    function withPst(value) {
+    function withPacificTime(value) {
         const text = String(value || '').trim();
         if (!text) return '';
-        const standardized = text.replace(/\b(?:PDT|PST|Pacific(?:\s+time)?)\b/gi, 'PST');
-        return /\bPST\b/i.test(standardized) ? standardized : `${standardized} PST`;
+        const label = 'Pacific Time (PT)';
+        const standardized = text.replace(
+            /\bPacific(?:\s+(?:standard|daylight))?(?:\s+time)?\b(?:\s*\((?:PDT|PST|PCT|PT)\))?|\b(?:PDT|PST|PCT|PT)\b/gi,
+            label,
+        );
+        return standardized.includes(label) ? standardized : `${standardized} ${label}`;
     }
 
     function eventHref(event) {
@@ -439,7 +443,7 @@
                     <p>${escapeHtml(event.summary)}</p>
                     <div class="event-card-meta">
                         <span><i class="fa-regular fa-calendar" aria-hidden="true"></i>${escapeHtml(formatDate(event))}</span>
-                        <span><i class="fa-regular fa-clock" aria-hidden="true"></i>${escapeHtml(withPst(formatTimeRange(event)))}</span>
+                        <span><i class="fa-regular fa-clock" aria-hidden="true"></i>${escapeHtml(withPacificTime(formatTimeRange(event)))}</span>
                         <span><i class="fa-solid fa-location-dot" aria-hidden="true"></i>${escapeHtml(attendanceLabel(event))}</span>
                     </div>
                     <div class="event-card-actions">
@@ -583,14 +587,14 @@
             return `
                 <aside class="event-course-card">
                     <span class="section-kicker">Continue learning</span><h3>${escapeHtml(details.title || 'Program details')}</h3>
-                    <dl><div><dt>Course starts</dt><dd>${escapeHtml(details.start_date || 'Ask our team')}</dd></div><div><dt>Class schedule</dt><dd>${escapeHtml(details.schedule ? withPst(details.schedule) : 'Ask our team')}</dd></div><div><dt>Delivery</dt><dd>${escapeHtml(details.delivery || attendanceLabel(event))}</dd></div></dl>
+                    <dl><div><dt>Course starts</dt><dd>${escapeHtml(details.start_date || 'Ask our team')}</dd></div><div><dt>Class schedule</dt><dd>${escapeHtml(details.schedule ? withPacificTime(details.schedule) : 'Ask our team')}</dd></div><div><dt>Delivery</dt><dd>${escapeHtml(details.delivery || attendanceLabel(event))}</dd></div></dl>
                     <a href="${escapeHtml(programUrl)}" class="subtle-link">Explore the program <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                 </aside>`;
         }
         return `
             <aside class="event-course-card">
                 <span class="section-kicker">Event at a glance</span><h3>${escapeHtml(attendanceLabel(event))}</h3>
-                <dl><div><dt>Date</dt><dd>${escapeHtml(formatDate(event))}</dd></div><div><dt>Time</dt><dd>${escapeHtml(withPst(formatTimeRange(event)))}</dd></div>${location ? `<div><dt>Location</dt><dd>${escapeHtml(location)}</dd></div>` : ''}</dl>
+                <dl><div><dt>Date</dt><dd>${escapeHtml(formatDate(event))}</dd></div><div><dt>Time</dt><dd>${escapeHtml(withPacificTime(formatTimeRange(event)))}</dd></div>${location ? `<div><dt>Location</dt><dd>${escapeHtml(location)}</dd></div>` : ''}</dl>
                 ${event.contact_email ? `<a href="mailto:${escapeHtml(event.contact_email)}" class="subtle-link">Contact the event team <i class="fas fa-arrow-right" aria-hidden="true"></i></a>` : ''}
             </aside>`;
     }
@@ -618,7 +622,7 @@
                     <p>${escapeHtml(event.summary)}</p>
                     <div class="event-hero-facts">
                         <span><i class="fa-regular fa-calendar" aria-hidden="true"></i><strong>${escapeHtml(formatDate(event))}</strong></span>
-                        <span><i class="fa-regular fa-clock" aria-hidden="true"></i><strong>${escapeHtml(withPst(formatTimeRange(event)))}</strong></span>
+                        <span><i class="fa-regular fa-clock" aria-hidden="true"></i><strong>${escapeHtml(withPacificTime(formatTimeRange(event)))}</strong></span>
                         <span><i class="fa-solid fa-location-dot" aria-hidden="true"></i><strong>${escapeHtml(attendanceLabel(event))}</strong></span>
                     </div>
                     <div class="hero-action-row">
@@ -650,7 +654,7 @@
                 <div class="event-section-heading"><span class="section-kicker">Your free hour</span><h2>A clear, useful introduction to MCC French</h2></div>
                 <div class="event-agenda-grid">
                     <div class="event-agenda-list">
-                        ${event.agenda.map((item, index) => `<article><span>${String(index + 1).padStart(2, '0')}</span><time>${escapeHtml(withPst(item.time || item.start_time))}</time><div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.body || item.text || item.description)}</p></div></article>`).join('')}
+                        ${event.agenda.map((item, index) => `<article><span>${String(index + 1).padStart(2, '0')}</span><time>${escapeHtml(withPacificTime(item.time || item.start_time))}</time><div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.body || item.text || item.description)}</p></div></article>`).join('')}
                     </div>
                     ${courseCardTemplate(event)}
                 </div>
@@ -687,7 +691,7 @@
             </section>
 
             <section class="event-registration-section" id="register">
-                <div class="event-registration-intro"><span class="section-kicker">Free registration</span><h2>Reserve your place</h2><p>Complete the form once. MCC will send the online link or in-person instructions before the session.</p><div class="event-registration-summary"><span><i class="fa-regular fa-calendar" aria-hidden="true"></i>${escapeHtml(formatDate(event))}</span><span><i class="fa-regular fa-clock" aria-hidden="true"></i>${escapeHtml(withPst(formatTimeRange(event)))}</span><span><i class="fa-solid fa-location-dot" aria-hidden="true"></i>${escapeHtml(attendanceLabel(event))}</span></div><button type="button" class="btn-text-question" data-website-chat-open><i class="fas fa-message" aria-hidden="true"></i> Ask a Question</button></div>
+                <div class="event-registration-intro"><span class="section-kicker">Free registration</span><h2>Reserve your place</h2><p>Complete the form once. MCC will send the online link or in-person instructions before the session.</p><div class="event-registration-summary"><span><i class="fa-regular fa-calendar" aria-hidden="true"></i>${escapeHtml(formatDate(event))}</span><span><i class="fa-regular fa-clock" aria-hidden="true"></i>${escapeHtml(withPacificTime(formatTimeRange(event)))}</span><span><i class="fa-solid fa-location-dot" aria-hidden="true"></i>${escapeHtml(attendanceLabel(event))}</span></div><button type="button" class="btn-text-question" data-website-chat-open><i class="fas fa-message" aria-hidden="true"></i> Ask a Question</button></div>
                 <div class="event-registration-card">
                     <form data-event-registration novalidate${event.registration_open === false ? ' hidden' : ''}>
                         <div class="event-form-grid">
