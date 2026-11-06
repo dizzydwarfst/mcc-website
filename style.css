@@ -8017,6 +8017,7 @@ body.engagement-modal-open {
 }
 
 .event-card-content {
+    min-width: 0;
     padding: clamp(1.4rem, 2.5vw, 2rem);
     text-align: center;
 }
@@ -8024,6 +8025,8 @@ body.engagement-modal-open {
 .event-card-content h3 {
     margin: 0.55rem 0 0.75rem;
     font-size: clamp(1.4rem, 2vw, 2rem);
+    white-space: normal;
+    overflow-wrap: anywhere;
 }
 
 .event-card-content h3 a {
@@ -9306,10 +9309,6 @@ body.engagement-modal-open {
     .event-detail-hero h1,
     .event-section-heading h2,
     .event-registration-intro h2 {
-        white-space: nowrap;
-    }
-
-    .event-card.is-featured .event-card-content h3 {
         white-space: nowrap;
     }
 }
