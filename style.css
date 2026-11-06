@@ -8022,6 +8022,10 @@ body.engagement-modal-open {
     text-align: center;
 }
 
+.event-card-content > .section-kicker {
+    justify-content: center;
+}
+
 .event-card-content h3 {
     margin: 0.55rem 0 0.75rem;
     font-size: clamp(1.4rem, 2vw, 2rem);
