@@ -1,10 +1,7 @@
 /**
  * MCC public events experience.
  *
- * The portal is the source of truth. A local published event keeps the first
- * launch useful while Event Studio is being deployed, but registrations are
- * always sent to the versioned portal event endpoint so consent evidence is
- * never lost in the legacy website-signup flow.
+ * The portal is the source of truth for event visibility and registration.
  */
 (function initMccEvents() {
     'use strict';
@@ -275,6 +272,17 @@
         return { ...raw, ...(translations[locale()] || translations.en || {}) };
     }
 
+    function eventTimezone(value) {
+        try {
+            const zone = String(value || 'America/Vancouver').trim();
+            new Intl.DateTimeFormat('en-CA', { timeZone: zone });
+            return zone;
+        } catch (_) {
+            // Older portal records used labels such as "Vancouver time".
+            return 'America/Vancouver';
+        }
+    }
+
     function normalizeEvent(raw) {
         const isLocalFallback = raw === FALLBACK_EVENT;
         const event = localizedRecord(raw);
@@ -299,6 +307,7 @@
         return {
             ...base,
             ...event,
+            timezone: eventTimezone(event.timezone),
             id: event.id || event._id || event.event_id || base.id || '',
             event_id: event.event_id || event.public_id || event.id || base.event_id || '',
             slug: event.slug || base.slug || '',
@@ -334,15 +343,16 @@
     }
 
     async function loadEvents({ featured = false, limit = 24 } = {}) {
-        const query = new URLSearchParams({ status: 'published', upcoming: 'true', limit: String(limit), locale: locale() });
-        if (featured) query.set('featured', 'true');
-        try {
-            const events = listFromPayload(await apiRequest(`/public/events?${query}`));
-            return events.length ? events : [normalizeEvent(FALLBACK_EVENT)];
-        } catch (error) {
-            console.info('[MCC events] Portal event list is not available yet; using the local published event.', error);
-            return [normalizeEvent(FALLBACK_EVENT)];
+        const query = new URLSearchParams({ status: 'all', limit: String(limit), locale: locale() });
+        if (featured) {
+            query.set('featured', 'true');
+            query.set('upcoming', 'true');
         }
+        else query.set('show_on_events_page', 'true');
+        const events = listFromPayload(await apiRequest(`/public/events?${query}`));
+        return events.filter((event) => ['published', 'closed'].includes(event.status)
+            && !Number.isNaN(Date.parse(event.start_at))
+            && (featured ? event.featured : event.show_on_events_page !== false));
     }
 
     function eventSlugFromLocation() {
@@ -355,13 +365,8 @@
     }
 
     async function loadEvent(slug) {
-        try {
-            const payload = await apiRequest(`/public/events/${encodeURIComponent(slug)}?locale=${encodeURIComponent(locale())}`);
-            return normalizeEvent(payload?.event || payload);
-        } catch (error) {
-            if (!slug || slug === FALLBACK_EVENT.slug || slug === FALLBACK_EVENT.event_id) return normalizeEvent(FALLBACK_EVENT);
-            throw error;
-        }
+        const payload = await apiRequest(`/public/events/${encodeURIComponent(slug)}?locale=${encodeURIComponent(locale())}`);
+        return normalizeEvent(payload?.event || payload);
     }
 
     function formatDate(event, includeYear = true) {
@@ -420,15 +425,16 @@
 
     function eventCard(event, compact = false, showProgramInfo = false) {
         const image = safeUrl(event.hero_image, FALLBACK_EVENT.hero_image);
+        const past = Date.parse(event.end_at || event.start_at) < Date.now();
         const registrationLabel = event.registration_open === false ? 'View Event' : (event.waitlist ? 'Join the Waitlist' : 'Sign Up for Free');
         return `
             <article class="event-card${compact ? ' is-featured' : ''}">
                 <a class="event-card-media" href="${escapeHtml(eventHref(event))}" aria-label="View ${escapeHtml(event.title)}">
                     <img src="${escapeHtml(image)}" alt="${escapeHtml(event.hero_alt || '')}">
-                    <span class="event-card-date"><strong>${escapeHtml(new Date(event.start_at).getDate())}</strong>${escapeHtml(new Intl.DateTimeFormat('en-CA', { month: 'short', timeZone: event.timezone || 'America/Vancouver' }).format(new Date(event.start_at)))}</span>
+                    <span class="event-card-date"><strong>${escapeHtml(new Intl.DateTimeFormat('en-CA', { day: 'numeric', timeZone: event.timezone }).format(new Date(event.start_at)))}</strong>${escapeHtml(new Intl.DateTimeFormat('en-CA', { month: 'short', timeZone: event.timezone }).format(new Date(event.start_at)))}</span>
                 </a>
                 <div class="event-card-content">
-                    <span class="section-kicker">${escapeHtml(event.eyebrow || 'MCC event')}</span>
+                    <span class="section-kicker">${escapeHtml(past ? 'Past event' : event.eyebrow || 'MCC event')}</span>
                     <h3><a href="${escapeHtml(eventHref(event))}">${escapeHtml(event.title)}</a></h3>
                     <p>${escapeHtml(event.summary)}</p>
                     <div class="event-card-meta">
@@ -450,17 +456,20 @@
         const homeRoot = document.querySelector('[data-events-home]');
         const listRoot = document.querySelector('[data-events-list]');
         if (!homeRoot && !listRoot) return;
-        const events = await loadEvents({ featured: Boolean(homeRoot), limit: homeRoot ? 3 : 24 });
-        if (homeRoot) {
-            homeRoot.innerHTML = events.slice(0, 3).map((event) => eventCard(event, events.length === 1)).join('');
-            homeRoot.removeAttribute('aria-busy');
-        }
-        if (listRoot) {
-            listRoot.innerHTML = events.length
-                ? events.map((event) => eventCard(event, false, true)).join('')
-                : '<div class="events-empty"><h2>No upcoming events</h2><p>New MCC events will appear here when registration opens.</p></div>';
-            listRoot.removeAttribute('aria-busy');
-        }
+        await Promise.all([[homeRoot, true], [listRoot, false]].map(async ([root, featured]) => {
+            if (!root) return;
+            try {
+                const events = await loadEvents({ featured, limit: featured ? 3 : 24 });
+                root.innerHTML = events.length
+                    ? events.map((event) => eventCard(event, featured && events.length === 1, !featured)).join('')
+                    : `<div class="events-empty"><h2>${featured ? 'No upcoming events' : 'No events to display'}</h2><p>Please check back for new MCC events.</p></div>`;
+            } catch (error) {
+                console.info('[MCC events] Could not load events.', error);
+                root.innerHTML = '<div class="events-empty" role="status"><h2>Events are temporarily unavailable</h2><p>Please refresh the page to try again.</p></div>';
+            } finally {
+                root.removeAttribute('aria-busy');
+            }
+        }));
     }
 
     function policyListFromPayload(payload) {
