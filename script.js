@@ -525,12 +525,61 @@ document.addEventListener('DOMContentLoaded', () => {
         // Conditional agency fields (Step 2)
         const agencyFields = document.getElementById('agency-fields');
         const agencyRadios = wizardForm.querySelectorAll('input[name="using_agency"]');
+
+        // "How did you hear about us?" is coupled to the agency question: naming an
+        // agency answers it ("agency"), so we lock the select instead of asking twice.
+        // The applicant's own pick is remembered and restored if they switch to "No".
+        const heardAbout = document.getElementById('heard_about_us');
+        const heardAboutLockedHint = document.getElementById('heard-about-locked-hint');
+        const heardAboutDetailGroup = document.getElementById('heard-about-detail-group');
+        const heardAboutDetail = document.getElementById('heard_about_us_detail');
+        let heardAboutManualChoice = heardAbout ? heardAbout.value : '';
+
+        function syncHeardAboutDetail() {
+            if (!heardAboutDetailGroup) return;
+            const showDetail = Boolean(heardAbout) && !heardAbout.disabled && heardAbout.value === 'other';
+            heardAboutDetailGroup.style.display = showDetail ? '' : 'none';
+            if (!showDetail && heardAboutDetail) heardAboutDetail.value = '';
+        }
+
+        function syncHeardAboutLock(usingAgency) {
+            if (!heardAbout) return;
+            if (usingAgency) {
+                heardAbout.value = 'agency';
+                heardAbout.disabled = true;
+                heardAbout.setAttribute('aria-disabled', 'true');
+            } else {
+                heardAbout.disabled = false;
+                heardAbout.removeAttribute('aria-disabled');
+                heardAbout.value = heardAboutManualChoice;
+            }
+            if (heardAboutLockedHint) heardAboutLockedHint.style.display = usingAgency ? '' : 'none';
+            syncHeardAboutDetail();
+        }
+
+        if (heardAbout) {
+            heardAbout.addEventListener('change', () => {
+                if (heardAbout.disabled) return;
+                if (heardAbout.value === 'agency') {
+                    const agencyYes = wizardForm.querySelector('#agency_yes');
+                    if (agencyYes) {
+                        agencyYes.checked = true;
+                        agencyYes.dispatchEvent(new Event('change', { bubbles: true }));
+                        return;
+                    }
+                }
+                heardAboutManualChoice = heardAbout.value;
+                syncHeardAboutDetail();
+            });
+        }
+
         function syncAgencyVisibility() {
             const checked = wizardForm.querySelector('input[name="using_agency"]:checked');
             const showFields = checked && checked.value === 'yes';
             if (agencyFields) {
                 agencyFields.style.display = showFields ? '' : 'none';
             }
+            syncHeardAboutLock(Boolean(showFields));
         }
         agencyRadios.forEach(r => r.addEventListener('change', syncAgencyVisibility));
         syncAgencyVisibility();
@@ -857,16 +906,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 .find((dropdown) => [...dropdown.querySelectorAll(':scope > a[href]')]
                     .some((candidate) => cleanPath(candidate.getAttribute('href')) === '/programs'));
             const programsMenu = programsDropdown?.querySelector(':scope > .dropdown-content');
-            if (programsMenu && ![...programsMenu.querySelectorAll('a[href]')]
-                .some((candidate) => cleanPath(candidate.getAttribute('href')) === '/programs-french-language')) {
-                const fslLink = document.createElement('a');
-                fslLink.href = '/programs-french-language';
-                fslLink.setAttribute('data-i18n', 'common.nav_french_language');
+            // French programs are listed last in the Programs menu: FSL, then
+            // French Test Preparation (TCF & TEF) directly after it.
+            const findMenuLink = (path) => [...(programsMenu?.querySelectorAll('a[href]') || [])]
+                .find((candidate) => cleanPath(candidate.getAttribute('href')) === path);
+            const makeMenuLink = (path, key, fallback) => {
+                const menuLink = document.createElement('a');
+                menuLink.href = path;
+                menuLink.setAttribute('data-i18n', `common.${key}`);
                 const language = document.body.dataset.lang === 'fr' ? 'fr' : 'en';
-                const translation = window.MCC_TRANSLATIONS?.common?.nav_french_language;
-                fslLink.textContent = translation?.[language]
-                    || (language === 'fr' ? 'Français langue seconde (FLS)' : 'French as a Second Language (FSL)');
-                programsMenu.appendChild(fslLink);
+                menuLink.textContent = window.MCC_TRANSLATIONS?.common?.[key]?.[language] || fallback[language];
+                return menuLink;
+            };
+            if (programsMenu) {
+                let fslLink = findMenuLink('/programs-french-language');
+                if (!fslLink) {
+                    fslLink = makeMenuLink('/programs-french-language', 'nav_french_language',
+                        { en: 'French as a Second Language (FSL)', fr: 'Français langue seconde (FLS)' });
+                    programsMenu.appendChild(fslLink);
+                }
+                if (!findMenuLink('/programs-french-tcf')) {
+                    fslLink.after(makeMenuLink('/programs-french-tcf', 'nav_french_tcf',
+                        { en: 'French Test Preparation (TCF & TEF)', fr: 'Préparation aux tests de français (TCF et TEF)' }));
+                }
             }
 
             let link = [...navigation.querySelectorAll('a[href]')]
@@ -906,8 +968,22 @@ document.addEventListener('DOMContentLoaded', () => {
 (function loadWebsiteEngagement() {
     if (document.querySelector('script[data-mcc-website-engagement]')) return;
     const sharedScript = document.currentScript;
+    const base = sharedScript?.src || window.location.href;
+
+    // An injected script is async by default, so the two would race. Setting
+    // async = false puts them back in insertion order, which matters because
+    // website-engagement.js reads the portal contract from portal-api.js.
+    if (!window.MCCPortalApi && !document.querySelector('script[data-mcc-portal-api]')) {
+        const portalApi = document.createElement('script');
+        portalApi.src = new URL('portal-api.js', base).href;
+        portalApi.async = false;
+        portalApi.dataset.mccPortalApi = 'true';
+        document.head.appendChild(portalApi);
+    }
+
     const featureScript = document.createElement('script');
-    featureScript.src = new URL('website-engagement.js', sharedScript?.src || window.location.href).href;
+    featureScript.src = new URL('website-engagement.js', base).href;
+    featureScript.async = false;
     featureScript.dataset.mccWebsiteEngagement = 'true';
     document.head.appendChild(featureScript);
 })();

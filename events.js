@@ -337,22 +337,61 @@
         };
     }
 
+    /**
+     * Fields the portal may use to say which programs an event belongs to.
+     * `programs` is the contract; the rest are accepted so a portal that only
+     * tags events still lights up the program sections without a website change.
+     */
+    const PROGRAM_KEY_FIELDS = Object.freeze(['programs', 'program_slugs', 'program_slug', 'program_key', 'program', 'tags']);
+
+    function programKey(value) {
+        if (value && typeof value === 'object') return programKey(value.slug || value.key || value.id || value.name || '');
+        return String(value ?? '').trim().toLowerCase().replace(/[\s_]+/g, '-');
+    }
+
+    function eventProgramKeys(event) {
+        const keys = new Set();
+        PROGRAM_KEY_FIELDS.forEach((field) => {
+            const value = event?.[field];
+            (Array.isArray(value) ? value : [value]).forEach((entry) => {
+                const key = programKey(entry);
+                if (key) keys.add(key);
+            });
+        });
+        return keys;
+    }
+
+    function eventMatchesProgram(event, program) {
+        const wanted = programKey(program);
+        return wanted ? eventProgramKeys(event).has(wanted) : true;
+    }
+
+    function isUpcomingEvent(event) {
+        const start = new Date(event.start_at);
+        if (Number.isNaN(start.getTime())) return false;
+        const end = new Date(event.end_at);
+        const finish = Number.isNaN(end.getTime()) ? start : end;
+        return finish.getTime() >= Date.now();
+    }
+
     function listFromPayload(payload) {
         const records = Array.isArray(payload) ? payload : payload?.events || payload?.items || payload?.results || [];
         return records.map(normalizeEvent);
     }
 
-    async function loadEvents({ featured = false, limit = 24 } = {}) {
+    async function loadEvents({ featured = false, limit = 24, program = '' } = {}) {
         const query = new URLSearchParams({ status: 'all', limit: String(limit), locale: locale() });
-        if (featured) {
-            query.set('featured', 'true');
-            query.set('upcoming', 'true');
-        }
-        else query.set('show_on_events_page', 'true');
+        if (featured) query.set('featured', 'true');
+        if (featured || program) query.set('upcoming', 'true');
+        if (program) query.set('program', program);
+        if (!featured && !program) query.set('show_on_events_page', 'true');
         const events = listFromPayload(await apiRequest(`/public/events?${query}`));
         return events.filter((event) => ['published', 'closed'].includes(event.status)
             && !Number.isNaN(Date.parse(event.start_at))
-            && (featured ? event.featured : event.show_on_events_page !== false));
+            && (!(featured || program) || isUpcomingEvent(event))
+            && (!featured || event.featured)
+            && (!program || eventMatchesProgram(event, program))
+            && (featured || program || event.show_on_events_page !== false));
     }
 
     function eventSlugFromLocation() {
@@ -473,6 +512,125 @@
             } finally {
                 root.removeAttribute('aria-busy');
             }
+        }));
+    }
+
+    async function loadPinnedEvent(slug) {
+        try {
+            const payload = await apiRequest(`/public/events/${encodeURIComponent(slug)}?locale=${encodeURIComponent(locale())}`);
+            const event = normalizeEvent(payload?.event || payload);
+            return ['published', 'closed'].includes(event.status) && isUpcomingEvent(event) ? [event] : [];
+        } catch (error) {
+            console.info('[MCC events] Pinned program event is not available.', error);
+            return [];
+        }
+    }
+
+    function programEventAgenda(event) {
+        const agenda = (Array.isArray(event.agenda) ? event.agenda : []).slice(0, 4)
+            .map((item) => ({
+                time: withPacificTime(item.time || item.when || ''),
+                datetime: item.start_at || item.datetime || '',
+                title: item.title || item.name || '',
+                text: item.text || item.description || '',
+            }))
+            .filter((item) => item.title || item.text);
+        if (!agenda.length) return '';
+        const items = agenda.map((item) => `
+                <div class="fsl-agenda-item">
+                    ${item.datetime
+                        ? `<time datetime="${escapeHtml(item.datetime)}">${escapeHtml(item.time)}</time>`
+                        : `<span class="fsl-agenda-time">${escapeHtml(item.time)}</span>`}
+                    <div>
+                        <strong>${escapeHtml(item.title)}</strong>
+                        ${item.text ? `<p>${escapeHtml(item.text)}</p>` : ''}
+                    </div>
+                </div>`).join('');
+        return `
+            <div class="fsl-trial-agenda" aria-label="Event agenda">
+                <span class="fsl-agenda-label">${escapeHtml(event.agenda_label || 'What to expect')}</span>
+                ${items}
+                <p class="fsl-trial-timezone">All times are in Pacific Time (PT).</p>
+            </div>`;
+    }
+
+    function programEventActions(event, root) {
+        // These come from our own markup, never from the portal.
+        const secondaryHref = root.getAttribute('data-events-program-link') || '';
+        const secondaryLabel = root.getAttribute('data-events-program-label') || 'Explore the Program';
+        const registerLabel = event.registration_open === false ? 'View Event Details' : 'Sign Up for Free';
+        const registerHref = `${eventHref(event)}${event.registration_open === false ? '' : '#register'}`;
+        return `
+                    <div class="hero-action-row fsl-event-actions">
+                        <a href="${escapeHtml(registerHref)}" class="btn-solid-gold">${registerLabel}</a>
+                        ${secondaryHref ? `<a href="${escapeHtml(secondaryHref)}" class="btn-outline-gold">${escapeHtml(secondaryLabel)}</a>` : ''}
+                        ${root.hasAttribute('data-events-chat') ? `<button type="button" class="btn-text-question" data-website-chat-open>
+                            <i class="fas fa-message" aria-hidden="true"></i>
+                            <span>Ask a Question</span>
+                        </button>` : ''}
+                    </div>`;
+    }
+
+    function programEventCard(event, root, titleId) {
+        const agenda = programEventAgenda(event);
+        const meta = [
+            { icon: 'fa-calendar-day', text: formatDate(event) },
+            { icon: 'fa-clock', text: withPacificTime(formatTimeRange(event)) },
+            { icon: 'fa-location-dot', text: attendanceLabel(event) },
+        ].filter((item) => item.text);
+        return `
+            <div class="fsl-trial-card${agenda ? '' : ' is-single'} reveal active">
+                <div class="fsl-trial-copy">
+                    <span class="section-kicker">${escapeHtml(event.eyebrow || 'MCC event')}</span>
+                    <h2 class="section-title" id="${escapeHtml(titleId)}">${escapeHtml(event.title)}</h2>
+                    <p>${escapeHtml(event.summary || event.description || '')}</p>
+                    ${meta.length ? `<div class="fsl-trial-meta" aria-label="Event details">
+                        ${meta.map((item) => `<span><i class="fas ${escapeHtml(item.icon)}" aria-hidden="true"></i> ${escapeHtml(item.text)}</span>`).join('')}
+                    </div>` : ''}
+                    ${programEventActions(event, root)}
+                </div>
+                ${agenda}
+            </div>`;
+    }
+
+    /**
+     * Renders portal events inside a program page.
+     *
+     *   data-events-program="fsl"      show upcoming events the portal tags for this program
+     *   data-events-slug="my-event"    pin one specific event instead (wins over the program)
+     *   data-events-limit="1"          how many to show (default 1, soonest first)
+     *   data-events-program-link       optional secondary button href
+     *   data-events-program-label      optional secondary button label
+     *   data-events-chat               render the "Ask a Question" button
+     *
+     * The section stays hidden until the portal returns a matching upcoming
+     * event, so a program page can never advertise an event that has passed.
+     */
+    async function renderProgramEvents() {
+        const roots = Array.from(document.querySelectorAll('[data-events-program], [data-events-slug]'));
+        if (!roots.length) return;
+        await Promise.all(roots.map(async (root, index) => {
+            const pinnedSlug = root.getAttribute('data-events-slug') || '';
+            const program = root.getAttribute('data-events-program') || '';
+            const limit = Math.max(1, Number(root.getAttribute('data-events-limit')) || 1);
+            const events = pinnedSlug
+                ? await loadPinnedEvent(pinnedSlug)
+                : (await loadEvents({ program, limit: Math.max(limit, 12) }).catch((error) => {
+                    console.info('[MCC events] Program events are temporarily unavailable.', error);
+                    return [];
+                }))
+                    .sort((a, b) => new Date(a.start_at) - new Date(b.start_at))
+                    .slice(0, limit);
+            root.removeAttribute('aria-busy');
+            if (!events.length) {
+                root.innerHTML = '';
+                root.hidden = true;
+                return;
+            }
+            const titleId = `program-event-title-${index}`;
+            root.innerHTML = events.map((event, position) => programEventCard(event, root, `${titleId}-${position}`)).join('');
+            root.setAttribute('aria-labelledby', `${titleId}-0`);
+            root.hidden = false;
         }));
     }
 
@@ -1076,6 +1234,7 @@
 
     ready(() => {
         renderEventLists();
+        renderProgramEvents();
         renderEventDetail();
         renderLegalDocument();
 
@@ -1085,6 +1244,7 @@
             if (nextLocale === renderedLocale) return;
             renderedLocale = nextLocale;
             renderEventLists();
+            renderProgramEvents();
             renderEventDetail();
             renderLegalDocument();
         });

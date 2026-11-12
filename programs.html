@@ -6,6 +6,11 @@
     <meta name="description" content="Explore MCC programs — Diploma credentials, English (ESL), and French Language programs designed for career success and Canadian immigration goals.">
     <title>Programs - Metropolitan Community College</title>
     <link rel="stylesheet" href="style.css">
+        <!-- Outfit carries the wordmark, whose line-by-line alignment depends on its
+         exact metrics; preconnecting shortens the window where a fallback face
+         renders instead. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
@@ -25,7 +30,7 @@
                 <div class="logo-container">
                     <a href="index.html" class="logo-link">
                         <span class="mcc-logo"><img src="assets/mcc-logo-outlined.png" alt="Metropolitan Community College logo"></span>
-                        <span class="logo-text"><span class="logo-line logo-line-1">Metropolitan</span><span class="logo-line logo-line-2">Community College</span></span>
+                        <span class="logo-text"><span class="logo-line logo-line-1">Metropolitan</span><span class="logo-line logo-line-2">Community</span><span class="logo-line logo-line-3">College</span></span>
                     </a>
                 </div>
                 <button class="mobile-menu-btn" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
@@ -88,7 +93,7 @@
                         </div>
                     </div>
                     <div class="nav-dropdown">
-                        <a href="student-life.html" class="nav-dropdown-toggle"><span data-i18n="common.nav_student_life">Student Life</span> <i class="fas fa-chevron-down nav-chevron"></i></a>
+                        <a href="student-life.html" class="nav-dropdown-toggle"><span data-i18n="common.nav_student_life">Student Support</span> <i class="fas fa-chevron-down nav-chevron"></i></a>
                         <div class="dropdown-content">
                             <a href="student-life.html" data-i18n="common.nav_student_life_hub">Student Life Hub</a>
                             <a href="academic-calendar.html" data-i18n="common.nav_academic_calendar">Academic Calendar</a>
@@ -100,6 +105,7 @@
                             <a href="arrival-in-canada.html" data-i18n="common.nav_arrival">Arrival in Canada</a>
                             <a href="living-in-vancouver.html" data-i18n="common.nav_living_vancouver">Living in Vancouver</a>
                             <a href="community-integration.html" data-i18n="common.nav_community">Community Integration</a>
+                            <a href="document-services.html" data-i18n="common.nav_order_document">Order Document</a>
                         </div>
                     </div>
                 </nav>
@@ -128,12 +134,58 @@
 
         <section class="section-shell" style="background:#ffffff;">
             <div class="section-intro reveal">
-                <span class="section-kicker" data-i18n="progs.cats_kicker">Program Categories</span>
+                <span class="section-kicker" data-i18n="progs.cats_kicker">Programs</span>
                 <h2 class="section-title center" data-i18n="progs.cats_title">Choose your pathway</h2>
-                <p style="text-align:center;color:var(--text-medium);max-width:620px;margin:0 auto;" data-i18n="progs.cats_p">Three distinct program areas — each built with clear learning outcomes, qualified instructors, and a straightforward path from enrollment to credential.</p>
+                <p style="text-align:center;color:var(--text-medium);max-width:620px;margin:0 auto;" data-i18n="progs.cats_p">Three programs currently open for enrollment — each with clear learning outcomes, qualified instructors, and a straightforward path from enrollment to credential.</p>
             </div>
             <div class="pathway-grid" style="margin-top:2.5rem;">
 
+                <!-- Same three programs as the homepage, rendered in this page's icon +
+                     checklist card style. All wording comes from the shared `pathways`
+                     namespace in translations.js so the two pages cannot drift apart.
+                     The Diploma Programs / ESL / French category cards this section used
+                     to carry are kept below for when those areas reopen. -->
+                <article class="pathway-card reveal" style="display:flex;flex-direction:column;gap:1rem;">
+                    <div style="font-size:2rem;color:var(--accent-gold);">
+                        <i class="fas fa-concierge-bell" aria-hidden="true"></i>
+                    </div>
+                    <h3 data-i18n="pathways.hosp_title">Hospitality Operations</h3>
+                    <p data-i18n="pathways.hosp_p">For students heading into Vancouver's hotels, restaurants, resorts, and tourism sector.</p>
+                    <ul class="checklist">
+                        <li data-i18n="pathways.hosp_li1">A 24-credit applied diploma in 8 months, with a specialization in food and beverage, front office, or events</li>
+                        <li data-i18n="pathways.hosp_li2">Property management systems, reservations, and guest experience training</li>
+                        <li data-i18n="pathways.hosp_li3">Up to 15 credits transfer toward a UCW Bachelor of Commerce</li>
+                    </ul>
+                    <a href="program-hospitality.html" class="subtle-link" style="margin-top:auto;"><span data-i18n="pathways.hosp_link">Explore Hospitality Operations</span> <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                </article>
+                <article class="pathway-card accent-teal reveal" style="display:flex;flex-direction:column;gap:1rem;transition-delay:0.1s;">
+                    <div style="font-size:2rem;color:var(--accent-gold);">
+                        <i class="fas fa-trophy" aria-hidden="true"></i>
+                    </div>
+                    <h3 data-i18n="pathways.esports_title">International Esports Management</h3>
+                    <p data-i18n="pathways.esports_p">Canada's first business management diploma built around the esports industry.</p>
+                    <ul class="checklist">
+                        <li data-i18n="pathways.esports_li1">A 60-credit diploma over 16 to 20 months</li>
+                        <li data-i18n="pathways.esports_li2">Business, marketing, and event operations applied to competitive gaming</li>
+                        <li data-i18n="pathways.esports_li3">Continue to a UCW Bachelor of Commerce in as little as 15 more months</li>
+                    </ul>
+                    <a href="program-esports.html" class="subtle-link" style="margin-top:auto;"><span data-i18n="pathways.esports_link">Explore Esports Management</span> <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                </article>
+                <article class="pathway-card accent-deep reveal" style="display:flex;flex-direction:column;gap:1rem;transition-delay:0.2s;">
+                    <div style="font-size:2rem;color:var(--accent-gold);">
+                        <i class="fas fa-language" aria-hidden="true"></i>
+                    </div>
+                    <h3 data-i18n="pathways.fsl_title">French as a Second Language</h3>
+                    <p data-i18n="pathways.fsl_p">For learners who want usable French quickly, on a schedule that fits around work and life.</p>
+                    <ul class="checklist">
+                        <li data-i18n="pathways.fsl_li1">Reach CEFR B1 / NCLC 5 in 4.5 months on the Fast Track Intensive</li>
+                        <li data-i18n="pathways.fsl_li2">Four classes a week, three hours a day, in person, online, or hybrid</li>
+                        <li data-i18n="pathways.fsl_li3">Upgrade to CEFR B2 / NCLC 7 with TCF and TEF test preparation</li>
+                    </ul>
+                    <a href="programs-french-language.html" class="subtle-link" style="margin-top:auto;"><span data-i18n="pathways.fsl_link">Explore FSL levels and intakes</span> <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                </article>
+
+                <!-- M6 HIDDEN (temporarily): Diploma Programs, ESL & French category cards
                 <article class="pathway-card reveal" style="display:flex;flex-direction:column;gap:1rem;">
                     <div style="font-size:2rem;color:var(--accent-gold);">
                         <i class="fas fa-graduation-cap"></i>
@@ -149,7 +201,6 @@
                     <a href="programs-diploma.html" class="subtle-link" style="margin-top:auto;"><span data-i18n="progs.cat1_link">Explore Diploma Programs</span> <i class="fas fa-arrow-right"></i></a>
                 </article>
 
-                <!-- M6 HIDDEN (temporarily): ESL & French category cards
                 <article class="pathway-card accent-teal reveal" style="display:flex;flex-direction:column;gap:1rem;transition-delay:0.1s;">
                     <div style="font-size:2rem;color:var(--accent-gold);">
                         <i class="fas fa-comments"></i>

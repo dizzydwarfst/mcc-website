@@ -8,6 +8,14 @@
             kicker: 'Upcoming Intakes',
             title: 'Intake schedule',
             intro: 'Start and completion dates for this program.',
+            intake: 'Intake',
+            schedule: 'Schedule',
+            scheduleValue: 'Monday to Thursday',
+            format: 'Format',
+            formatValue: 'Online, In-Person, Hybrid',
+            nextStart: 'Next Start Date',
+            action: 'Apply',
+            enroll: 'Enroll Now',
             start: 'Start',
             end: 'End',
             tbd: 'TBD'
@@ -16,6 +24,14 @@
             kicker: 'Prochaines rentr\u00e9es',
             title: 'Calendrier des rentr\u00e9es',
             intro: 'Dates de d\u00e9but et de fin pour ce programme.',
+            intake: 'Rentr\u00e9e',
+            schedule: 'Horaire',
+            scheduleValue: 'Du lundi au jeudi',
+            format: 'Format',
+            formatValue: 'En ligne, en personne, hybride',
+            nextStart: 'Prochaine date de d\u00e9but',
+            action: 'Inscription',
+            enroll: "S'inscrire",
             start: 'D\u00e9but',
             end: 'Fin',
             tbd: '\u00c0 confirmer'
@@ -29,9 +45,13 @@
         return document.body && document.body.getAttribute('data-lang') === 'fr' ? 'fr' : 'en';
     }
 
-    function cleanDate(value) {
+    function cleanText(value) {
         if (typeof value !== 'string') return '';
         return value.trim();
+    }
+
+    function cleanDate(value) {
+        return cleanText(value);
     }
 
     function parseIsoLocal(value) {
@@ -54,7 +74,7 @@
         return date;
     }
 
-    function formatDate(value, lang) {
+    function formatDate(value, lang, monthStyle) {
         const clean = cleanDate(value);
         if (!clean) return '';
 
@@ -63,7 +83,7 @@
 
         return new Intl.DateTimeFormat(lang === 'fr' ? 'fr-CA' : 'en-CA', {
             year: 'numeric',
-            month: 'short',
+            month: monthStyle || 'short',
             day: 'numeric'
         }).format(date);
     }
@@ -82,7 +102,10 @@
                 if (!row || typeof row !== 'object') return null;
                 return {
                     start: cleanDate(row.start),
-                    end: cleanDate(row.end)
+                    end: cleanDate(row.end),
+                    enrollmentOpen: row.enrollment_open,
+                    enrollmentStatus: cleanText(row.enrollment_status).toLowerCase(),
+                    enrollmentLabel: cleanText(row.enrollment_label)
                 };
             })
             .filter(row => row && row.start)
@@ -109,6 +132,77 @@
         return cell;
     }
 
+    function tableCell(label, value, className) {
+        const cell = el('td', className || '', value);
+        cell.setAttribute('data-label', label);
+        return cell;
+    }
+
+    // Staff set the state in the portal; never derive it from the dates.
+    function isEnrollmentOpen(row) {
+        if (row.enrollmentOpen === true) return true;
+        if (row.enrollmentOpen === false) return false;
+        if (row.enrollmentStatus) return row.enrollmentStatus === 'open';
+        return true;
+    }
+
+    function actionContent(row, labels) {
+        if (isEnrollmentOpen(row)) {
+            const enroll = el('a', 'program-intake-enroll', row.enrollmentLabel || labels.enroll);
+            enroll.href = '/apply-for-admissions';
+            return enroll;
+        }
+
+        const status = el('span', 'program-intake-status', row.enrollmentLabel || '—');
+        if (row.enrollmentStatus) status.setAttribute('data-enrollment-status', row.enrollmentStatus);
+        return status;
+    }
+
+    function renderFslSchedule(section, surface, program, intakes, labels, lang) {
+        section.classList.add('program-intake-schedule-table');
+        section.setAttribute('aria-labelledby', 'program-intake-title');
+
+        const intro = el('div', 'section-intro program-intake-intro');
+        intro.appendChild(el('span', 'section-kicker', labels.kicker));
+        const title = el('h2', 'section-title center', labels.title);
+        title.id = 'program-intake-title';
+        intro.appendChild(title);
+        intro.appendChild(el('p', '', labels.intro));
+        surface.appendChild(intro);
+
+        const tableWrap = el('div', 'program-intake-table-wrap');
+        const table = el('table', 'program-intake-table');
+        const head = el('thead');
+        const headRow = el('tr');
+        [labels.intake, labels.schedule, labels.format, labels.nextStart, labels.end, labels.action].forEach(label => {
+            headRow.appendChild(el('th', '', label));
+        });
+        head.appendChild(headRow);
+        table.appendChild(head);
+
+        const body = el('tbody');
+        const programName = program.name || 'French as a Second Language (FSL)';
+        intakes.forEach(row => {
+            const item = el('tr');
+            const intake = tableCell(labels.intake, '', 'program-intake-name');
+            const intakeContent = el('div', 'program-intake-name-content');
+            intakeContent.appendChild(el('strong', '', programName));
+            intake.appendChild(intakeContent);
+            item.appendChild(intake);
+            item.appendChild(tableCell(labels.schedule, labels.scheduleValue));
+            item.appendChild(tableCell(labels.format, labels.formatValue));
+            item.appendChild(tableCell(labels.nextStart, formatDate(row.start, lang, 'long')));
+            item.appendChild(tableCell(labels.end, row.end ? formatDate(row.end, lang, 'long') : labels.tbd, row.end ? '' : 'is-tbd'));
+            const action = tableCell(labels.action, '', 'program-intake-action');
+            action.appendChild(actionContent(row, labels));
+            item.appendChild(action);
+            body.appendChild(item);
+        });
+        table.appendChild(body);
+        tableWrap.appendChild(table);
+        surface.appendChild(tableWrap);
+    }
+
     function removeSchedule(host) {
         const existing = host.querySelector(`[${SCHEDULE_ATTR}]`);
         if (existing) existing.remove();
@@ -126,6 +220,21 @@
         section.setAttribute(SCHEDULE_ATTR, '');
 
         const surface = el('div', 'section-surface');
+        const code = (program.code || '').trim().toUpperCase();
+
+        if (code === 'FSL') {
+            renderFslSchedule(section, surface, program, intakes, labels, lang);
+            section.appendChild(surface);
+
+            const anchor = host.querySelector('[data-program-intake-anchor]');
+            if (anchor) {
+                anchor.insertAdjacentElement('beforebegin', section);
+            } else {
+                host.appendChild(section);
+            }
+            return;
+        }
+
         const intro = el('div', 'section-intro program-intake-intro');
         intro.appendChild(el('span', 'section-kicker', labels.kicker));
         intro.appendChild(el('h2', 'section-title center', labels.title));

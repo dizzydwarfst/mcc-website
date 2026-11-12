@@ -20,6 +20,7 @@ async function render({ home = true, items = [sample], failure = false, detail =
     const context = {
         document: {
             readyState: 'complete', body: { dataset: {} },
+            querySelectorAll: () => [],
             querySelector: (selector) => selector === (detail ? '[data-event-detail]' : home ? '[data-events-home]' : '[data-events-list]') ? root : null,
         },
         window: { location: { origin: 'https://example.com', pathname: '/events/fsl-info-trial-session-september-2026', search: '' }, setTimeout, clearTimeout },

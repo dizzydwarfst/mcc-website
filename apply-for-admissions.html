@@ -6,6 +6,11 @@
     <meta name="description" content="Apply for admissions to Metropolitan Community College via our four-step application form.">
     <title>Apply for Admissions - Metropolitan Community College</title>
     <link rel="stylesheet" href="style.css">
+        <!-- Outfit carries the wordmark, whose line-by-line alignment depends on its
+         exact metrics; preconnecting shortens the window where a fallback face
+         renders instead. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
@@ -25,7 +30,7 @@
                 <div class="logo-container">
                     <a href="index.html" class="logo-link">
                         <span class="mcc-logo"><img src="assets/mcc-logo-outlined.png" alt="Metropolitan Community College logo"></span>
-                        <span class="logo-text"><span class="logo-line logo-line-1">Metropolitan</span><span class="logo-line logo-line-2">Community College</span></span>
+                        <span class="logo-text"><span class="logo-line logo-line-1">Metropolitan</span><span class="logo-line logo-line-2">Community</span><span class="logo-line logo-line-3">College</span></span>
                     </a>
                 </div>
                 <button class="mobile-menu-btn" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
@@ -88,7 +93,7 @@
                         </div>
                     </div>
                     <div class="nav-dropdown">
-                        <a href="student-life.html" class="nav-dropdown-toggle"><span data-i18n="common.nav_student_life">Student Life</span> <i class="fas fa-chevron-down nav-chevron"></i></a>
+                        <a href="student-life.html" class="nav-dropdown-toggle"><span data-i18n="common.nav_student_life">Student Support</span> <i class="fas fa-chevron-down nav-chevron"></i></a>
                         <div class="dropdown-content">
                             <a href="student-life.html" data-i18n="common.nav_student_life_hub">Student Life Hub</a>
                             <a href="academic-calendar.html" data-i18n="common.nav_academic_calendar">Academic Calendar</a>
@@ -100,6 +105,7 @@
                             <a href="arrival-in-canada.html" data-i18n="common.nav_arrival">Arrival in Canada</a>
                             <a href="living-in-vancouver.html" data-i18n="common.nav_living_vancouver">Living in Vancouver</a>
                             <a href="community-integration.html" data-i18n="common.nav_community">Community Integration</a>
+                            <a href="document-services.html" data-i18n="common.nav_order_document">Order Document</a>
                         </div>
                     </div>
                 </nav>
@@ -365,6 +371,27 @@
                                     <span class="error-msg">Please choose Yes or No</span>
                                 </div>
 
+                                <div class="form-group" id="heard-about-group" style="margin-bottom:1.25rem;">
+                                    <label for="heard_about_us"><span data-i18n="apply.s2_heard_q">How did you hear about us?</span> <span style="color:#D4AF37">*</span></label>
+                                    <select name="heard_about_us" id="heard_about_us" required>
+                                        <option value="" data-i18n="apply.s2_heard_choose">Choose one</option>
+                                        <option value="google" data-i18n="apply.s2_heard_google">Google / search</option>
+                                        <option value="social_media" data-i18n="apply.s2_heard_social">Social media</option>
+                                        <option value="friend_or_family" data-i18n="apply.s2_heard_friend">Friend or family</option>
+                                        <option value="agency" data-i18n="apply.s2_heard_agency">Agency</option>
+                                        <option value="event" data-i18n="apply.s2_heard_event">Event or fair</option>
+                                        <option value="other" data-i18n="apply.s2_heard_other">Other</option>
+                                    </select>
+                                    <span class="error-msg">Please tell us how you heard about us</span>
+                                    <span class="field-hint" id="heard-about-locked-hint" style="display:none;" data-i18n="apply.s2_heard_locked">Answered for you because you are applying through an agency.</span>
+                                </div>
+
+                                <div class="form-group" id="heard-about-detail-group" style="display:none;margin-bottom:1.25rem;">
+                                    <label for="heard_about_us_detail" data-i18n="apply.s2_heard_detail">Tell us where</label>
+                                    <input type="text" name="heard_about_us_detail" id="heard_about_us_detail" maxlength="300" placeholder="Where did you hear about us?" data-i18n-placeholder="apply.s2_heard_detail_ph">
+                                    <span class="error-msg">Please tell us where you heard about us</span>
+                                </div>
+
                                 <div id="agency-fields" style="display:none;">
                                     <div class="form-grid-3">
                                         <div class="form-group">
@@ -476,6 +503,90 @@
                                     <label style="display:block;margin-bottom:0.75rem;" data-i18n="apply.s3_add_ons">Optional add-ons</label>
                                     <div class="inline-option-list optional-add-ons" id="add-ons-options"></div>
                                     <small style="color:var(--text-medium);font-size:0.82rem;" data-i18n="apply.s3_add_ons_hint">Choose any extras you want to include with this program.</small>
+                                </div>
+
+                                <!-- French intake questions. Shown only for programs the portal marks with
+                                     french_questions_enabled, and each question only once the one above it
+                                     is answered. apply-form.js owns the visibility, the `required` flags and
+                                     the clearing; every group below starts hidden. -->
+                                <div id="french-intake" style="display:none;margin-top:1.75rem;">
+                                    <h4 style="color:var(--deep-green);margin-bottom:0.35rem;font-size:1.05rem;" data-i18n="apply.s3_fr_heading">About your French</h4>
+                                    <p style="color:var(--text-medium);font-size:0.9rem;margin-bottom:1.25rem;" data-i18n="apply.s3_fr_intro">These answers help us place you at the right level.</p>
+
+                                    <div class="form-group" id="french-goal-group" style="max-width:480px;">
+                                        <label for="french_goal"><span data-i18n="apply.s3_fr_goal">What is your goal for learning French?</span> <span style="color:#D4AF37">*</span></label>
+                                        <select name="french_goal" id="french_goal">
+                                            <option value="" data-i18n="apply.s3_choose">Choose an option</option>
+                                            <option value="work_permit" data-i18n="apply.s3_fr_goal_work_permit">Work permit</option>
+                                            <option value="tcf_test" data-i18n="apply.s3_fr_goal_tcf">Taking the TCF test</option>
+                                            <option value="tef_test" data-i18n="apply.s3_fr_goal_tef">Taking the TEF test</option>
+                                            <option value="work_requirement" data-i18n="apply.s3_fr_goal_work_requirement">For work (work requirement)</option>
+                                            <option value="self_improvement" data-i18n="apply.s3_fr_goal_self">Self-improvement</option>
+                                        </select>
+                                        <span class="error-msg">Please choose your goal for learning French</span>
+                                    </div>
+
+                                    <div class="form-group" id="french-target-level-group" style="margin-top:1.25rem;display:none;">
+                                        <label style="display:block;margin-bottom:0.75rem;"><span data-i18n="apply.s3_fr_target">What is your target level?</span> <span style="color:#D4AF37">*</span></label>
+                                        <div class="inline-option-list">
+                                            <label class="inline-option" style="display:inline-flex;align-items:center;gap:0.5rem;cursor:pointer;">
+                                                <input type="radio" name="french_target_level" value="b1"> <span>B1</span>
+                                            </label>
+                                            <label class="inline-option" style="display:inline-flex;align-items:center;gap:0.5rem;cursor:pointer;">
+                                                <input type="radio" name="french_target_level" value="b2"> <span>B2</span>
+                                            </label>
+                                            <label class="inline-option" style="display:inline-flex;align-items:center;gap:0.5rem;cursor:pointer;">
+                                                <input type="radio" name="french_target_level" value="c1_plus"> <span data-i18n="apply.s3_fr_level_c1_plus">C1 or above</span>
+                                            </label>
+                                        </div>
+                                        <span class="error-msg">Please choose your target level</span>
+                                    </div>
+
+                                    <div class="form-group" id="french-current-level-group" style="max-width:480px;margin-top:1.25rem;display:none;">
+                                        <label for="french_current_level"><span data-i18n="apply.s3_fr_current">What is your current French level?</span> <span style="color:#D4AF37">*</span></label>
+                                        <select name="french_current_level" id="french_current_level">
+                                            <option value="" data-i18n="apply.s3_choose">Choose an option</option>
+                                            <option value="none" data-i18n="apply.s3_fr_level_none">I don't know French</option>
+                                            <option value="a1">A1</option>
+                                            <option value="a2">A2</option>
+                                            <option value="b1">B1</option>
+                                            <option value="b2_plus" data-i18n="apply.s3_fr_level_b2_plus">B2 or above</option>
+                                        </select>
+                                        <span class="error-msg">Please choose your current French level</span>
+                                    </div>
+
+                                    <div class="form-group" id="french-test-proof-group" style="margin-top:1.25rem;display:none;">
+                                        <label style="display:block;margin-bottom:0.75rem;"><span data-i18n="apply.s3_fr_proof">Do you have a TCF or TEF test result?</span> <span style="color:#D4AF37">*</span></label>
+                                        <div class="inline-option-list">
+                                            <label class="inline-option" style="display:inline-flex;align-items:center;gap:0.5rem;cursor:pointer;">
+                                                <input type="radio" name="french_test_proof" value="yes"> <span data-i18n="apply.s2_yes">Yes</span>
+                                            </label>
+                                            <label class="inline-option" style="display:inline-flex;align-items:center;gap:0.5rem;cursor:pointer;">
+                                                <input type="radio" name="french_test_proof" value="no"> <span data-i18n="apply.s2_no">No</span>
+                                            </label>
+                                        </div>
+                                        <span class="error-msg">Please tell us whether you have a test result</span>
+                                    </div>
+
+                                    <div class="form-group" id="french-results-group" style="max-width:480px;margin-top:1.25rem;display:none;">
+                                        <label for="doc-french-results"><span data-i18n="apply.s3_fr_upload">Please upload your test result.</span> <span style="color:#D4AF37">*</span></label>
+                                        <input type="file" name="doc_french_results" id="doc-french-results" accept="application/pdf,image/jpeg,image/png">
+                                        <small style="color:var(--text-medium);font-size:0.82rem;" data-i18n="apply.s4_doc_hint">PDF, JPG, or PNG &middot; max 15&nbsp;MB</small>
+                                        <span class="error-msg" id="doc-french-results-error">Please attach your test result</span>
+                                    </div>
+
+                                    <div class="form-group" id="french-placement-group" style="margin-top:1.25rem;display:none;">
+                                        <label style="display:block;margin-bottom:0.75rem;"><span data-i18n="apply.s3_fr_placement">Where would you like to start?</span> <span style="color:#D4AF37">*</span></label>
+                                        <div class="inline-option-list">
+                                            <label class="inline-option" style="display:inline-flex;align-items:center;gap:0.5rem;cursor:pointer;">
+                                                <input type="radio" name="french_placement_preference" value="start_beginning"> <span data-i18n="apply.s3_fr_placement_beginning">I will start at the beginning of the programme</span>
+                                            </label>
+                                            <label class="inline-option" style="display:inline-flex;align-items:center;gap:0.5rem;cursor:pointer;">
+                                                <input type="radio" name="french_placement_preference" value="placement_test"> <span data-i18n="apply.s3_fr_placement_test">I want to take a placement test instead</span>
+                                            </label>
+                                        </div>
+                                        <span class="error-msg">Please choose where you would like to start</span>
+                                    </div>
                                 </div>
 
                                 <div class="wizard-buttons">

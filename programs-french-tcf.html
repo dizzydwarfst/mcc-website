@@ -3,10 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex">
     <meta name="description" content="MCC French Test Preparation (TCF & TEF Canada) — an optional add-on to the FSL program for students upgrading to expert level (CEFR B2 / NCLC 7) through targeted preparation for both official French exams.">
     <title>French Test Preparation (TCF &amp; TEF Canada) | Metropolitan Community College</title>
     <link rel="stylesheet" href="style.css">
+        <!-- Outfit carries the wordmark, whose line-by-line alignment depends on its
+         exact metrics; preconnecting shortens the window where a fallback face
+         renders instead. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
@@ -26,7 +30,7 @@
                 <div class="logo-container">
                     <a href="index.html" class="logo-link">
                         <span class="mcc-logo"><img src="assets/mcc-logo-outlined.png" alt="Metropolitan Community College logo"></span>
-                        <span class="logo-text"><span class="logo-line logo-line-1">Metropolitan</span><span class="logo-line logo-line-2">Community College</span></span>
+                        <span class="logo-text"><span class="logo-line logo-line-1">Metropolitan</span><span class="logo-line logo-line-2">Community</span><span class="logo-line logo-line-3">College</span></span>
                     </a>
                 </div>
                 <button class="mobile-menu-btn" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
@@ -89,7 +93,7 @@
                         </div>
                     </div>
                     <div class="nav-dropdown">
-                        <a href="student-life.html" class="nav-dropdown-toggle"><span data-i18n="common.nav_student_life">Student Life</span> <i class="fas fa-chevron-down nav-chevron"></i></a>
+                        <a href="student-life.html" class="nav-dropdown-toggle"><span data-i18n="common.nav_student_life">Student Support</span> <i class="fas fa-chevron-down nav-chevron"></i></a>
                         <div class="dropdown-content">
                             <a href="student-life.html" data-i18n="common.nav_student_life_hub">Student Life Hub</a>
                             <a href="academic-calendar.html" data-i18n="common.nav_academic_calendar">Academic Calendar</a>
@@ -101,6 +105,7 @@
                             <a href="arrival-in-canada.html" data-i18n="common.nav_arrival">Arrival in Canada</a>
                             <a href="living-in-vancouver.html" data-i18n="common.nav_living_vancouver">Living in Vancouver</a>
                             <a href="community-integration.html" data-i18n="common.nav_community">Community Integration</a>
+                            <a href="document-services.html" data-i18n="common.nav_order_document">Order Document</a>
                         </div>
                     </div>
                 </nav>
@@ -113,14 +118,14 @@
         <section class="page-hero">
             <div class="page-hero-grid reveal">
                 <div>
-                    <span class="page-eyebrow"><a href="programs.html" style="color:inherit;text-decoration:none;">Programs</a> / <a href="programs-french.html" style="color:inherit;text-decoration:none;">French Programs</a> / Test Preparation (TCF &amp; TEF)</span>
-                    <h1 class="page-hero-title">Test Preparation (TCF &amp; TEF) &mdash; your upgrade to expert French</h1>
-                    <p class="page-hero-subtitle">An optional add-on for students who want to improve their French beyond the FSL program to expert level &mdash; CEFR&nbsp;B2 / NCLC&nbsp;7. We prepare you for both official Canadian French exams &mdash; <strong>TCF Canada</strong> and <strong>TEF Canada</strong> &mdash; with targeted practice across listening, reading, writing, and speaking. Improve your confidence, strengthen your resume, and open more doors.</p>
+                    <span class="page-eyebrow" data-i18n-html="fexam.tp_breadcrumb_html"><a href="programs.html" style="color:inherit;text-decoration:none;">Programs</a> / <a href="programs-french.html" style="color:inherit;text-decoration:none;">French Programs</a> / French Test Preparation (TCF &amp; TEF)</span>
+                    <h1 class="page-hero-title" data-i18n="fexam.tp_hero_title">French Test Preparation (TCF &amp; TEF) &mdash; your upgrade to expert French</h1>
+                    <p class="page-hero-subtitle" data-i18n-html="fexam.tp_hero_subtitle_html">An optional add-on for students who want to improve their French beyond the FSL program to expert level &mdash; CEFR&nbsp;B2 / NCLC&nbsp;7. We prepare you for both official Canadian French exams &mdash; <strong>TCF Canada</strong> and <strong>TEF Canada</strong> &mdash; with targeted practice across listening, reading, writing, and speaking. Improve your confidence, strengthen your resume, and open more doors.</p>
                     <div class="page-stat-list">
-                        <span class="page-stat-pill"><i class="fas fa-arrow-up-right-dots"></i> <span>Upgrade to CEFR B2 / NCLC 7</span></span>
-                        <span class="page-stat-pill"><i class="fas fa-passport"></i> <span>TCF &amp; TEF Canada prep</span></span>
-                        <span class="page-stat-pill"><i class="fas fa-clipboard-check"></i> <span>Full mock exams</span></span>
-                        <span class="page-stat-pill"><i class="fas fa-user-check"></i> <span>Personalized study plan</span></span>
+                        <span class="page-stat-pill"><i class="fas fa-arrow-up-right-dots"></i> <span data-i18n="fexam.tp_pill_upgrade">Upgrade to CEFR B2 / NCLC 7</span></span>
+                        <span class="page-stat-pill"><i class="fas fa-passport"></i> <span data-i18n="fexam.tp_pill_exams">TCF &amp; TEF Canada prep</span></span>
+                        <span class="page-stat-pill"><i class="fas fa-clipboard-check"></i> <span data-i18n="fexam.tp_pill_mocks">Full mock exams</span></span>
+                        <span class="page-stat-pill"><i class="fas fa-user-check"></i> <span data-i18n="fexam.pill_personalized">Personalized study plan</span></span>
                     </div>
                     <div style="margin-top:1.5rem;display:flex;gap:1rem;flex-wrap:wrap;">
                         <a href="contact.html" class="btn-solid-gold" data-i18n="common.btn_book_assessment">Book a Free French Level Assessment</a>
@@ -128,7 +133,7 @@
                     </div>
                 </div>
                 <div class="page-hero-media">
-                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80" alt="Student preparing for the TCF and TEF Canada exams">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80" alt="Student preparing for the TCF and TEF Canada exams" data-i18n-alt="fexam.tp_hero_img_alt">
                 </div>
             </div>
         </section>
@@ -136,40 +141,40 @@
         <!-- ADD-ON FRAMING + LEVELS DIAGRAM -->
         <section class="section-shell" style="background:#ffffff;" id="levels">
             <div class="section-intro reveal">
-                <span class="section-kicker"><i class="fas fa-plus"></i> Add-on to the FSL Program</span>
-                <h2 class="section-title center">The final step to expert French</h2>
-                <p style="text-align:center;color:var(--text-medium);max-width:720px;margin:0 auto;">The <a href="programs-french-language.html" class="gold-inline-link">French as a Second Language (FSL) program</a> takes you to advanced (CEFR&nbsp;B1 / NCLC&nbsp;5). This Test Preparation add-on is designed for students who want to keep going — upgrading to expert (CEFR&nbsp;B2 / NCLC&nbsp;7) through focused preparation for the TCF Canada and TEF Canada exams.</p>
+                <span class="section-kicker"><i class="fas fa-plus"></i> <span data-i18n="fexam.tp_addon_kicker">Add-on to the FSL Program</span></span>
+                <h2 class="section-title center" data-i18n="fexam.tp_addon_title">The final step to expert French</h2>
+                <p style="text-align:center;color:var(--text-medium);max-width:720px;margin:0 auto;" data-i18n-html="fexam.tp_addon_p_html">The <a href="programs-french-language.html" class="gold-inline-link">French as a Second Language (FSL) program</a> takes you to advanced (CEFR&nbsp;B1 / NCLC&nbsp;5). This Test Preparation add-on is designed for students who want to keep going — upgrading to expert (CEFR&nbsp;B2 / NCLC&nbsp;7) through focused preparation for the TCF Canada and TEF Canada exams.</p>
             </div>
             <div class="french-levels-diagram reveal">
                 <div class="fld-track">
                     <div class="fld-step">
                         <span class="fld-cefr">A1</span>
-                        <span class="fld-level">Beginner</span>
+                        <span class="fld-level" data-i18n="common.fld_beginner">Beginner</span>
                         <span class="fld-nclc">NCLC 1–3</span>
-                        <span class="fld-desc">Build French from the ground up — pronunciation, core grammar, and everyday vocabulary.</span>
-                        <span class="fld-meta">6 weeks · FSL</span>
+                        <span class="fld-desc" data-i18n="common.fld_a1_desc">Build French from the ground up — pronunciation, core grammar, and everyday vocabulary.</span>
+                        <span class="fld-meta" data-i18n="common.fld_meta_fsl">6 weeks · FSL</span>
                     </div>
                     <div class="fld-step">
                         <span class="fld-cefr">A2</span>
-                        <span class="fld-level">Intermediate</span>
+                        <span class="fld-level" data-i18n="common.fld_intermediate">Intermediate</span>
                         <span class="fld-nclc">NCLC 4</span>
-                        <span class="fld-desc">Handle daily communication, talk about the past, and read and write short texts.</span>
-                        <span class="fld-meta">6 weeks · FSL</span>
+                        <span class="fld-desc" data-i18n="common.fld_a2_desc">Handle daily communication, talk about the past, and read and write short texts.</span>
+                        <span class="fld-meta" data-i18n="common.fld_meta_fsl">6 weeks · FSL</span>
                     </div>
                     <div class="fld-step">
                         <span class="fld-cefr">B1</span>
-                        <span class="fld-level">Advanced</span>
+                        <span class="fld-level" data-i18n="common.fld_advanced">Advanced</span>
                         <span class="fld-nclc">NCLC 5</span>
-                        <span class="fld-desc">Reach fluency and confidence across all four skills — the FSL completion level.</span>
-                        <span class="fld-meta">6 weeks · FSL</span>
+                        <span class="fld-desc" data-i18n="common.fld_b1_desc">Reach fluency and confidence across all four skills — the FSL completion level.</span>
+                        <span class="fld-meta" data-i18n="common.fld_meta_fsl">6 weeks · FSL</span>
                     </div>
                     <div class="fld-step fld-addon">
-                        <span class="fld-addon-tag"><i class="fas fa-plus"></i> You are here</span>
+                        <span class="fld-addon-tag"><i class="fas fa-plus"></i> <span data-i18n="common.fld_you_are_here">You are here</span></span>
                         <span class="fld-cefr">B2</span>
-                        <span class="fld-level">Expert</span>
+                        <span class="fld-level" data-i18n="common.fld_expert">Expert</span>
                         <span class="fld-nclc">NCLC 7</span>
-                        <span class="fld-desc">Upgrade to expert level with TCF &amp; TEF test preparation for immigration and academics.</span>
-                        <span class="fld-meta">6 weeks · Test Prep</span>
+                        <span class="fld-desc" data-i18n="common.fld_b2_desc">Upgrade to expert level with TCF &amp; TEF test preparation for immigration and academics.</span>
+                        <span class="fld-meta" data-i18n="common.fld_meta_prep">6 weeks · Test Prep</span>
                     </div>
                 </div>
             </div>
@@ -179,7 +184,7 @@
             <div class="section-intro reveal">
                 <span class="section-kicker" data-i18n="fexam.promise_kicker">The Program Promise</span>
                 <h2 class="section-title center" data-i18n="fexam.promise_title">We do more than prepare you for a test</h2>
-                <p style="text-align:center;color:var(--text-medium);max-width:720px;margin:0 auto;" data-i18n="tcf.promise_p">French is not only for immigration. French is a career advantage, a confidence builder, a study pathway, and a way to participate more fully in Canadian life. Our TCF Preparation Program gives you French skills you can use in real life &mdash; not just on exam day.</p>
+                <p style="text-align:center;color:var(--text-medium);max-width:720px;margin:0 auto;" data-i18n="tcf.promise_p">French is not only for immigration. French is a career advantage, a confidence builder, a study pathway, and a way to participate more fully in Canadian life. Our TCF &amp; TEF Preparation Program gives you French skills you can use in real life &mdash; not just on exam day.</p>
             </div>
             <div class="requirements-grid" style="margin-top:2rem;">
                 <article class="req-card reveal">
@@ -195,7 +200,7 @@
                 <article class="req-card accent-teal reveal" style="transition-delay:0.1s;">
                     <i class="fas fa-graduation-cap" style="font-size:1.5rem;color:var(--accent-gold);margin-bottom:0.75rem;display:block;"></i>
                     <h3 data-i18n="fexam.b2_title">Academic &amp; skill development</h3>
-                    <p data-i18n="tcf.b2_p">Build structured language habits across speaking, listening, reading, writing, and adaptive test strategy &mdash; the same skills that translate into academic success.</p>
+                    <p data-i18n="tcf.b2_p">Build structured language habits across speaking, listening, reading, writing, and exam strategy &mdash; the same skills that translate into academic success.</p>
                     <ul class="checklist">
                         <li data-i18n="fexam.b2_li1">Grammar &amp; vocabulary expansion</li>
                         <li data-i18n="fexam.b2_li2">Reading and listening accuracy</li>
@@ -215,9 +220,9 @@
                 <article class="req-card reveal" style="transition-delay:0.3s;">
                     <i class="fas fa-passport" style="font-size:1.5rem;color:var(--accent-gold);margin-bottom:0.75rem;display:block;"></i>
                     <h3 data-i18n="fexam.b4_title">Immigration &amp; citizenship support</h3>
-                    <p data-i18n="tcf.b4_p">For students exploring immigration or citizenship, TCF Canada may be one accepted way to demonstrate French proficiency. We help you prepare with structured practice and feedback.</p>
+                    <p data-i18n="tcf.b4_p">For students exploring immigration or citizenship, TCF Canada or TEF Canada may be an accepted way to demonstrate French proficiency. We help you prepare with structured practice and feedback.</p>
                     <ul class="checklist">
-                        <li data-i18n="fexam.b4_li1">IRCC-recognized exam</li>
+                        <li data-i18n="fexam.b4_li1">IRCC-recognized exams</li>
                         <li data-i18n="fexam.b4_li2">NCLC score targeting</li>
                         <li data-i18n="fexam.b4_li3">One pathway among many</li>
                     </ul>
@@ -239,7 +244,7 @@
             <div class="section-intro reveal">
                 <span class="section-kicker" data-i18n="fexam.who_kicker">Who this is for</span>
                 <h2 class="section-title center" data-i18n="fexam.who_title">Five kinds of students. One supportive program.</h2>
-                <p style="text-align:center;color:var(--text-medium);max-width:680px;margin:0 auto;" data-i18n="tcf.who_p">Students join our TCF Preparation Program for very different reasons. The structure is the same, but the outcomes are personal &mdash; we help you reach your specific goal.</p>
+                <p style="text-align:center;color:var(--text-medium);max-width:680px;margin:0 auto;" data-i18n="tcf.who_p">Students join our TCF &amp; TEF Preparation Program for very different reasons. The structure is the same, but the outcomes are personal &mdash; we help you reach your specific goal.</p>
             </div>
             <div class="requirements-grid" style="margin-top:2rem;">
                 <article class="req-card reveal">
@@ -255,7 +260,7 @@
                 <article class="req-card accent-deep reveal" style="transition-delay:0.2s;">
                     <i class="fas fa-book-reader" style="font-size:1.5rem;color:var(--accent-gold);margin-bottom:0.75rem;display:block;"></i>
                     <h3 data-i18n="fexam.s3_title">Academic students</h3>
-                    <p data-i18n="tcf.s3_p">You want structured language improvement. The program builds grammar, vocabulary, reading comprehension, writing structure, listening accuracy, and speaking fluency through guided TCF-style practice.</p>
+                    <p data-i18n="tcf.s3_p">You want structured language improvement. The program builds grammar, vocabulary, reading comprehension, writing structure, listening accuracy, and speaking fluency through guided TCF- and TEF-style practice.</p>
                 </article>
                 <article class="req-card reveal" style="transition-delay:0.3s;">
                     <i class="fas fa-id-badge" style="font-size:1.5rem;color:var(--accent-gold);margin-bottom:0.75rem;display:block;"></i>
@@ -265,7 +270,7 @@
                 <article class="req-card accent-teal reveal" style="transition-delay:0.4s;">
                     <i class="fas fa-route" style="font-size:1.5rem;color:var(--accent-gold);margin-bottom:0.75rem;display:block;"></i>
                     <h3 data-i18n="fexam.s5_title">Immigration / citizenship students</h3>
-                    <p data-i18n="tcf.s5_p">You're exploring immigration or citizenship pathways and want to demonstrate French proficiency. TCF Canada may be one accepted route &mdash; we help you prepare through structured practice.</p>
+                    <p data-i18n="tcf.s5_p">You're exploring immigration or citizenship pathways and want to demonstrate French proficiency. TCF Canada or TEF Canada may be an accepted route &mdash; we help you prepare through structured practice.</p>
                 </article>
             </div>
         </section>
@@ -277,7 +282,7 @@
                 <p style="text-align:center;color:var(--text-medium);max-width:680px;margin:0 auto;" data-i18n="fexam.gain_intro">Students complete the program with stronger French communication skills, better exam awareness, more speaking confidence, improved writing structure, and a clearer study plan. Here's how each program feature maps to a real student outcome.</p>
             </div>
             <div style="max-width:1100px;margin:2.5rem auto 0;padding:0 5%;overflow-x:auto;">
-                <table style="width:100%;border-collapse:collapse;font-size:0.95rem;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 12px 36px rgba(8,22,18,0.06);">
+                <table class="exam-gain-table" style="width:100%;border-collapse:collapse;font-size:0.95rem;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 12px 36px rgba(8,22,18,0.06);">
                     <thead>
                         <tr style="background:#f4f7f5;">
                             <th style="padding:0.85rem 1rem;text-align:left;font-weight:700;color:var(--text-dark);border-bottom:2px solid #e0e8e4;" data-i18n="fexam.gain_th_feature">Program feature</th>
@@ -286,10 +291,10 @@
                     </thead>
                     <tbody>
                         <tr><td style="padding:0.7rem 1rem;color:var(--text-dark);font-weight:600;border-bottom:1px solid #e8eeeb;" data-i18n="fexam.gain_r1_f">Free level assessment</td><td style="padding:0.7rem 1rem;color:var(--text-medium);border-bottom:1px solid #e8eeeb;" data-i18n="fexam.gain_r1_o">You know your starting point and the right entry into the program.</td></tr>
-                        <tr><td style="padding:0.7rem 1rem;color:var(--text-dark);font-weight:600;border-bottom:1px solid #e8eeeb;" data-i18n="tcf.gain_r2_f">TCF exam orientation</td><td style="padding:0.7rem 1rem;color:var(--text-medium);border-bottom:1px solid #e8eeeb;" data-i18n="tcf.gain_r2_o">You understand the adaptive format, timing, and scoring before exam day.</td></tr>
+                        <tr><td style="padding:0.7rem 1rem;color:var(--text-dark);font-weight:600;border-bottom:1px solid #e8eeeb;" data-i18n="tcf.gain_r2_f">TCF &amp; TEF exam orientation</td><td style="padding:0.7rem 1rem;color:var(--text-medium);border-bottom:1px solid #e8eeeb;" data-i18n="tcf.gain_r2_o">You understand each exam's format, timing, and scoring before exam day.</td></tr>
                         <tr><td style="padding:0.7rem 1rem;color:var(--text-dark);font-weight:600;border-bottom:1px solid #e8eeeb;" data-i18n="fexam.gain_r3_f">Speaking practice</td><td style="padding:0.7rem 1rem;color:var(--text-medium);border-bottom:1px solid #e8eeeb;" data-i18n="fexam.gain_r3_o">You become more confident speaking French in real and high-pressure situations.</td></tr>
                         <tr><td style="padding:0.7rem 1rem;color:var(--text-dark);font-weight:600;border-bottom:1px solid #e8eeeb;" data-i18n="fexam.gain_r4_f">Writing correction</td><td style="padding:0.7rem 1rem;color:var(--text-medium);border-bottom:1px solid #e8eeeb;" data-i18n="fexam.gain_r4_o">You improve sentence structure, accuracy, and register for written tasks.</td></tr>
-                        <tr><td style="padding:0.7rem 1rem;color:var(--text-dark);font-weight:600;border-bottom:1px solid #e8eeeb;" data-i18n="tcf.gain_r5_f">Listening training</td><td style="padding:0.7rem 1rem;color:var(--text-medium);border-bottom:1px solid #e8eeeb;" data-i18n="tcf.gain_r5_o">You handle adaptive audio with better comprehension and stamina.</td></tr>
+                        <tr><td style="padding:0.7rem 1rem;color:var(--text-dark);font-weight:600;border-bottom:1px solid #e8eeeb;" data-i18n="tcf.gain_r5_f">Listening training</td><td style="padding:0.7rem 1rem;color:var(--text-medium);border-bottom:1px solid #e8eeeb;" data-i18n="tcf.gain_r5_o">You handle exam audio with better comprehension and stamina.</td></tr>
                         <tr><td style="padding:0.7rem 1rem;color:var(--text-dark);font-weight:600;border-bottom:1px solid #e8eeeb;" data-i18n="fexam.gain_r6_f">Reading strategies</td><td style="padding:0.7rem 1rem;color:var(--text-medium);border-bottom:1px solid #e8eeeb;" data-i18n="fexam.gain_r6_o">You manage exam time better and read with purpose, not panic.</td></tr>
                         <tr><td style="padding:0.7rem 1rem;color:var(--text-dark);font-weight:600;border-bottom:1px solid #e8eeeb;" data-i18n="fexam.gain_r7_f">Mock tests</td><td style="padding:0.7rem 1rem;color:var(--text-medium);border-bottom:1px solid #e8eeeb;" data-i18n="fexam.gain_r7_o">You practise under test-like conditions and arrive on exam day prepared.</td></tr>
                         <tr><td style="padding:0.7rem 1rem;color:var(--text-dark);font-weight:600;border-bottom:1px solid #e8eeeb;" data-i18n="fexam.gain_r8_f">Teacher feedback</td><td style="padding:0.7rem 1rem;color:var(--text-medium);border-bottom:1px solid #e8eeeb;" data-i18n="fexam.gain_r8_o">You understand exactly where you lose points and how to fix it.</td></tr>
@@ -302,16 +307,16 @@
 
         <section class="section-shell" style="background:#ffffff;">
             <div class="section-intro reveal">
-                <span class="section-kicker">About the Exams</span>
-                <h2 class="section-title center">What the TCF &amp; TEF Canada exams test</h2>
-                <p style="text-align:center;color:var(--text-medium);max-width:660px;margin:0 auto;">Both TCF Canada and TEF Canada assess the same four core language skills &mdash; the skills that matter in real-world communication. Each component is scored and, for students pursuing immigration or citizenship pathways, mapped to the NCLC (Niveaux de comp&eacute;tence linguistique canadiens) scale. The table below shows how the two exams differ in format.</p>
+                <span class="section-kicker" data-i18n="fexam.tp_about_kicker">About the Exams</span>
+                <h2 class="section-title center" data-i18n="fexam.tp_about_title">What the TCF &amp; TEF Canada exams test</h2>
+                <p style="text-align:center;color:var(--text-medium);max-width:660px;margin:0 auto;" data-i18n="fexam.tp_about_p">Both TCF Canada and TEF Canada assess the same four core language skills &mdash; the skills that matter in real-world communication. Each component is scored and, for students pursuing immigration or citizenship pathways, mapped to the NCLC (Niveaux de comp&eacute;tence linguistique canadiens) scale. The table below shows how the two exams differ in format.</p>
             </div>
 
-            <div style="max-width:1200px;margin:2.5rem auto 0;padding:0 5%;display:grid;grid-template-columns:1fr 1fr;gap:2rem;">
+            <div class="exam-overview-grid">
 
                 <div class="exam-prep-card reveal">
                     <h3 data-i18n="fexam.four_components_title">The Four Components</h3>
-                    <p class="exam-subtitle">Both exams share the same four components. TCF Canada uses an adaptive format for listening and reading; TEF Canada uses a standard multiple-choice format. Each adds separate written and oral production tasks.</p>
+                    <p class="exam-subtitle" data-i18n="fexam.tp_four_p">Both exams share the same four components. TCF Canada uses an adaptive format for listening and reading; TEF Canada uses a standard multiple-choice format. Each adds separate written and oral production tasks.</p>
                     <div class="skills-row">
                         <span class="skill-chip"><i class="fas fa-headphones"></i> <span data-i18n="fexam.chip_listening">Compr&eacute;hension de l'oral (Listening)</span></span>
                         <span class="skill-chip"><i class="fas fa-book-open"></i> <span data-i18n="fexam.chip_reading">Compr&eacute;hension des &eacute;crits (Reading)</span></span>
@@ -328,8 +333,8 @@
                 </div>
 
                 <div class="exam-prep-card reveal" style="transition-delay:0.1s;">
-                    <h3>TCF Canada vs TEF Canada</h3>
-                    <p class="exam-subtitle">Both TCF and TEF are accepted by IRCC with equal weight. The differences are in format and question style &mdash; we help you choose and prepare for the one that fits how you test best.</p>
+                    <h3 data-i18n="fexam.tp_compare_title">TCF Canada vs TEF Canada</h3>
+                    <p class="exam-subtitle" data-i18n="fexam.tp_compare_p">Both TCF and TEF are accepted by IRCC with equal weight. The differences are in format and question style &mdash; we help you choose and prepare for the one that fits how you test best.</p>
                     <div style="overflow-x:auto;">
                         <table style="width:100%;border-collapse:collapse;font-size:0.88rem;">
                             <thead>
@@ -376,16 +381,16 @@
         <section class="section-shell" style="background:#f4f7f5;">
             <div class="section-intro reveal">
                 <span class="section-kicker" data-i18n="fexam.approach_kicker">Our Approach</span>
-                <h2 class="section-title center">How MCC prepares you for TCF &amp; TEF Canada</h2>
-                <p style="text-align:center;color:var(--text-medium);max-width:660px;margin:0 auto;">Our prep is targeted and exam-specific &mdash; not a general French class. Every session is built around the official format of your chosen exam (TCF or TEF) and the score breakdown that determines your NCLC level.</p>
+                <h2 class="section-title center" data-i18n="fexam.tp_approach_title">How MCC prepares you for TCF &amp; TEF Canada</h2>
+                <p style="text-align:center;color:var(--text-medium);max-width:660px;margin:0 auto;" data-i18n="fexam.tp_approach_p">Our prep is targeted and exam-specific &mdash; not a general French class. Every session is built around the official format of your chosen exam (TCF or TEF) and the score breakdown that determines your NCLC level.</p>
             </div>
 
             <div style="max-width:1100px;margin:2.5rem auto 0;padding:0 5%;">
                 <div class="exam-prep-card reveal">
                     <h3 data-i18n="fexam.included_title">What's included</h3>
-                    <ul class="checklist" style="columns:2;gap:1.5rem;">
-                        <li>Full TCF or TEF practice tests under timed conditions</li>
-                        <li>Format-specific listening and reading strategy training</li>
+                    <ul class="checklist exam-included-list">
+                        <li data-i18n="tcf.included_li1">Full TCF or TEF practice tests under timed conditions</li>
+                        <li data-i18n="tcf.included_li2">Format-specific listening and reading strategy training</li>
                         <li data-i18n="tcf.included_li3">Written production practice with examiner-style marking</li>
                         <li data-i18n="tcf.included_li4">Oral production coaching and scoring breakdown</li>
                         <li data-i18n="tcf.included_li5">NCLC estimation and CRS point projection</li>
@@ -401,10 +406,10 @@
             <div class="section-intro reveal">
                 <span class="section-kicker" data-i18n="fexam.imm_kicker">Immigration &amp; Citizenship Pathways</span>
                 <h2 class="section-title center" data-i18n="fexam.imm_title">If immigration is part of your goal</h2>
-                <p style="text-align:center;color:var(--text-medium);max-width:680px;margin:0 auto;" data-i18n="tcf.imm_p">For students whose plans include Canadian immigration or citizenship, TCF Canada is one accepted way to demonstrate French proficiency. It's not the only reason to learn French &mdash; but if it's part of your goal, here's the context that matters.</p>
+                <p style="text-align:center;color:var(--text-medium);max-width:680px;margin:0 auto;" data-i18n="tcf.imm_p">For students whose plans include Canadian immigration or citizenship, TCF Canada and TEF Canada are accepted ways to demonstrate French proficiency. Immigration isn't the only reason to learn French &mdash; but if it's part of your goal, here's the context that matters.</p>
             </div>
             <div style="max-width:1000px;margin:2rem auto 0;padding:0 5%;">
-                <div class="requirements-grid">
+                <div class="requirements-grid requirements-grid--pair">
                     <article class="req-card reveal">
                         <i class="fas fa-chart-bar" style="font-size:1.5rem;color:var(--accent-gold);margin-bottom:0.75rem;display:block;"></i>
                         <h3 data-i18n="fexam.nclc_title">What is NCLC?</h3>
@@ -430,54 +435,6 @@
             </div>
         </section>
 
-        <section class="section-shell program-reviews-hidden" style="background:#f4f7f5;">
-            <div class="section-intro reveal">
-                <span class="section-kicker">Student Voices</span>
-                <h2 class="section-title center">From TCF prep to permanent residence</h2>
-            </div>
-            <div class="testimonial-marquee reveal">
-            <div class="testimonial-grid">
-
-                <article class="testimonial-card">
-                    <span class="quote-mark">&ldquo;</span>
-                    <p class="testimonial-quote">I chose TCF Canada because the adaptive format suited me better. MCC's small-group prep was detailed and honest &mdash; my instructor told me exactly where I was losing points on the oral section and coached me through it. I got my PR confirmation six months later.</p>
-                    <div class="testimonial-person">
-                        <img class="testimonial-avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=200&q=80" alt="Olena Marchenko">
-                        <div>
-                            <p class="testimonial-name">Olena Marchenko</p>
-                            <p class="testimonial-meta"><span class="flag">🇺🇦</span> Ukraine &middot; TCF Canada Prep</p>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="testimonial-card accent-teal">
-                    <span class="quote-mark">&ldquo;</span>
-                    <p class="testimonial-quote">I needed TCF for academic admission to a Francophone university. The adaptive format made me anxious &mdash; if you get one question wrong, the whole next block changes difficulty. MCC's prep simulated that pressure exactly, and after three full mock exams I stopped panicking. I scored a B2 and got my admission letter the same week.</p>
-                    <div class="testimonial-person">
-                        <img class="testimonial-avatar" src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?auto=format&fit=crop&w=200&q=80" alt="Hyejin Park">
-                        <div>
-                            <p class="testimonial-name">Hyejin Park</p>
-                            <p class="testimonial-meta"><span class="flag">🇰🇷</span> South Korea &middot; TCF Canada Prep</p>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="testimonial-card accent-deep">
-                    <span class="quote-mark">&ldquo;</span>
-                    <p class="testimonial-quote">My French was good in a classroom but the adaptive section is brutal. MCC's coaches drilled me on TCF's specific scoring &mdash; how the system decides what to ask next. Two mock exams later I was reading the format instead of fighting it. NCLC 7 first sitting, full CRS bonus.</p>
-                    <div class="testimonial-person">
-                        <img class="testimonial-avatar" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80" alt="Tomas Silva">
-                        <div>
-                            <p class="testimonial-name">Tomas Silva</p>
-                            <p class="testimonial-meta"><span class="flag">🇧🇷</span> Brazil &middot; TCF Canada Prep</p>
-                        </div>
-                    </div>
-                </article>
-
-            </div>
-            </div>
-        </section>
-
         <section class="section-shell" style="background:#ffffff;text-align:center;">
             <div class="reveal" style="max-width:680px;margin:0 auto;">
                 <span class="section-kicker" data-i18n="fexam.final_kicker">Start When You're Ready</span>
@@ -490,15 +447,15 @@
             </div>
         </section>
 
-        <section class="program-pgwp-notice-section" aria-label="Program notices">
+        <section class="program-pgwp-notice-section" aria-label="Program notices" data-i18n-aria-label="common.program_notices_aria">
             <div class="program-pgwp-notice reveal">
                 <div class="program-disclaimer-row">
                     <span class="program-pgwp-icon" aria-hidden="true"><i class="fas fa-circle-info"></i></span>
-                    <p><strong>Disclaimer:</strong> These programs are currently not approved by the Private Training Institutions Regulatory Unit (PTIRU) and are in the process of being readied for approval. For more information, please reach out to us via our <a href="mailto:admin@metropolitancollege.ca">contact email</a>.</p>
+                    <p data-i18n-html="fexam.tp_disclaimer_html"><strong>Disclaimer:</strong> This program is currently under review by PTIRU. For more information, please reach out to us via our <a href="mailto:admin@metropolitancollege.ca">contact email</a>.</p>
                 </div>
                 <div class="program-disclaimer-row">
                     <span class="program-pgwp-icon" aria-hidden="true"><i class="fas fa-circle-info"></i></span>
-                    <p class="program-disclaimer-single-line"><strong>Post-Graduation Work Permit (PGWP):</strong> This program is not eligible for a Post-Graduation Work Permit (PGWP).</p>
+                    <p class="program-disclaimer-single-line" data-i18n-html="common.pgwp_notice_html"><strong>Post-Graduation Work Permit (PGWP):</strong> This program is not eligible for a Post-Graduation Work Permit (PGWP).</p>
                 </div>
             </div>
         </section>
