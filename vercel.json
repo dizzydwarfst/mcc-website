@@ -20,6 +20,10 @@
   ],
   "rewrites": [
     {
+      "source": "/r/:code",
+      "destination": "/api/r/:code"
+    },
+    {
       "source": "/trial-FSL",
       "destination": "/event?slug=fsl-info-trial-session-september-2026"
     },

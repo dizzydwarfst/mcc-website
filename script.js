@@ -1,3 +1,78 @@
+(function captureMccAttribution() {
+    'use strict';
+
+    const CODE_KEY = 'mcc_ref';
+    const UTM_KEY = 'mcc_attr';
+    const UTM_FIELDS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+    // Eight characters from A-Z and 2-9, minus the look-alikes I, L, O, 0 and 1.
+    const CODE_PATTERN = /^[A-HJKMNP-Z2-9]{8}$/;
+
+    function session() {
+        try { return window.sessionStorage; } catch (_) { return null; }
+    }
+
+    function readStored() {
+        const store = session();
+        if (!store) return { ref: '', utm: {} };
+        try {
+            const utm = JSON.parse(store.getItem(UTM_KEY) || '{}') || {};
+            return { ref: String(store.getItem(CODE_KEY) || ''), utm };
+        } catch (_) { return { ref: '', utm: {} }; }
+    }
+
+    function writeStored(ref, utm) {
+        const store = session();
+        if (!store) return;
+        try {
+            if (ref) store.setItem(CODE_KEY, ref);
+            store.setItem(UTM_KEY, JSON.stringify(utm));
+        } catch (_) { /* private browsing or a full quota: attribution is optional */ }
+    }
+
+    function fromLocation() {
+        const query = new URLSearchParams(window.location.search);
+        const candidate = String(query.get('ref') || '').trim().toUpperCase();
+        const utm = {};
+        UTM_FIELDS.forEach((field) => {
+            const value = String(query.get(field) || '').trim();
+            if (value) utm[field] = value.slice(0, 200);
+        });
+        return { ref: CODE_PATTERN.test(candidate) ? candidate : '', utm };
+    }
+
+    function hasValues(record) {
+        return Boolean(record.ref) || UTM_FIELDS.some((field) => record.utm[field]);
+    }
+
+    const stored = readStored();
+    const incoming = fromLocation();
+    // A referral code always beats a code-less first touch, because it is the
+    // link that carried the visitor to the event. Once a code is stored it is
+    // never replaced. The UTM values travel with the visit that set the code so
+    // the two never describe different campaigns.
+    if (incoming.ref && !stored.ref) {
+        stored.ref = incoming.ref;
+        stored.utm = incoming.utm;
+        writeStored(stored.ref, stored.utm);
+    } else if (!stored.ref && !hasValues(stored) && hasValues(incoming)) {
+        stored.utm = incoming.utm;
+        writeStored('', stored.utm);
+    }
+
+    window.MccAttribution = {
+        referralCode() {
+            const record = stored;
+            return CODE_PATTERN.test(record.ref) ? record.ref : '';
+        },
+        utm() {
+            const record = stored;
+            const values = {};
+            UTM_FIELDS.forEach((field) => { values[field] = record.utm[field] || ''; });
+            return values;
+        },
+    };
+})();
+
 // Scroll Handler for sticky Header
 const header = document.querySelector('.glass-header, .solid-header');
 
@@ -73,7 +148,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Typewriter Effect (language-aware; re-queries element so language swaps don't orphan it)
 const TYPEWRITER_WORDS = {
     en: ["Learning", "Growth", "Excellence", "Innovation", "Success"],
-    fr: ["l'apprentissage", "la croissance", "l'excellence", "l'innovation", "la réussite"]
+    fr: ["l'apprentissage", "la croissance", "l'excellence", "l'innovation", "la rÃ©ussite"]
 };
 
 let wordIndex = 0;
@@ -246,7 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
-    // Testimonial Marquee — clone cards for seamless loop
+    // Testimonial Marquee â€” clone cards for seamless loop
     // ==========================================
     const marquees = document.querySelectorAll('.testimonial-marquee .testimonial-grid');
     marquees.forEach(track => {
@@ -659,7 +734,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ==========================================
-// Language Flip Toggle (EN / FR) — native i18n
+// Language Flip Toggle (EN / FR) â€” native i18n
 // Translations live in translations.js (window.MCC_TRANSLATIONS)
 // ==========================================
 (function initLanguageToggle() {
@@ -790,7 +865,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const language = document.body.dataset.lang === 'fr' ? 'fr' : 'en';
                 const translation = window.MCC_TRANSLATIONS?.common?.nav_french_language;
                 fslLink.textContent = translation?.[language]
-                    || (language === 'fr' ? 'Français langue seconde (FLS)' : 'French as a Second Language (FSL)');
+                    || (language === 'fr' ? 'FranÃ§ais langue seconde (FLS)' : 'French as a Second Language (FSL)');
                 programsMenu.appendChild(fslLink);
             }
 
