@@ -148,7 +148,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Typewriter Effect (language-aware; re-queries element so language swaps don't orphan it)
 const TYPEWRITER_WORDS = {
     en: ["Learning", "Growth", "Excellence", "Innovation", "Success"],
-    fr: ["l'apprentissage", "la croissance", "l'excellence", "l'innovation", "la rÃ©ussite"]
+    fr: ["l'apprentissage", "la croissance", "l'excellence", "l'innovation", "la réussite"]
 };
 
 let wordIndex = 0;
@@ -321,7 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
-    // Testimonial Marquee â€” clone cards for seamless loop
+    // Testimonial Marquee — clone cards for seamless loop
     // ==========================================
     const marquees = document.querySelectorAll('.testimonial-marquee .testimonial-grid');
     marquees.forEach(track => {
@@ -734,7 +734,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ==========================================
-// Language Flip Toggle (EN / FR) â€” native i18n
+// Language Flip Toggle (EN / FR) — native i18n
 // Translations live in translations.js (window.MCC_TRANSLATIONS)
 // ==========================================
 (function initLanguageToggle() {
@@ -865,7 +865,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const language = document.body.dataset.lang === 'fr' ? 'fr' : 'en';
                 const translation = window.MCC_TRANSLATIONS?.common?.nav_french_language;
                 fslLink.textContent = translation?.[language]
-                    || (language === 'fr' ? 'FranÃ§ais langue seconde (FLS)' : 'French as a Second Language (FSL)');
+                    || (language === 'fr' ? 'Français langue seconde (FLS)' : 'French as a Second Language (FSL)');
                 programsMenu.appendChild(fslLink);
             }
 

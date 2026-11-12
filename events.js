@@ -45,8 +45,8 @@
             { icon: 'fa-laptop', title: 'Choose your format', text: 'Attend online through a live link or join the in-person experience.' },
         ],
         agenda: [
-            { time: '5:00â€“5:30 PM', title: 'Introduction & Q&A', text: 'Meet the team and ask about levels, schedules, delivery formats, and next steps.' },
-            { time: '5:30â€“6:00 PM', title: 'Free trial class', text: 'Join a short immersive lesson and experience MCC\'s teaching style.' },
+            { time: '5:00–5:30 PM', title: 'Introduction & Q&A', text: 'Meet the team and ask about levels, schedules, delivery formats, and next steps.' },
+            { time: '5:30–6:00 PM', title: 'Free trial class', text: 'Join a short immersive lesson and experience MCC\'s teaching style.' },
         ],
         process: [
             { title: 'Reserve your spot', text: 'Complete the registration form at the bottom of this page and select online or in-person attendance.' },
@@ -57,7 +57,7 @@
         course_details: {
             title: 'September French course',
             start_date: 'September 14, 2026',
-            schedule: 'Mondayâ€“Thursday, 5:30â€“8:30 PM',
+            schedule: 'Monday–Thursday, 5:30–8:30 PM',
             delivery: 'In-person class or online synchronous live stream',
         },
         faqs: [
@@ -69,7 +69,7 @@
         ],
         brochures: [
             { locale: 'en', title: 'English event brochure', url: '/assets/events/fsl-info-trial-september-2026/brochure-en.jpeg', thumbnail_url: '/assets/events/fsl-info-trial-september-2026/brochure-en.jpeg', file_type: 'image/jpeg' },
-            { locale: 'zh', title: 'ä¸­æ–‡æ´»åŠ¨å®£ä¼ å†Œ', url: '/assets/events/fsl-info-trial-september-2026/brochure-zh.jpg', thumbnail_url: '/assets/events/fsl-info-trial-september-2026/brochure-zh.jpg', file_type: 'image/jpeg' },
+            { locale: 'zh', title: '中文活动宣传册', url: '/assets/events/fsl-info-trial-september-2026/brochure-zh.jpg', thumbnail_url: '/assets/events/fsl-info-trial-september-2026/brochure-zh.jpg', file_type: 'image/jpeg' },
         ],
     };
 
@@ -99,7 +99,7 @@
             version: '2026.08',
             title: 'Website Terms and Conditions',
             effective_date: '2026-08-10',
-            summary: 'Terms governing use of MCCâ€™s public website and online forms.',
+            summary: 'Terms governing use of MCC’s public website and online forms.',
             body: `
                 <h2>Using this website</h2>
                 <p>Use the MCC website lawfully and do not attempt to interfere with its security, availability, accounts, forms, or data. Information submitted through a form must be accurate to the best of your knowledge.</p>
@@ -130,7 +130,7 @@
                 <h2>Photography and video</h2>
                 <p>Photography or video may occur when disclosed on the event page. Registration records your separate media choice. A participant selecting no consent should use the no-photo process provided by staff or keep their camera off online.</p>
                 <h2>General information</h2>
-                <p>Event and program information is educational and is not legal or immigration advice. Program admission and enrolment remain subject to MCCâ€™s official requirements and agreements.</p>
+                <p>Event and program information is educational and is not legal or immigration advice. Program admission and enrolment remain subject to MCC’s official requirements and agreements.</p>
             `,
         },
         media_release: {
@@ -139,7 +139,7 @@
             version: '2026.08',
             title: 'Media Release',
             effective_date: '2026-08-10',
-            summary: 'The choice governing promotional use of a participantâ€™s image, voice, or appearance.',
+            summary: 'The choice governing promotional use of a participant’s image, voice, or appearance.',
             body: `
                 <h2>Your media choice</h2>
                 <p>When an event includes photography or recording, every registrant must choose yes or no. Choosing no does not block event registration. Staff may use a no-photo identifier or designated area; online participants may keep their camera off.</p>
@@ -384,7 +384,7 @@
         if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())) return '';
         const options = { hour: 'numeric', minute: '2-digit', timeZone: event.timezone || 'America/Vancouver' };
         const formatter = new Intl.DateTimeFormat(locale() === 'fr' ? 'fr-CA' : 'en-CA', options);
-        return `${formatter.format(start)}â€“${formatter.format(end)}`;
+        return `${formatter.format(start)}–${formatter.format(end)}`;
     }
 
     function attendanceLabel(event) {
@@ -510,8 +510,8 @@
     }
 
     function acknowledgementResources(field) {
-        if (field === 'privacy_accepted') return `<a href="${APPROVED_PRIVACY_POLICY_URL}" target="_blank" rel="noopener">Privacy Policy PDF</a> <span aria-hidden="true">Â·</span> <a href="${policyHref('privacy')}" target="_blank" rel="noopener">Website privacy notice</a>`;
-        if (field === 'terms_accepted') return `<a href="${policyHref('terms')}" target="_blank" rel="noopener">Website Terms</a> <span aria-hidden="true">Â·</span> <a href="${policyHref('event_terms')}" target="_blank" rel="noopener">Event Terms</a>`;
+        if (field === 'privacy_accepted') return `<a href="${APPROVED_PRIVACY_POLICY_URL}" target="_blank" rel="noopener">Privacy Policy PDF</a> <span aria-hidden="true">·</span> <a href="${policyHref('privacy')}" target="_blank" rel="noopener">Website privacy notice</a>`;
+        if (field === 'terms_accepted') return `<a href="${policyHref('terms')}" target="_blank" rel="noopener">Website Terms</a> <span aria-hidden="true">·</span> <a href="${policyHref('event_terms')}" target="_blank" rel="noopener">Event Terms</a>`;
         if (field === 'media_notice_acknowledged') return `<a href="${policyHref('media_release')}" target="_blank" rel="noopener">Read Media Release</a>`;
         return '';
     }
@@ -557,7 +557,7 @@
             </div>
             ${choices.map((choice) => `
                 <fieldset class="event-choice-group">
-                    <legend>${escapeHtml(choice.label)}${choice.required ? ' <strong>Requiredâ€”choose one</strong>' : ''}</legend>
+                    <legend>${escapeHtml(choice.label)}${choice.required ? ' <strong>Required—choose one</strong>' : ''}</legend>
                     ${choice.field === 'media_choice' ? '<p>Selecting no does not prevent registration.</p>' : ''}
                     ${(Array.isArray(choice.options) ? choice.options : []).map((option) => `
                         <label><input type="radio" name="${escapeHtml(choice.field)}" value="${escapeHtml(option.value)}"${choice.required ? ' required' : ''}><span>${escapeHtml(option.label)}</span></label>
@@ -913,7 +913,7 @@
             };
 
             submit.disabled = true;
-            submit.textContent = 'Saving your registrationâ€¦';
+            submit.textContent = 'Saving your registration…';
             try {
                 const response = await apiRequest(registrationApiPath(event), { method: 'POST', body: JSON.stringify(payload) });
                 form.hidden = true;
